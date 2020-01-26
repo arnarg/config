@@ -5,5 +5,6 @@ let
 
   self = {
     okta-aws = callPackage ./okta-aws { };
+    operator-sdk = callPackage ./operator-sdk { };
   };
 in self

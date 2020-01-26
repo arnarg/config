@@ -45,7 +45,7 @@ in with pkgs.stdenv; with lib; {
         else "/home/${cfg.userName}";
     };
 
-    home-manager.users.${cfg.userName} = {
+    home-manager.users."${cfg.userName}" = {
       home.packages = import ./packages.nix { inherit pkgs; };
 
       #########

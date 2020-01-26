@@ -30,6 +30,7 @@ in with lib; {
 
   programs.bash.enable = true;
   programs.zsh.enable = true;
+  programs.zsh.enableSyntaxHighlighting = true;
 
   services.nix-daemon.enable = true;
   services.nix-daemon.enableSocketListener = true;

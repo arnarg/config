@@ -1,5 +1,7 @@
 { pkgs }:
-with pkgs; [
+let
+  mypkgs = import ../packages { inherit pkgs; };
+in with pkgs; [
   curl
   dnsutils
   htop
@@ -20,4 +22,7 @@ with pkgs; [
   kubectl
   kubectx
   kubernetes-helm
+
+  # mypkgs
+  mypkgs.operator-sdk
 ]
