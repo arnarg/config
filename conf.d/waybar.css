@@ -1,0 +1,129 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: inconsolata;
+    font-size: 16pt;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #282C34;
+    color: #abb2bf;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0;
+    background-color: transparent;
+    color: #ffffff;
+    border-bottom: 4px solid transparent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: transparent;
+    box-shadow: inherit;
+    border-bottom: 4px solid #727884;
+}
+
+#workspaces button.focused {
+    border-bottom: 4px solid #afb3bc;
+}
+
+#workspaces button.urgent {
+    border-bottom: 4px solid #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 4px solid #ffffff;
+}
+
+#clock,
+#memory,
+#network,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor {
+    padding: 0 10px;
+    margin: 0 6px;
+    color: #ffffff;
+    border-bottom: 4px solid;
+}
+
+#clock {
+    border-bottom-color: #8FB09F;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#memory {
+    border-bottom-color: #9b59b6;
+}
+
+#network {
+    border-bottom-color: #2980b9;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#temperature {
+    background-color: #f0932b;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
