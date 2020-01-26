@@ -14,6 +14,18 @@ in with pkgs.stdenv; with lib; {
       default = "arnarg@fastmail.com";
       description = "User e-mail for Git";
     };
+
+    userName = mkOption {
+      type = types.str;
+      default = "arnar";
+      description = "The user name";
+    };
+
+    enableFirefox = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Wether to enable firefox or not";
+    };
   };
 
   imports = [
@@ -23,13 +35,17 @@ in with pkgs.stdenv; with lib; {
 
   config = {
     time.timeZone = "Iceland";
-    nix.trustedUsers = [ "root" "arnar" ];
+    nix.trustedUsers = [ "root" cfg.userName ];
 
     environment.systemPackages = [ pkgs.zsh ];
-    users.users.arnar.shell = pkgs.zsh;
-    users.users.arnar.home = "/home/arnar";
+    users.users.${cfg.userName} = {
+      shell = pkgs.zsh;
+      home = 
+        if isDarwin then "/Users/${cfg.userName}"
+        else "/home/${cfg.userName}";
+    };
 
-    home-manager.users.arnar = {
+    home-manager.users.${cfg.userName} = {
       home.packages = import ./packages.nix { inherit pkgs; };
 
       #########
@@ -48,7 +64,7 @@ in with pkgs.stdenv; with lib; {
       #############
       ## FIREFOX ##
       #############
-      programs.firefox.enable = true;
+      programs.firefox.enable = cfg.enableFirefox;
     };
   };
 }

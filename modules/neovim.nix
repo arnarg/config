@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
-{
-  home-manager.users.arnar = {
+let
+  userName = config.local.home.userName;
+in {
+  home-manager.users.${userName} = {
     programs.neovim = {
       enable = true;
       viAlias = true;
