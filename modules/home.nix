@@ -44,6 +44,11 @@ in with pkgs.stdenv; with lib; {
       #########
       programs.fzf.enable = true;
       programs.fzf.enableZshIntegration = true;
+
+      #############
+      ## FIREFOX ##
+      #############
+      programs.firefox.enable = true;
     };
   };
 }
