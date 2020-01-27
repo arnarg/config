@@ -19,10 +19,7 @@ in
   ];
 
   boot.cleanTmpDir = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.copyKernels = true;
-  boot.loader.grub.device = "nodev";
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
