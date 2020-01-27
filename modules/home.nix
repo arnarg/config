@@ -39,13 +39,14 @@ in with pkgs.stdenv; with lib; {
 
     environment.systemPackages = [ pkgs.zsh ];
     users.users.${cfg.userName} = {
+      name = cfg.userName;
       shell = pkgs.zsh;
       home = 
         if isDarwin then "/Users/${cfg.userName}"
         else "/home/${cfg.userName}";
     };
 
-    home-manager.users."${cfg.userName}" = {
+    home-manager.users.${cfg.userName} = {
       home.packages = import ./packages.nix { inherit pkgs; };
 
       #########

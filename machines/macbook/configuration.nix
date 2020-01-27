@@ -1,10 +1,9 @@
 { config, lib, pkgs, ... }:
 let
   homeDir = builtins.getEnv("HOME");
-  home-manager = builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz;
 in with lib; {
   imports = [
-    "${home-manager}/nix-darwin"
+    <home-manager/nix-darwin>
     ../../modules/nixpkgs.nix
     ../../modules/home.nix
   ];
@@ -21,12 +20,27 @@ in with lib; {
     zsh.enableOktaAws = true;
   };
 
-  home-manager.users.arnari.home.packages = with pkgs; [
-    awscli
-    python37
-    python37Packages.virtualenv
-    python37Packages.pip
-  ];
+  home-manager.users.arnari.home = {
+    packages = with pkgs; [
+      awscli
+      python37
+      python37Packages.virtualenv
+      python37Packages.pip
+      terraform
+    ];
+    sessionVariables = {
+      # Set external paths
+      # I still have some packages in macports
+      PATH = "/opt/local/bin:$PATH";
+    };
+  };
+
+  # This hack is here because for some reason home-manager's activation script isn't being run
+  # https://github.com/rycee/home-manager/blob/master/nix-darwin/default.nix#L75-L79
+  system.activationScripts.launchd.text = mkAfter (''
+    echo Activating home-manager configuration for arnari
+    sudo -u arnari -i ${config.home-manager.users.arnari.home.activationPackage}/activate
+  '' + "\n");
 
   programs.bash.enable = true;
   programs.zsh.enable = true;
@@ -34,6 +48,8 @@ in with lib; {
 
   services.nix-daemon.enable = true;
   services.nix-daemon.enableSocketListener = true;
+
+  services.activate-system.enable = true;
 
   nix.maxJobs = 12;
   nix.buildCores = 1;

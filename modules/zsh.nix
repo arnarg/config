@@ -13,7 +13,7 @@ in with pkgs.stdenv; with lib; {
   };
 
   config = {
-    home-manager.users."${userName}" = {
+    home-manager.users.${userName} = {
       programs.zsh = rec {
         enable = true;
   
