@@ -14,6 +14,7 @@ in
     ../../modules/users.nix
     ../../modules/home.nix
     ../../modules/desktop.nix
+    ../../modules/kr.nix
     ./hardware-configuration.nix
   ];
 
