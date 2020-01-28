@@ -54,6 +54,11 @@ in {
         spotify
       ];
 
+      home.sessionVariables = {
+        GDK_SCALE = "-1";
+        GDK_BACKEND = "wayland";
+      };
+
       xdg.enable = true;
       xdg.configFile."sway/config" = {
         source = pkgs.substituteAll {
