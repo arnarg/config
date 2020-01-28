@@ -22,6 +22,9 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # I want the latest stable kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking = {
     hostId = "fdedf053";
     hostName = "workstation";
