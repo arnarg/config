@@ -13,6 +13,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # I have a Ryzen 1600. https://bugzilla.kernel.org/show_bug.cgi?id=196683
+  boot.kernelParams = [ "rcu_nocbs=0-11" ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
