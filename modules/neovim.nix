@@ -40,6 +40,11 @@ in {
         endif
         nnoremap <C-P> :Files<CR>
         nnoremap <leader>f :Ag<CR>
+        nnoremap <C-L> :Lines<CR>
+        nnoremap <leader>l :BLines<CR>
+        nnoremap <leader>c :Commits<CR>
+        nnoremap <leader>h :History<CR>
+        nnoremap <leader>t :Filetypes<CR>
         """""""""""
         " AIRLINE "
         """""""""""
