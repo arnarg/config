@@ -2,7 +2,6 @@
 let
   cfg = config.local.zsh;
   userName = config.local.home.userName;
-  mypkgs = import ../packages { inherit pkgs; };
 in with pkgs.stdenv; with lib; {
   options.local.zsh = {
     enableOktaAws = mkOption {
@@ -65,7 +64,7 @@ in with pkgs.stdenv; with lib; {
           bindkey '^h' backward-delete-char
         '' + optionalString cfg.enableOktaAws ''
           # Okta
-          . ${mypkgs.okta-aws}/bash_functions
+          . ${pkgs.mypkgs.okta-aws}/bash_functions
           okta-plz() {
             PROFILE="''${1:-$AWS_PROFILE}"
             [[ -z "''${PROFILE}" ]] && echo 'AWS_PROFILE unset' && return 1

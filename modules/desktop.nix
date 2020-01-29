@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.desktop;
-  mypkgs = import ../packages { inherit pkgs; };
 
   # NOTE
   # - $SWAYSOCK unavailable
@@ -61,12 +60,12 @@ in {
       };
 
       xdg.enable = true;
-      xdg.configFile."sway/config" = {
-        source = pkgs.substituteAll {
+      xdg.configFile."sway/config" = with pkgs; {
+        source = substituteAll {
           name = "sway-config";
           src = ../conf.d/sway.conf;
-          wall = "${pkgs.pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
-          j4 = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop";
+          wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
+          j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
         };
         onChange = "${reloadSway}";

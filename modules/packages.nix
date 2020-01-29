@@ -1,7 +1,5 @@
 { pkgs }:
-let
-  mypkgs = import ../packages { inherit pkgs; };
-in with pkgs; [
+with pkgs; [
   curl
   dnsutils
   htop

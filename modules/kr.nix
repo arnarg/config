@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   userName = config.local.home.userName;
-  mypkgs = import ../packages { inherit pkgs; };
 in {
   config = {
     home-manager.users.${userName} = {
-      home.packages = [ mypkgs.kr ];
+      home.packages = [ pkgs.mypkgs.kr ];
 
       #systemd.user.services.krd = {
       #  Unit = {
@@ -13,7 +12,7 @@ in {
       #  };
 
       #  Service = {
-      #    ExecStart = "${mypkgs.kr}/bin/krd";
+      #    ExecStart = "${pkgs.mypkgs.kr}/bin/krd";
       #    Restart = "on-failure";
       #  };
 
@@ -25,7 +24,7 @@ in {
       programs.ssh.enable = true;
       programs.ssh.matchBlocks = {
         "*" = {
-          proxyCommand = "${mypkgs.kr}/bin/krssh %h %p";
+          proxyCommand = "${pkgs.mypkgs.kr}/bin/krssh %h %p";
           identityFile = "~/.ssh/id_krypton.pub";
           extraOptions.IdentityAgent = "~/.kr/krd-agent.sock";
         };

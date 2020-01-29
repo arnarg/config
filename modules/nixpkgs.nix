@@ -5,6 +5,10 @@
       allowUnfree = true;
       allowBroken = false;
       allowUnsupportedSystem = false;
+
+      packageOverrides = pkgs: {
+        mypkgs = import ../packages { inherit pkgs; };
+      };
     };
 
     # This was copied from https://github.com/jwiegley/nix-config
