@@ -34,7 +34,9 @@ in with pkgs.stdenv; with lib; {
   ];
 
   config = {
-    time.timeZone = "Iceland";
+    time.timeZone =
+      if isDarwin then "Atlantic/Reykjavik"
+      else "Iceland";
     nix.trustedUsers = [ "root" cfg.userName ];
 
     environment.systemPackages = [ pkgs.zsh ];

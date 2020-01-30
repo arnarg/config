@@ -35,13 +35,6 @@ in with lib; {
     };
   };
 
-  # This hack is here because for some reason home-manager's activation script isn't being run
-  # https://github.com/rycee/home-manager/blob/master/nix-darwin/default.nix#L75-L79
-  system.activationScripts.launchd.text = mkAfter (''
-    echo Activating home-manager configuration for arnari
-    sudo -u arnari -i ${config.home-manager.users.arnari.home.activationPackage}/activate
-  '' + "\n");
-
   programs.bash.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableSyntaxHighlighting = true;
