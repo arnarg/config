@@ -35,7 +35,7 @@ in with pkgs.stdenv; with lib; {
 
   config = {
     time.timeZone =
-      if isDarwin then "Atlantic/Reykjavik"
+      if isDarwin then null
       else "Iceland";
     nix.trustedUsers = [ "root" cfg.userName ];
 

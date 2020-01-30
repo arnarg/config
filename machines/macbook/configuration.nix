@@ -6,6 +6,7 @@ in with lib; {
     <home-manager/nix-darwin>
     ../../modules/nixpkgs.nix
     ../../modules/home.nix
+    ../../modules/kr.nix
   ];
 
   environment = {
@@ -38,6 +39,8 @@ in with lib; {
   programs.bash.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableSyntaxHighlighting = true;
+
+  services.krypton.krd.enable = true;
 
   services.nix-daemon.enable = true;
   services.nix-daemon.enableSocketListener = true;
