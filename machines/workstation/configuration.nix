@@ -15,6 +15,7 @@ in
     ../../modules/home.nix
     ../../modules/desktop.nix
     ../../modules/kr.nix
+    ../../modules/docker.nix
     ./hardware-configuration.nix
   ];
 
