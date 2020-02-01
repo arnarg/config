@@ -14,7 +14,6 @@ in
     ../../modules/users.nix
     ../../modules/home.nix
     ../../modules/desktop.nix
-    ../../modules/kr.nix
     ../../modules/docker.nix
     ./hardware-configuration.nix
   ];
@@ -25,6 +24,22 @@ in
 
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  local.home.userName = "arnar";
+
+  # Run krd
+  home-manager.users.arnar.systemd.user.services.krd = {
+    Unit = {
+      Description = "Krypton daemon";
+    };
+    Service = {
+      ExecStart = "${pkgs.mypkgs.kr}/bin/krd";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 
   networking = {
     hostId = "fdedf053";

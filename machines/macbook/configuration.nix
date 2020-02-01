@@ -6,7 +6,6 @@ in with lib; {
     <home-manager/nix-darwin>
     ../../modules/nixpkgs.nix
     ../../modules/home.nix
-    ../../modules/kr.nix
   ];
 
   environment = {
@@ -19,6 +18,13 @@ in with lib; {
     home.userName = "arnari";
     home.enableFirefox = false;
     zsh.enableOktaAws = true;
+  };
+
+  # Run krd
+  launchd.user.agents.krd = {
+    serviceConfig.ProgramArguments = [ "${pkgs.mypkgs.kr}/bin/krd" ];
+    serviceConfig.Label = "co.krypt.krd";
+    serviceConfig.RunAtLoad = true;
   };
 
   home-manager.users.arnari.home = {
@@ -39,8 +45,6 @@ in with lib; {
   programs.bash.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableSyntaxHighlighting = true;
-
-  services.krypton.krd.enable = true;
 
   services.nix-daemon.enable = true;
   services.nix-daemon.enableSocketListener = true;

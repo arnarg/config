@@ -80,8 +80,6 @@ in {
         onChange = "${reloadSway}";
       };
 
-      programs.rofi.enable = true;
-
       programs.alacritty = {
         enable = true;
         settings = {

@@ -31,6 +31,7 @@ in with pkgs.stdenv; with lib; {
   imports = [
     ./zsh.nix
     ./neovim.nix
+    ./kr.nix
   ];
 
   config = {
