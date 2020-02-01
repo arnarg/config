@@ -5,8 +5,9 @@ let
 
   self = {
     bemenu = callPackage ./bemenu { };
+    hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
+    kr = callPackage ./kr { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
-    kr = callPackage ./kr { };
   };
 in self
