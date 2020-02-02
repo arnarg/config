@@ -69,6 +69,7 @@ in with pkgs.stdenv; with lib; {
       ## FIREFOX ##
       #############
       programs.firefox.enable = cfg.enableFirefox;
+      programs.firefox.package = pkgs.firefox-wayland;
     };
   };
 }
