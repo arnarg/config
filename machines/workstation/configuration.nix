@@ -27,6 +27,10 @@ in
 
   local.home.userName = "arnar";
 
+  # For some gaming
+  hardware.opengl.driSupport32Bit = true;
+  home-manager.users.arnar.home.packages = [ pkgs.steam ];
+
   # Run krd
   home-manager.users.arnar.systemd.user.services.krd = {
     Unit = {
