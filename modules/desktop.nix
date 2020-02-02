@@ -39,6 +39,7 @@ in {
       "sway"
       "tty"
       "video"
+      "dialout"
     ];
 
     programs.sway.enable = true;
