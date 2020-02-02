@@ -51,11 +51,13 @@ in {
         swaylock
         waybar
         xwayland
+        capitaine-cursors
 
         spotify
       ];
 
       home.sessionVariables = {
+        XCURSOR_PATH = [ "$HOME/.nix-profile/share/icons" ];
         GDK_SCALE = "-1";
         GDK_BACKEND = "wayland";
       };
