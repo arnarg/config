@@ -44,6 +44,9 @@ in {
 
     programs.sway.enable = true;
 
+    # For yubikey
+    services.pcscd.enable = true;
+
     home-manager.users.arnar = {
       home.packages = with pkgs; [
         libpulseaudio
