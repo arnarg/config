@@ -64,6 +64,6 @@
   nix.gc = {
     automatic = true;
     dates = "Mon *-*-* 06:00:00";
-    options = "--delete-older-than 5w";
+    options = "--delete-older-than 35d";
   };
 }
