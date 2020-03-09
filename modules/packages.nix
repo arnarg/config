@@ -23,4 +23,5 @@ with pkgs; [
 
   # mypkgs
   mypkgs.operator-sdk
+  mypkgs.ksniff
 ]
