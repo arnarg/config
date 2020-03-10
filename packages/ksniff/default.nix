@@ -42,7 +42,7 @@ in buildGoModule {
   src = fetchFromGitHub {
     owner = "eldadru";
     repo = "ksniff";
-    rev = version;
+    rev = "v${version}";
     sha256 = "0vqx29wsxhv06kwxmcmqixa8g4qxy4zqlyx1icaqhpv0rgddildb";
   };
 
