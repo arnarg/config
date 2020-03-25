@@ -18,6 +18,11 @@ in
     ./hardware-configuration.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    blender
+    krita
+  ];
+
   boot.cleanTmpDir = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
