@@ -19,8 +19,8 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    blender
     krita
+    networkmanager
   ];
 
   boot.cleanTmpDir = true;
@@ -32,9 +32,7 @@ in
 
   local.home.userName = "arnar";
 
-  # For some gaming
-  hardware.opengl.driSupport32Bit = true;
-  home-manager.users.arnar.home.packages = [ pkgs.steam ];
+  users.users.arnar.extraGroups = [ "networkmanager" ];
 
   # Run krd
   home-manager.users.arnar.systemd.user.services.krd = {
@@ -53,6 +51,7 @@ in
   networking = {
     hostId = "eb0a230e";
     hostName = "flex";
+    networkmanager.enable = true;
   };
 
   system.stateVersion = "19.09";
