@@ -1,21 +1,21 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.desktop;
-
-  # NOTE
-  # - $SWAYSOCK unavailable
-  # - $(sway --get-socketpath) doesn"t work
-  # A bit hacky, but since we always know our uid
-  # this works consistently
-  reloadSway = ''
-    echo "Reloading sway"
-    swaymsg -s \
-    $(find /run/user/''${UID}/ \
-      -name "sway-ipc.''${UID}.*.sock") \
-    reload
-  '';
-in {
+in with pkgs.stdenv; with lib; {
   imports = [ ./home.nix ];
+
+  options.local.desktop = {
+    isHiDPI = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Scales UI elements.";
+    };
+    isLaptop = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enables laptop features.";
+    };
+  };
 
   config = {
     sound.enable = true;
@@ -30,60 +30,31 @@ in {
       ];
     };
 
-    security.sudo.enable =true;
+    security.sudo.enable = true;
 
     users.users.arnar.extraGroups = [
       "audio"
       "cdrom"
       "input"
-      "sway"
       "tty"
       "video"
       "dialout"
     ];
-
-    programs.sway.enable = true;
 
     # For yubikey
     services.pcscd.enable = true;
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [
-        libpulseaudio
-        swayidle
-        swaylock
-        waybar
-        xwayland
         capitaine-cursors
-
+        libpulseaudio
         spotify
       ];
 
       home.sessionVariables = {
-        XCURSOR_PATH = [ "$HOME/.nix-profile/share/icons" ];
-        GDK_SCALE = "-1";
         GDK_BACKEND = "wayland";
-      };
-
-      xdg.enable = true;
-      xdg.configFile."sway/config" = with pkgs; {
-        source = substituteAll {
-          name = "sway-config";
-          src = ../conf.d/sway.conf;
-          wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
-          j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
-          bemenu = "${mypkgs.bemenu}/bin/bemenu";
-        };
-        onChange = "${reloadSway}";
-      };
-
-      xdg.configFile."waybar/config" = {
-        text = (builtins.readFile ../conf.d/waybar.conf);
-        onChange = "${reloadSway}";
-      };
-      xdg.configFile."waybar/style.css" = {
-        text = (builtins.readFile ../conf.d/waybar.css);
-        onChange = "${reloadSway}";
+        GDK_SCALE = "-1";
+        XCURSOR_PATH = [ "$HOME/.nix-profile/share/icons" ];
       };
 
       programs.alacritty = {
@@ -95,7 +66,7 @@ in {
           };
 
           font = {
-            size = 14;
+            size = if cfg.isHiDPI then 14 else 12;
             normal.family = "Inconsolata";
           };
 

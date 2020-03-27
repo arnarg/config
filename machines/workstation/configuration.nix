@@ -14,6 +14,7 @@ in
     ../../modules/users.nix
     ../../modules/home.nix
     ../../modules/desktop.nix
+    ../../modules/sway
     ../../modules/docker.nix
     ./hardware-configuration.nix
   ];
@@ -23,7 +24,7 @@ in
     krita
   ];
 
-  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -31,6 +32,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   local.home.userName = "arnar";
+  local.desktop.isHiDPI = true;
 
   # For some gaming
   hardware.opengl.driSupport32Bit = true;

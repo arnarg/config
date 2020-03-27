@@ -10,20 +10,20 @@ in
 
   imports = [
     "${home-manager}/nixos"
+    ../../modules/profiles/laptop.nix
     ../../modules/nixpkgs.nix
     ../../modules/users.nix
     ../../modules/home.nix
     ../../modules/desktop.nix
-    ../../modules/docker.nix
+    ../../modules/sway
     ./hardware-configuration.nix
   ];
 
   environment.systemPackages = with pkgs; [
     krita
-    networkmanager
   ];
 
-  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -31,8 +31,6 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   local.home.userName = "arnar";
-
-  users.users.arnar.extraGroups = [ "networkmanager" ];
 
   # Run krd
   home-manager.users.arnar.systemd.user.services.krd = {
@@ -51,7 +49,6 @@ in
   networking = {
     hostId = "eb0a230e";
     hostName = "flex";
-    networkmanager.enable = true;
   };
 
   system.stateVersion = "19.09";

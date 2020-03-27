@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "acpi_backlight=vendor" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
