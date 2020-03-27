@@ -10,5 +10,6 @@ let
     ksniff = callPackage ./ksniff { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
+    virtboard = callPackage ./virtboard { };
   };
 in self

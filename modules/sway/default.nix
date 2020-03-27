@@ -17,7 +17,7 @@ let
 in with pkgs.stdenv; with lib; {
   options.local.desktop.sway = {
     extraConfig = mkOption {
-      type = types.str;
+      type = types.lines;
       default = "";
       description = "Extra sway config.";
     };

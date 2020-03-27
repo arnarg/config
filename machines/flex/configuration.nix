@@ -32,6 +32,19 @@ in
 
   local.home.userName = "arnar";
 
+  # Enable iio-sensor-proxy for screen rotation
+  hardware.sensor.iio.enable = true;
+
+  # Enables d-bus activation of virtboard
+  home-manager.users.arnar.xdg.dataFile."dbus-1/services/sm.puri.OSK0.service" = {
+    text = ''
+      [D-BUS Service]
+      Name=sm.puri.OSK0
+      Exec=${pkgs.mypkgs.virtboard}/bin/virtboard
+      User=arnar
+    '';
+  };
+
   # Run krd
   home-manager.users.arnar.systemd.user.services.krd = {
     Unit = {

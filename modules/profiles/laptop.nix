@@ -24,6 +24,8 @@
   local.desktop.sway.extraConfig = with pkgs; ''
     # Enable tap
     input * tap enabled
+    # Disable tap and drag
+    input * drag disabled
     # Media keys
     bindsym XF86AudioMute exec ${pamixer}/bin/pamixer -t
     bindsym XF86AudioRaiseVolume exec ${pamixer}/bin/pamixer -i 5
@@ -34,6 +36,7 @@
     # I want 50% brightness initially
     exec ${light}/bin/light -S 50
     # Startup programs
+    # Enables touchpad gestures
     exec ${libinput-gestures}/bin/libinput-gestures
   '';
 
