@@ -14,7 +14,15 @@ let
       -name "sway-ipc.''${UID}.*.sock") \
     reload
   '';
-in {
+in with pkgs.stdenv; with lib; {
+  options.local.desktop.sway = {
+    extraConfig = mkOption {
+      type = types.str;
+      default = "";
+      description = "Extra sway config.";
+    };
+  };
+
   config = {
     programs.sway.enable = true;
     users.users.arnar.extraGroups = [ "sway" ];
@@ -35,6 +43,8 @@ in {
           wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
           j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
+          bemenuSize = if cfg.isHiDPI then 16 else 14;
+          extraConfig = cfg.sway.extraConfig;
         };
         onChange = "${reloadSway}";
       };
