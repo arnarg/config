@@ -1,5 +1,6 @@
 { stdenv, rustPlatform, fetchFromGitLab,
-meson, ninja, pkgconfig, cargo, rustc, cmake, gnome3, libcroco, libxml2, libxkbcommon, gtk3, pango, cairo, atk, gdk-pixbuf, glib, wayland, wayland-protocols, makeWrapper, gsettings-desktop-schemas, hicolor-icon-theme, ... }:
+  meson, ninja, cargo, rustc, pkgconfig, cmake, glib, libxml2, wrapGAppsHook,
+  gnome3, gtk3, libcroco, libxkbcommon, wayland, wayland-protocols, ... }:
 
 rustPlatform.buildRustPackage rec {
   pname = "squeekboard";
@@ -27,20 +28,17 @@ rustPlatform.buildRustPackage rec {
     rustc
     pkgconfig
     cmake
-    libxml2.dev
-    makeWrapper
+    glib
+    libxml2
+    wrapGAppsHook
   ];
 
   buildInputs = [
-    libxkbcommon
-    gtk3
-    atk
-    pango
-    cairo
-    gdk-pixbuf
-    glib
+    gnome3.adwaita-icon-theme
     gnome3.gnome-desktop
+    gtk3
     libcroco
+    libxkbcommon
     wayland
     wayland-protocols
   ];
@@ -55,9 +53,11 @@ rustPlatform.buildRustPackage rec {
     cp -r $src/data/{icons,keyboards,langs,popup.ui,squeekboard.gresources.xml,style-Adwaita:dark.css,style.css} $out/share
   '';
 
-  postFixup = ''
-    wrapProgram $out/bin/squeekboard \
-      --set GSETTINGS_SCHEMA_DIR "${gsettings-desktop-schemas}/share/gsettings-schemas/gsettings-desktop-schemas-${gsettings-desktop-schemas.version}/glib-2.0/schemas"
+  # Hard-code Adwaita dark theme
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --set GTK_THEME "Adwaita:dark"
+    )
   '';
 
   meta = with stdenv.lib; {

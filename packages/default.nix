@@ -10,7 +10,6 @@ let
     ksniff = callPackage ./ksniff { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
-    virtboard = callPackage ./virtboard { };
     squeekboard = callPackage ./squeekboard { };
   };
 in self

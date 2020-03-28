@@ -40,7 +40,7 @@ in
     text = ''
       [D-BUS Service]
       Name=sm.puri.OSK0
-      Exec=${pkgs.mypkgs.virtboard}/bin/virtboard
+      Exec=${pkgs.mypkgs.squeekboard}/bin/squeekboard
       User=arnar
     '';
   };
@@ -50,17 +50,19 @@ in
     text = ''
       #!/usr/bin/env bash
       if [[ "$1" == "click" ]]; then
-        currentState=`busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 GetVisible 2>/dev/null`
-        if [[ $? == 0 ]]; then
-          case "$currentState" in
-          "b true")
-            busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false
-            ;;
-          "b false")
-            busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
-            ;;
-          esac
-        fi
+        for i in 1 2 3 4; do
+          currentState=`busctl --user get-property sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 Visible`
+          if [[ $? == 0 ]]; then break; fi
+          sleep 0.1
+        done
+        case "$currentState" in
+        "b true")
+          busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false
+          ;;
+        "b false")
+          busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
+          ;;
+        esac
       fi
     '';
   };
@@ -71,6 +73,11 @@ in
     };
     modules-right = [ "network" "memory" "battery" "clock" "custom/virtboard" ];
   };
+
+  local.desktop.sway.extraConfig = lib.mkAfter ''
+    # Workaround for squeekboard
+    seat seat0 keyboard_grouping none
+  '';
 
   # Run krd
   home-manager.users.arnar.systemd.user.services.krd = {
