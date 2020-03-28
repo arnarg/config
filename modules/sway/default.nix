@@ -21,11 +21,18 @@ in with pkgs.stdenv; with lib; {
       default = "";
       description = "Extra sway config.";
     };
+    waybar.extraConfig = mkOption {
+      type = types.attrs;
+      default = {};
+      description = "Extra waybar config.";
+    };
   };
 
   config = {
     programs.sway.enable = true;
     users.users.arnar.extraGroups = [ "sway" ];
+
+    fonts.fonts = [ pkgs.font-awesome ];
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [
@@ -60,6 +67,7 @@ in with pkgs.stdenv; with lib; {
             inherit lib;
             isHiDPI = cfg.isHiDPI;
             isLaptop = cfg.isLaptop;
+            extraConfig = cfg.sway.waybar.extraConfig;
           }
         );
         onChange = "${reloadSway}";

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   home-manager = builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz;
 in
@@ -43,6 +43,33 @@ in
       Exec=${pkgs.mypkgs.virtboard}/bin/virtboard
       User=arnar
     '';
+  };
+
+  # Script to toggle virtboard
+  home-manager.users.arnar.xdg.configFile."waybar/scripts/virtboard.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+      if [[ "$1" == "click" ]]; then
+        currentState=`busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 GetVisible 2>/dev/null`
+        if [[ $? == 0 ]]; then
+          case "$currentState" in
+          "b true")
+            busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false
+            ;;
+          "b false")
+            busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
+            ;;
+          esac
+        fi
+      fi
+    '';
+  };
+  local.desktop.sway.waybar.extraConfig = {
+    "custom/virtboard" = {
+      format = "";
+      on-click = "${pkgs.bash}/bin/bash /home/arnar/.config/waybar/scripts/virtboard.sh click";
+    };
+    modules-right = [ "network" "memory" "battery" "clock" "custom/virtboard" ];
   };
 
   # Run krd

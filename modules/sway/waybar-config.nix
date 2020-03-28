@@ -1,4 +1,4 @@
-{ lib, isHiDPI, isLaptop }:
+{ lib, isHiDPI, isLaptop, extraConfig }:
 let
   laptopConfig = {
     modules-right = [
@@ -32,4 +32,4 @@ in {
   clock = {
     format-alt = "{:%a, %d. %b %H:%M}";
   };
-} // (lib.optionalAttrs isLaptop laptopConfig)
+} // (lib.optionalAttrs isLaptop laptopConfig) // extraConfig
