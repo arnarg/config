@@ -38,7 +38,7 @@ in with pkgs.stdenv; with lib; {
       home.packages = with pkgs; [
         swayidle
         swaylock
-        waybar
+        (waybar.override { pulseSupport = true; })
         xwayland
       ];
 

@@ -71,7 +71,7 @@ in
       format = "";
       on-click = "${pkgs.bash}/bin/bash /home/arnar/.config/waybar/scripts/virtboard.sh click";
     };
-    modules-right = [ "network" "memory" "battery" "clock" "custom/virtboard" ];
+    modules-right = [ "network" "pulseaudio" "battery" "clock" "custom/virtboard" ];
   };
 
   local.desktop.sway.extraConfig = lib.mkAfter ''
