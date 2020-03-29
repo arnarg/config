@@ -35,7 +35,7 @@ in
   # Enable iio-sensor-proxy for screen rotation
   hardware.sensor.iio.enable = true;
 
-  # Enables d-bus activation of virtboard
+  # Enables d-bus activation of squeekboard
   home-manager.users.arnar.xdg.dataFile."dbus-1/services/sm.puri.OSK0.service" = {
     text = ''
       [D-BUS Service]
@@ -45,33 +45,13 @@ in
     '';
   };
 
-  # Script to toggle virtboard
-  home-manager.users.arnar.xdg.configFile."waybar/scripts/virtboard.sh" = {
-    text = ''
-      #!/usr/bin/env bash
-      if [[ "$1" == "click" ]]; then
-        for i in 1 2 3 4; do
-          currentState=`busctl --user get-property sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 Visible`
-          if [[ $? == 0 ]]; then break; fi
-          sleep 0.1
-        done
-        case "$currentState" in
-        "b true")
-          busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false
-          ;;
-        "b false")
-          busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
-          ;;
-        esac
-      fi
-    '';
-  };
+  # Add button to toggle squeekboard
   local.desktop.sway.waybar.extraConfig = {
-    "custom/virtboard" = {
+    "custom/squeekboard" = {
       format = "";
-      on-click = "${pkgs.bash}/bin/bash /home/arnar/.config/waybar/scripts/virtboard.sh click";
+      on-click = "${pkgs.mypkgs.desktop-scripts}/waybar/squeekboard.sh";
     };
-    modules-right = [ "custom/lang" "network" "pulseaudio" "battery" "clock" "custom/virtboard" ];
+    modules-right = [ "custom/lang" "network" "pulseaudio" "battery" "clock" "custom/squeekboard" ];
   };
 
   local.desktop.sway.extraConfig = lib.mkAfter ''

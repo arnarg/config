@@ -57,7 +57,7 @@ window#waybar.solo {
 #network,
 #battery,
 #custom-media,
-#custom-virtboard,
+#custom-squeekboard,
 #custom-lang,
 #tray,
 #mode,
@@ -102,7 +102,7 @@ label:focus {
     border-bottom-color: #f53c3c;
 }
 
-#custom-virtboard {
+#custom-squeekboard {
     border-bottom: 0;
     font-size: 16pt;
 }
