@@ -50,14 +50,18 @@ in with pkgs.stdenv; with lib; {
           wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
           j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
-          bemenuSize = if cfg.isHiDPI then 16 else 14;
+          bemenuSize = if cfg.isHiDPI then 14 else 12;
           extraConfig = cfg.sway.extraConfig;
         };
         onChange = "${reloadSway}";
       };
 
-      xdg.configFile."waybar/style.css" = {
-        text = (builtins.readFile ./conf.d/waybar.css);
+      xdg.configFile."waybar/style.css" = with pkgs; {
+        source = substituteAll {
+          name = "waybar-css";
+          src = ./conf.d/waybar.css;
+          fontSize = if cfg.isHiDPI then 14 else 12;
+        };
         onChange = "${reloadSway}";
       };
 

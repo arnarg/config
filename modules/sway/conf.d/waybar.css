@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     font-family: inconsolata, 'Font Awesome 5 Free Solid';
-    font-size: 14pt;
+    font-size: @fontSize@pt;
     min-height: 0;
 }
 
