@@ -51,6 +51,7 @@ in with pkgs.stdenv; with lib; {
           j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
           bemenuSize = if cfg.isHiDPI then 14 else 12;
+          desktopScripts = "${mypkgs.desktop-scripts}";
           extraConfig = cfg.sway.extraConfig;
         };
         onChange = "${reloadSway}";
@@ -68,6 +69,7 @@ in with pkgs.stdenv; with lib; {
       xdg.configFile."waybar/config" = {
         text = builtins.toJSON (
           import ./waybar-config.nix {
+            inherit pkgs;
             inherit lib;
             isHiDPI = cfg.isHiDPI;
             isLaptop = cfg.isLaptop;

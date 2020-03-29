@@ -1,8 +1,9 @@
-{ lib, isHiDPI, isLaptop, extraConfig }:
+{ pkgs, lib, isHiDPI, isLaptop, extraConfig }:
 let
   laptopConfig = {
     # No memory module because space is premium :(
     modules-right = [
+      "custom/lang"
       "network"
       "pulseaudio"
       "battery"
@@ -34,6 +35,7 @@ in {
   modules-left = [ "sway/workspaces" "sway/mode" ];
   modules-center = [ "sway/window" ];
   modules-right = [
+    "custom/lang"
     "network"
     "memory"
     "clock"
@@ -52,5 +54,13 @@ in {
   clock = {
     format-alt = " {:%a, %d. %b %H:%M}";
     format = " {:%H:%M}";
+  };
+  "custom/lang" = {
+    format = " {}";
+    exec = "${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh";
+    on-click = "${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
+    interval = "once";
+    signal = 1;
+    return-type = "json";
   };
 } // (lib.optionalAttrs isLaptop laptopConfig) // extraConfig

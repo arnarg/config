@@ -11,5 +11,6 @@ let
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
     squeekboard = callPackage ./squeekboard { };
+    desktop-scripts = callPackage ./desktop-scripts { };
   };
 in self
