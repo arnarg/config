@@ -44,9 +44,12 @@ in {
     max-length = 50;
   };
   network = {
-    format-wifi = " {essid} ({signalStrength}%)";
+    format-wifi = " {signalStrength}%";
     format-ethernet = " {ipaddr}/{cidr}";
     format-disconnected = " Disconnected";
+    tooltip-format-wifi = "{essid}";
+    tooltip-format-ethernet = "{ipaddr}/{cidr}";
+    tooltip-format-disconnected = "Disconnected";
   };
   memory = {
     format = " {percentage}%";
@@ -54,6 +57,7 @@ in {
   clock = {
     format-alt = " {:%a, %d. %b %H:%M}";
     format = " {:%H:%M}";
+    tooltip = false;
   };
   "custom/lang" = {
     format = " {}";
