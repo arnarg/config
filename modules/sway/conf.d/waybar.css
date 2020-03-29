@@ -63,21 +63,14 @@ window#waybar.solo {
 #mode,
 #pulseaudio,
 #idle_inhibitor {
-    padding: 0 10px;
-    margin: 0 6px;
+    padding: 0 0.5em;
+    margin: 0 0.4em;
     color: #ffffff;
     border-bottom: 0.2em solid;
 }
 
 #clock {
     border-bottom-color: #8FB09F;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
 }
 
 label:focus {
@@ -93,12 +86,20 @@ label:focus {
     border-bottom-color: #af7e50;
 }
 
+#battery.critical {
+    border-bottom-color: #f53c3c;
+}
+
+#custom-lang {
+    border-bottom-color: #b7c454;
+}
+
 #network {
     border-bottom-color: #2980b9;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    border-bottom-color: #f53c3c;
 }
 
 #custom-virtboard {
