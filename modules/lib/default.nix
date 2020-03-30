@@ -4,7 +4,7 @@ with lib;
 {
   options.local.displayScalingFactor = mkOption {
     type = types.float;
-    default = 1;
+    default = 1.0;
     description = "A floating point number that is used to scale font sizes.";
   };
 

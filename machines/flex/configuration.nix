@@ -10,6 +10,7 @@ in
 
   imports = [
     "${home-manager}/nixos"
+    ../../modules/lib
     ../../modules/profiles/laptop.nix
     ../../modules/nixpkgs.nix
     ../../modules/users.nix

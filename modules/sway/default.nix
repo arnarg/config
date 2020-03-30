@@ -35,7 +35,7 @@ in with pkgs.stdenv; with lib; {
     local.desktop.sway.waybar.config = import ./waybar-config.nix {
       inherit lib;
       inherit pkgs;
-      isHiDPI = cfg.isHiDPI;
+      displayScalingLib = config.lib.displayScaling;
       isLaptop = cfg.isLaptop;
     };
 
@@ -58,7 +58,7 @@ in with pkgs.stdenv; with lib; {
           wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
           j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
-          bemenuSize = if cfg.isHiDPI then 14 else 12;
+          bemenuSize = config.lib.displayScaling.floor 12;
           desktopScripts = "${mypkgs.desktop-scripts}";
           extraConfig = cfg.sway.extraConfig;
         };
@@ -69,7 +69,7 @@ in with pkgs.stdenv; with lib; {
         source = substituteAll {
           name = "waybar-css";
           src = ./conf.d/waybar.css;
-          fontSize = if cfg.isHiDPI then 14 else 12;
+          fontSize = config.lib.displayScaling.floor 12;
         };
         onChange = "${reloadSway}";
       };

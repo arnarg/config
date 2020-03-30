@@ -1,4 +1,4 @@
-{ pkgs, lib, isHiDPI, isLaptop }:
+{ pkgs, lib, displayScalingLib, isLaptop }:
 let
   laptopConfig = {
     # No memory module because space is premium :(
@@ -31,7 +31,7 @@ let
   };
 in {
   layer = "top";
-  height = if isHiDPI then 40 else 30;
+  height = displayScalingLib.floor 30;
   modules-left = [ "sway/workspaces" "sway/mode" ];
   modules-center = [ "sway/window" ];
   modules-right = [

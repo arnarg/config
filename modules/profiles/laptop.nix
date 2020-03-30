@@ -20,7 +20,6 @@
   services.upower.enable = true;
 
   local.desktop.isLaptop = true;
-  local.desktop.isHiDPI = lib.mkDefault false;
   local.desktop.sway.extraConfig = with pkgs; ''
     # Enable tap
     input * tap enabled

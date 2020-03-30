@@ -5,11 +5,6 @@ in with pkgs.stdenv; with lib; {
   imports = [ ./home.nix ];
 
   options.local.desktop = {
-    isHiDPI = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Scales UI elements.";
-    };
     isLaptop = mkOption {
       type = types.bool;
       default = false;
@@ -66,7 +61,7 @@ in with pkgs.stdenv; with lib; {
           };
 
           font = {
-            size = if cfg.isHiDPI then 14 else 12;
+            size = config.lib.displayScaling.floor 12;
             normal.family = "Inconsolata";
           };
 

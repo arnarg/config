@@ -10,6 +10,7 @@ in
 
   imports = [
     "${home-manager}/nixos"
+    ../../modules/lib
     ../../modules/nixpkgs.nix
     ../../modules/users.nix
     ../../modules/home.nix
@@ -32,7 +33,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   local.home.userName = "arnar";
-  local.desktop.isHiDPI = true;
+  local.displayScalingFactor = 1.2;
 
   # For some gaming
   hardware.opengl.driSupport32Bit = true;
