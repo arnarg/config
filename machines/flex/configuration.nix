@@ -46,12 +46,12 @@ in
   };
 
   # Add button to toggle squeekboard
-  local.desktop.sway.waybar.extraConfig = {
+  local.desktop.sway.waybar.config = {
     "custom/squeekboard" = {
       format = "";
       on-click = "${pkgs.mypkgs.desktop-scripts}/waybar/squeekboard.sh";
     };
-    modules-right = [ "custom/lang" "network" "pulseaudio" "battery" "clock" "custom/squeekboard" ];
+    modules-right = lib.mkAfter [ "custom/squeekboard" ];
   };
 
   local.desktop.sway.extraConfig = lib.mkAfter ''

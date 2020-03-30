@@ -1,4 +1,4 @@
-{ pkgs, lib, isHiDPI, isLaptop, extraConfig }:
+{ pkgs, lib, isHiDPI, isLaptop }:
 let
   laptopConfig = {
     # No memory module because space is premium :(
@@ -67,4 +67,4 @@ in {
     signal = 1;
     return-type = "json";
   };
-} // (lib.optionalAttrs isLaptop laptopConfig) // extraConfig
+} // (lib.optionalAttrs isLaptop laptopConfig)

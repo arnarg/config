@@ -21,16 +21,24 @@ in with pkgs.stdenv; with lib; {
       default = "";
       description = "Extra sway config.";
     };
-    waybar.extraConfig = mkOption {
-      type = types.attrs;
+    waybar.config = mkOption {
+      type = types.attrsOf types.unspecified;
       default = {};
-      description = "Extra waybar config.";
+      description = "Waybar config";
     };
   };
 
   config = {
     programs.sway.enable = true;
     users.users.arnar.extraGroups = [ "sway" ];
+
+    local.desktop.sway.waybar.config = import ./waybar-config.nix {
+      inherit lib;
+      inherit pkgs;
+      isHiDPI = cfg.isHiDPI;
+      isLaptop = cfg.isLaptop;
+    };
+
 
     fonts.fonts = [ pkgs.font-awesome ];
 
@@ -67,15 +75,7 @@ in with pkgs.stdenv; with lib; {
       };
 
       xdg.configFile."waybar/config" = {
-        text = builtins.toJSON (
-          import ./waybar-config.nix {
-            inherit pkgs;
-            inherit lib;
-            isHiDPI = cfg.isHiDPI;
-            isLaptop = cfg.isLaptop;
-            extraConfig = cfg.sway.waybar.extraConfig;
-          }
-        );
+        text = builtins.toJSON config.local.desktop.sway.waybar.config;
         onChange = "${reloadSway}";
       };
     };
