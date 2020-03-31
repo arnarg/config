@@ -17,8 +17,8 @@ in
 
   local.development.enable = true;
   local.desktop.enable = true;
-  local.profiles.laptop.enable = true;
-  local.profiles.laptop.touch.enable = true;
+  local.laptop.enable = true;
+  local.laptop.touch.enable = true;
 
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
