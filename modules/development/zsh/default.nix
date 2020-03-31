@@ -10,7 +10,8 @@ in with pkgs.stdenv; with lib; {
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = [ pkgs.zsh ];
+    programs.zsh.enable = true;
+    users.users.${userName}.shell = pkgs.zsh;
 
     home-manager.users.${userName} = {
       
