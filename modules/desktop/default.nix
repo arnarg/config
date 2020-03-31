@@ -2,17 +2,19 @@
 let
   cfg = config.local.desktop;
 in with pkgs.stdenv; with lib; {
-  imports = [ ./home.nix ];
-
   options.local.desktop = {
-    isLaptop = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enables laptop features.";
-    };
+    enable = mkEnableOption "desktop";
   };
 
-  config = {
+  imports = [
+    ./sway
+    ./firefox
+  ];
+
+  config = mkIf cfg.enable {
+    local.desktop.sway.enable = true;
+    local.desktop.firefox.enable = true;
+
     sound.enable = true;
     hardware.pulseaudio.enable = true;
     hardware.pulseaudio.package = pkgs.pulseaudioFull;
@@ -35,9 +37,6 @@ in with pkgs.stdenv; with lib; {
       "video"
       "dialout"
     ];
-
-    # For yubikey
-    services.pcscd.enable = true;
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [

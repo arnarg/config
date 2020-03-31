@@ -10,16 +10,17 @@ in
 
   imports = [
     "${home-manager}/nixos"
-    ../../modules/lib
-    ../../modules/profiles/laptop.nix
-    ../../modules/nixpkgs.nix
-    ../../modules/users.nix
-    ../../modules/home.nix
-    ../../modules/desktop.nix
-    ../../modules/sway
+    ../../modules
+    ../../modules/os-specific/linux.nix
     ./hardware-configuration.nix
   ];
 
+  local.development.enable = true;
+  local.desktop.enable = true;
+  local.profiles.laptop.enable = true;
+  local.profiles.laptop.touch.enable = true;
+
+  # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
     krita
   ];
@@ -31,48 +32,8 @@ in
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  local.home.userName = "arnar";
-
   # Enable iio-sensor-proxy for screen rotation
   hardware.sensor.iio.enable = true;
-
-  # Enables d-bus activation of squeekboard
-  home-manager.users.arnar.xdg.dataFile."dbus-1/services/sm.puri.OSK0.service" = {
-    text = ''
-      [D-BUS Service]
-      Name=sm.puri.OSK0
-      Exec=${pkgs.mypkgs.squeekboard}/bin/squeekboard
-      User=arnar
-    '';
-  };
-
-  # Add button to toggle squeekboard
-  local.desktop.sway.waybar.config = {
-    "custom/squeekboard" = {
-      format = "";
-      on-click = "${pkgs.mypkgs.desktop-scripts}/waybar/squeekboard.sh";
-    };
-    modules-right = lib.mkAfter [ "custom/squeekboard" ];
-  };
-
-  local.desktop.sway.extraConfig = lib.mkAfter ''
-    # Workaround for squeekboard
-    seat seat0 keyboard_grouping none
-  '';
-
-  # Run krd
-  home-manager.users.arnar.systemd.user.services.krd = {
-    Unit = {
-      Description = "Krypton daemon";
-    };
-    Service = {
-      ExecStart = "${pkgs.mypkgs.kr}/bin/krd";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-  };
 
   networking = {
     hostId = "eb0a230e";

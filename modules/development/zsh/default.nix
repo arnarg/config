@@ -1,18 +1,23 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.local.zsh;
-  userName = config.local.home.userName;
+  cfg = config.local.development.zsh;
+  userName = config.local.userName;
 in with pkgs.stdenv; with lib; {
-  options.local.zsh = {
-    enableOktaAws = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Wether okta-aws should be enabled";
-    };
+  options.local.development.zsh = {
+    enable = mkEnableOption "zsh";
+    enableOktaAws = mkEnableOption "okta-aws";
   };
 
-  config = {
+  config = mkIf cfg.enable {
+
+    environment.systemPackages = [ pkgs.zsh ];
+
     home-manager.users.${userName} = {
+      
+      programs.fzf.enable = true;
+      programs.fzf.enableZshIntegration = true;
+
+
       programs.zsh = rec {
         enable = true;
   
@@ -110,5 +115,6 @@ in with pkgs.stdenv; with lib; {
         ];
       };
     };
+
   };
 }

@@ -15,13 +15,11 @@ with pkgs; [
   go
   gocode
   godef
-  
+
   # Kubernetes
   kubectl
   kubectx
   kubernetes-helm
-
-  # mypkgs
   mypkgs.operator-sdk
   mypkgs.ksniff
 ]

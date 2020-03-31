@@ -10,16 +10,16 @@ in
 
   imports = [
     "${home-manager}/nixos"
-    ../../modules/lib
-    ../../modules/nixpkgs.nix
-    ../../modules/users.nix
-    ../../modules/home.nix
-    ../../modules/desktop.nix
-    ../../modules/sway
-    ../../modules/docker.nix
+    ../../modules
+    ../../modules/os-specific/linux.nix
     ./hardware-configuration.nix
   ];
 
+  local.displayScalingFactor = 1.2;
+  local.development.enable = true;
+  local.desktop.enable = true;
+
+  # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
     blender
     krita
@@ -32,26 +32,9 @@ in
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  local.home.userName = "arnar";
-  local.displayScalingFactor = 1.2;
-
   # For some gaming
   hardware.opengl.driSupport32Bit = true;
   home-manager.users.arnar.home.packages = [ pkgs.steam ];
-
-  # Run krd
-  home-manager.users.arnar.systemd.user.services.krd = {
-    Unit = {
-      Description = "Krypton daemon";
-    };
-    Service = {
-      ExecStart = "${pkgs.mypkgs.kr}/bin/krd";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-  };
 
   networking = {
     hostId = "fdedf053";

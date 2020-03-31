@@ -1,8 +1,14 @@
 { config, lib, pkgs, ... }:
 let
-  userName = config.local.home.userName;
+  cfg = config.local.development.kr;
+  userName = config.local.userName;
 in with pkgs.stdenv; with lib; {
-  config = {
+  options.local.development.kr = {
+    enable = mkEnableOption "kr";
+  };
+
+  config = mkIf cfg.enable {
+      
     home-manager.users.${userName} = {
       home.packages = [ pkgs.mypkgs.kr ];
 
@@ -15,6 +21,7 @@ in with pkgs.stdenv; with lib; {
         };
       };
     };
+
   };
 
 }

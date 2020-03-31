@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.local.desktop;
+  cfg = config.local.desktop.sway;
 
   # NOTE
   # - $SWAYSOCK unavailable
@@ -16,6 +16,7 @@ let
   '';
 in with pkgs.stdenv; with lib; {
   options.local.desktop.sway = {
+    enable = mkEnableOption "sway";
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -28,7 +29,7 @@ in with pkgs.stdenv; with lib; {
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     programs.sway.enable = true;
     users.users.arnar.extraGroups = [ "sway" ];
 
@@ -36,7 +37,7 @@ in with pkgs.stdenv; with lib; {
       inherit lib;
       inherit pkgs;
       displayScalingLib = config.lib.displayScaling;
-      isLaptop = cfg.isLaptop;
+      isLaptop = config.local.laptop.enable;
     };
 
 
@@ -60,7 +61,7 @@ in with pkgs.stdenv; with lib; {
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
           bemenuSize = config.lib.displayScaling.floor 12;
           desktopScripts = "${mypkgs.desktop-scripts}";
-          extraConfig = cfg.sway.extraConfig;
+          extraConfig = cfg.extraConfig;
         };
         onChange = "${reloadSway}";
       };
