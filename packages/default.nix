@@ -5,12 +5,13 @@ let
 
   self = {
     bemenu = callPackage ./bemenu { };
+    desktop-scripts = callPackage ./desktop-scripts { };
     hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
     kr = callPackage ./kr { };
     ksniff = callPackage ./ksniff { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
     squeekboard = callPackage ./squeekboard { };
-    desktop-scripts = callPackage ./desktop-scripts { };
+    sway-accel-rotate = callPackage ./sway-accel-rotate { };
   };
 in self

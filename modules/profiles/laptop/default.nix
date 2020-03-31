@@ -8,6 +8,7 @@ in with lib; {
 
   imports = [
     ./touch.nix
+    ./tablet.nix
   ];
 
   config = mkIf cfg.enable {

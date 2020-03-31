@@ -19,6 +19,7 @@ in
   local.desktop.enable = true;
   local.laptop.enable = true;
   local.laptop.touch.enable = true;
+  local.laptop.tablet.enable = true;
 
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
