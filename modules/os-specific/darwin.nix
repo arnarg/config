@@ -23,6 +23,8 @@ in with lib; {
   };
 
   config = {
+    # nix-darwin is still using enableSyntaxHighlighting
+    programs.zsh.enableSyntaxHighlighting = true;
     # Run krd
     launchd.user.agents.krd = mkIf cfg.development.kr.enable {
       serviceConfig.ProgramArguments = [ "${pkgs.mypkgs.kr}/bin/krd" ];

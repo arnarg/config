@@ -13,6 +13,9 @@ in with lib; {
 
   config = mkIf cfg.enable {
 
+    # Enabl UPower to watch battery stats
+    services.upower.enable = true;
+
     # Enable networkmanager
     networking.networkmanager.enable = true;
     users.users.arnar.extraGroups = [ "networkmanager" ];
