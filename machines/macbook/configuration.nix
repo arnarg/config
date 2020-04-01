@@ -4,8 +4,8 @@ let
 in with lib; {
   imports = [
     <home-manager/nix-darwin>
-    ../../modules/nixpkgs.nix
-    ../../modules/home.nix
+    ../../modules
+    ../../modules/os-specific/darwin.nix
   ];
 
   environment = {
@@ -13,19 +13,10 @@ in with lib; {
     shells = [ pkgs.zsh ];
   };
 
-  local = {
-    home.git.userEmail = "arnari@wuxinextcode.com";
-    home.userName = "arnari";
-    home.enableFirefox = false;
-    zsh.enableOktaAws = true;
-  };
-
-  # Run krd
-  launchd.user.agents.krd = {
-    serviceConfig.ProgramArguments = [ "${pkgs.mypkgs.kr}/bin/krd" ];
-    serviceConfig.Label = "co.krypt.krd";
-    serviceConfig.RunAtLoad = true;
-  };
+  local.userName = "arnari";
+  local.development.enable = true;
+  local.development.git.userEmail = "arnari@wuxinextcode";
+  local.development.zsh.enableOktaAws = true;
 
   home-manager.users.arnari.home = {
     packages = with pkgs; [
@@ -43,8 +34,6 @@ in with lib; {
   };
 
   programs.bash.enable = true;
-  programs.zsh.enable = true;
-  programs.zsh.enableSyntaxHighlighting = true;
 
   services.nix-daemon.enable = true;
   services.nix-daemon.enableSocketListener = true;
