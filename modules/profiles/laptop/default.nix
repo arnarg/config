@@ -13,7 +13,7 @@ in with lib; {
 
   config = mkIf cfg.enable {
 
-    # Enabl UPower to watch battery stats
+    # Enable UPower to watch battery stats
     services.upower.enable = true;
 
     # Enable networkmanager
@@ -49,6 +49,8 @@ in with lib; {
       # Startup programs
       # Enables touchpad gestures
       exec ${libinput-gestures}/bin/libinput-gestures
+      # Start upower-notify
+      exec ${go-upower-notify}/bin/upower-notify
     '';
   
     # libinput-gestures config

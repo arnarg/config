@@ -30,6 +30,10 @@ in with pkgs.stdenv; with lib; {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      mako
+    ];
+
     programs.sway.enable = true;
     users.users.arnar.extraGroups = [ "sway" ];
 
