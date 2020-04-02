@@ -17,11 +17,11 @@ in with pkgs.stdenv; with lib; {
       serviceConfig.User = "plex-exporter";
       serviceConfig.Group = "plex-exporter";
       serviceConfig.ExecStart = "${pkgs.mypkgs.plex-exporter}/bin/plex_exporter";
-      serviceConfig.EnvironmentFile = "-/etc/plex-exporter/environment";
+      serviceConfig.EnvironmentFile = "-/etc/plex_exporter/environment";
     };
 
     # default config
-    environment.etc."plex-exporter/config.yaml" = {
+    environment.etc."plex_exporter/config.yaml" = {
       text = ''
         autoDiscover: true
       '';
