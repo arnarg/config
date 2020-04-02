@@ -7,6 +7,7 @@ in with pkgs.stdenv; with lib; {
     ./profiles
     ./desktop
     ./development
+    ./services
   ];
 
   options.local = {

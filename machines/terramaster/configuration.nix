@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nix.nixPath = [
@@ -8,8 +8,8 @@
   ];
 
   imports = [
-    ../../modules/nixpkgs.nix
-    ../../modules/users.nix
+    ../../modules
+    ../../modules/os-specific/linux.nix
     ./hardware-configuration.nix
     ./fancontrol.nix
     ./nfs.nix
@@ -31,7 +31,7 @@
   # Enable SSH
   services.openssh.enable = true;
 
-  time.timeZone = "utc";
+  time.timeZone = lib.mkOverride "utc";
 
   networking = {
     hostName = "terramaster";
@@ -51,6 +51,8 @@
   # Metrics
   services.prometheus.exporters.node.enable = true;
   services.prometheus.exporters.node.openFirewall = true;
+  services.local.prometheus.exporters.plex.enable = true;
+  services.local.prometheus.exporters.plex.openFirewall = true;
 
   # NixOS settings
   system = {

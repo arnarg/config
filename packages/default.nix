@@ -11,6 +11,7 @@ let
     ksniff = callPackage ./ksniff { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
+    plex-exporter = callPackage ./plex-exporter { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
   };

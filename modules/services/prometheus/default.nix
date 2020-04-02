@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  imports = [
+    ./plex-exporter.nix
+  ];
+}
