@@ -60,8 +60,8 @@
     # Metrics
     services.prometheus.exporters.node.enable = true;
     services.prometheus.exporters.node.openFirewall = true;
-    services.local.prometheus.exporters.plex.enable = true;
-    services.local.prometheus.exporters.plex.openFirewall = true;
+    local.services.prometheus.exporters.plex.enable = true;
+    local.services.prometheus.exporters.plex.openFirewall = true;
 
     # NixOS settings
     system = {
