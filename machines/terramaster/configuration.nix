@@ -40,7 +40,7 @@
     # Enable SSH
     services.openssh.enable = true;
 
-    time.timeZone = lib.mkOverride "utc";
+    time.timeZone = lib.mkForce "utc";
 
     networking = {
       hostName = "terramaster";

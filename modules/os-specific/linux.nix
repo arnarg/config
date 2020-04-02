@@ -7,6 +7,8 @@ in with lib; {
   ];
 
   config = {
+    time.timeZone = mkDefault "Iceland";
+
     programs.zsh.syntaxHighlighting = mkIf cfg.development.zsh.enable { enable = true; };
 
     home-manager.users.${cfg.userName} = {
