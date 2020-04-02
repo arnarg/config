@@ -16,8 +16,8 @@ buildGoModule rec {
   subPackages = [ "." ];
 
   meta = with lib; {
-    description = "Rotate Sway outputs based on current accelerometer orientation using iio-sensor-proxy.";
-    homepage = https://github.com/arnarg/sway-accel-rotate;
+    description = "A Prometheus exporter for a few metrics from Plex Media Server.";
+    homepage = https://github.com/arnarg/plex_exporter;
     license = licenses.mit;
     platforms = platforms.linux;
   };

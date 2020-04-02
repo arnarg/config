@@ -16,7 +16,7 @@ in with pkgs.stdenv; with lib; {
 
       serviceConfig.User = "plex-exporter";
       serviceConfig.Group = "plex-exporter";
-      serviceConfig.ExecStart = "${pkgs.mypkgs.plex-exporter}/bin/plex-exporter";
+      serviceConfig.ExecStart = "${pkgs.mypkgs.plex-exporter}/bin/plex_exporter";
       serviceConfig.EnvironmentFile = "-/etc/plex_exporter/environment";
     };
 
