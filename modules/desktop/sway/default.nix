@@ -71,6 +71,7 @@ in with pkgs.stdenv; with lib; {
           bemenu = "${mypkgs.bemenu}/bin/bemenu";
           bemenuSize = config.lib.displayScaling.floor 12;
           desktopScripts = "${mypkgs.desktop-scripts}";
+          swaylockCmd = "${swaylock-fancy}/bin/swaylock-fancy -p -f Inconsolata-Bold";
           extraConfig = cfg.extraConfig;
         };
         onChange = "${reloadSway}";
