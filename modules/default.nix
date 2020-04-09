@@ -3,10 +3,11 @@ let
   cfg = config.local;
 in with pkgs.stdenv; with lib; {
   imports = [
-    ./lib
-    ./profiles
     ./desktop
     ./development
+    ./lib
+    ./profiles
+    ./programs
     ./services
   ];
 

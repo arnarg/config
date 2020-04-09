@@ -14,5 +14,6 @@ let
     plex-exporter = callPackage ./plex-exporter { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
+    waybind = callPackage ./waybind { };
   };
 in self

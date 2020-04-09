@@ -30,6 +30,9 @@ in with lib; {
   
     # Enable light to control backlight
     programs.light.enable = true;
+
+    # Enable waybind key rebinder
+    local.programs.waybind.enable = true;
   
     # Add laptop specific config to sway
     local.desktop.sway.extraConfig = with pkgs; ''

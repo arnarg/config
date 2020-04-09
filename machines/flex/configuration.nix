@@ -21,6 +21,8 @@ in
   local.laptop.touch.enable = true;
   local.laptop.tablet.enable = true;
 
+  local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
     krita
