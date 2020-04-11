@@ -20,6 +20,7 @@ in with lib; {
       serviceConfig.Restart = "always";
       serviceConfig.User = "waybind";
       serviceConfig.Group = "waybind";
+      serviceConfig.PrivateNetwork = true;
     };
 
     # Write config
@@ -84,6 +85,9 @@ in with lib; {
             unbind: true
       '';
     };
+
+    # Load uinput module
+    boot.kernelModules = [ "uinput" ];
 
     # Add udev rules
     services.udev.packages = [ pkgs.mypkgs.waybind ];
