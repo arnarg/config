@@ -18,7 +18,6 @@ in
   local.development.enable = true;
   local.desktop.enable = true;
   local.laptop.enable = true;
-  local.laptop.touch.enable = true;
   local.laptop.tablet.enable = true;
 
   local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
