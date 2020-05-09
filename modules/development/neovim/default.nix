@@ -50,6 +50,16 @@ in with lib; {
               sha256 = "1rrmvv7ali50rpbih1s0fj00a3hjspwinx2y6nhwac7bjsnqqdwi";
             };
           })
+          (pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "tmux-navigate";
+            version = "2020-05-06";
+            src = pkgs.fetchFromGitHub {
+              owner = "sunaku";
+              repo = "tmux-navigate";
+              rev = "053a2463efd4d5ba7558f81d7615090505a54df7";
+              sha256 = "0y4aaff4pd55ssx72xmhml3jziwwirrd6vq4138lgcsx4b8cldk7";
+            };
+          })
         ];
       };
     };

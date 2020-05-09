@@ -14,6 +14,7 @@ let
     plex-exporter = callPackage ./plex-exporter { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
+    tmux-plugins = callPackage ./tmux-plugins { };
     waybind = callPackage ./waybind { };
   };
 in self

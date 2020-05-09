@@ -11,6 +11,7 @@ in with pkgs.stdenv; with lib; {
     ./git
     ./kr
     ./neovim
+    ./tmux
     ./zsh
   ];
 
@@ -18,6 +19,7 @@ in with pkgs.stdenv; with lib; {
     local.development.git.enable = true;
     local.development.kr.enable = true;
     local.development.neovim.enable = true;
+    local.development.tmux.enable = true;
     local.development.zsh.enable = true;
 
     # For yubikey
