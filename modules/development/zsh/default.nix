@@ -49,34 +49,7 @@ in with pkgs.stdenv; with lib; {
           cat = "${pkgs.bat}/bin/bat -p";
         };
   
-        initExtra = mkBefore (''
-          setopt HIST_IGNORE_SPACE
-  
-          # Pure theme settings
-          zstyle ':prompt:pure:path' color red
-          zstyle ':prompt:pure:prompt:success' color white
-  
-          # nix-shell
-          prompt_nix_shell_setup
-  
-          # Key bindings
-          bindkey -v
-          bindkey -a '^[[3~' vi-delete
-          bindkey -a 'H' beginning-of-line
-          bindkey -a 'F' end-of-line
-  
-          # Fix backspace not working after returning from cmd mode
-          bindkey '^?' backward-delete-char
-          bindkey '^h' backward-delete-char
-        '' + optionalString cfg.enableOktaAws ''
-          # Okta
-          . ${pkgs.mypkgs.okta-aws}/bash_functions
-          okta-plz() {
-            PROFILE="''${1:-$AWS_PROFILE}"
-            [[ -z "''${PROFILE}" ]] && echo 'AWS_PROFILE unset' && return 1
-            okta-aws "''${PROFILE}" sts get-caller-identity
-          }
-        '');
+        initExtra = mkBefore (builtins.readFile ./extra.zsh);
   
         plugins = with pkgs; [
           {
