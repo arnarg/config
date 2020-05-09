@@ -66,3 +66,9 @@ nnoremap <leader>. :BufstopForward<CR>
 " GOYO "
 """"""""
 nnoremap <leader>g :Goyo<CR>
+
+"""""""""""
+" VIMWIKI "
+"""""""""""
+let g:vimwiki_list = [{'path': '~/notes/personal',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
