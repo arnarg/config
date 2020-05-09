@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.development.neovim;
-  userName = config.local.userName;
 in with lib; {
   options.local.development.neovim = {
     enable = mkEnableOption "neovim";
@@ -9,7 +8,7 @@ in with lib; {
 
   config = mkIf cfg.enable {
 
-    home-manager.users.${userName} = {
+    home-manager.users.arnar = {
       programs.neovim = {
         enable = true;
         viAlias = true;

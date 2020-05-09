@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.development;
-  userName = config.local.userName;
 in with pkgs.stdenv; with lib; {
   options.local.development = {
     enable = mkEnableOption "development";
@@ -24,6 +23,6 @@ in with pkgs.stdenv; with lib; {
     # For yubikey
     services.pcscd.enable = if isLinux then true else false;
 
-    home-manager.users.${userName}.home.packages = import ./packages.nix { inherit pkgs; };
+    home-manager.users.arnar.home.packages = import ./packages.nix { inherit pkgs; };
   };
 }

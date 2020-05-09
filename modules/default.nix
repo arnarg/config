@@ -9,19 +9,12 @@ in with pkgs.stdenv; with lib; {
     ./profiles
     ./programs
     ./services
+    ./users
   ];
-
-  options.local = {
-    userName = mkOption {
-      type = types.str;
-      default = "arnar";
-      description = "Username to use. Required for my work macbook.";
-    };
-  };
 
   config = {
 
-    nix.trustedUsers = [ "root" cfg.userName ];
+    nix.trustedUsers = [ "root" "@wheel" ];
 
     nixpkgs = {
       config = {
@@ -43,12 +36,6 @@ in with pkgs.stdenv; with lib; {
                     (attrNames (readDir path)));
     };
 
-    users.users.${cfg.userName} = {
-      name = cfg.userName;
-      home =
-        if isDarwin then "/Users/${cfg.userName}"
-        else "/home/${cfg.userName}";
-    };
-
+    time.timeZone = mkDefault "Iceland";
   };
 }

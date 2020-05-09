@@ -20,21 +20,6 @@ let
       cp $src/static-tcpdump $out/bin/static-tcpdump
     '';
   };
-  # Wireshark on Mac OS doesn't have `wireshark` (all lowercase)
-  wiresharkWrapped = if stdenv.isDarwin then
-    stdenv.mkDerivation {
-      pname = "wireshark-wrapped";
-      version = wireshark.version;
-
-      dontUnpack = true;
-      dontBuild = true;
-
-      installPhase = ''
-        mkdir -p $out/bin
-        ln -s ${wireshark}/Applications/Wireshark.app/Contents/MacOS/Wireshark $out/bin/wireshark
-      '';
-    }
-  else wireshark;
 in buildGoModule {
   pname = "ksniff";
   version = version;
@@ -55,13 +40,13 @@ in buildGoModule {
   postFixup = ''
     wrapProgram $out/bin/kubectl-sniff \
       --set KUBECTL_PLUGINS_LOCAL_FLAG_LOCAL_TCPDUMP_PATH "${static-tcpdump}/bin/static-tcpdump" \
-      --prefix PATH ":" "${wiresharkWrapped}/bin"
+      --prefix PATH ":" "${wireshark}/bin"
   '';
 
   meta = with lib; {
     description = "Kubectl plugin to ease sniffing on kubernetes pods using tcpdump and wireshark.";
     homepage = https://github.com/eldadru/ksniff;
     license = licenses.asl20;
-    platforms = platforms.linux ++ platforms.darwin;
+    platforms = platforms.linux;
   };
 }

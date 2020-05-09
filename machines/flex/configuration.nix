@@ -11,7 +11,6 @@ in
   imports = [
     "${home-manager}/nixos"
     ../../modules
-    ../../modules/os-specific/linux.nix
     ./hardware-configuration.nix
   ];
 

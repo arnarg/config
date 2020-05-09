@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.desktop.firefox;
-  userName = config.local.userName;
 in with lib; {
   options.local.desktop.firefox = {
     enable = mkEnableOption "firefox";
@@ -9,7 +8,7 @@ in with lib; {
 
   config = mkIf cfg.enable {
 
-    home-manager.users.${userName} = {
+    home-manager.users.arnar = {
       programs.firefox.enable = true;
       programs.firefox.package = pkgs.firefox-wayland;
 

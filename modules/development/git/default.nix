@@ -19,7 +19,7 @@ in with lib; {
 
   config = mkIf cfg.enable {
     
-    home-manager.users.${userName} = {
+    home-manager.users.arnar = {
       programs.git.enable = true;
       programs.git.userName = cfg.userName;
       programs.git.userEmail = cfg.userEmail;

@@ -1,19 +1,18 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.development.zsh;
-  userName = config.local.userName;
 in with pkgs.stdenv; with lib; {
   options.local.development.zsh = {
     enable = mkEnableOption "zsh";
-    enableOktaAws = mkEnableOption "okta-aws";
   };
 
   config = mkIf cfg.enable {
 
     programs.zsh.enable = true;
-    users.users.${userName}.shell = pkgs.zsh;
+    programs.zsh.syntaxHighlighting.enable = true;
+    users.users.arnar.shell = pkgs.zsh;
 
-    home-manager.users.${userName} = {
+    home-manager.users.arnar = {
       
       programs.fzf.enable = true;
       programs.fzf.enableZshIntegration = true;
@@ -59,13 +58,6 @@ in with pkgs.stdenv; with lib; {
               repo = "pure";
               rev = "v1.11.0";
               sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
-              # Repository includes a symlink async that points to async.zsh
-              # This is stripped for some reason so I add it manually
-              extraPostFetch = optionalString isDarwin ''
-                chmod u+w $out
-                ln -s async.zsh $out/async
-                chmod u-w $out
-              '';
             };
           }
           {
