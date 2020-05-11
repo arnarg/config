@@ -16,5 +16,6 @@ let
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     tmux-plugins = callPackage ./tmux-plugins { };
     waybind = callPackage ./waybind { };
+    yubikey-agent = callPackage ./yubikey-agent { };
   };
 in self
