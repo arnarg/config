@@ -11,7 +11,7 @@ buildGoModule rec {
     sha256 = "0jalcxrhvn65p11ph07yhh8hl0q5w9aq6xp7b60gnwlyifrzyqvg";
   };
 
-  modSha256 = "0hq9j0w3y94sd25vcwhgs4zswpqcw2j6midvdny5lq2sfz7jwv3d";
+  vendorSha256 = "14l27adbnhqdc0kdjkmqplc4yq0jdz9dfv3mj21mfjxib5nx0rzl";
 
   buildInputs = [ pcsclite ];
 

@@ -2,26 +2,26 @@
 
 buildGoModule rec {
   name = "operator-sdk";
-  version = "0.15.0";
+  version = "0.17.1";
 
   src = fetchFromGitHub {
     owner = "operator-framework";
     repo = "operator-sdk";
     rev = "v${version}";
-    sha256 = "0cd55dq29ppchbqhrj2aimyplp6wrlyah1kjpbfkf84gab84dw22";
+    sha256 = "0q360vzqpxjglv6mh427lz4wvqby1sh7gcv04c0ai6ln392sj319";
   };
 
-  modSha256 = "0vsh99m6nxqgxjrfb5fj1b5m212qx4m33d9mjj34jiblnky24p4m";
+  vendorSha256 = "105yd2lhmqwwys9cs33qb7r810rq1gcrkrzgm7fp5mp8j8dg3p8q";
 
   subPackages = [ "cmd/operator-sdk" ];
 
-    buildInputs = [ go makeWrapper ];
+  buildInputs = [ go makeWrapper ];
 
-    # operator-sdk uses the go compiler at runtime
-    allowGoReference = true;
-    postFixup = ''
-      wrapProgram $out/bin/operator-sdk --prefix PATH : ${lib.makeBinPath [ go ]}
-    '';
+  # operator-sdk uses the go compiler at runtime
+  allowGoReference = true;
+  postFixup = ''
+    wrapProgram $out/bin/operator-sdk --prefix PATH : ${lib.makeBinPath [ go ]}
+  '';
 
   meta = with lib; {
     description = "SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding.";

@@ -31,7 +31,7 @@ in buildGoModule {
     sha256 = "0vqx29wsxhv06kwxmcmqixa8g4qxy4zqlyx1icaqhpv0rgddildb";
   };
 
-  modSha256 = "1s6q1r0a3yzzcww3jrlacfpyb9nsyn8n78clahp7n8jhi8fziz7g";
+  vendorSha256 = "0kp9nap64287g3cj0w1lxpgyvlbqkins8bwpwafixmb29l0xyixl";
 
   subPackages = [ "cmd/kubectl-sniff.go" ];
 
