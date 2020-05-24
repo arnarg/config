@@ -41,5 +41,5 @@ in
     hostName = "flex";
   };
 
-  system.stateVersion = "20.04";
+  system.stateVersion = "20.03";
 }

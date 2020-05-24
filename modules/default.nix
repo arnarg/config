@@ -36,6 +36,6 @@ in with pkgs.stdenv; with lib; {
                     (attrNames (readDir path)));
     };
 
-    time.timeZone = mkDefault "Iceland";
+    time.timeZone = mkDefault "Europe/Vienna";
   };
 }
