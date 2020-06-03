@@ -9,14 +9,18 @@ in with pkgs.stdenv; with lib; {
   imports = [
     ./docker
     ./git
+    ./gpg
     ./kr
     ./neovim
+    ./pass
     ./tmux
     ./zsh
   ];
 
   config = mkIf cfg.enable {
+    local.development.docker.enable = true;
     local.development.git.enable = true;
+    local.development.gpg.enable = true;
     local.development.kr.enable = true;
     local.development.neovim.enable = true;
     local.development.tmux.enable = true;

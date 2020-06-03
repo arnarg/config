@@ -20,6 +20,6 @@ with pkgs; [
   kubectl
   kubectx
   kubernetes-helm
-  mypkgs.operator-sdk
+  #mypkgs.operator-sdk
   mypkgs.ksniff
 ]

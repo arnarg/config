@@ -15,6 +15,11 @@ in with lib; {
       default = "arnarg@fastmail.com";
       description = "User email for Git";
     };
+    gpgKey = mkOption {
+      type = types.str;
+      default = null;
+      description = "GPG key to use for signing";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -23,6 +28,9 @@ in with lib; {
       programs.git.enable = true;
       programs.git.userName = cfg.userName;
       programs.git.userEmail = cfg.userEmail;
+
+      programs.git.signing.key = cfg.gpgKey;
+      programs.git.signing.signByDefault = builtins.isString cfg.gpgKey;
     };
 
   };
