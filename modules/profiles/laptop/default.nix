@@ -19,6 +19,7 @@ in with lib; {
     # Enable networkmanager
     networking.networkmanager.enable = true;
     users.users.arnar.extraGroups = [ "networkmanager" ];
+    environment.systemPackages = with pkgs; [ networkmanager-openvpn ];
   
     # Enable tlp
     services.tlp.enable = true;
