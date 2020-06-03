@@ -11,6 +11,7 @@ in
   imports = [
     "${home-manager}/nixos"
     ../../modules
+    /etc/nixos/configuration.nix
     ./hardware-configuration.nix
   ];
 
@@ -23,10 +24,6 @@ in
   boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  environment.systemPackages = with pkgs; [
-    remmina
-  ];
 
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
