@@ -27,8 +27,8 @@ in with pkgs.stdenv; with lib; {
         enableAutosuggestions = false;
   
         history = {
-          size = 50000;
-          save = 500000;
+          size = mkDefault 50000;
+          save = mkDefault 500000;
           path = "${dotDir}/history";
           ignoreDups = true;
           share = false;

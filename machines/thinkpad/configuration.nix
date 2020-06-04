@@ -31,6 +31,12 @@ in
   # Enable libvirt
   local.development.libvirt.enable = true;
 
+  # Long zsh history
+  home-manager.users.arnar.programs.zsh.history = {
+    size = lib.mkForce 10000000;
+    save = lib.mkForce 10000000;
+  };
+
   networking = {
     hostId = "7648dca7";
     hostName = "thinkpad";
