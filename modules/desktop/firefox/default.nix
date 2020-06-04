@@ -19,6 +19,8 @@ in with lib; {
         "browser.shell.checkDefaultBrowser" = false;
         # Set up display scaling
         "layout.css.devPixelsPerPx" = (builtins.toString config.local.displayScalingFactor);
+        # Disable pocket
+        "extensions.pocket.enable" = false;
       };
     };
 
