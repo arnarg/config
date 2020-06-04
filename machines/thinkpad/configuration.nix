@@ -28,6 +28,9 @@ in
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Enable libvirt
+  local.development.libvirt.enable = true;
+
   networking = {
     hostId = "7648dca7";
     hostName = "thinkpad";

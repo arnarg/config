@@ -11,6 +11,7 @@ in with pkgs.stdenv; with lib; {
     ./git
     ./gpg
     ./kr
+    ./libvirt
     ./neovim
     ./pass
     ./tmux
