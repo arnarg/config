@@ -67,4 +67,10 @@ in {
     signal = 1;
     return-type = "json";
   };
+  "custom/vpn" = {
+    format = "{}";
+    exec = "${pkgs.mypkgs.desktop-scripts}/waybar/vpn.sh";
+    interval = 5;
+    return-type = "json";
+  };
 } // (lib.optionalAttrs isLaptop laptopConfig)

@@ -59,6 +59,7 @@ window#waybar.solo {
 #custom-media,
 #custom-squeekboard,
 #custom-lang,
+#custom-vpn,
 #tray,
 #mode,
 #pulseaudio,
@@ -92,6 +93,12 @@ label:focus {
 
 #custom-lang {
     border-bottom-color: #b7c454;
+}
+
+#custom-vpn {
+    border-bottom: 0;
+    background-color: #afb3bc;
+    color: #282C34;
 }
 
 #network {

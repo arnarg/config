@@ -37,6 +37,9 @@ in
     save = lib.mkForce 10000000;
   };
 
+  # Enable vpn waybar module
+  local.desktop.sway.waybar.config.modules-right = lib.mkBefore [ "custom/vpn" ];
+
   networking = {
     hostId = "7648dca7";
     hostName = "thinkpad";
