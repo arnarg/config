@@ -40,6 +40,12 @@ in
   # Enable vpn waybar module
   local.desktop.sway.waybar.config.modules-right = lib.mkBefore [ "custom/vpn" ];
 
+  # Fix positioning of external monitors
+  home-manager.users.arnar.wayland.windowManager.sway.config.output = {
+    DP-3 = { pos = "0 0"; };
+    DP-4 = { pos = "2560 0"; };
+  };
+
   networking = {
     hostId = "7648dca7";
     hostName = "thinkpad";
