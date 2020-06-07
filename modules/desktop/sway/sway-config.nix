@@ -6,7 +6,7 @@ let
   bindings = {
     "${cfg.config.modifier}+Return" = "exec ${cfg.config.terminal}";
     "${cfg.config.modifier}+Shift+q" = "kill";
-    "${cfg.config.modifier}+d" = "exec ${cfg.config.menu}";
+    "${cfg.config.modifier}+space" = "exec ${cfg.config.menu}";
 
     "${cfg.config.modifier}+${cfg.config.left}" = "focus left";
     "${cfg.config.modifier}+${cfg.config.down}" = "focus down";
@@ -28,7 +28,6 @@ let
     "${cfg.config.modifier}+e" = "layout toggle split";
 
     "${cfg.config.modifier}+Shift+space" = "floating toggle";
-    "${cfg.config.modifier}+space" = "focus mode_toggle";
 
     "${cfg.config.modifier}+1" = "workspace number 1";
     "${cfg.config.modifier}+2" = "workspace number 2";
