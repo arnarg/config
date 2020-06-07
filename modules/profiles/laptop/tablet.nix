@@ -9,9 +9,11 @@ in with lib; {
 
   config = mkIf (cfg.enable && swayEnabled) {
 
-    local.desktop.sway.extraConfig = mkAfter ''
-      exec ${pkgs.mypkgs.sway-accel-rotate}/bin/sway-accel-rotate
-    '';
+    home-manager.users.arnar.wayland.windowManager.sway.config = {
+      startup = [
+        { command = "${pkgs.mypkgs.sway-accel-rotate}/bin/sway-accel-rotate"; }
+      ];
+    };
 
   };
 }

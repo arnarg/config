@@ -36,26 +36,31 @@ in with lib; {
     local.programs.waybind.enable = true;
   
     # Add laptop specific config to sway
-    local.desktop.sway.extraConfig = with pkgs; ''
-      # Enable tap
-      input * tap enabled
-      # Disable tap and drag
-      input * drag disabled
-      # Media keys
-      bindsym XF86AudioMute exec ${pamixer}/bin/pamixer -t
-      bindsym XF86AudioRaiseVolume exec ${pamixer}/bin/pamixer -i 5
-      bindsym XF86AudioLowerVolume exec ${pamixer}/bin/pamixer -d 5
-      # Brightness
-      bindsym XF86MonBrightnessUp exec ${light}/bin/light -A 10
-      bindsym XF86MonBrightnessDown exec ${light}/bin/light -U 10
-      # I want 50% brightness initially
-      exec ${light}/bin/light -S 50
-      # Startup programs
-      # Enables touchpad gestures
-      exec ${libinput-gestures}/bin/libinput-gestures
-      # Start upower-notify
-      exec ${go-upower-notify}/bin/upower-notify
-    '';
+    home-manager.users.arnar.wayland.windowManager.sway = {
+      config = {
+        input = {
+          "*" = { tap = "enabled"; drag = "disabled"; };
+        };
+
+        keybindings = with pkgs; {
+          "XF86AudioMute" = "exec ${pamixer}/bin/pamixer -t";
+          "XF86AudioRaiseVolume" = "exec ${pamixer}/bin/pamixer -i 5";
+          "XF86AudioLowerVolume" = "exec ${pamixer}/bin/pamixer -d 5";
+          "XF86MonBrightnessUp" = "exec ${light}/bin/light -A 10";
+          "XF86MonBrightnessDown" = "exec ${light}/bin/light -U 10";
+        };
+
+        startup = [
+          { command = "${pkgs.libinput-gestures}/bin/libinput-gestures"; }
+          { command = "${pkgs.light}/bin/light -S 50"; }
+          { command = "${pkgs.go-upower-notify}/bin/upower-notify"; }
+        ];
+      };
+      extraConfig = ''
+        bindswitch lid:on output eDP-1 disable
+        bindswitch lid:off output eDP-1 enable
+      '';
+    };
   
     # libinput-gestures config
     home-manager.users.arnar.xdg.configFile."libinput-gestures.conf" = {

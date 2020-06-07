@@ -29,7 +29,7 @@ in with lib; {
 
     # Workaround for squeekboard so it doesn't mess up key layouts for other keyboards in sway
     # https://github.com/swaywm/sway/issues/5134
-    local.desktop.sway.extraConfig = lib.mkAfter ''
+    home-manager.users.arnar.wayland.windowManager.sway.extraConfig = ''
       # Workaround for squeekboard
       seat seat0 keyboard_grouping none
     '';

@@ -17,17 +17,16 @@ let
 in with pkgs.stdenv; with lib; {
   options.local.desktop.sway = {
     enable = mkEnableOption "sway";
-    extraConfig = mkOption {
-      type = types.lines;
-      default = "";
-      description = "Extra sway config.";
-    };
     waybar.config = mkOption {
       type = types.attrsOf types.unspecified;
       default = {};
       description = "Waybar config";
     };
   };
+
+  imports = [
+    ./sway-config.nix
+  ];
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -55,28 +54,14 @@ in with pkgs.stdenv; with lib; {
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [
-        swayidle
-        swaylock
         (waybar.override { pulseSupport = true; })
-        xwayland
       ];
 
-      xdg.enable = true;
-      xdg.configFile."sway/config" = with pkgs; {
-        source = substituteAll {
-          name = "sway-config";
-          src = ./conf.d/sway.conf;
-          wall = "${pantheon.elementary-wallpapers}/share/backgrounds/Morskie\ Oko.jpg";
-          j4 = "${j4-dmenu-desktop}/bin/j4-dmenu-desktop";
-          bemenu = "${mypkgs.bemenu}/bin/bemenu";
-          bemenuSize = config.lib.displayScaling.floor 12;
-          desktopScripts = "${mypkgs.desktop-scripts}";
-          swaylockCmd = "${swaylock-fancy}/bin/swaylock-fancy -p -f Inconsolata-Bold";
-          extraConfig = cfg.extraConfig;
-        };
-        onChange = "${reloadSway}";
-      };
+      # Sway
+      wayland.windowManager.sway.enable = true;
 
+      # Waybar config
+      xdg.enable = true;
       xdg.configFile."waybar/style.css" = with pkgs; {
         source = substituteAll {
           name = "waybar-css";
