@@ -34,6 +34,9 @@ in with lib; {
 
     # Enable waybind key rebinder
     local.programs.waybind.enable = true;
+
+    # Enable bluetooth
+    hardware.bluetooth.enable = true;
   
     # Add laptop specific config to sway
     home-manager.users.arnar.wayland.windowManager.sway = {
