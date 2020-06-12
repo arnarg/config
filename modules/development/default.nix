@@ -14,16 +14,17 @@ in with pkgs.stdenv; with lib; {
     ./libvirt
     ./neovim
     ./pass
+    ./podman
     ./tmux
     ./zsh
   ];
 
   config = mkIf cfg.enable {
-    local.development.docker.enable = true;
     local.development.git.enable = true;
     local.development.gpg.enable = true;
     local.development.kr.enable = true;
     local.development.neovim.enable = true;
+    local.development.podman.enable = true;
     local.development.tmux.enable = true;
     local.development.zsh.enable = true;
 
