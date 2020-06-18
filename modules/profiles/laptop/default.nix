@@ -60,8 +60,8 @@ in with lib; {
         ];
       };
       extraConfig = ''
-        bindswitch lid:on output eDP-1 disable
-        bindswitch lid:off output eDP-1 enable
+        bindswitch --locked --reload lid:on output eDP-1 disable
+        bindswitch --locked --reload lid:off output eDP-1 enable
       '';
     };
   
