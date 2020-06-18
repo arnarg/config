@@ -9,6 +9,7 @@ let
     hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
     kr = callPackage ./kr { };
     ksniff = callPackage ./ksniff { };
+    nsh = callPackage ./nsh { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
     plex-exporter = callPackage ./plex-exporter { };
@@ -17,6 +18,5 @@ let
     tmux-plugins = callPackage ./tmux-plugins { };
     waybind = callPackage ./waybind { };
     yubikey-agent = callPackage ./yubikey-agent { };
-    pmake = callPackage ./pmake { };
   };
 in self

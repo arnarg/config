@@ -48,7 +48,7 @@ in with pkgs.stdenv; with lib; {
           cat = "${pkgs.bat}/bin/bat -p";
         };
   
-        initExtra = mkBefore (builtins.readFile ./extra.zsh);
+        initExtra = mkBefore (builtins.readFile ./extra.zsh + "\n. ${pkgs.mypkgs.nsh}/share/nsh");
   
         plugins = with pkgs; [
           {

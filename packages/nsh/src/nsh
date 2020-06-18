@@ -1,0 +1,9 @@
+nsh() {
+	file="@share@/shells/$1.nix"
+	if [[ ! -f "$file" ]]; then
+		echo "No shell named '$1' defined."
+		return 1
+	fi
+
+	nix-shell "$file"
+}
