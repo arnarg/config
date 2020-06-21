@@ -9,10 +9,12 @@ let
     hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
     kr = callPackage ./kr { };
     ksniff = callPackage ./ksniff { };
+    mkosi = callPackage ./mkosi { };
     nsh = callPackage ./nsh { };
     okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
     plex-exporter = callPackage ./plex-exporter { };
+    snr = callPackage ./snr { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     tmux-plugins = callPackage ./tmux-plugins { };
