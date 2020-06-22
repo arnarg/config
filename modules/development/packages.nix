@@ -10,6 +10,7 @@ with pkgs; [
   wget
   wireshark
   yubikey-manager
+  mypkgs.mkosi
 
   # Go
   go
@@ -17,9 +18,9 @@ with pkgs; [
   godef
 
   # Kubernetes
-  kubectl
-  kubectx
-  kubernetes-helm
+  #kubectl
+  #kubectx
+  #kubernetes-helm
   #mypkgs.operator-sdk
-  mypkgs.ksniff
+  #mypkgs.ksniff
 ]

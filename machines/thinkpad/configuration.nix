@@ -16,6 +16,7 @@ in
   ];
 
   local.development.enable = true;
+  local.development.kr.enable = lib.mkForce false;
   local.desktop.enable = true;
   local.laptop.enable = true;
 
@@ -42,6 +43,9 @@ in
 
   # Enable printing
   services.printing.enable = true;
+
+  # Enable LXC
+  virtualisation.lxc.enable = true;
 
   networking = {
     hostId = "7648dca7";
