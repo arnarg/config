@@ -1,15 +1,25 @@
-{ python37Packages, fetchFromGitHub, ... }:
+{ python37Packages, fetchFromGitHub, gnutar, debootstrap, glibc, makeWrapper, ... }:
 let
   pythonPackages = python37Packages;
   buildPythonPackage = pythonPackages.buildPythonPackage;
 in buildPythonPackage rec {
   pname = "mkosi";
-  version = "5";
+  version = "2020-06-16";
+
+  buildInputs = with pythonPackages; [ pytest ];
+
+  patches = [ ./tar_path.patch ];
+
+  postFixup = ''
+    wrapProgram $out/bin/mkosi \
+      --set LD_LIBRARY_PATH "${glibc}/lib" \
+      --prefix PATH ":" "${debootstrap}/bin:${gnutar}/bin"
+  '';
 
   src = fetchFromGitHub {
     owner = "systemd";
     repo = "mkosi";
-    rev = "v${version}";
-    sha256 = "05n3bjh1bffhjv582rzbig6bn1y4hzh8sppxrqas3gvp05nig39p";
+    rev = "1d6d1377eba173c142be491ce2dfb09fb4b6639c";
+    sha256 = "1jh304d3rfdfrpgxc7r81zjs7baziyvqiq4scf3ycsnvwi83n3y2";
   };
 }
