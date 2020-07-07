@@ -11,7 +11,6 @@
   
   imports = [
     ../../modules
-    ../../modules/os-specific/linux.nix
     ./hardware-configuration.nix
     ./fancontrol.nix
     ./nfs.nix
