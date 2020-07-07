@@ -1,23 +1,27 @@
-{ buildGoModule, go, lib, fetchFromGitHub, pcsclite, ... }:
+{ buildGoModule, go, lib, fetchFromGitHub, pinentry-qt, pcsclite, makeWrapper, ... }:
 
 buildGoModule rec {
   name = "yubikey-agent";
-  version = "0.1.1";
+  version = "0.1.3";
 
   src = fetchFromGitHub {
     owner = "FiloSottile";
     repo = "yubikey-agent";
     rev = "v${version}";
-    sha256 = "0jalcxrhvn65p11ph07yhh8hl0q5w9aq6xp7b60gnwlyifrzyqvg";
+    sha256 = "07gix5wrakn4z846zhvl66lzwx58djrfnn6m8v7vc69l9jr3kihr";
   };
 
-  vendorSha256 = "14l27adbnhqdc0kdjkmqplc4yq0jdz9dfv3mj21mfjxib5nx0rzl";
+  vendorSha256 = "1gn0w557w7cb9xd03sla6r389ncd3ik5bqwnrwzyb2imfpqwz58a";
 
-  buildInputs = [ pcsclite ];
+  buildInputs = [ pcsclite makeWrapper ];
 
   # piv-go hardcodes "-I/usr/include/PCSC"
   preBuild = ''
     export CGO_CFLAGS+="-I${pcsclite.dev}/include/PCSC"
+  '';
+
+  postFixup = ''
+    wrapProgram $out/bin/yubikey-agent --prefix PATH : ${lib.makeBinPath [ pinentry-qt ]}
   '';
 
   meta = with lib; {
