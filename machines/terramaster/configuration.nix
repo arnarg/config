@@ -7,6 +7,11 @@
       type = lib.types.attrs;
       default = {};
     };
+    # Faking podman as it doesn't exist in 20.03
+    virtualisation.podman = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+    };
   };
   
   imports = [
