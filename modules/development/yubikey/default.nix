@@ -4,19 +4,40 @@ let
 in with pkgs.stdenv; with lib; {
   options.local.development.yubikey = {
     enable = mkEnableOption "yubikey";
+    defaultAuthSock = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether or not to set yubikey-agent as default SSH agent.";
+    };
+    SSHHosts = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "List of hosts that should use yubikey-agent.";
+    };
   };
 
   config = mkIf cfg.enable {
 
     services.pcscd.enable = true;
+
+    environment.sessionVariables = {
+      YUBIKEY_AGENT_SOCK = "\${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock";
+    };
       
     home-manager.users.arnar = {
       home.packages = [ pkgs.mypkgs.yubikey-agent pkgs.pinentry-qt ];
 
       programs.ssh.enable = true;
+      programs.ssh.matchBlocks = mkMerge (
+        forEach cfg.SSHHosts (h:
+          {
+            "${h}".extraOptions.IdentityAgent = "$YUBIKEY_AGENT_SOCK";
+          }
+        )
+      );
 
-      programs.zsh.sessionVariables = {
-        SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock";
+      programs.zsh.sessionVariables = mkIf cfg.defaultAuthSock {
+        SSH_AUTH_SOCK = "\${YUBIKEY_AGENT_SOCK}";
       };
 
       # Run yubikey-agent
