@@ -3,6 +3,7 @@ let
   laptopConfig = {
     # No memory module because space is premium :(
     modules-right = [
+      "idle_inhibitor"
       "custom/lang"
       "network"
       "pulseaudio"
@@ -35,6 +36,7 @@ in {
   modules-left = [ "sway/workspaces" "sway/mode" ];
   modules-center = [ "sway/window" ];
   modules-right = [
+    "idle_inhibitor"
     "custom/lang"
     "network"
     "memory"
@@ -58,6 +60,9 @@ in {
     format-alt = " {:%a, %d. %b %H:%M}";
     format = " {:%H:%M}";
     tooltip = false;
+  };
+  idle_inhibitor = {
+    format = "";
   };
   "custom/lang" = {
     format = " {}";
