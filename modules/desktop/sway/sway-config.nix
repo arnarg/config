@@ -72,8 +72,10 @@ let
       "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
 
     "${cfg.config.modifier}+t" = "exec ${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
+    "${cfg.config.modifier}+q" = "exec ${lockCommand}";
   };
 
+  lockCommand = "${pkgs.swaylock-fancy}/bin/swaylock-fancy -p -f Inconsolata-Bold";
 
 in {
   home-manager.users.arnar.wayland.windowManager.sway = {
@@ -158,10 +160,10 @@ in {
         {
           command = ''
             ${pkgs.swayidle}/bin/swayidle -w \
-              timeout 300 '${pkgs.swaylock-fancy}/bin/swaylock-fancy -p -f Inconsolata-Bold' \
+              timeout 300 '${lockCommand}' \
               timeout 600 '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
               resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
-              before-sleep '${pkgs.swaylock-fancy}/bin/swaylock-fancy -p -f Inconsolata-Bold'
+              before-sleep '${lockCommand}'
           '';
         }
       ];
