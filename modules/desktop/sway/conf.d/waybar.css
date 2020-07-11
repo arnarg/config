@@ -141,12 +141,12 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    background: transparent;
+    border-bottom: 0;
 }
 
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
-    border-bottom: 0;
 }
 
