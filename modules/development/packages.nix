@@ -10,7 +10,6 @@ with pkgs; [
   wget
   wireshark
   yubikey-manager
-  mypkgs.mkosi
 
   # Go
   go
