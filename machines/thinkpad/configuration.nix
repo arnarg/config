@@ -16,7 +16,6 @@ in
   ];
 
   local.development.enable = true;
-  local.development.kr.enable = lib.mkForce false;
   local.desktop.enable = true;
   local.laptop.enable = true;
 
@@ -25,6 +24,11 @@ in
   boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # SSH agent settings
+  programs.ssh.startAgent = true;
+  local.development.yubikey.defaultAuthSock = false;
+  local.development.yubikey.SSHHosts = ["github.com"];
 
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
