@@ -1,4 +1,4 @@
-{ buildGoModule, go, lib, fetchFromGitHub, pcsclite, ... }:
+{ buildGoModule, go, lib, fetchFromGitHub, pcsclite, libnotify, makeWrapper }:
 
 buildGoModule rec {
   name = "yubikey-agent";
@@ -13,12 +13,16 @@ buildGoModule rec {
 
   vendorSha256 = "1gn0w557w7cb9xd03sla6r389ncd3ik5bqwnrwzyb2imfpqwz58a";
 
-  buildInputs = [ pcsclite ];
+  buildInputs = [ pcsclite makeWrapper ];
 
   # piv-go hardcodes "-I/usr/include/PCSC"
   # https://github.com/go-piv/piv-go/blob/v1.5.0/piv/pcsc_unix.go#L24
   preBuild = ''
     export CGO_CFLAGS+="-I${pcsclite.dev}/include/PCSC"
+  '';
+
+  postFixup = ''
+    wrapProgram $out/bin/yubikey-agent --prefix PATH : ${lib.makeBinPath [ libnotify ]}
   '';
 
   meta = with lib; {
