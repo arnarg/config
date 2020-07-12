@@ -15,8 +15,10 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build all packages with most recent nixos-unstable
       run: |
+        ret=0
         cd packages
         for p in ./*/
         do
-          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`"
+          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`" || ret=1
         done
+        exit $ret
