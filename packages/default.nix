@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  callPackage = pkgs.lib.callPackageWith (pkgs // self);
+  callPackage = pkgs.lib.callPackageWith pkgs;
 
   self = {
     bemenu = callPackage ./bemenu { };
