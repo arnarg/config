@@ -16,9 +16,11 @@ jobs:
     - name: Build all packages with most recent nixos-unstable
       run: |
         ret=0
+        failed=""
         cd packages
         for p in ./*/
         do
-          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`" || ret=1
+          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`" || (ret=1 && failed+="`basename $p` ")
         done
+        echo $failed
         exit $ret
