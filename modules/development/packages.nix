@@ -1,5 +1,6 @@
 { pkgs }:
 with pkgs; [
+  cachix
   curl
   dnsutils
   htop

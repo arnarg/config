@@ -14,7 +14,9 @@ in with pkgs.stdenv; with lib; {
 
   config = {
 
-    nix.trustedUsers = [ "root" "@wheel" ];
+    nix.trustedUsers = [ "root" "arnar" ];
+    nix.binaryCaches = [ "https://arnarg.cachix.org" ];
+    nix.binaryCachePublicKeys = [ "arnarg.cachix.org-1:QwvsbygCMQHexg8JVwILYFrZwnWwMfH08O8SH6HsVaw=" ];
 
     nixpkgs = {
       config = {
