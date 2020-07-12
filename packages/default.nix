@@ -11,7 +11,6 @@ let
     ksniff = callPackage ./ksniff { };
     mkosi = callPackage ./mkosi { };
     nsh = callPackage ./nsh { };
-    operator-sdk = callPackage ./operator-sdk { };
     plex-exporter = callPackage ./plex-exporter { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };

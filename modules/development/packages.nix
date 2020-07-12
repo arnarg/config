@@ -21,6 +21,6 @@ with pkgs; [
   #kubectl
   #kubectx
   #kubernetes-helm
-  #mypkgs.operator-sdk
+  #operator-sdk
   #mypkgs.ksniff
 ]
