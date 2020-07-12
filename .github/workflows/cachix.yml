@@ -16,7 +16,7 @@ jobs:
     - name: Build all packages with most recent nixos-unstable
       run: |
         cd packages
-        for p in ./*
+        for p in ./*/
         do
-          nix-build --args pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.zip) {}' -A "$p"
+          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`"
         done
