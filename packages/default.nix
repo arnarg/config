@@ -11,13 +11,10 @@ let
     ksniff = callPackage ./ksniff { };
     mkosi = callPackage ./mkosi { };
     nsh = callPackage ./nsh { };
-    okta-aws = callPackage ./okta-aws { };
     operator-sdk = callPackage ./operator-sdk { };
     plex-exporter = callPackage ./plex-exporter { };
-    snr = callPackage ./snr { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
-    tmux-plugins = callPackage ./tmux-plugins { };
     waybind = callPackage ./waybind { };
     yubikey-agent = callPackage ./yubikey-agent { };
   };
