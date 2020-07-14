@@ -36,6 +36,9 @@ in
   # Enable iio-sensor-proxy for screen rotation
   hardware.sensor.iio.enable = true;
 
+  # Enable libvirt
+  local.development.libvirt.enable = true;
+
   networking = {
     hostId = "eb0a230e";
     hostName = "flex";
