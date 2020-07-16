@@ -10,6 +10,7 @@ in with pkgs.stdenv; with lib; {
     ./docker
     ./git
     ./gpg
+    ./homehosts
     ./kr
     ./libvirt
     ./neovim
@@ -23,6 +24,7 @@ in with pkgs.stdenv; with lib; {
   config = mkIf cfg.enable {
     local.development.git.enable = mkDefault true;
     local.development.gpg.enable = mkDefault true;
+    local.development.homehosts.enable = mkDefault true;
     local.development.kr.enable = mkDefault false;
     local.development.neovim.enable = mkDefault true;
     local.development.podman.enable = mkDefault true;

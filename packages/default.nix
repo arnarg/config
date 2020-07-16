@@ -9,6 +9,7 @@ let
     hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
     kr = callPackage ./kr { };
     ksniff = callPackage ./ksniff { };
+    libnss_homehosts = callPackage ./libnss_homehosts { };
     mkosi = callPackage ./mkosi { };
     nsh = callPackage ./nsh { };
     plex-exporter = callPackage ./plex-exporter { };
