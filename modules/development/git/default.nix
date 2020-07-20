@@ -31,6 +31,10 @@ in with lib; {
 
       programs.git.signing.key = if builtins.isString cfg.gpgKey then cfg.gpgKey else "";
       programs.git.signing.signByDefault = builtins.isString cfg.gpgKey;
+
+      programs.git.extraConfig = {
+        pull.rebase = false;
+      };
     };
 
   };
