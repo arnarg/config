@@ -1,4 +1,4 @@
-{ buildGoModule, go, lib, fetchFromGitHub, pcsclite, libnotify, makeWrapper }:
+{ buildGoModule, go, lib, fetchFromGitHub, pcsclite, libnotify, pinentry-qt, makeWrapper }:
 
 buildGoModule rec {
   name = "yubikey-agent";
@@ -22,7 +22,7 @@ buildGoModule rec {
   '';
 
   postFixup = ''
-    wrapProgram $out/bin/yubikey-agent --prefix PATH : ${lib.makeBinPath [ libnotify ]}
+    wrapProgram $out/bin/yubikey-agent --prefix PATH : ${lib.makeBinPath [ libnotify pinentry-qt ]}
   '';
 
   meta = with lib; {
