@@ -18,9 +18,10 @@ jobs:
         ret=0
         failed=""
         cd packages
-        for p in ./*/
+        ALL_PACKAGES=`nix-instantiate --arg pkgs '<nixpkgs>' --eval default.nix | sed -E 's|([a-zA-Z0-9_\-]+) = <CODE>;|"\1": "",|g' | sed -e 's|, }| }|g'  | jq -r 'keys[]'`
+        for p in `echo $ALL_PACKAGES`
         do
-          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "`basename $p`" || (ret=1 && failed+="`basename $p` ")
+          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "$p" || (ret=1 && failed+="$p ")
         done
         echo $failed
         exit $ret
