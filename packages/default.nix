@@ -19,5 +19,10 @@ let
     yubikey-agent = callPackage ./yubikey-agent { };
 
     morph = callPackage "${fetchTarball https://github.com/DBCDK/morph/archive/v1.5.0.tar.gz}/nix-packaging" { };
+
+    # Override packages used in my nixos config
+    # I add this here because my CI script builds all packages in this file and caches them in cachix
+    spotifyd = pkgs.spotifyd.override { withMpris = true; };
+    waybar = pkgs.waybar.override { pulseSupport = true; };
   };
 in self
