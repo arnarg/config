@@ -7,13 +7,15 @@ in with pkgs.stdenv; with lib; {
   };
 
   imports = [
-    ./sway
     ./firefox
+    ./spotify
+    ./sway
   ];
 
   config = mkIf cfg.enable {
     local.desktop.sway.enable = true;
     local.desktop.firefox.enable = true;
+    local.desktop.spotify.enable = true;
 
     sound.enable = true;
     hardware.pulseaudio.enable = true;
@@ -42,7 +44,6 @@ in with pkgs.stdenv; with lib; {
       home.packages = with pkgs; [
         capitaine-cursors
         libpulseaudio
-        spotify
       ];
 
       home.sessionVariables = {

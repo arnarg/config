@@ -64,13 +64,6 @@ let
 
     "${cfg.config.modifier}+r" = "mode resize";
 
-    "XF86AudioPlay" =
-      "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
-    "XF86AudioPrev" =
-      "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
-    "XF86AudioNext" =
-      "exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next";
-
     "${cfg.config.modifier}+t" = "exec ${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
     "${cfg.config.modifier}+q" = "exec ${lockCommand}";
   };
