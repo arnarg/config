@@ -18,7 +18,7 @@ let
     waybind = callPackage ./waybind { };
     yubikey-agent = callPackage ./yubikey-agent { };
 
-    morph = callPackage "${fetchTarball https://github.com/DBCDK/morph/archive/v1.5.0.tar.gz}/nix-packaging" { };
+    morph = callPackage "${fetchTarball https://github.com/DBCDK/morph/archive/v1.5.0.tar.gz}/nix-packaging" { version = "1.5.0"; };
 
     # Override packages used in my nixos config
     # I add this here because my CI script builds all packages in this file and caches them in cachix
