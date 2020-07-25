@@ -41,6 +41,9 @@
     boot.extraModulePackages = with pkgs.linuxPackages; [ it87 pkgs.mypkgs.hddled ];
     boot.kernelModules = ["coretemp" "it87" "hddled_tmj33"];
 
+    # Have git in path
+    environment.systemPackages = [ pkgs.git ];
+
     # Enable SSH
     services.openssh.enable = true;
 
