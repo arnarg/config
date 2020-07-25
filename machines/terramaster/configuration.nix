@@ -12,6 +12,11 @@
       type = lib.types.attrs;
       default = {};
     };
+    # Faking nssDatabases as it doesn't exist in 20.03
+    system.nssDatabases = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+    };
   };
   
   imports = [
