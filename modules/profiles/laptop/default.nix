@@ -57,11 +57,11 @@ in with lib; {
           { command = "${pkgs.libinput-gestures}/bin/libinput-gestures"; }
           { command = "${pkgs.light}/bin/light -S 50"; }
           { command = "${pkgs.go-upower-notify}/bin/upower-notify"; }
+          { command = "${pkgs.mypkgs.desktop-scripts}/sway/display.sh eDP-1"; always = true; }
         ];
       };
       extraConfig = ''
-        bindswitch --locked --reload lid:on output eDP-1 disable
-        bindswitch --locked --reload lid:off output eDP-1 enable
+        bindswitch --locked --reload lid:toggle exec ${pkgs.mypkgs.desktop-scripts}/sway/display.sh eDP-1
       '';
     };
   
