@@ -13,6 +13,7 @@ let
     mkosi = callPackage ./mkosi { };
     nsh = callPackage ./nsh { };
     plex-exporter = callPackage ./plex-exporter { };
+    pushnix = callPackage ./pushnix { };
     squeekboard = callPackage ./squeekboard { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     waybind = callPackage ./waybind { };
