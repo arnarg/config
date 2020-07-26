@@ -14,19 +14,53 @@
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "acpi_backlight=vendor" ];
 
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/23babed9-0b74-434e-8c45-696dd90173c1";
+
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
+    label = "nixos";
+    fsType = "btrfs";
+    options = [ "subvol=root" "compress=zstd" "noatime" ];
+  };
+
+  fileSystems."/home" = {
+    label = "nixos";
+    fsType = "btrfs";
+    options = [ "subvol=home" "compress=zstd" "noatime" ];
+  };
+
+  fileSystems."/nix" = {
+    label = "nixos";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "compress=zstd" "noatime" ];
+  };
+
+  fileSystems."/persist" = {
+    label = "nixos";
+    fsType = "btrfs";
+    options = [ "subvol=persist" "compress=zstd" "noatime" ];
+  };
+
+  fileSystems."/var/log" = {
+    label = "nixos";
+    fsType = "btrfs";
+    options = [ "subvol=log" "compress=zstd" "noatime" ];
+    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    label = "boot";
     fsType = "vfat";
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
+  swapDevices = [{
+    label = "swap";
+    encrypted = {
+      enable = true;
+      blkDev = "/dev/disk/by-uuid/de3cca27-a8af-471c-8f8a-39fc3909e4da";
+      keyFile = "/mnt-root/root/.swap.key";
+      label = "encswap";
+    };
+  }];
 
   nix.maxJobs = lib.mkDefault 8;
 }
