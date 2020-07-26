@@ -18,6 +18,8 @@ in
   local.desktop.enable = true;
   local.laptop.enable = true;
   local.laptop.tablet.enable = true;
+  local.immutable.enable = true;
+  local.immutable.users = [ "arnar" ];
 
   local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
 
