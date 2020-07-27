@@ -46,6 +46,7 @@ in with pkgs.stdenv; with lib; {
           ls  = "${pkgs.coreutils}/bin/ls --color=auto";
           ll  = "${pkgs.coreutils}/bin/ls -l --color=auto";
           cat = "${pkgs.bat}/bin/bat -p";
+          ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
         };
   
         initExtra = mkBefore (builtins.readFile ./extra.zsh + "\n. ${pkgs.mypkgs.nsh}/share/nsh");
