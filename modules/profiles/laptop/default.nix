@@ -73,5 +73,16 @@ in with lib; {
     '';
     };
 
+    # Files to persist on laptops with immutable profile turned on
+    local.immutable.links.etc = [
+      "/etc/NetworkManager/system-connections"
+    ];
+    local.immutable.links.tmpfiles = [
+      "/var/lib/NetworkManager/secret_key"
+      "/var/lib/NetworkManager/seen-bssids"
+      "/var/lib/NetworkManager/timestamps"
+      "/var/lib/bluetooth"
+    ];
+
   };
 }

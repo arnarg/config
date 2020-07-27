@@ -35,19 +35,30 @@ in with lib; {
       default = [];
       description = "List of users that should use passwordFile \${persistPath}/passwords/\${user}.";
     };
+
+    links = {
+      etc = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "List of files and folders that should be linked using environment.etc.*.source.";
+      };
+
+      tmpfiles = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "List of files and folders that should be linked using systemd.tmpfiles.rules.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
     # Files to persist between boots
-    environment.etc = {
-      "NetworkManager/system-connections".source = "${cfg.persistPath}/etc/NetworkManager/system-connections";
-    };
-    systemd.tmpfiles.rules = [
-      "L /var/lib/NetworkManager/secret_key - - - - ${cfg.persistPath}/var/lib/NetworkManager/secret_key"
-      "L /var/lib/NetworkManager/seen-bssids - - - - ${cfg.persistPath}/var/lib/NetworkManager/seen-bssids"
-      "L /var/lib/NetworkManager/timestamps - - - - ${cfg.persistPath}/var/lib/NetworkManager/timestamps"
-      "L /var/lib/bluetooth - - - - ${cfg.persistPath}/var/lib/bluetooth"
-    ];
+    environment.etc = mkMerge (map (p:
+      { "${strings.removePrefix "/etc/" p}" = { source = "${cfg.persistPath}${p}"; }; }
+    ) cfg.links.etc );
+    systemd.tmpfiles.rules = map (p:
+      "L ${p} - - - - ${cfg.persistPath}${p}"
+    ) cfg.links.tmpfiles;
 
     # Disable sudo nag
     security.sudo.extraConfig = ''
