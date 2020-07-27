@@ -65,6 +65,11 @@ in with lib; {
       Defaults lecture = never
     '';
 
+    # Empty user's Download folder
+    boot.postBootCommands = concatStringsSep "\n" (map (u:
+      "rm -rf ${config.users.users.${u}.home}/Downloads/* || true"
+    ) cfg.users);
+
     # Persisting user passwords
     users.mutableUsers = false;
     fileSystems."${cfg.persistPath}".neededForBoot = true;
