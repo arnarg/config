@@ -7,7 +7,6 @@ in with lib; {
   };
 
   imports = [
-    ./touch.nix
     ./tablet.nix
   ];
 

@@ -57,7 +57,6 @@ window#waybar.solo {
 #network,
 #battery,
 #custom-media,
-#custom-squeekboard,
 #custom-lang,
 #custom-vpn,
 #tray,
@@ -107,11 +106,6 @@ label:focus {
 
 #network.disconnected {
     border-bottom-color: #f53c3c;
-}
-
-#custom-squeekboard {
-    border-bottom: 0;
-    font-size: 16pt;
 }
 
 #custom-media {
