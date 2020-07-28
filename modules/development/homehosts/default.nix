@@ -10,6 +10,7 @@ in with lib; {
     environment.sessionVariables = {
       LD_LIBRARY_PATH = "${pkgs.mypkgs.libnss_homehosts}/lib:$LD_LIBRARY_PATH";
     };
+    services.nscd.enable = true;
     system.nssModules = [ pkgs.mypkgs.libnss_homehosts ];
     system.nssDatabases.hosts = mkBefore [ "homehosts" ];
   };
