@@ -15,13 +15,4 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build all packages with most recent nixos-unstable
       run: |
-        ret=0
-        failed=""
-        cd packages
-        ALL_PACKAGES=`nix-instantiate --arg pkgs '<nixpkgs>' --eval default.nix | sed -E 's|([a-zA-Z0-9_\-]+) = <CODE>;|"\1": "",|g' | sed -e 's|, }| }|g'  | jq -r 'keys[]'`
-        for p in `echo $ALL_PACKAGES`
-        do
-          nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' -A "$p" || (ret=1 && failed+="$p ")
-        done
-        echo $failed
-        exit $ret
+        nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' --no-out-link packages/default.nix
