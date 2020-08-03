@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   name = "bemenu";
-  version = "0.3.0";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "Cloudef";
     repo = "bemenu";
     rev = version;
-    sha256 = "03k8wijdgj5nwmvgjhsrlh918n719789fhs4dqm23pd00rapxipk";
+    sha256 = "1ifq5bk7782b9m6bl111x33fn38rpppdrww7hfavqia9a9gi2sl5";
   };
 
   cmakeFlags = [
