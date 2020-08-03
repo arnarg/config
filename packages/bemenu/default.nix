@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, pkgconfig, pango, wayland, libxkbcommon, ... }:
+{ stdenv, fetchFromGitHub, pkgconfig, pango, cairo, wayland, wayland-protocols, libxkbcommon }:
 
 stdenv.mkDerivation rec {
   name = "bemenu";
@@ -11,15 +11,12 @@ stdenv.mkDerivation rec {
     sha256 = "1ifq5bk7782b9m6bl111x33fn38rpppdrww7hfavqia9a9gi2sl5";
   };
 
-  cmakeFlags = [
-    "-DBEMENU_CURSES_RENDERER=OFF"
-    "-DBEMENU_X11_RENDERER=OFF"
-    "-DBEMENU_WAYLAND_RENDERER=ON"
-  ];
+  makeFlags = [ "PREFIX=$(out)" ];
+  buildFlags = [ "clients" "wayland" ];
 
-  nativeBuildInputs = [ cmake pkgconfig ];
+  nativeBuildInputs = [ pkgconfig ];
 
-  buildInputs = [ pango wayland libxkbcommon ];
+  buildInputs = [ pango cairo wayland wayland-protocols libxkbcommon ];
 
   enableParallelBuilding = true;
 
