@@ -79,7 +79,7 @@ in {
       menu = let
         j4 = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop";
         bemenu = "${pkgs.bemenu}/bin/bemenu";
-      in "${j4} --dmenu=\"${bemenu} -ibp '>' --tb '#4eb5ab' --tf '#181b21' --fb '#181b21' --nb '#181b21' --hb '#4eb5ab' --hf '#181b21' --fn 'inconsolata ${builtins.toString (config.lib.displayScaling.floor 12)}'\" | xargs swaymsg exec";
+      in "${j4} --dmenu=\"${bemenu} -ibp '>' --tb '#4eb5ab' --tf '#181b21' --fb '#181b21' --nb '#181b21' --hb '#4eb5ab' --hf '#181b21' --fn 'inconsolata ${builtins.toString (config.lib.displayScaling.floor 12)}' -m all\" | xargs swaymsg exec";
 
       ############
       ## COLORS ##
