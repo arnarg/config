@@ -14,6 +14,7 @@ let
     nsh = callPackage ./nsh { };
     plex-exporter = callPackage ./plex-exporter { };
     pushnix = callPackage ./pushnix { };
+    sshuttle = callPackage ./sshuttle { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     waybind = callPackage ./waybind { };
     yubikey-agent = callPackage ./yubikey-agent { };
