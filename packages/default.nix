@@ -7,7 +7,6 @@ let
     bemenu = callPackage ./bemenu { };
     desktop-scripts = callPackage ./desktop-scripts { };
     hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
-    kr = callPackage ./kr { };
     ksniff = callPackage ./ksniff { };
     libnss_homehosts = callPackage ./libnss_homehosts { };
     mkosi = callPackage ./mkosi { };
