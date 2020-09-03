@@ -10,12 +10,14 @@ in with pkgs.stdenv; with lib; {
     ./firefox
     ./spotify
     ./sway
+    ./qutebrowser
   ];
 
   config = mkIf cfg.enable {
     local.desktop.sway.enable = true;
     local.desktop.firefox.enable = true;
     local.desktop.spotify.enable = true;
+    local.desktop.qutebrowser.enable = true;
 
     sound.enable = true;
     hardware.pulseaudio.enable = true;
