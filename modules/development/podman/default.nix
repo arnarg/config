@@ -12,10 +12,10 @@ in with lib; {
     virtualisation.podman.dockerCompat = true;
 
     users.users.arnar.subUidRanges = [
-      { count = 65534; startUid = 100001; }
+      { count = 65536; startUid = 100000; }
     ];
     users.users.arnar.subGidRanges = [
-      { count = 65534; startGid = 100001; }
+      { count = 65536; startGid = 100000; }
     ];
 
   };
