@@ -22,11 +22,12 @@ in with lib; {
   
     # Enable tlp
     services.tlp.enable = true;
-    services.tlp.extraConfig = ''
-      TLP_DEFAULT_MODE=BAT
-      CPU_SCALING_GOVERNOR_ON_AC=performance
-      CPU_SCALING_GOVERNOR_ON_BAT=ondemand
-    '';
+    services.tlp.settings = {
+      TLP_DEFAULT_MODE = "BAT";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
+    };
+
   
     # Enable light to control backlight
     programs.light.enable = true;
