@@ -16,7 +16,6 @@ let
     sshuttle = callPackage ./sshuttle { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     waybind = callPackage ./waybind { };
-    yubikey-agent = callPackage ./yubikey-agent { };
 
     morph = callPackage "${fetchTarball https://github.com/DBCDK/morph/archive/v1.5.0.tar.gz}/nix-packaging" { version = "1.5.0"; };
 
