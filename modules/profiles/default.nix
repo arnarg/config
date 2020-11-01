@@ -4,5 +4,6 @@
   imports = [
     ./immutable
     ./laptop
+    ./server
   ];
 }
