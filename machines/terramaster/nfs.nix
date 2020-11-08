@@ -37,22 +37,9 @@ in {
   
   # Mount filesystems
   fileSystems = {
-    "/tank" = {
-      device = "/dev/disk/by-uuid/4f87db74-309f-4256-baaa-4596a22b04e5";
-      fsType = "btrfs";
-      mountPoint = "/tank";
-      options = [ "rw" "relatime" "space_cache" "subvolid=257" "subvol=/tank" ];
-    };
-
     "/export/media" = {
       device = "/tank/MEDIA";
       options = [ "bind" ];
     };
-  };
-
-  services.btrfs.autoScrub = {
-    enable = true;
-    fileSystems = [ "/tank" ];
-    interval = "Mon *-*-* 03:00:00";
   };
 }

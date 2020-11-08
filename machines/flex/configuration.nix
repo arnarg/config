@@ -1,7 +1,4 @@
 { config, pkgs, lib, ... }:
-let
-  home-manager = builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz;
-in
 {
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
@@ -9,7 +6,6 @@ in
   ];
 
   imports = [
-    "${home-manager}/nixos"
     ../../modules
     ./hardware-configuration.nix
   ];

@@ -26,4 +26,5 @@
       };
     };
   };
+  local.immutable.users = [ "arnar" ];
 }

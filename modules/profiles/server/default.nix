@@ -7,6 +7,7 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
+    networking.firewall.enable = true;
 
     services.openssh.enable = true;
 
@@ -15,9 +16,12 @@ in with lib; {
     services.prometheus.exporters.node.enable = true;
     services.prometheus.exporters.node.openFirewall = true;
 
-    security.sudo.extraRules = [
-      { users = [ "arnar" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
+    local.immutable.links.etc = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
-
   };
 }

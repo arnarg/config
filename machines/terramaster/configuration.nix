@@ -1,37 +1,14 @@
 { config, pkgs, lib, ... }:
 
 {
-  options = {
-    # Faking home-manager as I'm not including that in this machine
-    home-manager = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
-    };
-    # Faking podman as it doesn't exist in 20.03
-    virtualisation.podman = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
-    };
-    # Faking nssDatabases as it doesn't exist in 20.03
-    system.nssDatabases = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
-    };
-  };
-  
   imports = [
     ../../modules
     ./hardware-configuration.nix
-    ./fancontrol.nix
-    ./nfs.nix
-    ./plex.nix
   ];
 
   config = {
     nix.nixPath = [
       "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-      "nixos-config=/home/arnar/Code/config/machines/terramaster/configuration.nix:/nix/var/nix/profiles/per-user/root/channels
-"
     ];
 
     # Whether to delete all files in /tmp during boot.
@@ -46,43 +23,29 @@
     boot.extraModulePackages = with pkgs.linuxPackages; [ it87 pkgs.mypkgs.hddled ];
     boot.kernelModules = ["coretemp" "it87" "hddled_tmj33"];
 
-    # Have git in path
-    environment.systemPackages = [ pkgs.git ];
+    local.server.enable = true;
 
-    # Enable SSH
-    services.openssh.enable = true;
+    local.services.fancontrol.enable = true;
+    # Because of the order in boot.kernelModules coretemp is always loaded before it87.
+    # This makes hwmon0 coretemp and hwmon1 it8613e (acpitz is hwmon2).
+    # This seems to be consistent between reboots.
+    local.services.fancontrol.config = ''
+      INTERVAL=10
+      DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon1=devices/platform/it87.2592
+      DEVNAME=hwmon0=coretemp hwmon1=it8613
+      FCTEMPS=hwmon1/pwm3=hwmon0/temp1_input
+      FCFANS= hwmon1/pwm3=hwmon1/fan3_input
+      MINTEMP=hwmon1/pwm3=20
+      MAXTEMP=hwmon1/pwm3=60
+      MINSTART=hwmon1/pwm3=52
+      MINSTOP=hwmon1/pwm3=12
+    '';
 
-    time.timeZone = lib.mkForce "utc";
+    networking.hostName = "terramaster";
+    networking.useDHCP = false;
+    networking.interfaces.enp1s0.useDHCP = true;
 
-    networking = {
-      hostName = "terramaster";
-      # Global useDHCP flag is deprecated
-      useDHCP = false;
-      interfaces = {
-        enp1s0 = {
-          useDHCP = true;
-        };
-        enp2s0 = {
-          useDHCP = true;
-        };
-      };
-      firewall.enable = true;
-    };
-
-    # Metrics
-    services.prometheus.exporters.node.enable = true;
-    services.prometheus.exporters.node.openFirewall = true;
-    local.services.prometheus.exporters.plex.enable = true;
-    local.services.prometheus.exporters.plex.openFirewall = true;
-
-    # NixOS settings
-    system = {
-      stateVersion = "20.03";
-      autoUpgrade = {
-        enable = true;
-        dates = "Sun *-*-* 04:00:00";
-      };
-    };
+    system.stateVersion = "20.09";
 
     nix.gc = {
       automatic = true;

@@ -1,8 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local;
+  home-manager = builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz;
 in with pkgs.stdenv; with lib; {
   imports = [
+    "${home-manager}/nixos"
     ./desktop
     ./development
     ./lib

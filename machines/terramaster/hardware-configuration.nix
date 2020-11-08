@@ -1,29 +1,54 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "uas" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=2G" "mode=755" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    label = "boot";
     fsType = "vfat";
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
+  fileSystems."/nix" = {
+    label = "nix";
+    fsType = "ext4";
+    neededForBoot = true;
+  };
 
-  nix.maxJobs = lib.mkDefault 2;
+  fileSystems."/var/log" = {
+    device = "/nix/persist/var/log";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/tank" = {
+    device = "/dev/disk/by-uuid/4f87db74-309f-4256-baaa-4596a22b04e5";
+    fsType = "btrfs";
+    options = [ "rw" "relatime" "space_cache" "subvolid=257" "subvol=/tank" ];
+  };
+
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [ "/tank" ];
+    interval = "Mon *-*-* 03:00:00";
+  };
+
+  local.immutable.enable = true;
+  local.immutable.persistDevice = "/nix";
+  local.immutable.persistPath = "/nix/persist";
+
+  nix.maxJobs = 2;
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }

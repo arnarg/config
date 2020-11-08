@@ -5,37 +5,21 @@ let
 in with lib; {
   options.local.immutable = {
     enable = mkEnableOption "immutable";
-
-    device = mkOption {
-      type = types.str;
-      default = "/dev/mapper/enc";
-      description = "Path to immutable device.";
-    };
-
-    rootSubvolume = mkOption {
-      type = types.str;
-      default = "root";
-      description = "Name of the root subvolume.";
-    };
-
-    rootBlankSubvolume = mkOption {
-      type = types.str;
-      default = "root-blank";
-      description = "Name of the empty root subvolume.";
-    };
-
     persistPath = mkOption {
       type = types.str;
       default = "/persist";
       description = "Path to a persisted folder.";
     };
-
+    persistDevice = mkOption {
+      type = types.str;
+      default = cfg.persistPath;
+      description = "The device the persisted folder is on.";
+    };
     users = mkOption {
       type = types.listOf types.str;
       default = [];
       description = "List of users that should use passwordFile \${persistPath}/passwords/\${user}.";
     };
-
     links = {
       etc = mkOption {
         type = types.listOf types.str;
@@ -72,7 +56,7 @@ in with lib; {
 
     # Persisting user passwords
     users.mutableUsers = false;
-    fileSystems."${cfg.persistPath}".neededForBoot = true;
+    fileSystems."${cfg.persistDevice}".neededForBoot = true;
     users.users = mkMerge (
       [ { root.passwordFile = "${cfg.persistPath}/passwords/root"; } ] ++
       forEach cfg.users (u:
@@ -80,25 +64,5 @@ in with lib; {
       )
     );
 
-    # Rollback to blank snapshot
-    boot.initrd.postDeviceCommands = mkBefore ''
-      mkdir -p /mnt
-
-      mount -o subvol=/ ${cfg.device} /mnt
-
-      btrfs subvolume list -o /mnt/${cfg.rootSubvolume} |
-      cut -f9 -d' ' |
-      while read subvolume; do
-        echo "deleting /$subvolume subvolume..."
-        btrfs subvolume delete "/mnt/$subvolume"
-      done &&
-      echo "deleting /${cfg.rootSubvolume} subvolume..." &&
-      btrfs subvolume delete /mnt/${cfg.rootSubvolume}
-
-      echo "restoring blank /${cfg.rootSubvolume} subvolume..."
-      btrfs subvolume snapshot /mnt/${cfg.rootBlankSubvolume} /mnt/${cfg.rootSubvolume}
-
-      umount /mnt
-    '';
   };
 }
