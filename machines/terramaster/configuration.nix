@@ -34,6 +34,9 @@
       "/var/lib/plex"
     ];
 
+    # Prometheus
+    local.services.prometheus.enable = true;
+
     # Terramaster F2-221's fan is connected to a case fan header.
     # It doesn't spin up under load so I set up fancontrol to take care of this.
     local.services.fancontrol.enable = true;
