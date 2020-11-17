@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b
-    - uses: cachix/install-nix-action@63cf434de4e4292c6960639d56c5dd550e789d77
+    - uses: cachix/install-nix-action@68043fd3c39467300b2cf963b245dcea7ea979d6
     - uses: cachix/cachix-action@490a246fbc7f92208d309eeb54383a4d828cedc1
       with:
         name: arnarg
