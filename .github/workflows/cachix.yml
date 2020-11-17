@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b
     - uses: cachix/install-nix-action@68043fd3c39467300b2cf963b245dcea7ea979d6
-    - uses: cachix/cachix-action@490a246fbc7f92208d309eeb54383a4d828cedc1
+    - uses: cachix/cachix-action@6e4751ed42b22f60165d3f266cfa4cce66ae406d
       with:
         name: arnarg
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
