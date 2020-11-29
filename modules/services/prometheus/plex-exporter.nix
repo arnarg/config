@@ -42,5 +42,15 @@ in with pkgs.stdenv; with lib; {
     users.groups.plex-exporter = {
       name = "plex-exporter";
     };
+
+    # in case prometheus is enabled on the host
+    services.prometheus.scrapeConfigs = [
+      {
+        job_name = "plex";
+        static_configs = [
+          { targets = [ "localhost:9594" ]; }
+        ];
+      }
+    ];
   };
 }
