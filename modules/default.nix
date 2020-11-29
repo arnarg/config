@@ -27,7 +27,7 @@ in with pkgs.stdenv; with lib; {
         allowUnsupportedSystem = false;
 
         packageOverrides = pkgs: {
-          mypkgs = import ../packages { inherit pkgs; };
+          mypkgs = import ../packages { inherit pkgs lib; };
         };
       };
 

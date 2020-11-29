@@ -56,8 +56,18 @@ in with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "sunaku";
               repo = "tmux-navigate";
-              rev = "053a2463efd4d5ba7558f81d7615090505a54df7";
-              sha256 = "0y4aaff4pd55ssx72xmhml3jziwwirrd6vq4138lgcsx4b8cldk7";
+              rev = "52da3cdca6e23fda99e05527093d274622b742cd";
+              sha256 = "0njnra2a9c51hxghhqlyvdi4b02wgmfd6jcpfhapcvvv599g8sri";
+            };
+          })
+          (pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "tmuxline";
+            version = "2019-12-21";
+            src = pkgs.fetchFromGitHub {
+              owner = "edkolev";
+              repo = "tmuxline.vim";
+              rev = "7001ab359f2bc699b7000c297a0d9e9a897b70cf";
+              sha256 = "13d87zxpdzryal5dkircc0sm88mwwq7f5n4j3jn9f09fmg9siifb";
             };
           })
         ];
