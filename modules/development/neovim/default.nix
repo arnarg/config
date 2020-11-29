@@ -29,6 +29,7 @@ in with lib; {
           vim-go
           vim-nix
           vim-terraform
+          vim-easymotion
           vimwiki
           (pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "bufstop";
