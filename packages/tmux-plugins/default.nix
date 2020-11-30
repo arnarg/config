@@ -55,17 +55,6 @@ in rec {
 
   inherit mkDerivation;
 
-  tilish = mkDerivation {
-    pluginName = "tilish";
-    version = "2020-08-12";
-    src = fetchFromGitHub {
-      owner = "jabirali";
-      repo = "tmux-tilish";
-      rev = "73d2404cdc0ef6bd7fbc8982edae0b0e2a4dd860";
-      sha256 = "1x58h3bg9d69j40fh8rcjpxvg0i6j04pj8p3jk57l3cghxis5j05";
-    };
-  };
-
   navigate = mkDerivation {
     pluginName = "navigate";
     version = "2020-10-16";

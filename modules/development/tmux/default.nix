@@ -18,7 +18,7 @@ in with pkgs.stdenv; with lib; {
       programs.tmux.plugins = with pkgs; [
         tmuxPlugins.sensible
         {
-          plugin = mypkgs.tmuxPlugins.tilish;
+          plugin = tmuxPlugins.tilish;
           extraConfig = ''
             set -g @tilish-navigate 'on'
             set -g @tilish-default 'main-vertical'
@@ -31,6 +31,8 @@ in with pkgs.stdenv; with lib; {
       programs.tmux.extraConfig = ''
         # Set status bar on top
         set-option -g status-position top
+        # Enable mouse mode
+        set-option -g mouse on
         # Enable vi copy mode
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi 'v' send -X begin-selection
