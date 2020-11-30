@@ -3,8 +3,6 @@
 , pkgs
 , reattach-to-user-namespace
 , stdenv
-, ruby
-, makeWrapper
 }:
 # Stolen from <nixpkgs>/pkgs/misc/tmux-plugins/default.nix
 let
@@ -77,10 +75,9 @@ in rec {
       rev = "416f613d3eaadbe1f6f9eda77c49430527ebaffb";
       sha256 = "1xbzdyhsgaq2in0f8f491gwjmx6cxpkf2c35d2dk0kg4jfs505sz";
     };
-    buildInputs = [ makeWrapper ];
     preFixup = ''
-      wrapProgram $out/share/tmux-plugins/jump/scripts/tmux-jump.sh \
-        --prefix PATH ":" "${ruby}/bin"
+      sed -i -e 's|ruby|${pkgs.ruby}/bin/ruby|g' $target/scripts/tmux-jump.sh
     '';
+    dependencies = [ pkgs.ruby ];
   };
 }

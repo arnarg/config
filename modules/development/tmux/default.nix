@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.development.tmux;
+  desktopEnabled = config.local.desktop.enable;
 in with pkgs.stdenv; with lib; {
   options.local.development.tmux = {
     enable = mkEnableOption "tmux";
@@ -31,12 +32,11 @@ in with pkgs.stdenv; with lib; {
       programs.tmux.extraConfig = ''
         # Set status bar on top
         set-option -g status-position top
-        # Enable mouse mode
-        set-option -g mouse on
         # Enable vi copy mode
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi 'v' send -X begin-selection
-        bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+        bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel${optionalString desktopEnabled "\\; run \"${pkgs.tmux}/bin/tmux save-buffer - | ${pkgs.wl-clipboard}/bin/wl-copy -np > /dev/null\""}
+        bind-key -T copy-mode-vi 'Y' send -X copy-selection-and-cancel${optionalString desktopEnabled "\\; run \"${pkgs.tmux}/bin/tmux save-buffer - | ${pkgs.wl-clipboard}/bin/wl-copy -n > /dev/null\""}
       '';
     };
   
