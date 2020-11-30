@@ -16,8 +16,7 @@ in with pkgs.stdenv; with lib; {
       programs.tmux.escapeTime = 0;
 
       programs.tmux.plugins = with pkgs; [
-        pkgs.tmuxPlugins.sensible
-        pkgs.tmuxPlugins.fingers
+        tmuxPlugins.sensible
         {
           plugin = mypkgs.tmuxPlugins.tilish;
           extraConfig = ''
