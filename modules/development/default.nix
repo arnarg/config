@@ -28,7 +28,7 @@ in with pkgs.stdenv; with lib; {
     local.development.kr.enable = mkDefault false;
     local.development.neovim.enable = mkDefault true;
     local.development.podman.enable = mkDefault true;
-    local.development.tmux.enable = mkDefault false;
+    local.development.tmux.enable = mkDefault true;
     local.development.yubikey.enable = mkDefault true;
     local.development.zsh.enable = mkDefault true;
 
