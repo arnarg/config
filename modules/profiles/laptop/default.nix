@@ -46,11 +46,21 @@ in with lib; {
         };
 
         keybindings = with pkgs; {
-          "XF86AudioMute" = "exec ${pamixer}/bin/pamixer -t";
-          "XF86AudioRaiseVolume" = "exec ${pamixer}/bin/pamixer -i 5";
-          "XF86AudioLowerVolume" = "exec ${pamixer}/bin/pamixer -d 5";
-          "XF86MonBrightnessUp" = "exec ${light}/bin/light -A 10";
-          "XF86MonBrightnessDown" = "exec ${light}/bin/light -U 10";
+          "XF86AudioMute" = ''
+            exec ${pamixer}/bin/pamixer -t && ( ${pamixer}/bin/pamixer --get-mute && echo 0 > $SWAYSOCK.wob ) || ${pamixer}/bin/pamixer --get-volume > $SWAYSOCK.wob
+          '';
+          "XF86AudioRaiseVolume" = ''
+            exec ${pamixer}/bin/pamixer -i 5 --get-volume > $SWAYSOCK.wob
+          '';
+          "XF86AudioLowerVolume" = ''
+            exec ${pamixer}/bin/pamixer -d 5 --get-volume > $SWAYSOCK.wob
+          '';
+          "XF86MonBrightnessUp" = ''
+            exec ${light}/bin/light -A 10 && ${light}/bin/light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+          '';
+          "XF86MonBrightnessDown" = ''
+            exec ${light}/bin/light -U 10 && ${light}/bin/light -G | cut -d'.' -f1 > $SWAYSOCK.wob
+          '';
         };
 
         startup = [

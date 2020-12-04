@@ -159,6 +159,13 @@ in {
               before-sleep '${lockCommand}'
           '';
         }
+        {
+          command = ''
+            ${pkgs.coreutils}/bin/mkfifo $SWAYSOCK.wob && \
+            ${pkgs.coreutils}/bin/tail -f $SWAYSOCK.wob | \
+            ${pkgs.wob}/bin/wob -t 2000 -W 500 -H 20 -b 2 -a bottom -M 30 -p 0 -o 0
+          '';
+        }
       ];
 
       bars = [];
