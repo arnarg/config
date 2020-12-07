@@ -15,6 +15,8 @@
   local.desktop.enable = true;
   local.laptop.enable = true;
 
+  local.services.syncthing.enable = true;
+
   local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
 
   boot.tmpOnTmpfs = true;
