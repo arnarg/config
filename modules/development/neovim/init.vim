@@ -70,5 +70,7 @@ nnoremap <leader>g :Goyo<CR>
 """""""""""
 " VIMWIKI "
 """""""""""
-let g:vimwiki_list = [{'path': '~/notes/personal',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [
+	\{'path': '~/notes/personal', 'syntax': 'markdown', 'ext': '.md'},
+	\{'path': '~/notes/work', 'syntax': 'markdown', 'ext': '.md'}
+	\]
