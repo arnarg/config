@@ -19,6 +19,7 @@
 
   local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
   local.programs.aerc.enable = true;
+  local.services.syncthing.enable = true;
 
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
@@ -45,5 +46,5 @@
     hostName = "flex";
   };
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "21.03";
 }

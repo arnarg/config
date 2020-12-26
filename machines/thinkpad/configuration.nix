@@ -54,5 +54,5 @@
     hostName = "thinkpad";
   };
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "21.03";
 }

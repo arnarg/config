@@ -9,6 +9,9 @@ in with lib; {
   config = mkIf cfg.enable {
 
     home-manager.users.arnar = {
+      # This needs to be set in order for firefox to build
+      home.stateVersion = config.system.stateVersion;
+
       programs.firefox.enable = true;
       programs.firefox.package = pkgs.firefox-wayland;
 
