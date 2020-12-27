@@ -27,6 +27,8 @@ in with pkgs.stdenv; with lib; {
         }
         mypkgs.tmuxPlugins.navigate
         mypkgs.tmuxPlugins.jump
+        tmuxPlugins.resurrect
+        tmuxPlugins.continuum
       ];
 
       programs.tmux.extraConfig = ''
