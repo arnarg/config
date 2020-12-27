@@ -23,6 +23,21 @@ in with pkgs.stdenv; with lib; {
 
     services.yubikey-agent.enable = true;
 
+    # These options breaks the yubikey-agent user service for me
+    # TODO: check in future if these overrides are still needed
+    systemd.user.services.yubikey-agent.serviceConfig = {
+      ProtectHostname = lib.mkForce false;
+      PrivateUsers = lib.mkForce false;
+      ProtectSystem = lib.mkForce false;
+      ProtectKernelLogs = lib.mkForce false;
+      ProtectKernelModules = lib.mkForce false;
+      ProtectKernelTunables = lib.mkForce false;
+      ProtectControlGroups = lib.mkForce false;
+      ProtectClock = lib.mkForce false;
+      PrivateTmp = lib.mkForce false;
+      PrivateDevices = lib.mkForce false;
+    };
+
     environment.sessionVariables = mkMerge [
       {
         YUBIKEY_AGENT_SOCK = "\${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock";
