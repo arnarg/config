@@ -37,6 +37,8 @@ in with pkgs.stdenv; with lib; {
     # Use librsvg's gdk-pixbuf loader cache file as it enables gdk-pixbuf to load SVG files (important for icons)
     environment.sessionVariables = {
       GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
+      XDG_CURRENT_DESKTOP = "sway"; # https://github.com/emersion/xdg-desktop-portal-wlr/issues/20
+      XDG_SESSION_TYPE = "wayland"; # https://github.com/emersion/xdg-desktop-portal-wlr/pull/11
     };
 
     programs.sway.enable = true;
@@ -49,8 +51,12 @@ in with pkgs.stdenv; with lib; {
       isLaptop = config.local.laptop.enable;
     };
 
-
     fonts.fonts = [ pkgs.font-awesome ];
+
+    services.pipewire.enable = true;
+    xdg.portal.enable = true;
+    xdg.portal.gtkUsePortal = true;
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [

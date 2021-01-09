@@ -1,0 +1,8 @@
+sudo nixos-rebuild switch
+which systemctl
+ls -l /run/current-system/sw/bin/systemctl
+systemctl --user
+sudo nixos-rebuild switch
+reboot
+cd Code/config
+vim

@@ -166,6 +166,11 @@ in {
             ${pkgs.wob}/bin/wob -t 2000 -W 500 -H 20 -b 2 -a bottom -M 30 -p 0 -o 0
           '';
         }
+        {
+          command = ''
+            ${pkgs.systemd}/bin/systemctl --user import-environment
+          '';
+        }
       ];
 
       bars = [];
