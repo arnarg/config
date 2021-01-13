@@ -31,7 +31,7 @@ in with pkgs.stdenv; with lib; {
         history = {
           size = mkDefault 50000;
           save = mkDefault 500000;
-          path = "${dotDir}/history";
+          path = "$HOME/${dotDir}/history";
           ignoreDups = true;
           share = false;
         };
@@ -51,7 +51,11 @@ in with pkgs.stdenv; with lib; {
           ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
         };
   
-        initExtra = mkBefore (builtins.readFile ./extra.zsh + "\n. ${pkgs.mypkgs.nsh}/share/nsh");
+        initExtra = mkBefore (
+          builtins.readFile ./extra.zsh
+          + "\n. ${pkgs.mypkgs.nsh}/share/nsh"
+          + "\n${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
+        );
   
         plugins = with pkgs; [
           {
@@ -61,15 +65,6 @@ in with pkgs.stdenv; with lib; {
               repo = "pure";
               rev = "v1.11.0";
               sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
-            };
-          }
-          {
-            name = "nix-shell";
-            src = fetchFromGitHub {
-              owner = "chisui";
-              repo = "zsh-nix-shell";
-              rev = "69e90b9bccecd84734948fb03087c2454a8522f6";
-              sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
             };
           }
           {
