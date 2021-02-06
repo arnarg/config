@@ -10,7 +10,7 @@ in with lib; {
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [
-      (spotifyd.override { withMpris = true; })
+      mypkgs.spotifyd
       spotify-tui
       playerctl
     ];
