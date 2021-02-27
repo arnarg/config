@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, mypkgs, ... }:
 let
   cfg = config.local.development.zsh;
 in with pkgs.stdenv; with lib; {
@@ -53,7 +53,7 @@ in with pkgs.stdenv; with lib; {
   
         initExtra = mkBefore (
           builtins.readFile ./extra.zsh
-          + "\n. ${pkgs.mypkgs.nsh}/share/nsh"
+          + "\n. ${mypkgs.nsh}/share/nsh"
           + "\n${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
         );
   

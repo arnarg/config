@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, mypkgs, ... }:
 let
   cfg = config.local.development.tmux;
   desktopEnabled = config.local.desktop.enable;

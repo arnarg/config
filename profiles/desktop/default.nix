@@ -8,7 +8,11 @@
     ./syncthing
   ];
 
+  options.local.desktop.enable = lib.mkEnableOption "desktop";
+
   config = with lib; {
+    local.desktop.enable = true;
+
     # Default packages for this profile
     local.desktop.firefox.enable = mkDefault true;
     local.desktop.qutebrowser.enable = mkDefault true;
@@ -35,6 +39,8 @@
       "video"
       "dialout"
     ];
+
+    time.timeZone = mkForce "Europe/Vienna";
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [

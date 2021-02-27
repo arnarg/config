@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, pkgs, mypkgs, ... }:
 let
 
   cfg = config.home-manager.users.arnar.wayland.windowManager.sway;
@@ -64,7 +64,7 @@ let
 
     "${cfg.config.modifier}+r" = "mode resize";
 
-    "${cfg.config.modifier}+t" = "exec ${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
+    "${cfg.config.modifier}+t" = "exec ${mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
     "${cfg.config.modifier}+q" = "exec ${lockCommand}";
   };
 

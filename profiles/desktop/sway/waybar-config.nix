@@ -1,4 +1,4 @@
-{ pkgs, lib, displayScalingLib, isLaptop }:
+{ pkgs, mypkgs, lib, displayScalingLib, isLaptop }:
 let
   laptopConfig = {
     # No memory module because space is premium :(
@@ -66,15 +66,15 @@ in {
   };
   "custom/lang" = {
     format = " {}";
-    exec = "${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh";
-    on-click = "${pkgs.mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
+    exec = "${mypkgs.desktop-scripts}/waybar/lang.sh";
+    on-click = "${mypkgs.desktop-scripts}/waybar/lang.sh switch 1";
     interval = "once";
     signal = 1;
     return-type = "json";
   };
   "custom/vpn" = {
     format = "{}";
-    exec = "${pkgs.mypkgs.desktop-scripts}/waybar/vpn.sh";
+    exec = "${mypkgs.desktop-scripts}/waybar/vpn.sh";
     interval = 5;
     return-type = "json";
   };

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, mypkgs, ... }:
 
 {
   users = {

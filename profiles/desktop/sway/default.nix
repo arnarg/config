@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, mypkgs, ... }:
 let
   cfg = config.local.desktop.sway;
 
@@ -45,8 +45,7 @@ in with pkgs.stdenv; with lib; {
     users.users.arnar.extraGroups = [ "sway" ];
 
     local.desktop.sway.waybar.config = import ./waybar-config.nix {
-      inherit lib;
-      inherit pkgs;
+      inherit lib pkgs mypkgs;
       displayScalingLib = config.lib.displayScaling;
       isLaptop = config.local.laptop.enable;
     };

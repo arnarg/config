@@ -1,10 +1,14 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, mypkgs, ... }:
 {
   imports = [
     ./waybind
   ];
 
+  options.local.laptop.enable = lib.mkEnableOption "laptop";
+
   config = {
+    local.laptop.enable = true;
+
     # Enable UPower to watch battery stats
     services.upower.enable = true;
 
@@ -59,11 +63,11 @@
           { command = "${pkgs.libinput-gestures}/bin/libinput-gestures"; }
           { command = "${pkgs.light}/bin/light -S 50"; }
           { command = "${pkgs.go-upower-notify}/bin/upower-notify"; }
-          { command = "${pkgs.mypkgs.desktop-scripts}/sway/display.sh eDP-1"; always = true; }
+          { command = "${mypkgs.desktop-scripts}/sway/display.sh eDP-1"; always = true; }
         ];
       };
       extraConfig = ''
-        bindswitch --locked --reload lid:toggle exec ${pkgs.mypkgs.desktop-scripts}/sway/display.sh eDP-1
+        bindswitch --locked --reload lid:toggle exec ${mypkgs.desktop-scripts}/sway/display.sh eDP-1
       '';
     };
   

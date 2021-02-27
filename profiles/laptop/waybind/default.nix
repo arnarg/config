@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, mypkgs, ... }:
 let
   cfg = config.local.laptop.waybind;
 in with lib; {
@@ -16,7 +16,7 @@ in with lib; {
       enable = true;
       description = "Waybind - dead simple key-rebinding";
       wantedBy = [ "default.target" ];
-      serviceConfig.ExecStart = "${pkgs.mypkgs.waybind}/bin/waybind";
+      serviceConfig.ExecStart = "${mypkgs.waybind}/bin/waybind";
       serviceConfig.Restart = "always";
       serviceConfig.User = "waybind";
       serviceConfig.Group = "waybind";
@@ -90,7 +90,7 @@ in with lib; {
     boot.kernelModules = [ "uinput" ];
 
     # Add udev rules
-    services.udev.packages = [ pkgs.mypkgs.waybind ];
+    services.udev.packages = [ mypkgs.waybind ];
 
     # Create waybind user
     users.users.waybind = {

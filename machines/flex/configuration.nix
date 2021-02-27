@@ -6,11 +6,6 @@
   ];
 
   imports = [
-    ../../modules
-    ../../profiles/desktop
-    ../../profiles/laptop
-    ../../profiles/tablet
-    ../../profiles/development
     ./hardware-configuration.nix
   ];
 

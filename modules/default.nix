@@ -11,5 +11,7 @@ in with pkgs.stdenv; with lib; {
 
   config = {
     security.sudo.enable = true;
+
+    time.timeZone = mkDefault "utc";
   };
 }
