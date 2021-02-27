@@ -1,12 +1,6 @@
 { config, lib, ... }:
-let
-  cfg = config.local.server;
-in with lib; {
-  options.local.server = {
-    enable = mkEnableOption "server";
-  };
-
-  config = mkIf cfg.enable {
+{
+  config = {
     networking.firewall.enable = true;
 
     services.openssh.enable = true;

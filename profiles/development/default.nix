@@ -1,17 +1,10 @@
 { config, lib, pkgs, ... }:
-let
-  cfg = config.local.development;
-in with pkgs.stdenv; with lib; {
-  options.local.development = {
-    enable = mkEnableOption "development";
-  };
-
+{
   imports = [
-    ./docker
+    ./aerc
     ./git
     ./gpg
     ./homehosts
-    ./kr
     ./libvirt
     ./neovim
     ./pass
@@ -21,17 +14,15 @@ in with pkgs.stdenv; with lib; {
     ./zsh
   ];
 
-  config = mkIf cfg.enable {
+  config = with lib; {
+    # Default packages for this profile
+    local.development.aerc.enable = mkDefault true;
     local.development.git.enable = mkDefault true;
     local.development.gpg.enable = mkDefault true;
-    local.development.homehosts.enable = mkDefault false;
-    local.development.kr.enable = mkDefault false;
     local.development.neovim.enable = mkDefault true;
     local.development.podman.enable = mkDefault true;
     local.development.tmux.enable = mkDefault true;
     local.development.yubikey.enable = mkDefault true;
     local.development.zsh.enable = mkDefault true;
-
-    home-manager.users.arnar.home.packages = import ./packages.nix { inherit pkgs; };
   };
 }

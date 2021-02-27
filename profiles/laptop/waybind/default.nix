@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.local.programs.waybind;
+  cfg = config.local.laptop.waybind;
 in with lib; {
-  options.local.programs.waybind = {
+  options.local.laptop.waybind = {
     enable = mkEnableOption "waybind";
     inputDevice = mkOption {
       type = types.str;

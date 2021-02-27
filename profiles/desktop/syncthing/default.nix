@@ -1,8 +1,8 @@
 { config, lib, ... }:
 let
-  cfg = config.local.services.syncthing;
+  cfg = config.local.desktop.syncthing;
 in with lib; {
-  options.local.services.syncthing = {
+  options.local.desktop.syncthing = {
     enable = mkEnableOption "syncthing";
   };
 

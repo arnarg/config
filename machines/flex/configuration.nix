@@ -7,24 +7,30 @@
 
   imports = [
     ../../modules
+    ../../profiles/desktop
+    ../../profiles/laptop
+    ../../profiles/tablet
+    ../../profiles/development
     ./hardware-configuration.nix
   ];
 
-  local.development.enable = true;
-  local.desktop.enable = true;
-  local.laptop.enable = true;
-  local.laptop.tablet.enable = true;
   local.immutable.enable = true;
   local.immutable.users = [ "arnar" ];
 
-  local.programs.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-  local.programs.aerc.enable = true;
-  local.services.syncthing.enable = true;
+  local.laptop.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+  local.development.libvirt.enable = true;
+  local.development.aerc.enable = true;
+  local.desktop.syncthing.enable = true;
 
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
     krita
   ];
+
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
   programs.steam.enable = true;
 
@@ -34,12 +40,6 @@
 
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # Enable iio-sensor-proxy for screen rotation
-  hardware.sensor.iio.enable = true;
-
-  # Enable libvirt
-  local.development.libvirt.enable = true;
 
   networking = {
     hostId = "eb0a230e";

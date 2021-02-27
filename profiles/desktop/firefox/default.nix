@@ -24,6 +24,8 @@ in with lib; {
         "layout.css.devPixelsPerPx" = (builtins.toString config.local.displayScalingFactor);
         # Disable pocket
         "extensions.pocket.enable" = false;
+        # Disable firefox reacting to media keys
+        "media.hardwaremediakeys.enabled" = false;
       };
     };
 

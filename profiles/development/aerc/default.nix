@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.local.programs.aerc;
+  cfg = config.local.development.aerc;
 in with lib; {
-  options.local.programs.aerc = {
+  options.local.development.aerc = {
     enable = mkEnableOption "aerc";
   };
 

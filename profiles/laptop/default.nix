@@ -1,17 +1,10 @@
 { config, pkgs, lib, ... }:
-let
-  cfg = config.local.laptop;
-in with lib; {
-  options.local.laptop = {
-    enable = mkEnableOption "laptop";
-  };
-
+{
   imports = [
-    ./tablet.nix
+    ./waybind
   ];
 
-  config = mkIf cfg.enable {
-
+  config = {
     # Enable UPower to watch battery stats
     services.upower.enable = true;
 
@@ -27,13 +20,12 @@ in with lib; {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
     };
-
   
     # Enable light to control backlight
     programs.light.enable = true;
 
     # Enable waybind key rebinder
-    local.programs.waybind.enable = true;
+    local.laptop.waybind.enable = true;
 
     # Enable bluetooth
     hardware.bluetooth.enable = true;
@@ -93,6 +85,5 @@ in with lib; {
       "/var/lib/NetworkManager/timestamps"
       "/var/lib/bluetooth"
     ];
-
   };
 }

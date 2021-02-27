@@ -1,23 +1,19 @@
 { config, lib, pkgs, ... }:
-let
-  cfg = config.local.desktop;
-in with pkgs.stdenv; with lib; {
-  options.local.desktop = {
-    enable = mkEnableOption "desktop";
-  };
-
+{
   imports = [
     ./firefox
+    ./qutebrowser
     ./spotify
     ./sway
-    ./qutebrowser
+    ./syncthing
   ];
 
-  config = mkIf cfg.enable {
-    local.desktop.sway.enable = true;
-    local.desktop.firefox.enable = true;
-    local.desktop.spotify.enable = true;
-    local.desktop.qutebrowser.enable = true;
+  config = with lib; {
+    # Default packages for this profile
+    local.desktop.firefox.enable = mkDefault true;
+    local.desktop.qutebrowser.enable = mkDefault true;
+    local.desktop.spotify.enable = mkDefault true;
+    local.desktop.sway.enable = mkDefault true;
 
     sound.enable = true;
     hardware.pulseaudio.enable = true;
@@ -30,8 +26,6 @@ in with pkgs.stdenv; with lib; {
         powerline-fonts
       ];
     };
-
-    security.sudo.enable = true;
 
     users.users.arnar.extraGroups = [
       "audio"
@@ -47,12 +41,6 @@ in with pkgs.stdenv; with lib; {
         capitaine-cursors
         libpulseaudio
       ];
-
-      home.sessionVariables = {
-        GDK_BACKEND = "wayland";
-        GDK_SCALE = "-1";
-        XCURSOR_PATH = [ "$HOME/.nix-profile/share/icons" ];
-      };
 
       programs.alacritty = {
         enable = true;

@@ -5,6 +5,5 @@
     ./fancontrol
     ./grafana
     ./prometheus
-    ./syncthing
   ];
 }
