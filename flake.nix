@@ -22,13 +22,7 @@
       pkgsFor = pkgs: system:
         import pkgs {
           inherit system config;
-          # This was copied from https://github.com/jwiegley/nix-config
-          overlays =
-            let path = ./overlays; in with builtins;
-            map (n: import (path + ("/" + n)){inherit config;})
-                (filter (n: match ".*\\.nix" n != null ||
-                            pathExists (path + ("/" + n + "/default.nix")))
-                        (attrNames (readDir path)));
+          overlays = [ (import ./overlay.nix) ];
         };
     in
     {
