@@ -47,6 +47,15 @@
             hostname = "terramaster";
             profiles = [ "server" ];
           };
+
+        worker1 =
+          inputs.self.lib.mkMachine {
+            system = "aarch64-linux";
+            channel = inputs.stable;
+            hostname = "worker1";
+            profiles = [ "server" ];
+            baseConfig = ./machines/worker/configuration.nix;
+          };
       };
 
       lib = {
@@ -55,6 +64,7 @@
           , channel
           , hostname
           , profiles ? []
+          , baseConfig ? ./machines + "/${hostname}/configuration.nix"
           , extraModules ? []
           }:
           let
@@ -116,7 +126,7 @@
 
             modules = extraModules ++ (profilesToModules profiles) ++ [
               { networking.hostName = hostname; }
-              ( ./machines + "/${hostname}/configuration.nix" )
+              baseConfig
               ./modules
               nix
               misc

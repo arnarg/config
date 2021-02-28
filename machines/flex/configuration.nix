@@ -31,6 +31,9 @@
   # I want the latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # I want to cross-compile
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking = {
     hostId = "eb0a230e";
     hostName = "flex";

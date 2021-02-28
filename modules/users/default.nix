@@ -27,7 +27,6 @@
           wget
           wireshark
           yubikey-manager
-          mypkgs.pushnix
 
           # Go
           go
