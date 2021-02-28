@@ -7,6 +7,7 @@
   ############
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    stable.url = "github:nixos/nixpkgs/nixos-20.09";
 
     nix = { url = "github:nixos/nix"; };
     home = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
@@ -33,11 +34,9 @@
     {
       nixosConfigurations = {
         flex = 
-          let
+          inputs.self.lib.mkMachine {
             system = "x86_64-linux";
-            pkgs = pkgsFor inputs.nixpkgs system;
-          in inputs.self.lib.mkMachine {
-            inherit system pkgs;
+            channel = inputs.nixpkgs;
             hostname = "flex";
             profiles = [
               "desktop"
@@ -46,18 +45,27 @@
               "development"
             ];
           };
+
+        terramaster =
+          inputs.self.lib.mkMachine {
+            system = "x86_64-linux";
+            channel = inputs.stable;
+            hostname = "terramaster";
+            profiles = [ "server" ];
+          };
       };
 
       lib = {
         mkMachine =
           { system
-          , pkgs
+          , channel
           , hostname
           , profiles ? []
           , extraModules ? []
           }:
           let
             inherit (pkgs) lib;
+            pkgs = pkgsFor channel system;
 
             needsHM = x:
               x == "desktop" || x == "laptop" ||
@@ -120,7 +128,7 @@
               misc
             ];
           in
-          inputs.nixpkgs.lib.nixosSystem {
+          channel.lib.nixosSystem {
             inherit system modules specialArgs pkgs;
           };
           

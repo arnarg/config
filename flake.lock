@@ -73,7 +73,24 @@
       "inputs": {
         "home": "home",
         "nix": "nix",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "stable": "stable"
+      }
+    },
+    "stable": {
+      "locked": {
+        "lastModified": 1614447571,
+        "narHash": "sha256-kHshBYBAAL0sx7DwwrPyfvtUwidQ9aWXy0XrL5RQFhY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d303eee16ce8dee5c0b5b8e5f6323f561c189ec5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     }
   },

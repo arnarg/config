@@ -1,16 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, mypkgs, lib, ... }:
 
 {
   imports = [
-    ../../modules
     ./hardware-configuration.nix
   ];
 
   config = {
-    nix.nixPath = [
-      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    ];
-
     # Whether to delete all files in /tmp during boot.
     boot.cleanTmpDir = true;
     # Use the systemd-boot EFI boot loader.
@@ -20,11 +15,8 @@
     boot.loader.efi.canTouchEfiVariables = false;
 
     # Terramaster f2-221 has it8613e chip
-    boot.extraModulePackages = with pkgs.linuxPackages; [ it87 pkgs.mypkgs.hddled ];
+    boot.extraModulePackages = with pkgs.linuxPackages; [ it87 mypkgs.hddled ];
     boot.kernelModules = ["coretemp" "it87" "hddled_tmj33"];
-
-    # Enable server profile
-    local.server.enable = true;
 
     # Plex Media Server
     services.plex.enable = true;
