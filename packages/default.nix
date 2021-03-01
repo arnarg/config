@@ -25,7 +25,7 @@ let
 
     # Override packages used in my nixos config
     # I add this here because my CI script builds all packages in this file and caches them in cachix
-    spotifyd = pkgs.spotifyd.override { rustPackages = pkgs.rustPackages_1_45; withMpris = true; withPulseAudio = true; };
+    spotifyd = pkgs.spotifyd.override { withMpris = true; withPulseAudio = true; };
     waybar = pkgs.waybar.override { pulseSupport = true; };
   };
 in self
