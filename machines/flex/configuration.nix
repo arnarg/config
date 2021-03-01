@@ -17,11 +17,6 @@
     krita
   ];
 
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   programs.steam.enable = true;
 
   boot.tmpOnTmpfs = true;
