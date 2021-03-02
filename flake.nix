@@ -111,6 +111,7 @@
 
                 nixPath = [
                   "nixpkgs=${inputs.self}/compat"
+                  "pkgs=${inputs.self}/compat"
                   "nixos-config=${inputs.self}/compat/nixos"
                 ];
 
