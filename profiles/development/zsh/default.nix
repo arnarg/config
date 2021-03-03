@@ -53,7 +53,6 @@ in with pkgs.stdenv; with lib; {
   
         initExtra = mkBefore (
           builtins.readFile ./extra.zsh
-          + "\n. ${mypkgs.nsh}/share/nsh"
           + "\n${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
         );
   

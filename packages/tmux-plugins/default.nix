@@ -64,20 +64,4 @@ in rec {
       sha256 = "0njnra2a9c51hxghhqlyvdi4b02wgmfd6jcpfhapcvvv599g8sri";
     };
   };
-
-  jump = mkDerivation {
-    pluginName = "jump";
-    version = "2020-06-26";
-    rtpFilePath = "tmux-jump.tmux";
-    src = fetchFromGitHub {
-      owner = "schasse";
-      repo = "tmux-jump";
-      rev = "416f613d3eaadbe1f6f9eda77c49430527ebaffb";
-      sha256 = "1xbzdyhsgaq2in0f8f491gwjmx6cxpkf2c35d2dk0kg4jfs505sz";
-    };
-    preFixup = ''
-      sed -i -e 's|ruby|${pkgs.ruby}/bin/ruby|g' $target/scripts/tmux-jump.sh
-    '';
-    dependencies = [ pkgs.ruby ];
-  };
 }

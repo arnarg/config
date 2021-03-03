@@ -152,6 +152,18 @@
       legacyPackages = forAllSystems
         ({ pkgs, ... }: pkgs);
 
+      nixosModule = import ./modules;
+      nixosModules = {
+        desktop = import ./profiles/desktop;
+        development = import ./profiles/development;
+        laptop = import ./profiles/laptop;
+        server = import ./profiles/server;
+        tablet = import ./profiles/tablet;
+      };
+
+      packages = forAllSystems
+        (import ./packages);
+
     };
 
 }
