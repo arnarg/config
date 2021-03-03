@@ -24,6 +24,16 @@
           inherit system config;
           overlays = [ (import ./overlay.nix) ];
         };
+
+      nameValuePair = name: value: { inherit name value; };
+      genAttrs = names: f: builtins.listToAttrs (map (n: nameValuePair n (f n)) names);
+
+      allSystems = [ "x86_64-linux" "aarch64-linux" ];
+      forAllSystems = f: genAttrs allSystems
+        (system: f {
+          inherit system;
+          pkgs = pkgsFor inputs.nixpkgs system;
+        });
     in
     {
       nixosConfigurations = {
@@ -137,6 +147,10 @@
           };
           
       };
+
+      legacyPackages = forAllSystems
+        ({ pkgs, ... }: pkgs);
+
     };
 
 }
