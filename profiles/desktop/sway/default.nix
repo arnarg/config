@@ -1,4 +1,4 @@
-{ config, lib, pkgs, mypkgs, ... }:
+{ config, lib, pkgs, mypkgs, inputs, system, ... }:
 let
   cfg = config.local.desktop.sway;
 
@@ -59,7 +59,7 @@ in with pkgs.stdenv; with lib; {
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [
-        (waybar.override { pulseSupport = true; })
+        inputs.nixpkgs-wayland.packages.${system}.waybar
       ];
 
       # Sway

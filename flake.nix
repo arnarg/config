@@ -11,6 +11,7 @@
 
     nix = { url = "github:nixos/nix"; };
     home = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
+    nixpkgs-wayland  = { url = "github:colemickens/nixpkgs-wayland"; };
   };
 
   #############
@@ -109,7 +110,7 @@
                 '';
 
                 nixPath = [
-                  "pkgs=${inputs.self}/compat"
+                  "nixpkgs=${inputs.self}/compat"
                   "nixos-config=${inputs.self}/compat/nixos"
                 ];
 
