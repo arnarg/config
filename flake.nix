@@ -9,7 +9,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-20.09";
 
-    nix = { url = "github:nixos/nix"; };
     home = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
     nixpkgs-wayland  = { url = "github:colemickens/nixpkgs-wayland"; };
   };
@@ -97,7 +96,7 @@
 
             nix = { ... }: {
               nix = {
-                package = lib.mkForce inputs.nix.defaultPackage.${system};
+                package = lib.mkForce pkgs.nixFlakes;
 
                 trustedUsers = [ "root" "arnar" ];
                 binaryCaches = [ "https://arnarg.cachix.org" ];
