@@ -107,6 +107,7 @@
                 # log-format = bar-with-logs
                 extraOptions = ''
                   flake-registry = /etc/nix/registry.json
+                  experimental-features = nix-command flakes
                 '';
 
                 nixPath = [
