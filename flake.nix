@@ -41,7 +41,6 @@
         flex = 
           inputs.self.lib.mkMachine {
             system = "x86_64-linux";
-            channel = inputs.nixpkgs;
             hostname = "flex";
             profiles = [
               "desktop"
@@ -72,11 +71,12 @@
       lib = {
         mkMachine =
           { system
-          , channel
+          , channel ? inputs.nixpkgs
           , hostname
           , profiles ? []
           , baseConfig ? ./machines + "/${hostname}/configuration.nix"
           , extraModules ? []
+          , flake ? inputs.self
           }:
           let
             inherit (pkgs) lib;
@@ -110,17 +110,16 @@
                 '';
 
                 nixPath = [
-                  "nixpkgs=${inputs.self}/compat"
-                  "pkgs=${inputs.self}/compat"
-                  "nixos-config=${inputs.self}/compat/nixos"
+                  "nixpkgs=${flake}/compat"
+                  "nixos-config=${flake}/compat/nixos"
                 ];
 
                 registry = {
-                  self.flake = inputs.self;
+                  self.flake = flake;
 
                   nixpkgs = {
                     from = { id = "nixpkgs"; type = "indirect"; };
-                    flake = inputs.nixpkgs;
+                    flake = flake;
                   };
                 };
               };
