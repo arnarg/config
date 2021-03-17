@@ -32,6 +32,9 @@
     local.services.prometheus.exporters.plex.enable = true;
     local.services.grafana.enable = true;
 
+    # Transmission
+    local.services.transmission.enable = true;
+
     # Terramaster F2-221's fan is connected to a case fan header.
     # It doesn't spin up under load so I set up fancontrol to take care of this.
     local.services.fancontrol.enable = true;

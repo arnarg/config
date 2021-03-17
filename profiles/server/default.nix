@@ -1,5 +1,8 @@
 { config, lib, ... }:
 {
+  imports = [
+    ./transmission
+  ];
   config = {
     networking.firewall.enable = true;
 
