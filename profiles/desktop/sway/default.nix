@@ -59,7 +59,7 @@ in with pkgs.stdenv; with lib; {
 
     home-manager.users.arnar = {
       home.packages = with pkgs; [
-        inputs.nixpkgs-wayland.packages.${system}.waybar
+        waybar
       ];
 
       # Sway

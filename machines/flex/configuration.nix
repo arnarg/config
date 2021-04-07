@@ -17,8 +17,6 @@
     krita
   ];
 
-  programs.steam.enable = true;
-
   boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

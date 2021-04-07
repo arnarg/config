@@ -10,7 +10,6 @@
     stable.url = "github:nixos/nixpkgs/nixos-20.09";
 
     home = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
-    nixpkgs-wayland  = { url = "github:colemickens/nixpkgs-wayland"; };
   };
 
   #############
