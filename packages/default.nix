@@ -7,7 +7,6 @@ let
 
   self = {
     desktop-scripts = callPackage ./desktop-scripts { };
-    hddled = callPackage ./hddled { kernel = pkgs.linuxPackages.kernel; };
     plex-exporter = callPackage ./plex-exporter { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     waybind = callPackage ./waybind { };
