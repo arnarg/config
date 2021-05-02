@@ -2,6 +2,7 @@
 {
   imports = [
     ./firefox
+    ./gnome
     ./qutebrowser
     ./spotify
     ./sway
@@ -18,6 +19,7 @@
     local.desktop.qutebrowser.enable = mkDefault true;
     local.desktop.spotify.enable = mkDefault true;
     local.desktop.sway.enable = mkDefault true;
+    local.desktop.gnome.enable = mkDefault false;
 
     sound.enable = true;
     hardware.pulseaudio.enable = true;
@@ -54,6 +56,7 @@
           window = {
             padding.x = 6;
             padding.y = 4;
+            decorations = "None";
           };
 
           font = {

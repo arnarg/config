@@ -50,6 +50,7 @@ in with pkgs.stdenv; with lib; {
     ];
       
     home-manager.users.arnar = {
+      services.gpg-agent.enableScDaemon = false;
       programs.ssh.enable = true;
       programs.ssh.matchBlocks = mkMerge (
         forEach cfg.SSHHosts (h:

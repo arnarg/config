@@ -5,12 +5,13 @@
   ];
 
   local.immutable.enable = true;
-  local.immutable.users = [ "arnar" ];
 
   local.laptop.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
   local.development.libvirt.enable = true;
   local.development.aerc.enable = true;
   local.desktop.syncthing.enable = true;
+  local.desktop.sway.enable = lib.mkForce false;
+  local.desktop.gnome.enable = lib.mkForce true;
 
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [

@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "acpi_backlight=vendor" ];
+  #boot.kernelParams = [ "acpi_backlight=vendor" ];
 
   boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/23babed9-0b74-434e-8c45-696dd90173c1";
 
