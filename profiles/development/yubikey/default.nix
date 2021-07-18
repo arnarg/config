@@ -9,11 +9,6 @@ in with pkgs.stdenv; with lib; {
       default = true;
       description = "Whether or not to set yubikey-agent as default SSH agent.";
     };
-    SSHHosts = mkOption {
-      type = types.listOf types.str;
-      default = [];
-      description = "List of hosts that should use yubikey-agent.";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -48,18 +43,6 @@ in with pkgs.stdenv; with lib; {
         SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/ssh-agent";
       })
     ];
-      
-    home-manager.users.arnar = {
-      services.gpg-agent.enableScDaemon = false;
-      programs.ssh.enable = true;
-      programs.ssh.matchBlocks = mkMerge (
-        forEach cfg.SSHHosts (h:
-          {
-            "${h}".extraOptions.IdentityAgent = "$YUBIKEY_AGENT_SOCK";
-          }
-        )
-      );
-    };
 
   };
 

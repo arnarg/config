@@ -1,4 +1,4 @@
-{ config, pkgs, mypkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   kernel = config.boot.kernelPackages.kernel;
   hddled = pkgs.stdenv.mkDerivation rec {

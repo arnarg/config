@@ -1,4 +1,4 @@
-{ config, lib, pkgs, mypkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.local.services.prometheus.exporters.plex;
 in with pkgs.stdenv; with lib; {
@@ -16,7 +16,7 @@ in with pkgs.stdenv; with lib; {
 
       serviceConfig.User = "plex-exporter";
       serviceConfig.Group = "plex-exporter";
-      serviceConfig.ExecStart = "${mypkgs.plex-exporter}/bin/plex_exporter";
+      serviceConfig.ExecStart = "${pkgs.plex-exporter}/bin/plex_exporter";
       serviceConfig.EnvironmentFile = "-/etc/plex_exporter/environment";
     };
 

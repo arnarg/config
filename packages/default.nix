@@ -10,7 +10,9 @@ let
     plex-exporter = callPackage ./plex-exporter { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };
     waybind = callPackage ./waybind { };
+    kbct = callPackage ./kbct { };
     tela-icon-theme = callPackage ./tela-icon-theme { };
+    material-shell = callPackage ./material-shell { };
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
 

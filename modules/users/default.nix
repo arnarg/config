@@ -1,4 +1,4 @@
-{ pkgs, mypkgs, ... }:
+{ pkgs, ... }:
 
 {
   users = {
@@ -14,24 +14,6 @@
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCJgc736QyZbRlQLbK8Lm8Ra8EJdZIl3U84DRP3U7qmR/jSQR9P92RBuIXWTbcHbNxeZbMx7g6n9CDDPV0weXRQ="
           # Yubikey 2
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDKo0cPCEyU0wpsxTlKLqlLqjbO491aF80OE86lepqbrZpWqNurFd8EUdisSyOG5fMNNlbS3H7lVOruqGbuJUYo="
-        ];
-        packages = with pkgs; [
-          cachix
-          curl
-          dnsutils
-          htop
-          jq
-          nix-prefetch-github
-          python3
-          silver-searcher
-          wget
-          wireshark
-          yubikey-manager
-
-          # Go
-          go
-          gocode
-          godef
         ];
       };
     };

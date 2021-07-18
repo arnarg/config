@@ -15,4 +15,4 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build all packages with most recent nixos-unstable
       run: |
-        nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {}' --no-out-link packages/default.nix
+        nix-build --arg pkgs 'import (fetchTarball https://github.com/NixOS/nixpkgs/archive/release-21.05.tar.gz) {}' --no-out-link packages/default.nix
