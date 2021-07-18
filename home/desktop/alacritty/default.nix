@@ -5,8 +5,6 @@
       enable = true;
       settings = {
         window = {
-          padding.x = 6;
-          padding.y = 4;
           decorations = "None";
         };
 
@@ -15,33 +13,33 @@
           normal.family = "Inconsolata";
         };
 
-        # One Dark
+        # Gruvbox
         colors = {
           primary = {
-            background = "0x282c34";
-            foreground = "0xabb2bf";
+            background = "0x282828";
+            foreground = "0xebdbb2";
           };
 
           normal = {
-            black = "0x282c34";
-            red = "0xe06c75";
-            green = "0x98c379";
-            yellow = "0xd19a66";
-            blue = "0x61afef";
-            magenta = "0xc678dd";
-            cyan = "0x56b6c2";
-            white = "0xabb2bf";
+            black = "0x282828";
+            red = "0xcc241d";
+            green = "0x98971a";
+            yellow = "0xd79921";
+            blue = "0x458588";
+            magenta = "0xb16286";
+            cyan = "0x689d6a";
+            white = "0xa89984";
           };
 
           bright = {
-            black = "0x5c6370";
-            red = "0xe06c75";
-            green = "0x98c379";
-            yellow = "0xd19a66";
-            blue = "0x61afef";
-            magenta = "0xc678dd";
-            cyan = "0x56b6c2";
-            white = "0xffffff";
+            black = "0x928374";
+            red = "0xfb4934";
+            green = "0xb8bb26";
+            yellow = "0xfabd2f";
+            blue = "0x83a598";
+            magenta = "0xd3869b";
+            cyan = "0x8ec07c";
+            white = "0xebdbb2";
           };
         };
       };

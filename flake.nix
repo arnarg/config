@@ -7,11 +7,12 @@
   ############
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.1.0";
 
     home = {
       url = "github:nix-community/home-manager/release-21.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 

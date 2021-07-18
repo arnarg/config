@@ -2,6 +2,11 @@
 with lib; {
   config = {
 
+    fonts.fontconfig.enable = true;
+    home.packages = with pkgs; [
+      inconsolata-nerdfont
+    ];
+
     programs.neovim = {
       enable = true;
       viAlias = true;
@@ -9,20 +14,28 @@ with lib; {
 
       extraConfig = builtins.readFile ./init.vim;
 
+      extraPackages = with pkgs; [
+        ripgrep
+      ];
+
       plugins = with pkgs.vimPlugins; [
         deoplete-go
         deoplete-nvim
         editorconfig-vim
+        lush-nvim
+        onedark-nvim
+        gruvbox-nvim
         fzf-vim
-        goyo-vim
+        indent-blankline-nvim-lua
         nerdtree
         vim-airline
         vim-airline-themes
+        vim-devicons
+        vim-easymotion
         vim-gitgutter
         vim-go
         vim-nix
         vim-terraform
-        vim-easymotion
         vimwiki
         (pkgs.vimUtils.buildVimPluginFrom2Nix {
           pname = "bufstop";

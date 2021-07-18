@@ -8,6 +8,10 @@ inoremap <Down>  <NOP>
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
 
+" set guicolor
+set termguicolors
+colorscheme gruvbox
+
 """"""""""
 " VIM-GO "
 """"""""""
@@ -61,11 +65,6 @@ set nu rnu
 nnoremap <leader>b :BufstopFast<CR>
 nnoremap <leader>, :BufstopBack<CR>
 nnoremap <leader>. :BufstopForward<CR>
-
-""""""""
-" GOYO "
-""""""""
-nnoremap <leader>g :Goyo<CR>
 
 """""""""""
 " VIMWIKI "
