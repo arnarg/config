@@ -8,6 +8,7 @@
 
   local.laptop.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
   local.development.libvirt.enable = true;
+  local.development.android.enable = true;
   local.desktop.gnome.enable = lib.mkForce true;
 
   # Extra packages specific to this machine
