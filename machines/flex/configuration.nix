@@ -13,6 +13,7 @@
   # Extra packages specific to this machine
   environment.systemPackages = with pkgs; [
     krita
+    blender
   ];
 
   time.timeZone = lib.mkOverride 40 "utc";
