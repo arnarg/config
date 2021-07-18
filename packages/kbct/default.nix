@@ -2,7 +2,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "kbct";
-  version = "0.1.0";
+  version = "v0.1.0";
 
   src = fetchFromGitHub {
     owner = "samvel1024";
@@ -11,7 +11,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "fWGPNqurWRQead0Qc3xXNQRerJ+O1gmcW9a+KmPvWfM=";
   };
 
-  cargoSha256 = "sha256-uBbJeu5NxvgY929Gq1XgimdpdocmhzJ8m7uend92TUM=";
+  cargoSha256 = "sha256-5svepqv2766gfdB72Rzprud7F3dznLxfSn6nxQpM9RM=";
 
   buildInputs = [libudev];
   nativeBuildInputs = [pkgconfig];
