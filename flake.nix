@@ -65,7 +65,7 @@
           {
             # Get home manager in path
             environment.systemPackages = [
-              nixpkgs.packages.x86_64-linux.git
+              nixpkgs.legacyPackages.x86_64-linux.git
               home.packages.x86_64-linux.home-manager
             ];
           }
