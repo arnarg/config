@@ -16,6 +16,10 @@ let
           s: down
           a: left
           d: right
+          backspace: delete
+          z: previoussong
+          x: playpause
+          c: nextsong
   '';
 in with lib; {
   options.local.laptop.kbct = {
