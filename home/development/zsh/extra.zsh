@@ -1,7 +1,7 @@
 setopt HIST_IGNORE_SPACE
 
 # Pure theme settings
-zstyle ':prompt:pure:path' color red
+zstyle ':prompt:pure:path' color '#fb4934'
 zstyle ':prompt:pure:prompt:success' color white
 
 # nix-shell
