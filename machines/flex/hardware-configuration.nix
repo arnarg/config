@@ -83,5 +83,14 @@
     umount /mnt
   '';
 
+  # Enable OpenCL
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
+
+  # Enable vulkan
+  hardware.opengl.driSupport = true;
+
   nix.maxJobs = lib.mkDefault 8;
 }
