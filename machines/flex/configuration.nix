@@ -20,8 +20,6 @@
   services.mullvad-vpn.enable = true;
   networking.firewall.checkReversePath = "loose";
 
-  time.timeZone = lib.mkOverride 40 "utc";
-
   boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
