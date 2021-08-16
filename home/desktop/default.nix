@@ -5,4 +5,13 @@
     ./firefox
     ./spotify
   ];
+
+  config = {
+    home.packages = with pkgs; [
+      obsidian
+      logseq
+    ];
+
+    services.syncthing.enable = true;
+  };
 }

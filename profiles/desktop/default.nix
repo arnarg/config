@@ -32,5 +32,9 @@
 
     time.timeZone = mkForce "Europe/Vienna";
 
+    # for syncthing
+    networking.firewall.allowedUDPPorts = [ 22000 ];
+    networking.firewall.allowedTCPPorts = [ 22000 ];
+
   };
 } 
