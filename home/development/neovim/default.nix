@@ -35,8 +35,8 @@ with lib; {
         vim-gitgutter
         vim-go
         vim-nix
+        vim-smoothie
         vim-terraform
-        vimwiki
         (pkgs.vimUtils.buildVimPluginFrom2Nix {
           pname = "bufstop";
           version = "2017-06-13";
