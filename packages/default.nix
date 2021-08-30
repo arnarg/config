@@ -13,6 +13,7 @@ let
     kbct = callPackage ./kbct { };
     tela-icon-theme = callPackage ./tela-icon-theme { };
     material-shell = callPackage ./material-shell { };
+    morgen = callPackage ./morgen { };
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
 

@@ -4,6 +4,7 @@ final: prev: {
   sway-accel-rotate = prev.callPackage ./sway-accel-rotate {};
   waybind = prev.callPackage ./waybind {};
   kbct = prev.callPackage ./kbct {};
+  morgen = prev.callPackage ./morgen {};
 
   myTmuxPlugins = prev.lib.recurseIntoAttrs (prev.callPackage ./tmux-plugins {});
 
