@@ -10,11 +10,11 @@ let
   };
 in stdenv.mkDerivation rec {
   pname = "morgen";
-  version = "2.2.2";
+  version = "2.2.3";
 
   src = fetchurl {
-    url = "https://download.todesktop.com/210203cqcj00tw1/morgen-2.2.2.deb";
-    sha256 = "sha256-71QW1Eta8+X2mlkvZH3g0BTAaT6TGexyrQaR7ud/dVM=";
+    url = "https://download.todesktop.com/210203cqcj00tw1/morgen-2.2.3.deb";
+    sha256 = "sha256-Wu/LBFKgT766zoP79rX5mfFJ5Y2LskO+EEGRbu+PC+4=";
   };
 
   nativeBuildInputs = [ dpkg makeWrapper ];
