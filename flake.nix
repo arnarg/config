@@ -116,6 +116,18 @@
                 inherit nixpkgs;
               };
             };
+            arin = generateHome {
+              inherit extraSpecialArgs;
+              system = "x86_64-darwin";
+              username = "arin";
+              homeDirectory = "/home/arin";
+              configuration = {
+                imports = [
+                  self.homeModules.development
+                ];
+                inherit nixpkgs;
+              };
+            };
           };
 
       homeModules = utils.lib.modulesFromList [
