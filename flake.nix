@@ -125,6 +125,10 @@
                 imports = [
                   self.homeModules.development
                 ];
+                home.packages = [
+                  inputs.home.packages.x86_64-darwin.home-manager
+                  inputs.nixpkgs.legacyPackages.x86_64-darwin.nixUnstable
+                ];
                 inherit nixpkgs;
               };
             };
