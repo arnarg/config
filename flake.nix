@@ -71,6 +71,10 @@
             ];
           }
         ];
+        terramaster.modules = [
+          ./machines/terramaster/configuration.nix
+          self.nixosModules.server
+        ];
       };
 
       nixosModules = utils.lib.modulesFromList [

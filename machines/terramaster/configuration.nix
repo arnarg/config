@@ -3,13 +3,13 @@ let
   kernel = config.boot.kernelPackages.kernel;
   hddled = pkgs.stdenv.mkDerivation rec {
     name = "hddled_tmj33-${version}-${kernel.version}";
-    version = "0.1";
+    version = "0.2";
 
     src = pkgs.fetchFromGitHub {
       owner = "arnarg";
       repo = "hddled_tmj33";
       rev = version;
-      sha256 = "0izz2xxg47rsj88pfqrx035n8hz78bqna41vljwc29r8aid9rnk9";
+      sha256 = "sha256-h2yvaFC0uemt9TZO1FR4Kfqm2bErol7KzjL6SOqtHik=";
     };
 
     nativeBuildInputs = kernel.moduleBuildDependencies;

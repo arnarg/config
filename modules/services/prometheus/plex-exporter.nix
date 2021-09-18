@@ -34,6 +34,7 @@ in with pkgs.stdenv; with lib; {
 
     # user and group
     users.users.plex-exporter = {
+      isSystemUser = true;
       name = "plex-exporter";
       description = "plex-exporter user";
       group = "plex-exporter";
