@@ -31,7 +31,8 @@ in with lib; {
     programs.git.signing.signByDefault = builtins.isString cfg.gpgKey;
 
     programs.git.extraConfig = {
-      pull.rebase = false;
+      pull.rebase = true;
+      init.defaultBranch = "master";
     };
 
   };
