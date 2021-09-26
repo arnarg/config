@@ -116,6 +116,16 @@
                 inherit nixpkgs;
               };
             };
+	    wsl = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              configuration = {
+                imports = [
+                  self.homeModules.development
+                  ./home/machines/wsl.nix
+                ];
+                inherit nixpkgs;
+              };
+            };
             arin = generateHome {
               inherit extraSpecialArgs;
               system = "x86_64-darwin";
