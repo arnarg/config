@@ -2,6 +2,7 @@
 {
   config = {
     home.packages = with pkgs; [
+      gnome.gnome-tweaks
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
       whitesur-gtk-theme
@@ -14,12 +15,25 @@
           "blur-my-shell@aunetx"
         ];
       };
+      "org/gnome/shell/keybindings" = {
+        toggle-overview = ["<Primary>Up"];
+      };
       "org/gnome/desktop/interface" = {
         gtk-theme = "WhiteSur-dark";
         icon-theme = "WhiteSur-dark";
       };
+      "org/gnome/shell/extensions/user-theme" = {
+        name = "WhiteSur-dark";
+      };
       "org/gnome/desktop/wm/keybindings" = {
         minimize = [""];
+        switch-input-source = ["<Super>t"];
+        switch-input-source-backward = ["<Shift><Super>t"];
+        switch-to-workspace-left = ["<Primary>Left" "<Super>h"];
+        switch-to-workspace-right = ["<Primary>Right" "<Super>l"];
+      };
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = "close,minimize,maximize:appmenu";
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen
