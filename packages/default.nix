@@ -14,6 +14,7 @@ let
     tela-icon-theme = callPackage ./tela-icon-theme { };
     material-shell = callPackage ./material-shell { };
     morgen = callPackage ./morgen { };
+    whitesur-gtk-theme = callPackage ./whitesur-gtk-theme { };
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
 

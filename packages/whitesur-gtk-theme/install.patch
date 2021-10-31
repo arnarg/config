@@ -1,0 +1,133 @@
+diff --git a/install.sh b/install.sh
+index f5e88eb..611eff9 100755
+--- a/install.sh
++++ b/install.sh
+@@ -136,8 +136,6 @@ else
+     show_needed_dialogs
+   fi
+ 
+-  prompt -w "Removing the old '${name}' themes..."
+-
+   remove_themes; customize_theme; avoid_variant_duplicates; echo
+ 
+   prompt -i "Installing '${name}' themes in '${dest}'..."
+@@ -153,13 +151,13 @@ else
+ 
+   # rm -rf "${THEME_SRC_DIR}/sass/_gtk-base-temp.scss"
+ 
+-  if (is_running "xfce4-session"); then
+-    msg="XFCE: you may need to run 'xfce4-panel -r' after changing your theme to fix your panel opacity."
+-  elif (is_my_distro "solus") && (is_running "gnome-session"); then
+-    msg="GNOME: you may need to disable 'User Themes' extension to fix your dock."
+-  elif (is_running "gnome-session") && [[ "${GNOME_VERSION}" == "old" ]]; then
+-    msg="GNOME: you may need to disable 'User Themes' extension to fix your logout and authentication dialog."
+-  fi
++  #if (is_running "xfce4-session"); then
++  #  msg="XFCE: you may need to run 'xfce4-panel -r' after changing your theme to fix your panel opacity."
++  #elif (is_my_distro "solus") && (is_running "gnome-session"); then
++  #  msg="GNOME: you may need to disable 'User Themes' extension to fix your dock."
++  #elif (is_running "gnome-session") && [[ "${GNOME_VERSION}" == "old" ]]; then
++  #  msg="GNOME: you may need to disable 'User Themes' extension to fix your logout and authentication dialog."
++  #fi
+ 
+   if [[ "${msg}" ]]; then
+     echo; prompt -w "${msg}"
+@@ -170,6 +168,7 @@ else
+ 
+   echo; prompt -w "${final_msg}"
+   [[ -x /usr/bin/notify-send ]] && notify-send "'${name}' theme has been installed. Enjoy!" "${notif_msg}" -i "dialog-information-symbolic"
++  exit 0
+ fi
+ 
+ echo
+diff --git a/lib-core.sh b/lib-core.sh
+index a9826fa..c8f87d7 100755
+--- a/lib-core.sh
++++ b/lib-core.sh
+@@ -22,7 +22,7 @@ WHITESUR_SOURCE=("lib-core.sh")
+ 
+ export WHITESUR_PID=$$
+ MY_USERNAME="${SUDO_USER:-$(logname 2> /dev/null || echo "${USER}")}"
+-MY_HOME=$(getent passwd "${MY_USERNAME}" | cut -d: -f6)
++MY_HOME="/tmp/whitesur"
+ 
+ if command -v gnome-shell &> /dev/null; then
+   if (( $(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 1) >= 4 )); then
+@@ -43,7 +43,7 @@ else
+   SED_OPT="-i"
+ fi
+ 
+-SUDO_BIN="$(which sudo)"
++SUDO_BIN=""
+ 
+ #------------Directories--------------#
+ THEME_SRC_DIR="${REPO_DIR}/src"
+@@ -248,7 +248,7 @@ if [[ -d "${WHITESUR_TMP_DIR}" ]]; then
+ fi
+ 
+ rm -rf "${WHITESUR_TMP_DIR}"
+-mkdir -p "${WHITESUR_TMP_DIR}"; exec 2> "${WHITESUR_TMP_DIR}/error_log.txt"
++mkdir -p "${WHITESUR_TMP_DIR}"
+ 
+ signal_exit() {
+   rm -rf "${WHITESUR_TMP_DIR}"
+@@ -481,20 +481,20 @@ check_param() {
+ 
+     case "${global_param}" in
+       -d)
+-        if [[ "$(readlink -m "${value}")" =~ "${REPO_DIR}" ]]; then
+-          prompt -e "'${display_param}' ERROR: Can't install in the source directory."
+-          has_any_error="true"
+-        elif [[ ! -w "${value}" && ! -w "$(dirname "${value}")" ]]; then
+-          prompt -e "'${display_param}' ERROR: You have no permission to access that directory."
+-          has_any_error="true"
+-        else
++        #if [[ "$(readlink -m "${value}")" =~ "${REPO_DIR}" ]]; then
++        #  prompt -e "'${display_param}' ERROR: Can't install in the source directory."
++        #  has_any_error="true"
++        #elif [[ ! -w "${value}" && ! -w "$(dirname "${value}")" ]]; then
++        #  prompt -e "'${display_param}' ERROR: You have no permission to access that directory."
++        #  has_any_error="true"
++        #else
+           if [[ ! -d "${value}" ]]; then
+             prompt -w "Destination directory does not exist. Let's make a new one..."; echo
+             mkdir -p "${value}"
+           fi
+ 
+           dest="${value}"
+-        fi
++        #fi
+ 
+         remind_relative_path "${display_param}" "${value}"; variant_found="skip" ;;
+       -b)
+@@ -702,8 +702,7 @@ udo() {
+ 
+ full_sudo() {
+   if [[ ! -w "/root" ]]; then
+-    prompt -e "ERROR: '${1}' needs a root priviledge. Please run this '${0}' as root"
+-    has_any_error="true"
++    echo ""
+   fi
+ }
+ 
+diff --git a/lib-install.sh b/lib-install.sh
+index 9ccf8bd..f827dc5 100755
+--- a/lib-install.sh
++++ b/lib-install.sh
+@@ -517,7 +517,7 @@ install_themes() {
+   # "install_theemy" and "install_shelly" require "gtk_base", so multithreading
+   # isn't possible
+ 
+-  install_theme_deps; start_animation; install_beggy
++  start_animation; install_beggy
+ 
+   for opacity in "${opacities[@]}"; do
+     for alt in "${alts[@]}"; do
+@@ -557,7 +557,6 @@ install_gdm_theme() {
+   local TARGET=
+ 
+   # Let's go!
+-  install_theme_deps
+   rm -rf "${WHITESUR_GS_DIR}"; install_beggy
+   gtk_base "${colors[0]}" "${opacities[0]}" "${themes[0]}"
+ 

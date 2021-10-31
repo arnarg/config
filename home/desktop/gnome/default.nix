@@ -1,30 +1,18 @@
 { config, pkgs, ... }:
 {
   config = {
+    home.packages = with pkgs; [
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.blur-my-shell
+      whitesur-gtk-theme
+    ];
     dconf.settings = {
-      #"org/gnome/shell" = {
-      #  enabled-extensions = ["material-shell@papyelgringo"];
-      #};
-      #"org/gnome/shell/extensions/materialshell/bindings" = {
-      #  kill-focused-window = ["<Shift><Super>q"];
-      #  move-window-bottom = ["<Shift><Super>j"];
-      #  move-window-left = ["<Shift><Super>h"];
-      #  move-window-right = ["<Shift><Super>l"];
-      #  move-window-top = ["<Shift><Super>k"];
-      #  next-window = ["<Super>l" "<Super>d"];
-      #  next-workspace = ["<Super>j" "<Super>s"];
-      #  previous-window = ["<Super>h" "<Super>a"];
-      #  previous-workspace = ["<Super>k" "<Super>w"];
-      #};
-      "org/gnome/desktop/interface" = {
-        gtk-theme = "Plata-Compact";
-        icon-theme = "Tela";
+      "org/gnome/shell" = {
+        enabled-extensions = ["user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-dock@micxgx.gmail.com"];
       };
-      "org/gnome/mutter" = {
-        # My laptop doesn't even have a right super key
-        # I just don't want the annoying overlay to show up when
-        # I press the super key
-        overlay-key = "Super_R";
+      "org/gnome/desktop/interface" = {
+        gtk-theme = "WhiteSur-dark";
+        icon-theme = "WhiteSur-dark";
       };
       "org/gnome/desktop/wm/keybindings" = {
         minimize = [""];
