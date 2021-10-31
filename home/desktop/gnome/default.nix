@@ -84,5 +84,8 @@
         ];
       };
     };
+    programs.firefox.profiles.default.userChrome = ''
+      @import "${pkgs.whitesur-firefox-theme}/firefox/userChrome-Monterey.css";
+    '';
   };
 }

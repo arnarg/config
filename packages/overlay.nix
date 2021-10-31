@@ -7,6 +7,7 @@ final: prev: {
   waybind = prev.callPackage ./waybind {};
   whitesur-gtk-theme = prev.callPackage ./whitesur-gtk-theme {};
   whitesur-icon-theme = prev.callPackage ./whitesur-icon-theme {};
+  whitesur-firefox-theme = prev.callPackage ./whitesur-firefox-theme {};
 
   myTmuxPlugins = prev.lib.recurseIntoAttrs (prev.callPackage ./tmux-plugins {});
 
