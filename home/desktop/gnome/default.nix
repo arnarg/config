@@ -87,5 +87,8 @@
     programs.firefox.profiles.default.userChrome = ''
       @import "${pkgs.whitesur-firefox-theme}/firefox/userChrome-Monterey.css";
     '';
+    programs.firefox.profiles.default.settings = {
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    };
   };
 }

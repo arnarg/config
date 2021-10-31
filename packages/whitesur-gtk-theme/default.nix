@@ -1,6 +1,7 @@
 { lib,
 stdenv,
 fetchFromGitHub,
+fetchzip,
 glib,
 inkscape,
 optipng,
@@ -18,12 +19,21 @@ stdenv.mkDerivation rec {
   pname = "whitesur-gtk-theme";
   version = "2021-10-21";
 
-  src = fetchFromGitHub {
-    owner = "vinceliuice";
-    repo = "WhiteSur-gtk-theme";
-    rev = version;
-    sha256 = "FyIoQbYgUjmdQWn6R1jbX75ExnUCA8DnIUa1Jb5xfOU=";
-  };
+  srcs = [
+    (fetchFromGitHub {
+      owner = "vinceliuice";
+      repo = "WhiteSur-gtk-theme";
+      rev = version;
+      sha256 = "FyIoQbYgUjmdQWn6R1jbX75ExnUCA8DnIUa1Jb5xfOU=";
+    })
+    (fetchzip {
+      name = "wallpapers";
+      url = "https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/c9dcf70d66a23bb639c0a2d7c36ddd88ab0e0883.zip";
+      sha256 = "kJrCjlkaDW3eogHlDpOA1xOw5FkAgYU/gT4Pd+djIR8=";
+    })
+  ];
+
+  sourceRoot = "source";
 
   patches = [./install.patch];
 
@@ -67,5 +77,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/share/themes
     name= ./install.sh ${lib.concatStringsSep " " params}
+    mkdir -p $out/share/wallpapers
+    cp -r ../wallpapers/4k/${if monterey then "Monterey" else "WhiteSur"}*.png $out/share/wallpapers
   '';
 }

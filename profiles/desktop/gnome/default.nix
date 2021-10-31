@@ -14,11 +14,6 @@ in with pkgs.stdenv; with lib; {
       desktopManager.gnome.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [
-      plata-theme
-      tela-icon-theme
-    ];
-
     environment.enableDebugInfo = true;
 
   };
