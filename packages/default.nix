@@ -15,6 +15,7 @@ let
     material-shell = callPackage ./material-shell { };
     morgen = callPackage ./morgen { };
     whitesur-gtk-theme = callPackage ./whitesur-gtk-theme { };
+    whitesur-icon-theme = callPackage ./whitesur-icon-theme { };
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
 

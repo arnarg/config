@@ -6,6 +6,7 @@
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
       whitesur-gtk-theme
+      whitesur-icon-theme
     ];
     dconf.settings = {
       "org/gnome/shell" = {

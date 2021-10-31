@@ -6,6 +6,7 @@ final: prev: {
   sway-accel-rotate = prev.callPackage ./sway-accel-rotate {};
   waybind = prev.callPackage ./waybind {};
   whitesur-gtk-theme = prev.callPackage ./whitesur-gtk-theme {};
+  whitesur-icon-theme = prev.callPackage ./whitesur-icon-theme {};
 
   myTmuxPlugins = prev.lib.recurseIntoAttrs (prev.callPackage ./tmux-plugins {});
 
