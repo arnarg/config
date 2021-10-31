@@ -16,13 +16,13 @@ monterey ? true }:
 
 stdenv.mkDerivation rec {
   pname = "whitesur-gtk-theme";
-  version = "2021-10-29";
+  version = "2021-10-21";
 
   src = fetchFromGitHub {
     owner = "vinceliuice";
     repo = "WhiteSur-gtk-theme";
-    rev = "00b04162bc3e3ef6369a78a8b5859cfc0878c55a";
-    sha256 = "h/NIGQkAE53O70L7EIG71zAREfMf4jII0Kl24nUcA0I=";
+    rev = version;
+    sha256 = "FyIoQbYgUjmdQWn6R1jbX75ExnUCA8DnIUa1Jb5xfOU=";
   };
 
   patches = [./install.patch];
