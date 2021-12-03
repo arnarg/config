@@ -11,6 +11,8 @@ stdenv.mkDerivation rec {
     sha256 = "FyIoQbYgUjmdQWn6R1jbX75ExnUCA8DnIUa1Jb5xfOU=";
   };
 
+  patches = [ ./5-extensions.patch ];
+
   installPhase = ''
     mkdir -p $out
     cp -r src/other/firefox/ $out
