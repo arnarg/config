@@ -6,12 +6,12 @@
   ## INPUTS ##
   ############
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.1.0";
 
     home = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-21.11";
       inputs.nixpkgs.follows = "unstable";
     };
   };
@@ -45,8 +45,6 @@
         {
           nix = {
             trustedUsers = [ "root" "arnar" ];
-            binaryCaches = [ "https://arnarg.cachix.org" ];
-            binaryCachePublicKeys = [ "arnarg.cachix.org-1:QwvsbygCMQHexg8JVwILYFrZwnWwMfH08O8SH6HsVaw=" ];
 
             nixPath = [
               "nixpkgs=${self}/compat"
@@ -112,32 +110,6 @@
                   self.homeModules.development
                   self.homeModules.desktop
                   ./home/desktop/gnome
-                ];
-                inherit nixpkgs;
-              };
-            };
-	    wsl = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
-              configuration = {
-                imports = [
-                  self.homeModules.development
-                  ./home/machines/wsl.nix
-                ];
-                inherit nixpkgs;
-              };
-            };
-            arin = generateHome {
-              inherit extraSpecialArgs;
-              system = "x86_64-darwin";
-              username = "arin";
-              homeDirectory = "/home/arin";
-              configuration = {
-                imports = [
-                  self.homeModules.development
-                ];
-                home.packages = [
-                  inputs.home.packages.x86_64-darwin.home-manager
-                  inputs.nixpkgs.legacyPackages.x86_64-darwin.nixUnstable
                 ];
                 inherit nixpkgs;
               };
