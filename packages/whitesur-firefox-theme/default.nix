@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "whitesur-firefox-theme";
-  version = "2021-10-21";
+  version = "2021-12-28";
 
   src = fetchFromGitHub {
     owner = "vinceliuice";
     repo = "WhiteSur-gtk-theme";
     rev = version;
-    sha256 = "FyIoQbYgUjmdQWn6R1jbX75ExnUCA8DnIUa1Jb5xfOU=";
+    sha256 = "zIF4jKmPL+sE/0N6NKz4MhYJyxgR0uicQ9cxNllUAUU=";
   };
 
   patches = [ ./5-extensions.patch ];
