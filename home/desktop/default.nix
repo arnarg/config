@@ -8,6 +8,7 @@
 
   config = {
     home.packages = with pkgs; [
+      anytype
       obsidian
       logseq
       morgen

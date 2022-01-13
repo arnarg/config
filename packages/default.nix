@@ -6,6 +6,7 @@ let
   lib = pkgs.lib;
 
   self = {
+    anytype = callPackage ./anytype { };
     desktop-scripts = callPackage ./desktop-scripts { };
     plex-exporter = callPackage ./plex-exporter { };
     sway-accel-rotate = callPackage ./sway-accel-rotate { };

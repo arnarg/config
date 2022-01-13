@@ -1,4 +1,5 @@
 final: prev: {
+  anytype = prev.callPackage ./anytype {};
   desktop-scripts = prev.callPackage ./desktop-scripts {};
   kbct = prev.callPackage ./kbct {};
   morgen = prev.callPackage ./morgen {};

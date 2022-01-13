@@ -14,6 +14,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.avahi.enable = true;
+
   # I want to cross-compile
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
