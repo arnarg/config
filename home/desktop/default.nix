@@ -11,7 +11,6 @@
       anytype
       obsidian
       logseq
-      morgen
     ];
 
     services.syncthing.enable = true;
