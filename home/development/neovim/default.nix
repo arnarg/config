@@ -23,7 +23,6 @@ with lib; {
         deoplete-nvim
         editorconfig-vim
         lush-nvim
-        onedark-nvim
         gruvbox-nvim
         fzf-vim
         indent-blankline-nvim-lua
