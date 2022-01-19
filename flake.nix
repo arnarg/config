@@ -8,7 +8,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.1.0";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
 
     home = {
       url = "github:nix-community/home-manager/release-21.11";
@@ -20,9 +20,7 @@
   ## OUTPUTS ##
   #############
   outputs = inputs@{ self, utils, home, nixpkgs, ... }:
-    let
-      mkApp = utils.lib.mkApp;
-    in utils.lib.systemFlake {
+    utils.lib.mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" ];
@@ -31,26 +29,17 @@
       # Channels #
       ############
       sharedOverlays = [ self.overlay ];
-      channels.nixpkgs = {
-        input = nixpkgs;
-        config = { allowUnfree = true; };
-      };
+      channelsConfig = { allowUnfree = true; };
 
       #########
       # Hosts #
       #########
       hostDefaults.modules = [
-        utils.nixosModules.saneFlakeDefaults
         ./modules
         {
-          nix = {
-            trustedUsers = [ "root" "arnar" ];
-
-            nixPath = [
-              "nixpkgs=${self}/compat"
-              "nixos-config=${self}/compat/nixos"
-            ];
-          };
+          nix.generateNixPathFromInputs = true;
+          nix.generateRegistryFromInputs = true;
+          nix.trustedUsers = [ "root" "arnar" ];
         }
       ];
 
@@ -75,7 +64,7 @@
         ];
       };
 
-      nixosModules = utils.lib.modulesFromList [
+      nixosModules = utils.lib.exportModules [
         ./profiles/desktop
         ./profiles/development
         ./profiles/laptop
@@ -116,13 +105,19 @@
             };
           };
 
-      homeModules = utils.lib.modulesFromList [
+      homeModules = utils.lib.exportModules [
         ./home/development
         ./home/desktop
       ];
 
       overlay = import ./packages/overlay.nix;
-      legacyPackages = nixpkgs.legacyPackages;
+
+      outputsBuilder =
+        let
+          overlays = utils.lib.exportOverlays { inherit (self) inputs pkgs; };
+        in channels: {
+        packages = utils.lib.exportPackages overlays channels;
+      };
     };
 
 }
