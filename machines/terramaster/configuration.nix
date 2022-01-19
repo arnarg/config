@@ -24,13 +24,6 @@ let
       "KERNEL_MODULES=${kernel.dev}/lib/modules/${kernel.modDirVersion}"
       "MODDESTDIR=$(out)/lib/modules/${kernel.modDirVersion}/kernel/drivers/misc"
     ];
-
-    meta = with pkgs.stdenv.lib; {
-      description = "A linux module for controlling the HDD LEDs on Terramaster NAS devices with Intel J33xx CPU";
-      homepage = https://github.com/arnarg/hddled_tmj33;
-      license = licenses.gpl2;
-      platforms = [ "x86_64-linux" ];
-    };
   };
 in {
   imports = [
