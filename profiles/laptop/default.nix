@@ -1,22 +1,16 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./waybind
     ./kbct
   ];
 
-  options.local.laptop.enable = lib.mkEnableOption "laptop";
-
   config = {
-    local.laptop.enable = true;
-
     # Enable UPower to watch battery stats
     services.upower.enable = true;
 
     # Enable networkmanager
     networking.networkmanager.enable = true;
     users.users.arnar.extraGroups = [ "networkmanager" ];
-    environment.systemPackages = with pkgs; [ networkmanager-openvpn ];
   
     # Enable tlp
     #services.tlp.enable = true;
@@ -29,8 +23,7 @@
     # Enable light to control backlight
     programs.light.enable = true;
 
-    # Enable waybind key rebinder
-    local.laptop.waybind.enable = false;
+    # Enable kbct key rebinder
     local.laptop.kbct.enable = true;
 
     # Enable bluetooth

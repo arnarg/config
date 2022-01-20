@@ -35,7 +35,7 @@
       # Hosts #
       #########
       hostDefaults.modules = [
-        ./modules
+        self.nixosModules.base
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
@@ -46,10 +46,10 @@
       hosts = {
         flex.modules = [
           ./machines/flex/configuration.nix
+          self.nixosModules.immutable
           self.nixosModules.desktop
           self.nixosModules.development
           self.nixosModules.laptop
-          self.nixosModules.tablet
           {
             # Get home manager in path
             environment.systemPackages = [
@@ -60,16 +60,18 @@
         ];
         terramaster.modules = [
           ./machines/terramaster/configuration.nix
+          self.nixosModules.immutable
           self.nixosModules.server
         ];
       };
 
       nixosModules = utils.lib.exportModules [
+        ./profiles/base
         ./profiles/desktop
         ./profiles/development
+        ./profiles/immutable
         ./profiles/laptop
         ./profiles/server
-        ./profiles/tablet
       ];
 
       ########

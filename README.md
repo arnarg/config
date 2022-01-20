@@ -4,22 +4,20 @@ This repository hosts NixOS configuration for my various machines.
 
 ## Install
 
-Initial rebuild requires an explicit nixos-config path.
-
 ```
-nixos-rebuild switch -I nixos-config=$HOME/Code/config/machines/<target machine>/configuration.nix
+nixos-rebuild switch --flake .#<target host>
 ```
 
 ## Layout
 
 ```
 .
-├── machines  # Each subdirectory contains configuration for a single machine
+├── home      # Profiles for home-manager configuration
 │   └── */
-├── modules   # My own NixOS modules
+├── machines  # Host specific configuration
 │   └── */
-├── overlays  # Any nixpkgs overlays
+├── packages  # My own packages that are not available in nixpkgs
 │   └── *.nix
-└── packages  # My own packages that are not available in nixpkgs
+└── profiles  # Profiles for NixOS configuration
     └── */
 ```

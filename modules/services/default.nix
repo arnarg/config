@@ -1,9 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./fancontrol
-    ./grafana
-    ./prometheus
-  ];
-}

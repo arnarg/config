@@ -45,7 +45,6 @@
     interval = "Mon *-*-* 03:00:00";
   };
 
-  local.immutable.enable = true;
   local.immutable.persistDevice = "/nix";
   local.immutable.persistPath = "/nix/persist";
 

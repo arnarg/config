@@ -4,9 +4,6 @@
     ./hardware-configuration.nix
   ];
 
-  local.immutable.enable = true;
-
-  local.laptop.waybind.inputDevice = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
   local.development.libvirt.enable = true;
   local.desktop.gnome.enable = lib.mkForce true;
 

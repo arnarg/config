@@ -87,7 +87,7 @@ in {
     networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
     # NixOS stuff
-    system.stateVersion = "20.09";
+    system.stateVersion = "21.11";
     nix.gc = {
       automatic = true;
       dates = "Mon *-*-* 06:00:00";

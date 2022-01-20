@@ -1,6 +1,9 @@
 { config, lib, ... }:
 {
   imports = [
+    ./fancontrol
+    ./grafana
+    ./prometheus
     ./transmission
   ];
   config = {

@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-
-{
+{ config, lib, pkgs, ... }:
+with lib; {
   users = {
     users = {
       arnar = {
@@ -24,5 +23,8 @@
       };
     };
   };
-  local.immutable.users = [ "arnar" ];
+
+  security.sudo.enable = true;
+
+  time.timeZone = mkDefault "utc";
 }

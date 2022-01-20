@@ -4,7 +4,6 @@ let
   cfg = config.local.immutable;
 in with lib; {
   options.local.immutable = {
-    enable = mkEnableOption "immutable";
     persistPath = mkOption {
       type = types.str;
       default = "/persist";
@@ -35,7 +34,9 @@ in with lib; {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
+    local.immutable.users = [ "arnar" ];
+
     # Files to persist between boots
     environment.etc = mkMerge (map (p:
       { "${strings.removePrefix "/etc/" p}" = { source = "${cfg.persistPath}${p}"; }; }
@@ -49,11 +50,6 @@ in with lib; {
       Defaults lecture = never
     '';
 
-    # Empty user's Download folder
-    boot.postBootCommands = concatStringsSep "\n" (map (u:
-      "rm -rf ${config.users.users.${u}.home}/Downloads/* || true"
-    ) cfg.users);
-
     # Persisting user passwords
     users.mutableUsers = false;
     fileSystems."${cfg.persistDevice}".neededForBoot = true;
@@ -63,6 +59,5 @@ in with lib; {
         { "${u}".passwordFile = "${cfg.persistPath}/passwords/${u}"; }
       )
     );
-
   };
 }
