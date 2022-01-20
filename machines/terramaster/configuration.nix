@@ -78,6 +78,20 @@ in {
       MINSTOP=hwmon1/pwm3=12
     '';
 
+    # So I can use nixos-rebuild with --use-remote-sudo
+    # TODO: Figure out how to allow less commands
+    security.sudo.extraRules = [
+      {
+        users = [ "arnar" ];
+        commands = [
+          {
+            command = "ALL";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+
     # Networking stuff
     networking.hostName = "terramaster";
     networking.useDHCP = false;
