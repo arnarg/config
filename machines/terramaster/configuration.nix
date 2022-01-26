@@ -52,13 +52,27 @@ in {
       "/etc/plex_exporter/environment"
     ];
 
+    # Sonarr
+    services.sonarr.enable = true;
+    services.sonarr.dataDir = "/nix/persist/var/lib/sonarr/.config/NzbDrone";
+    services.sonarr.group = "mediaowners";
+
+    # Radarr
+    services.radarr.enable = true;
+    services.radarr.dataDir = "/nix/persist/var/lib/radarr/.config/NzbDrone";
+    services.radarr.group = "mediaowners";
+
+    # Transmission
+    local.services.transmission.enable = true;
+    services.transmission.group = "mediaowners";
+
+    users.groups.mediaowners.members = [ "sonarr" ];
+    users.groups.mediaowners.gid = 3000;
+
     # Prometheus
     local.services.prometheus.enable = true;
     local.services.prometheus.exporters.plex.enable = true;
     local.services.grafana.enable = true;
-
-    # Transmission
-    local.services.transmission.enable = true;
 
     # Terramaster F2-221's fan is connected to a case fan header.
     # It doesn't spin up under load so I set up fancontrol to take care of this.
