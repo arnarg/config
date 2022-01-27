@@ -4,7 +4,6 @@
     ./fancontrol
     ./grafana
     ./prometheus
-    ./transmission
   ];
   config = {
     networking.firewall.enable = true;

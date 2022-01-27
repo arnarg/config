@@ -27,6 +27,7 @@ let
   };
 in {
   imports = [
+    ./services.nix
     ./hardware-configuration.nix
   ];
 
@@ -42,32 +43,6 @@ in {
     # Terramaster f2-221 has it8613e chip
     boot.extraModulePackages = with pkgs.linuxPackages; [ it87 hddled ];
     boot.kernelModules = ["coretemp" "it87" "hddled_tmj33"];
-
-    # Plex Media Server
-    services.plex.enable = true;
-    services.plex.openFirewall = true;
-    services.plex.managePlugins = false;
-    local.immutable.links.tmpfiles = [
-      "/var/lib/plex"
-      "/etc/plex_exporter/environment"
-    ];
-
-    # Sonarr
-    services.sonarr.enable = true;
-    services.sonarr.dataDir = "/nix/persist/var/lib/sonarr/.config/NzbDrone";
-    services.sonarr.group = "mediaowners";
-
-    # Radarr
-    services.radarr.enable = true;
-    services.radarr.dataDir = "/nix/persist/var/lib/radarr/.config/NzbDrone";
-    services.radarr.group = "mediaowners";
-
-    # Transmission
-    local.services.transmission.enable = true;
-    services.transmission.group = "mediaowners";
-
-    users.groups.mediaowners.members = [ "sonarr" ];
-    users.groups.mediaowners.gid = 3000;
 
     # Prometheus
     local.services.prometheus.enable = true;
