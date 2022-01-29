@@ -78,6 +78,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share/themes
     name= ./install.sh ${lib.concatStringsSep " " params}
     mkdir -p $out/share/wallpapers
-    cp -r ../wallpapers/4k/${if monterey then "Monterey" else "WhiteSur"}*.png $out/share/wallpapers
+    cp -r ../wallpapers/4k/{WhiteSur,Monterey}*.png $out/share/wallpapers
   '';
 }

@@ -36,6 +36,12 @@
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "close,minimize,maximize:appmenu";
       };
+      "org/gnome/desktop/background" = {
+        picture-uri = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
+      };
+      "org/gnome/desktop/screensaver" = {
+        picture-uri = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
+      };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen
         screensaver = ["<Super>q"];
