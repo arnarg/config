@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./aerc
     ./git
     ./gpg
     ./neovim
