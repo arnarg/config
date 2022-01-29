@@ -40,6 +40,7 @@ nnoremap <leader>l :BLines<CR>
 nnoremap <leader>c :Commits<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Filetypes<CR>
+nnoremap <leader>b :Buffers<CR>
 
 """""""""""
 " AIRLINE "
@@ -62,14 +63,5 @@ set nu rnu
 """""""""""
 " BUFSTOP "
 """""""""""
-nnoremap <leader>b :BufstopFast<CR>
 nnoremap <leader>, :BufstopBack<CR>
 nnoremap <leader>. :BufstopForward<CR>
-
-"""""""""""
-" VIMWIKI "
-"""""""""""
-let g:vimwiki_list = [
-	\{'path': '~/notes/personal', 'syntax': 'markdown', 'ext': '.md'},
-	\{'path': '~/notes/work', 'syntax': 'markdown', 'ext': '.md'}
-	\]
