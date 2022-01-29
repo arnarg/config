@@ -69,16 +69,6 @@ with lib; {
           '';
         }
 
-        # NvimTree
-        {
-          plugin = nvim-tree-lua;
-          config = ''
-            let g:nvim_tree_quit_on_open = 1
-            lua require'nvim-tree'.setup()
-            nnoremap <C-n> :NvimTreeToggle<CR>
-          '';
-        }
-
         # Autocomplete
         {
           plugin = nvim-cmp;
@@ -115,22 +105,6 @@ with lib; {
         cmp-nvim-lsp
 
         # misc
-        {
-          plugin = pkgs.vimUtils.buildVimPlugin rec {
-            pname = "bufstop";
-            version = "1.6.2";
-            src = pkgs.fetchFromGitHub {
-              owner = "mihaifm";
-              repo = "bufstop";
-              rev = version;
-              sha256 = "hWzJWMvfnfweRLTsWYZBIbuCm7rMLYIp0kQrN68oX+A=";
-            };
-          };
-          config = ''
-            nnoremap <leader>, :BufstopBack<CR>
-            nnoremap <leader>. :BufstopForward<CR>
-          '';
-        }
         {
           plugin = pkgs.vimUtils.buildVimPlugin {
             pname = "tmux-navigate";
