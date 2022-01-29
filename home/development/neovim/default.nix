@@ -16,7 +16,6 @@ with lib; {
       viAlias = true;
       vimAlias = true;
 
-      #extraConfig = builtins.readFile ./init.vim;
       extraConfig = ''
         " lets not use arrow keys
         noremap <Up> <NOP>
@@ -34,8 +33,10 @@ with lib; {
         gnutar
         ripgrep
 
-        # For LSP
+        # For Treesitter
         gcc
+
+        # For LSP
         pyright
         gopls
       ];
@@ -116,6 +117,13 @@ with lib; {
               sha256 = "0njnra2a9c51hxghhqlyvdi4b02wgmfd6jcpfhapcvvv599g8sri";
             };
           };
+        }
+        {
+          plugin = git-blame-nvim;
+          config = ''
+            let g:gitblame_enabled = 0
+            nnoremap <leader>b <cmd>GitBlameToggle<cr>
+          '';
         }
         vim-gitgutter
         vim-nix
