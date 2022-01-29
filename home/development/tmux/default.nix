@@ -1,5 +1,14 @@
 { config, lib, pkgs, ... }:
-{
+let
+  cfg = config.local.tmux;
+in with lib; {
+  options.local.tmux = {
+    copyCommand = mkOption {
+      type = types.str;
+      default = "${pkgs.wl-clipboard}/bin/wl-copy";
+      description = "Command to pipe to when yanking";
+    };
+  };
   config = {
 
     programs.tmux.enable = true;
@@ -19,8 +28,7 @@
       }
       myTmuxPlugins.navigate
       tmuxPlugins.jump
-      tmuxPlugins.resurrect
-      tmuxPlugins.continuum
+      tmuxPlugins.gruvbox
     ];
 
     programs.tmux.extraConfig = ''
@@ -29,6 +37,7 @@
       # Enable vi copy mode
       set-window-option -g mode-keys vi
       bind-key -T copy-mode-vi 'v' send -X begin-selection
+      bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel '${cfg.copyCommand}'
     '';
 
   };
