@@ -125,7 +125,10 @@ with lib; {
             nnoremap <leader>b <cmd>GitBlameToggle<cr>
           '';
         }
-        which-key-nvim
+        {
+          plugin = which-key-nvim;
+          config = "lua require'which-key'.setup()";
+        }
         vim-gitgutter
         vim-nix
         vim-go
