@@ -125,6 +125,7 @@ with lib; {
             nnoremap <leader>b <cmd>GitBlameToggle<cr>
           '';
         }
+        which-key-nvim
         vim-gitgutter
         vim-nix
         vim-go
