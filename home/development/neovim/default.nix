@@ -39,6 +39,7 @@ with lib; {
         # For LSP
         pyright
         gopls
+        rnix-lsp
       ];
 
       # WIP re-implementing my vim setup
@@ -53,10 +54,6 @@ with lib; {
         # LSP
         {
           plugin = nvim-lspconfig;
-          config = ''
-            lua require'lspconfig'.pyright.setup{}
-            lua require'lspconfig'.gopls.setup{}
-          '';
         }
 
         # Telescope
@@ -71,6 +68,25 @@ with lib; {
         }
 
         # Autocomplete
+        cmp-buffer
+        cmp-path
+        {
+          plugin = cmp-nvim-lsp;
+          config = ''
+            lua <<EOF
+            local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+            require'lspconfig'.pyright.setup {
+              capabilities = capabilities
+            }
+            require'lspconfig'.gopls.setup {
+              capabilities = capabilities
+            }
+            require'lspconfig'.rnix.setup {
+              capabilities = capabilities
+            }
+            EOF
+          '';
+        }
         {
           plugin = nvim-cmp;
           config = ''
@@ -78,32 +94,32 @@ with lib; {
             -- Setup nvim-cmp.
             local cmp = require'cmp'
 
-            -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline('/', {
+            cmp.setup({
+              mapping = {
+                ["<Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  else
+                    fallback()
+                  end
+                end,
+                ["<S-Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  else
+                    fallback()
+                  end
+                end,
+              },
               sources = {
-                { name = 'buffer' }
-              }
+                { name = "nvim_lsp" },
+                { name = "buffer" },
+                { name = "path" },
+              },
             })
-
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline(':', {
-              sources = cmp.config.sources({
-                { name = 'path' }
-              }, {
-                { name = 'cmdline' }
-              })
-            })
-
-            -- Setup lspconfig.
-            local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-            require('lspconfig')['gopls'].setup {
-              capabilities = capabilities
-            }
           EOF
           '';
         }
-        cmp-nvim-lsp
 
         # misc
         {
