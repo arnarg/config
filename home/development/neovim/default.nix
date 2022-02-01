@@ -73,9 +73,8 @@ with lib; {
         }
 
         # LSP
-        {
-          plugin = nvim-lspconfig;
-        }
+        nvim-lspconfig
+        lspkind-nvim
 
         # Telescope
         {
@@ -115,7 +114,7 @@ with lib; {
             -- Setup nvim-cmp.
             local cmp = require'cmp'
 
-            cmp.setup({
+            cmp.setup {
               mapping = {
                 ["<Tab>"] = function(fallback)
                   if cmp.visible() then
@@ -137,7 +136,13 @@ with lib; {
                 { name = "buffer" },
                 { name = "path" },
               },
-            })
+              formatting = {
+                format = require'lspkind'.cmp_format {
+                  with_text = true,
+                  maxwidth = 50,
+                }
+              },
+            }
           EOF
           '';
         }
