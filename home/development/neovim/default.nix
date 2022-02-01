@@ -142,6 +142,48 @@ with lib; {
           '';
         }
 
+        # neorg
+        {
+          plugin = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+            pname = "nvim-neorg";
+            version = "0.0.10";
+            src = pkgs.fetchFromGitHub {
+              owner = "nvim-neorg";
+              repo = "neorg";
+              rev = version;
+              sha256 = "OVRk8z0ifOqe7Pn64rQeYI+QehoScgP50/PrvW6VLT8=";
+            };
+            doCheck = false;
+          };
+          config = ''
+            lua <<EOF
+            require('neorg').setup {
+              load = {
+                ["core.defaults"] = {},
+                ["core.keybinds"] = {
+                  config = {
+                    default_keybinds = true,
+                  }
+                },
+                ["core.gtd.base"] = {
+                  config = {
+                    workspace = "default",
+                  }
+                },
+                ["core.norg.concealer"] = {},
+                ["core.norg.dirman"] = {
+                  config = {
+                    workspaces = {
+                      default = "~/.neorg",
+                    }
+                  }
+                }
+              }
+            }
+            EOF
+          '';
+        }
+
         # misc
         {
           plugin = pkgs.vimUtils.buildVimPlugin {
