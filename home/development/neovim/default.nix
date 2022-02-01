@@ -42,7 +42,6 @@ with lib; {
         rnix-lsp
       ];
 
-      # WIP re-implementing my vim setup
       plugins = with pkgs.vimPlugins; [
         # Treesitter
         {
@@ -58,7 +57,9 @@ with lib; {
                 "cpp",
                 "c",
                 "javascript",
-                "markdown"
+                "markdown",
+                "json",
+                "yaml"
               },
               highlight = {
                   enable = true,
@@ -70,6 +71,10 @@ with lib; {
         {
           plugin = nvim-treesitter-context;
           config = "lua require'treesitter-context'.setup()";
+        }
+        {
+          plugin = nvim-gps;
+          config = "lua require'nvim-gps'.setup()";
         }
 
         # LSP
