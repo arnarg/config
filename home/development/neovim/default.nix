@@ -45,7 +45,28 @@ with lib; {
       # WIP re-implementing my vim setup
       plugins = with pkgs.vimPlugins; [
         # Treesitter
-        nvim-treesitter
+        {
+          plugin = nvim-treesitter;
+          config = ''
+            lua <<EOF
+            require('nvim-treesitter.configs').setup {
+              ensure_installed = {
+                "bash",
+                "go",
+                "python",
+                "nix",
+                "cpp",
+                "c",
+                "javascript",
+                "markdown"
+              },
+              highlight = {
+                  enable = true,
+              }
+            }
+            EOF
+          '';
+        }
         {
           plugin = nvim-treesitter-context;
           config = "lua require'treesitter-context'.setup()";
