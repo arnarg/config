@@ -58,8 +58,8 @@
       {
         plugin = bufferline-nvim;
         config = ''
-          nnoremap <leader>, :BufferLineCycleNext<CR>
-          nnoremap <leader>. :BufferLineCyclePrev<CR>
+          nnoremap <leader>. :BufferLineCycleNext<CR>
+          nnoremap <leader>, :BufferLineCyclePrev<CR>
           nnoremap <leader>> :BufferLineMoveNext<CR>
           nnoremap <leader>< :BufferLineMovePrev<CR>
           nnoremap <leader>p :BufferLinePick<CR>
