@@ -235,6 +235,20 @@ with lib; {
         vim-gitgutter
         vim-nix
         vim-go
+        nui-nvim
+        {
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            pname = "todo-prompt";
+            version = "2022-02-08";
+            src = pkgs.fetchFromGitHub {
+              owner = "arnarg";
+              repo = "todo-prompt.nvim";
+              rev = "7f6dd0d5ce51b61840d1e60f249d370354e45d82";
+              sha256 = "MfSIvnFNxP3I6ebUVMYyjqOgQmoUY/fnZU+7+y4vjXY=";
+            };
+            buildInputs = with pkgs; [ luajitPackages.busted ];
+          };
+        }
       ];
     };
 
