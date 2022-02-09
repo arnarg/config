@@ -24,6 +24,8 @@ in with lib; {
         extraConfig = ''
           set -g @tilish-navigate 'on'
           set -g @tilish-default 'main-vertical'
+          # Automatically resize left pane to 70% width
+          bind -n "M-w" resize-pane -t 1 -x 70%
         '';
       }
       myTmuxPlugins.navigate
