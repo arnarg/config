@@ -243,8 +243,8 @@ with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todo-prompt.nvim";
-              rev = "9a792716aa70346ab65b09631bb71818a0f4d867";
-              sha256 = "4lb0m+4tx1fMygucZ2WhBjBxYrZjxGyzq/opnarJkTY=";
+              rev = "ec14dfa50d380a3407945b83bfa33b9ad220a7df";
+              sha256 = "q170vHzvCtW15qlXclVVLw5LGVpEFxvbPKq99bmGw2I=";
             };
             buildInputs = with pkgs; [ luajitPackages.busted ];
           };
