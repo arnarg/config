@@ -232,9 +232,17 @@ with lib; {
             nnoremap <leader>T <cmd>ToggleTerm<cr>
           '';
         }
+        {
+          plugin = numb-nvim;
+          config = ''
+            lua require('numb').setup()
+          '';
+        }
         vim-gitgutter
         vim-nix
         vim-go
+
+        # TODO-PROMPT
         nui-nvim
         {
           plugin = pkgs.vimUtils.buildVimPlugin {
