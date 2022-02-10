@@ -245,16 +245,15 @@ with lib; {
         # TODO-PROMPT
         nui-nvim
         {
-          plugin = pkgs.vimUtils.buildVimPlugin {
+          plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "todo-prompt";
             version = "2022-02-08";
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todo-prompt.nvim";
-              rev = "ec14dfa50d380a3407945b83bfa33b9ad220a7df";
-              sha256 = "q170vHzvCtW15qlXclVVLw5LGVpEFxvbPKq99bmGw2I=";
+              rev = "6883da5092752ed76590aff41a30f03674915866";
+              sha256 = "LKa8QRW0oYID2IBszDmspljSVdSB39LDglSiZFT7aJY=";
             };
-            buildInputs = with pkgs; [ luajitPackages.busted ];
           };
         }
       ];
