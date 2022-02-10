@@ -243,7 +243,9 @@ with lib; {
         vim-go
 
         # TODO-PROMPT
-        nui-nvim
+        {
+          plugin = nui-nvim;
+        }
         {
           plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "todo-prompt";
@@ -251,10 +253,19 @@ with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todo-prompt.nvim";
-              rev = "ce67dff1b484b38b595261e2e040b989064bc9de";
-              sha256 = "Vc279xAjYoju0NPsAl6IsAu9o6v5MINZJNahfkWdLIc=";
+              rev = "6ae0a086f6b4b485f15a17886f496b240cfd90d7";
+              sha256 = "ByoGPzHJIDK9KCJUyore8jM6atjN7B5Z63oH17EdDPc=";
             };
           };
+          config = ''
+            lua <<EOF
+            require'todo-prompt'.setup({
+              callback = function(task, date)
+                print(task, os.date("%d/%m/%y %H:%M", date))
+              end
+            })
+            EOF
+          '';
         }
       ];
     };
