@@ -265,6 +265,7 @@ with lib; {
               end
             })
             EOF
+            nnoremap <leader>at <cmd>ToDoPrompt<cr>
           '';
         }
       ];
