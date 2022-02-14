@@ -248,25 +248,15 @@ with lib; {
         }
         {
           plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-            pname = "todo-prompt";
+            pname = "todotxt-nvim";
             version = "2022-02-08";
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
-              repo = "todo-prompt.nvim";
-              rev = "6ae0a086f6b4b485f15a17886f496b240cfd90d7";
-              sha256 = "ByoGPzHJIDK9KCJUyore8jM6atjN7B5Z63oH17EdDPc=";
+              repo = "todotxt.nvim";
+              rev = "ced95a8615f5010ebc0c6acc08e99eb905d0f8a0";
+              sha256 = "g0HCH9kBpFnSenHFAg6VAd810b3p1PAnzLPr34dNCdA=";
             };
           };
-          config = ''
-            lua <<EOF
-            require'todo-prompt'.setup({
-              callback = function(task, date)
-                print(task, os.date("%d/%m/%y %H:%M", date))
-              end
-            })
-            EOF
-            nnoremap <leader>at <cmd>ToDoPrompt<cr>
-          '';
         }
       ];
     };
