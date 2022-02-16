@@ -1,8 +1,15 @@
 { config, lib, pkgs, ... }:
-with lib; {
+let
+  cfg = config.local.neovim;
+in with lib; {
   imports = [
     ./theme.nix
   ];
+
+  options.local.neovim.todo_file = with lib; mkOption {
+    type = types.str;
+    default = "/home/arnar/Documents/todo.txt";
+  };
 
   config = {
 
@@ -253,10 +260,18 @@ with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todotxt.nvim";
-              rev = "6195649dfb84f3ab11618e548913ef9d4955643a";
-              sha256 = "PqAmjEk7OPGEKAWw4soYJ2vBnVooVT2eUCNzfp/iwZs=";
+              rev = "20abe05ee8058df5294c97af9ff04af91cebe5aa";
+              sha256 = "V10p9z/ps3dGg1p3UV1KapauVPXXa1tHTnJVEDFupUg=";
             };
           };
+          config = ''
+            lua <<EOF
+            require('todotxt-nvim').setup({
+              todo_file = "${cfg.todo_file}",
+            })
+            EOF
+            nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
+          '';
         }
       ];
     };
