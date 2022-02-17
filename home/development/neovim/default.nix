@@ -6,11 +6,6 @@ in with lib; {
     ./theme.nix
   ];
 
-  options.local.neovim.todo_file = with lib; mkOption {
-    type = types.str;
-    default = "/home/arnar/Documents/todo.txt";
-  };
-
   config = {
 
     fonts.fontconfig.enable = true;
@@ -47,6 +42,8 @@ in with lib; {
         pyright
         gopls
         rnix-lsp
+      ] ++ optionals pkgs.stdenv.isLinux [
+        wl-clipboard
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -260,14 +257,14 @@ in with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todotxt.nvim";
-              rev = "20abe05ee8058df5294c97af9ff04af91cebe5aa";
-              sha256 = "V10p9z/ps3dGg1p3UV1KapauVPXXa1tHTnJVEDFupUg=";
+              rev = "5e26b37c54ddb2db7500a1d6db1fb133069fb3f0";
+              sha256 = "V1pckF1cwaWQXlZs+YSjMrayBwLyqDYpU8XZlY7zHPE=";
             };
           };
           config = ''
             lua <<EOF
             require('todotxt-nvim').setup({
-              todo_file = "${cfg.todo_file}",
+              todo_file = "~/Documents/todo.txt",
             })
             EOF
             nnoremap <leader>a <cmd>ToDoTxtCapture<cr>

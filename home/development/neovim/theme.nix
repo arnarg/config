@@ -82,6 +82,18 @@
           EOF
         '';
       }
+      {
+        plugin = nvim-notify;
+        config = ''
+          lua <<EOF
+          require('notify').setup({
+            stages = "static",
+          })
+          require('telescope').load_extension('notify')
+          vim.notify = require('notify')
+          EOF
+        '';
+      }
     ];
   };
 }
