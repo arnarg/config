@@ -257,8 +257,8 @@ in with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todotxt.nvim";
-              rev = "5e26b37c54ddb2db7500a1d6db1fb133069fb3f0";
-              sha256 = "V1pckF1cwaWQXlZs+YSjMrayBwLyqDYpU8XZlY7zHPE=";
+              rev = "cf0396d9e03389920d05d3bd520814c341c996c2";
+              sha256 = "Ijk6Pimp5EbMnXT8gN8zYsvfg29/c456FNw80AH5W4g=";
             };
           };
           config = ''
