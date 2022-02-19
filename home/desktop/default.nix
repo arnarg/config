@@ -9,8 +9,6 @@
   config = {
     home.packages = with pkgs; [
       anytype
-      obsidian
-      logseq
     ];
 
     services.syncthing.enable = true;

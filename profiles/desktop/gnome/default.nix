@@ -13,8 +13,5 @@ in with pkgs.stdenv; with lib; {
       displayManager.gdm.wayland = true;
       desktopManager.gnome.enable = true;
     };
-
-    environment.enableDebugInfo = true;
-
   };
 }
