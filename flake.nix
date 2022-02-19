@@ -88,6 +88,9 @@
             config = {
               allowUnfree = true;
             };
+            overlays = [
+              self.overlay
+            ];
           };
         in
           {
