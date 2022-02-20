@@ -223,8 +223,8 @@ in with lib; {
             src = pkgs.fetchFromGitHub {
               owner = "arnarg";
               repo = "todotxt.nvim";
-              rev = "72e9b165917ba0e4e9d5489e3e1ca9bfd978774f";
-              sha256 = "gof75tCyFEVVdQUmFWY4d/ARlXmSg0vBaTEhuUxVJzo=";
+              rev = "d23e47b5958ffb910e5668a346db414b5a8adea3";
+              sha256 = "gafISWw9S5ie7xtuT7HUhexU9dQOQDsSLuvcZ9kWYMw=";
             };
           };
           config = ''
@@ -234,7 +234,7 @@ in with lib; {
             })
             EOF
             nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
-            nnoremap <leader>l <cmd>ToDoTxtTasks<cr>
+            nnoremap <leader>l <cmd>ToDoTxtTasksToggle<cr>
           '';
         }
       ];
