@@ -63,7 +63,9 @@
           nnoremap <leader>> :BufferLineMoveNext<CR>
           nnoremap <leader>< :BufferLineMovePrev<CR>
           nnoremap <leader>p :BufferLinePick<CR>
-          nnoremap <leader>q :BufferLinePickClose<CR>
+          nnoremap <leader>qp :BufferLinePickClose<CR>
+          nnoremap <leader>ql :BufferLineCloseLeft<CR>
+          nnoremap <leader>qr :BufferLineCloseRight<CR>
           lua <<EOF
           require('bufferline').setup {
             options = {
