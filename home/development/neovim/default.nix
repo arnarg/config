@@ -52,6 +52,15 @@ in with lib; {
           plugin = nvim-treesitter;
           config = ''
             lua <<EOF
+            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+            parser_config.todotxt = {
+              install_info = {
+                url = "https://github.com/arnarg/tree-sitter-todotxt.git",
+                files = {"src/parser.c"},
+                branch = "main",
+              },
+              filetype = "todotxt",
+            }
             require('nvim-treesitter.configs').setup {
               ensure_installed = {
                 "bash",
@@ -63,13 +72,15 @@ in with lib; {
                 "javascript",
                 "markdown",
                 "json",
-                "yaml"
+                "yaml",
+                "todotxt"
               },
               highlight = {
                   enable = true,
               }
             }
             EOF
+            autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
           '';
         }
         {
