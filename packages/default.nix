@@ -12,6 +12,7 @@ let
     tela-icon-theme = callPackage ./tela-icon-theme { };
     whitesur-gtk-theme = callPackage ./whitesur-gtk-theme { };
     whitesur-icon-theme = callPackage ./whitesur-icon-theme { };
+    whitesur-kde = callPackage ./whitesur-kde { };
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
   };
