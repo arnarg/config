@@ -28,6 +28,8 @@ in with lib; {
         inoremap <Down>  <NOP>
         inoremap <Left>  <NOP>
         inoremap <Right> <NOP>
+
+        set cursorline
       '';
 
       extraPackages = with pkgs; [
