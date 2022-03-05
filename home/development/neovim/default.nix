@@ -206,7 +206,11 @@ in with lib; {
           plugin = toggleterm-nvim;
           config = ''
             lua <<EOF
-            require'toggleterm'.setup()
+            require'toggleterm'.setup({
+              start_in_insert = false,
+              direction = 'vertical',
+              size = 70,
+            })
             function _G.set_terminal_keymaps()
               local opts = {noremap = true}
               vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
