@@ -40,10 +40,6 @@
         '';
       }
       {
-        plugin = neoscroll-nvim;
-        config = "lua require('neoscroll').setup()";
-      }
-      {
         plugin = vim-numbertoggle;
         config = "set nu rnu";
       }
