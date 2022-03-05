@@ -92,6 +92,21 @@
           EOF
         '';
       }
+      {
+        plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+          pname = "nvim-scrollbar";
+          version = "2022-02-26";
+          src = pkgs.fetchFromGitHub {
+            owner = "petertriho";
+            repo = "nvim-scrollbar";
+            rev = "b10ece8f991e2c096bc2a6a92da2a635f9298d26";
+            sha256 = "0IwTzVgYi2Z7M2+vJuP+lrKVrTOBWdrIi3mtsj0E+wg=";
+          };
+        };
+        config = ''
+          lua require("scrollbar").setup()
+        '';
+      }
     ];
   };
 }
