@@ -226,6 +226,9 @@ in with lib; {
             lua require('numb').setup()
           '';
         }
+        editorconfig-nvim
+
+        # legacy vim plugins
         vim-gitgutter
         vim-nix
         vim-go
