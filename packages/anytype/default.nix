@@ -1,12 +1,12 @@
 { lib, stdenv, fetchurl, appimageTools, makeDesktopItem, symlinkJoin }:
 let
-  version = "0.23.5";
+  version = "0.24.0";
 
   extracted = appimageTools.extract {
     name = "anytype2";
     src = fetchurl {
       url = "https://at9412003.fra1.cdn.digitaloceanspaces.com/Anytype-${version}.AppImage";
-      sha256 = "0lwia8zdyplwylr2zlnyy5qlhhassjf1s8xzp8nh68pc88bkylwi";
+      sha256 = "1i4bfx4g2pl9yh39qmnx1jcd7rjicknzy3knin3h3vb7jd8v29s3";
     };
   };
 
@@ -22,7 +22,7 @@ let
     icon = "${extracted}/anytype2.png";
     comment = "operating system for life";
     exec = "${wrapped}/bin/anytype2";
-    categories = "Utility";
+    categories = [ "Utility" ];
   };
 in symlinkJoin {
   name = "anytype-${version}";
