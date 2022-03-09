@@ -192,13 +192,6 @@ in with lib; {
           };
         }
         {
-          plugin = git-blame-nvim;
-          config = ''
-            let g:gitblame_enabled = 0
-            nnoremap <leader>b <cmd>GitBlameToggle<cr>
-          '';
-        }
-        {
           plugin = which-key-nvim;
           config = "lua require'which-key'.setup()";
         }
@@ -227,9 +220,15 @@ in with lib; {
           '';
         }
         editorconfig-nvim
+        plenary-nvim
+        {
+          plugin = gitsigns-nvim;
+          config = ''
+            lua require('gitsigns').setup()
+          '';
+        }
 
         # legacy vim plugins
-        vim-gitgutter
         vim-nix
         vim-go
 
