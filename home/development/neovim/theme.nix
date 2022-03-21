@@ -46,8 +46,15 @@
       {
         plugin = nvim-tree-lua;
         config = ''
-          let g:nvim_tree_quit_on_open = 1
-          lua require'nvim-tree'.setup()
+          lua <<EOF
+          require('nvim-tree').setup({
+            actions = {
+              open_file = {
+                quit_on_open = true,
+              },
+            },
+          })
+          EOF
           nnoremap <C-n> :NvimTreeToggle<CR>
         '';
       }
