@@ -23,7 +23,7 @@
     utils.lib.mkFlake {
       inherit self inputs;
 
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
 
       ############
       # Channels #
@@ -63,6 +63,17 @@
           self.nixosModules.immutable
           self.nixosModules.server
         ];
+        tiny1 = {
+          system = "aarch64-linux";
+          modules = [
+            {
+              networking.hostName = "tiny1";
+            }
+            ./machines/tiny/configuration.nix
+            self.nixosModules.immutable
+            self.nixosModules.server
+          ];
+        };
       };
 
       nixosModules = utils.lib.exportModules [
