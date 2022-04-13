@@ -12,6 +12,8 @@
 
   services.avahi.enable = true;
 
+  services.zerotierone.enable = true;
+
   networking = {
     hostId = "eb0a230e";
     hostName = "flex";
