@@ -2,7 +2,6 @@
 {
   imports = [
     ./git
-    ./gpg
     ./neovim
     ./pass
     ./tmux
