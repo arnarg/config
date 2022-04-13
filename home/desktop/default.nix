@@ -10,7 +10,5 @@
     home.packages = with pkgs; [
       anytype
     ];
-
-    services.syncthing.enable = true;
   };
 }
