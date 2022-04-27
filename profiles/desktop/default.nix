@@ -11,8 +11,9 @@
     local.desktop.gnome.enable = mkDefault true;
 
     sound.enable = true;
-    hardware.pulseaudio.enable = true;
-    hardware.pulseaudio.package = pkgs.pulseaudioFull;
+    hardware.pulseaudio.enable = false;
+    services.pipewire.enable = true;
+    services.pipewire.pulse.enable = true;
 
     fonts = {
       enableDefaultFonts = true;
