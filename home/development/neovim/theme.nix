@@ -4,6 +4,7 @@
     extraConfig = ''
       set termguicolors
       set background=dark
+      set laststatus=3
     '';
 
     plugins = with pkgs.vimPlugins; [
