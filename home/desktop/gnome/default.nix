@@ -5,7 +5,6 @@
       gnome.gnome-tweaks
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
-      whitesur-gtk-theme
       whitesur-icon-theme
     ];
     dconf.settings = {
@@ -20,11 +19,7 @@
         toggle-overview = ["<Primary>Up"];
       };
       "org/gnome/desktop/interface" = {
-        gtk-theme = "WhiteSur-dark";
         icon-theme = "WhiteSur-dark";
-      };
-      "org/gnome/shell/extensions/user-theme" = {
-        name = "WhiteSur-dark";
       };
       "org/gnome/desktop/wm/keybindings" = {
         minimize = [""];
@@ -37,7 +32,7 @@
         button-layout = "close,minimize,maximize:appmenu";
       };
       "org/gnome/desktop/background" = {
-        picture-uri = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
+        picture-uri-dark = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
       };
       "org/gnome/desktop/screensaver" = {
         picture-uri = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
@@ -49,7 +44,7 @@
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>Return";
-        command = "gnome-terminal";
+        command = "kgx";
         name = "Open Terminal";
       };
       "org/gnome/terminal/legacy" = {

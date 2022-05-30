@@ -1,4 +1,4 @@
-{ lib, rustPlatform, fetchFromGitHub, pkgconfig, libudev }:
+{ lib, rustPlatform, fetchFromGitHub, pkgconfig, udev }:
 
 rustPlatform.buildRustPackage rec {
   pname = "kbct";
@@ -13,6 +13,6 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-5svepqv2766gfdB72Rzprud7F3dznLxfSn6nxQpM9RM=";
 
-  buildInputs = [libudev];
+  buildInputs = [udev];
   nativeBuildInputs = [pkgconfig];
 }
