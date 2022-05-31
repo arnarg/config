@@ -19,7 +19,7 @@
   #############
   ## OUTPUTS ##
   #############
-  outputs = inputs@{ self, utils, home, nixpkgs, ... }:
+  outputs = inputs@{ self, utils, home, nixpkgs, unstable, ... }:
     utils.lib.mkFlake {
       inherit self inputs;
 
@@ -95,25 +95,23 @@
           system = "x86_64-linux";
           extraSpecialArgs = { inherit inputs; };
           generateHome = home.lib.homeManagerConfiguration;
-          nixpkgs = {
-            config = {
-              allowUnfree = true;
-            };
+          pkgs = import unstable {
+            inherit system;
             overlays = [
               self.overlay
             ];
+            config.allowUnfree = true;
           };
         in
           {
             arnar = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
+              inherit system username homeDirectory extraSpecialArgs pkgs;
               configuration = {
                 imports = [
                   self.homeModules.development
                   self.homeModules.desktop
                   ./home/desktop/gnome
                 ];
-                inherit nixpkgs;
               };
             };
           };
