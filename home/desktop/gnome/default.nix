@@ -3,6 +3,7 @@
   config = {
     home.packages = with pkgs; [
       gnome.gnome-tweaks
+      gnome.gnome-terminal
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
       whitesur-icon-theme
@@ -44,7 +45,7 @@
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>Return";
-        command = "kgx";
+        command = "gnome-terminal";
         name = "Open Terminal";
       };
       "org/gnome/terminal/legacy" = {
