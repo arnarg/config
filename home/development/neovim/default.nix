@@ -271,6 +271,27 @@ in with lib; {
             autocmd FileType telekasten nnoremap <buffer> v <cmd>Telekasten show_backlinks<cr>
           '';
         }
+        {
+          plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "project-nvim";
+            version = "2022-05-29";
+            src = pkgs.fetchFromGitHub {
+              owner = "ahmedkhalf";
+              repo = "project.nvim";
+              rev = "541115e762764bc44d7d3bf501b6e367842d3d4f";
+              sha256 = "n5rbD0gBDsYSYvrjCDD1pWqS61c9/nRVEcyiVha0S20=";
+            };
+          };
+          config = ''
+          lua << EOF
+          require("project_nvim").setup({
+            detection_methods = { "lsp", "pattern" },
+            patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+          })
+          require('telescope').load_extension('projects')
+          EOF
+          '';
+        }
 
         # legacy vim plugins
         vim-nix
