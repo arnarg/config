@@ -47,10 +47,10 @@
       {
         plugin = nvim-tree-lua;
         config = ''
-          let g:nvim_tree_respect_buf_cwd = 1
           lua <<EOF
           require('nvim-tree').setup({
             update_cwd = true,
+            respect_buf_cwd = true,
             actions = {
               open_file = {
                 quit_on_open = true,
