@@ -12,8 +12,9 @@
       indent-blankline-nvim-lua
       {
         plugin = nvim-web-devicons;
+        type = "lua";
         config = ''
-          lua require'nvim-web-devicons'.setup()
+          require('nvim-web-devicons').setup()
         '';
       }
       {
@@ -22,9 +23,9 @@
       }
       {
         plugin = lualine-nvim;
+        type = "lua";
         config = ''
-          lua << END
-          local gps = require("nvim-gps")
+          local gps = require('nvim-gps')
           require('lualine').setup {
             options = {
               icons_enabled = true,
@@ -37,7 +38,6 @@
               }
             }
           }
-          END
         '';
       }
       {
@@ -46,8 +46,8 @@
       }
       {
         plugin = nvim-tree-lua;
+        type = "lua";
         config = ''
-          lua <<EOF
           require('nvim-tree').setup({
             update_cwd = true,
             respect_buf_cwd = true,
@@ -57,23 +57,15 @@
               },
             },
           })
-          EOF
-          nnoremap <C-n> :NvimTreeToggle<CR>
+
+          vim.api.nvim_set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<cr>', { noremap = true })
         '';
       }
       {
         plugin = bufferline-nvim;
+        type = "lua";
         config = ''
-          nnoremap <leader>. :BufferLineCycleNext<CR>
-          nnoremap <leader>, :BufferLineCyclePrev<CR>
-          nnoremap <leader>> :BufferLineMoveNext<CR>
-          nnoremap <leader>< :BufferLineMovePrev<CR>
-          nnoremap <leader>p :BufferLinePick<CR>
-          nnoremap <leader>qp :BufferLinePickClose<CR>
-          nnoremap <leader>ql :BufferLineCloseLeft<CR>
-          nnoremap <leader>qr :BufferLineCloseRight<CR>
-          lua <<EOF
-          require('bufferline').setup {
+          require('bufferline').setup({
             options = {
               show_buffer_close_icons = false,
               show_close_icon = false,
@@ -86,20 +78,37 @@
                 }
               }
             }
-          }
-          EOF
+          })
+
+          if wk ~= nil then
+            wk.register({
+              b = {
+                name = 'Buffer',
+                p = { '<cmd>BufferLinePick<cr>', 'Pick buffer' },
+                q = {
+                  name = 'Close Buffer',
+                  p = { '<cmd>BufferLinePickClose<cr>', 'Pick buffer to close' },
+                  l = { '<cmd>BufferLineCloseLeft<cr>', 'Close all buffers to the left' },
+                  r = { '<cmd>BufferLineCloseRight<cr>', 'Close all buffers to the right' },
+                },
+                ['>'] = { '<cmd>BufferLineMoveNext<cr>', 'Move buffer to the right' },
+                ['<'] = { '<cmd>BufferLineMovePrev<cr>', 'Move buffer to the left' },
+              },
+              ['.'] = { '<cmd>BufferLineCycleNext<cr>', 'Switch to next buffer' },
+              [','] = { '<cmd>BufferLineCyclePrev<cr>', 'Switch to previous buffer' },
+            }, { prefix = '<leader>' })
+          end
         '';
       }
       {
         plugin = nvim-notify;
+        type = "lua";
         config = ''
-          lua <<EOF
           require('notify').setup({
             stages = "static",
           })
           require('telescope').load_extension('notify')
           vim.notify = require('notify')
-          EOF
         '';
       }
       {
@@ -113,8 +122,9 @@
             sha256 = "0IwTzVgYi2Z7M2+vJuP+lrKVrTOBWdrIi3mtsj0E+wg=";
           };
         };
+        type = "lua";
         config = ''
-          lua require("scrollbar").setup()
+          require("scrollbar").setup()
         '';
       }
     ];

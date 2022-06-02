@@ -30,6 +30,8 @@ in with lib; {
         inoremap <Right> <NOP>
 
         set cursorline
+
+        autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
       '';
 
       extraPackages = with pkgs; [
@@ -48,22 +50,23 @@ in with lib; {
         wl-clipboard
       ];
 
-      plugins = with pkgs.vimPlugins; [
+      plugins = with pkgs.vimPlugins; mkBefore [
+        # Which-key
+        {
+          plugin = which-key-nvim;
+          type = "lua";
+          config = ''
+            local wk = require('which-key')
+
+            wk.setup()
+          '';
+        }
         # Treesitter
         {
           plugin = nvim-treesitter;
+          type = "lua";
           config = ''
-            lua <<EOF
-            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-            parser_config.todotxt = {
-              install_info = {
-                url = "https://github.com/arnarg/tree-sitter-todotxt.git",
-                files = {"src/parser.c"},
-                branch = "main",
-              },
-              filetype = "todotxt",
-            }
-            require('nvim-treesitter.configs').setup {
+            require('nvim-treesitter.configs').setup({
               ensure_installed = {
                 "bash",
                 "go",
@@ -80,18 +83,22 @@ in with lib; {
               highlight = {
                   enable = true,
               }
-            }
-            EOF
-            autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
+            })
           '';
         }
         {
           plugin = nvim-treesitter-context;
-          config = "lua require'treesitter-context'.setup()";
+          type = "lua";
+          config = ''
+            require('treesitter-context').setup()
+          '';
         }
         {
           plugin = nvim-gps;
-          config = "lua require'nvim-gps'.setup()";
+          type = "lua";
+          config = ''
+            require('nvim-gps').setup()
+          '';
         }
 
         # LSP
@@ -101,11 +108,22 @@ in with lib; {
         # Telescope
         {
           plugin = telescope-nvim;
+          type = "lua";
           config = ''
-            nnoremap <C-P> <cmd>Telescope find_files<cr>
-            nnoremap <leader>f <cmd>Telescope live_grep<cr>
-            nnoremap <leader>c <cmd>Telescope git_commits<cr>
-            nnoremap <leader>t <cmd>Telescope filetypes<cr>
+            if wk ~= nil then
+              wk.register({
+                f = {
+                  name = "Find",
+                  f = { "<cmd>Telescope live_grep<cr>", "Find text" },
+                  c = { "<cmd>Telescope git_commits<cr>", "Find commits" },
+                },
+                s = {
+                  name = "Switch",
+                  t = { "<cmd>Telescope filetypes<cr>", "Switch filetype" },
+                }
+              }, { prefix = '<leader>' })
+            end
+            vim.api.nvim_set_keymap('n', '<C-P>', '<cmd>Telescope find_files<cr>', { noremap = true })
           '';
         }
 
@@ -114,27 +132,23 @@ in with lib; {
         cmp-path
         {
           plugin = cmp-nvim-lsp;
+          type = "lua";
           config = ''
-            lua <<EOF
             local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            -- require'lspconfig'.pyright.setup {
-            --   capabilities = capabilities
-            -- }
-            require'lspconfig'.gopls.setup {
+            require('lspconfig').gopls.setup {
               capabilities = capabilities
             }
-            require'lspconfig'.rnix.setup {
+            require('lspconfig').rnix.setup {
               capabilities = capabilities
             }
-            EOF
           '';
         }
         {
           plugin = nvim-cmp;
+          type = "lua";
           config = ''
-            lua <<EOF
             -- Setup nvim-cmp.
-            local cmp = require'cmp'
+            local cmp = require('cmp')
 
             cmp.setup {
               preselect = cmp.PreselectMode.None,
@@ -166,15 +180,15 @@ in with lib; {
                 }
               },
             }
-          EOF
           '';
         }
 
         # Commenting plugin
         {
           plugin = comment-nvim;
+          type = "lua";
           config = ''
-            lua require('Comment').setup()
+            require('Comment').setup()
           '';
         }
 
@@ -192,39 +206,19 @@ in with lib; {
           };
         }
         {
-          plugin = which-key-nvim;
-          config = "lua require'which-key'.setup()";
-        }
-        {
-          plugin = toggleterm-nvim;
-          config = ''
-            lua <<EOF
-            require'toggleterm'.setup({
-              start_in_insert = false,
-              direction = 'vertical',
-              size = 70,
-            })
-            function _G.set_terminal_keymaps()
-              local opts = {noremap = true}
-              vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-            end
-            vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-            EOF
-            nnoremap <leader>T <cmd>ToggleTerm<cr>
-          '';
-        }
-        {
           plugin = numb-nvim;
+          type = "lua";
           config = ''
-            lua require('numb').setup()
+            require('numb').setup()
           '';
         }
         editorconfig-nvim
         plenary-nvim
         {
           plugin = gitsigns-nvim;
+          type = "lua";
           config = ''
-            lua require('gitsigns').setup()
+            require('gitsigns').setup()
           '';
         }
         {
@@ -238,9 +232,10 @@ in with lib; {
               sha256 = "qEAc40jpuG4RaBzOYUJHZsVRBVBXOoNIxxhDR9Y87u8=";
             };
           };
+          type = "lua";
           config = ''
-            lua <<EOF
             local home = vim.fn.expand('~/Documents/notes')
+
             require('telekasten').setup({
               home = home,
               take_over_my_home = true,
@@ -261,14 +256,26 @@ in with lib; {
               show_tags_theme = "dropdown",
               command_palette_theme = "dropdown",
             })
-            EOF
-            nnoremap <leader>zz <cmd>Telekasten<cr>
-            nnoremap <leader>zf <cmd>Telekasten find_notes<cr>
-            nnoremap <leader>zs <cmd>Telekasten search_notes<cr>
-            nnoremap <leader>zn <cmd>Telekasten new_templated_note<cr>
-            nnoremap <leader>zt <cmd>Telekasten show_tags<cr>
-            autocmd FileType telekasten nnoremap <buffer> f <cmd>Telekasten follow_link<cr>
-            autocmd FileType telekasten nnoremap <buffer> v <cmd>Telekasten show_backlinks<cr>
+
+            if wk ~= nil then
+              wk.register({
+                n = {
+                  name = 'Notes',
+                  p = { '<cmd>Telekasten<cr>', 'Open command palette' },
+                  f = { '<cmd>Telekasten find_notes<cr>', 'Find notes' },
+                  s = { '<cmd>Telekasten search_notes<cr>', 'Search notes' },
+                  n = { '<cmd>Telekasten new_templated_note<cr>', 'New Note' },
+                  t = { '<cmd>Telekasten show_tags<cr>', 'Show tags' },
+                },
+              }, { prefix = '<leader>' })
+            end
+            vim.api.nvim_create_autocmd('FileType', {
+              pattern = 'telekasten',
+              callback = function()
+                vim.api.nvim_command('nnoremap <buffer> f <cmd>Telekasten follow_link<cr>')
+                vim.api.nvim_command('nnoremap <buffer> v <cmd>Telekasten show_backlinks<cr>')
+              end,
+            })
           '';
         }
         {
@@ -282,20 +289,27 @@ in with lib; {
               sha256 = "n5rbD0gBDsYSYvrjCDD1pWqS61c9/nRVEcyiVha0S20=";
             };
           };
+          type = "lua";
           config = ''
-          lua << EOF
-          require("project_nvim").setup({
-            detection_methods = { "lsp", "pattern" },
-            patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-          })
-          require('telescope').load_extension('projects')
-          EOF
+            require("project_nvim").setup({
+              detection_methods = { "lsp", "pattern" },
+              patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+            })
+            require('telescope').load_extension('projects')
+            if wk ~= nil then
+              wk.register({
+                s = {
+                  name = "Switch",
+                  p = { '<cmd>Telescope projects<cr>', 'Switch project' },
+                },
+              }, { prefix = '<leader>' })
+            end
           '';
         }
 
         # legacy vim plugins
         vim-nix
-        vim-go
+        # vim-go
 
         # TODO-PROMPT
         {
@@ -312,14 +326,23 @@ in with lib; {
               sha256 = "5EZ430P3kmXV+xM+G0n0CyV2UtpOa2T3zTheVwTQ8Wo=";
             };
           };
+          type = "lua";
           config = ''
-            lua <<EOF
             require('todotxt-nvim').setup({
               todo_file = "~/Documents/todo.txt",
             })
-            EOF
-            nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
-            nnoremap <leader>l <cmd>ToDoTxtTasksToggle<cr>
+
+            if wk ~= nil then
+              wk.register({
+                t = {
+                  name = 'Tasks',
+                  t = { '<cmd>ToDoTxtTasksToggle<cr>', 'Toggle tasks pane' },
+                  a = { '<cmd>ToDoTxtCapture<cr>', 'Capture task' },
+                },
+              }, { prefix = '<leader>' })
+            end
+            -- nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
+            -- nnoremap <leader>l <cmd>ToDoTxtTasksToggle<cr>
           '';
         }
       ];
