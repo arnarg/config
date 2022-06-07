@@ -4,6 +4,8 @@ let
 in with lib; {
   imports = [
     ./theme.nix
+    ./lsp.nix
+    ./go.nix
   ];
 
   config = {
@@ -41,11 +43,6 @@ in with lib; {
 
         # For Treesitter
         gcc
-
-        # For LSP
-        pyright
-        gopls
-        rnix-lsp
       ] ++ optionals pkgs.stdenv.isLinux [
         wl-clipboard
       ];
@@ -101,48 +98,9 @@ in with lib; {
           '';
         }
 
-        # LSP
-        nvim-lspconfig
-        lspkind-nvim
-
-        # Telescope
-        {
-          plugin = telescope-nvim;
-          type = "lua";
-          config = ''
-            if wk ~= nil then
-              wk.register({
-                f = {
-                  name = "Find",
-                  f = { "<cmd>Telescope live_grep<cr>", "Find text" },
-                  c = { "<cmd>Telescope git_commits<cr>", "Find commits" },
-                },
-                s = {
-                  name = "Switch",
-                  t = { "<cmd>Telescope filetypes<cr>", "Switch filetype" },
-                }
-              }, { prefix = '<leader>' })
-            end
-            vim.api.nvim_set_keymap('n', '<C-P>', '<cmd>Telescope find_files<cr>', { noremap = true })
-          '';
-        }
-
         # Autocomplete
         cmp-buffer
         cmp-path
-        {
-          plugin = cmp-nvim-lsp;
-          type = "lua";
-          config = ''
-            local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            require('lspconfig').gopls.setup {
-              capabilities = capabilities
-            }
-            require('lspconfig').rnix.setup {
-              capabilities = capabilities
-            }
-          '';
-        }
         {
           plugin = nvim-cmp;
           type = "lua";
@@ -180,6 +138,28 @@ in with lib; {
                 }
               },
             }
+          '';
+        }
+
+        # Telescope
+        {
+          plugin = telescope-nvim;
+          type = "lua";
+          config = ''
+            if wk ~= nil then
+              wk.register({
+                f = {
+                  name = "Find",
+                  f = { "<cmd>Telescope live_grep<cr>", "Find text" },
+                  c = { "<cmd>Telescope git_commits<cr>", "Find commits" },
+                },
+                s = {
+                  name = "Switch",
+                  t = { "<cmd>Telescope filetypes<cr>", "Switch filetype" },
+                }
+              }, { prefix = '<leader>' })
+            end
+            vim.api.nvim_set_keymap('n', '<C-P>', '<cmd>Telescope find_files<cr>', { noremap = true })
           '';
         }
 
@@ -309,7 +289,6 @@ in with lib; {
 
         # legacy vim plugins
         vim-nix
-        # vim-go
 
         # TODO-PROMPT
         {
