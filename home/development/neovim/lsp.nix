@@ -13,6 +13,7 @@ in with lib; {
         pyright
         rnix-lsp
         rust-analyzer
+        nodePackages.yaml-language-server
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -78,17 +79,73 @@ in with lib; {
               end
             end
 
+            local lspconfig = require('lspconfig')
             local servers = {
               'gopls',
               'rust_analyzer',
-              'rnix'
+              'rnix',
             }
             for _, lsp in pairs(servers) do
-              require('lspconfig')[lsp].setup {
+              lspconfig[lsp].setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
               }
             end
+
+            --- yamlls specific config
+            --- custom json schemas
+            lspconfig['yamlls'].setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+              settings = {
+                yaml = {
+                  schemas = {
+                    ['https://json.schemastore.org/kustomization'] = 'kustomization.yaml',
+                  },
+                },
+              },
+            })
+
+            --- pyright specific config
+            --- custom virtualenv lookup
+            local util = require('lspconfig/util')
+            local path = util.path
+
+            local function find_virtual_environment(workspace)
+              for _, dir in pairs({ 'venv', '.venv' }) do
+                local match = vim.fn.glob(path.join(workspace, dir))
+                if match ~= "" then
+                  return match
+                end
+              end
+              return nil
+            end
+
+            local function get_python_path(virtual_env_path)
+              if virtual_env_path then
+                return path.join(virtual_env_path, 'bin', 'python')
+              end
+              return exepath('python3') or exepath('python') or 'python'
+            end
+
+            local function setup_virtual_env(virtual_env_path)
+              vim.env.VIRTUAL_ENV = virtual_env_path
+
+              vim.env.PATH = path.join(virtual_env_path, "/bin:", vim.env.PATH)
+            end
+
+            lspconfig['pyright'].setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                before_init = function(_, config)
+                    if not vim.env.VIRTUAL_ENV then
+                        local virtual_env_path = find_virtual_environment(config.root_dir)
+                        setup_virtual_env(virtual_env_path)
+                        local python_path = get_python_path(virtual_env_path)
+                        config.settings.python.pythonPath = python_path
+                    end
+                end
+            })
           '';
         }
       ];
