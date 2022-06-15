@@ -58,11 +58,27 @@
             ];
           }
         ];
-        terramaster.modules = [
-          ./machines/terramaster/configuration.nix
-          self.nixosModules.immutable
-          self.nixosModules.server
-        ];
+        terramaster = let
+          system = "x86_64-linux";
+          pkgs = import unstable {
+            inherit system;
+            overlays = [
+              self.overlay
+            ];
+            config.allowUnfree = true;
+          };
+        in {
+          modules = [
+            ./machines/terramaster/configuration.nix
+            self.nixosModules.immutable
+            self.nixosModules.server
+            {
+              environment.systemPackages = [
+                pkgs.redpanda
+              ];
+            }
+          ];
+        };
         tiny1 = {
           system = "aarch64-linux";
           modules = [
@@ -111,6 +127,7 @@
                   self.homeModules.development
                   self.homeModules.desktop
                   ./home/desktop/gnome
+                  ./home/development/redpanda
                 ];
               };
             };

@@ -15,7 +15,6 @@ in with lib; {
   # Plex Media Server
   services.plex.enable = true;
   services.plex.openFirewall = true;
-  services.plex.managePlugins = false;
   local.immutable.links.tmpfiles = [
     "/var/lib/plex"
     "/etc/plex_exporter/environment"
