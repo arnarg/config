@@ -86,4 +86,13 @@ in with lib; {
     (mkServiceConfig "radarr" "http://127.0.0.1:7878/")
     (mkServiceConfig "transmission" "http://127.0.0.1:9091/")
   ];
+
+  # NATS
+  services.nats.enable = true;
+  services.nats.jetstream = true;
+  services.nats.dataDir = "/nix/persist/var/lib/nats";
+
+  # InfluxDB
+  services.influxdb.enable = true;
+  services.influxdb.dataDir = "/nix/persist/var/lib/influxdb";
 }
