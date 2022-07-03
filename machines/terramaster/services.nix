@@ -15,10 +15,6 @@ in with lib; {
   # Plex Media Server
   services.plex.enable = true;
   services.plex.openFirewall = true;
-  local.immutable.links.tmpfiles = [
-    "/var/lib/plex"
-    "/etc/plex_exporter/environment"
-  ];
 
   # Sonarr
   services.sonarr.enable = true;
@@ -46,7 +42,6 @@ in with lib; {
   users.groups.mediaowners.gid = 3000;
 
   # Reverse Proxy
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
   systemd.services.traefik.serviceConfig = {
     EnvironmentFile = concatStrings [ "-" config.services.traefik.dataDir "/acme.env" ];
   };
@@ -93,6 +88,22 @@ in with lib; {
   services.nats.dataDir = "/nix/persist/var/lib/nats";
 
   # InfluxDB
-  services.influxdb.enable = true;
-  services.influxdb.dataDir = "/nix/persist/var/lib/influxdb";
+  services.influxdb2.enable = true;
+
+  # Firewall
+  networking.firewall.allowedTCPPorts = [
+    80   # Traefik
+    443  # Traefik
+    4222 # NATS
+    8086 # InfluxDB
+  ];
+
+  # Immutable
+  local.immutable.links.tmpfiles = [
+    "/var/lib/plex"                     # Plex
+    "/etc/plex_exporter/environment"    # Plex exporter
+    "/var/lib/influxdb2/engine"         # InfluxDB2
+    "/var/lib/influxdb2/influxd.bolt"   # InfluxDB2
+    "/var/lib/influxdb2/influxd.sqlite" # InfluxDB2
+  ];
 }
