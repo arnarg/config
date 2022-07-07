@@ -14,6 +14,10 @@ in with lib; {
         rnix-lsp
         rust-analyzer
         nodePackages.yaml-language-server
+
+        # For rust-analyzer
+        cargo
+        rustc
       ];
 
       plugins = with pkgs.vimPlugins; [
