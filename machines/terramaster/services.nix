@@ -82,28 +82,15 @@ in with lib; {
     (mkServiceConfig "transmission" "http://127.0.0.1:9091/")
   ];
 
-  # NATS
-  services.nats.enable = true;
-  services.nats.jetstream = true;
-  services.nats.dataDir = "/nix/persist/var/lib/nats";
-
-  # InfluxDB
-  services.influxdb2.enable = true;
-
   # Firewall
   networking.firewall.allowedTCPPorts = [
     80   # Traefik
     443  # Traefik
-    4222 # NATS
-    8086 # InfluxDB
   ];
 
   # Immutable
   local.immutable.links.tmpfiles = [
     "/var/lib/plex"                     # Plex
     "/etc/plex_exporter/environment"    # Plex exporter
-    "/var/lib/influxdb2/engine"         # InfluxDB2
-    "/var/lib/influxdb2/influxd.bolt"   # InfluxDB2
-    "/var/lib/influxdb2/influxd.sqlite" # InfluxDB2
   ];
 }
