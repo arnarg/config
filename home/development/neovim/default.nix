@@ -163,6 +163,37 @@ in with lib; {
           '';
         }
 
+        # Dressing
+        {
+          plugin = dressing-nvim;
+        }
+
+        # Icon picker
+        {
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            pname = "icon-picker-nvim";
+            version = "2022-07-17";
+            src = pkgs.fetchFromGitHub {
+              owner = "ziontee113";
+              repo = "icon-picker.nvim";
+              rev = "fddd49e084d67ed9b98e4c56b1a2afe6bf58f236";
+              sha256 = "/4OeBu41PRW8hNI/166Y7Qv4OxmolBr/orarfXAw8mA=";
+            };
+          };
+          type = "lua";
+          config = ''
+            require('icon-picker')
+            if wk ~= nil then
+              wk.register({
+                ['<M-i>'] = { "<cmd>PickIconsInsert<cr>", "Insert emoji" },
+              }, { mode = 'i' })
+              wk.register({
+                ['<M-i>'] = { "<cmd>PickIcons<cr>", "Insert emoji" },
+              }, { mode = 'n' })
+            end
+          '';
+        }
+
         # Commenting plugin
         {
           plugin = comment-nvim;
