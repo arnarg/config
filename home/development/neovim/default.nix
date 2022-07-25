@@ -166,6 +166,15 @@ in with lib; {
         # Dressing
         {
           plugin = dressing-nvim;
+          type = "lua";
+          config = ''
+            require('dressing').setup({
+              input = {
+                relative = 'editor',
+                min_width = { 40, 0.5 },
+              }
+            })
+          '';
         }
 
         # Icon picker
