@@ -21,11 +21,16 @@
       wget
       wireshark
       yubikey-manager
+      zk
 
       # Go
       go
       gocode
       godef
     ];
+
+    programs.zsh.sessionVariables = {
+      ZK_NOTEBOOK_DIR = "$HOME/Documents/notes";
+    };
   };
 }

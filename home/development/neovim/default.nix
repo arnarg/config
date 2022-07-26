@@ -6,6 +6,7 @@ in with lib; {
     ./theme.nix
     ./lsp.nix
     ./go.nix
+    ./zk.nix
   ];
 
   config = {
@@ -239,63 +240,6 @@ in with lib; {
           type = "lua";
           config = ''
             require('gitsigns').setup()
-          '';
-        }
-        {
-          plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-            pname = "telekasten-nvim";
-            version = "2022-05-20";
-            src = pkgs.fetchFromGitHub {
-              owner = "renerocksai";
-              repo = "telekasten.nvim";
-              rev = "0180e38eabc2f62748ea99730c4c26f5e4a9312a";
-              sha256 = "qEAc40jpuG4RaBzOYUJHZsVRBVBXOoNIxxhDR9Y87u8=";
-            };
-          };
-          type = "lua";
-          config = ''
-            local home = vim.fn.expand('~/Documents/notes')
-
-            require('telekasten').setup({
-              home = home,
-              take_over_my_home = true,
-              auto_set_filetype = true,
-              templates = home .. '/' .. 'Templates',
-              dailies = home .. '/' .. 'Daily',
-              weeklies = home .. '/' .. 'Weekly',
-              extension = ".md",
-              dailies_create_nonexisting = false,
-              weekly_create_nonexisting = false,
-              follow_creates_nonexisting = true,
-              template_new_note = nil,
-              template_new_daily = nil,
-              template_new_weekly = nil,
-              image_link_style = "wiki",
-              plug_into_calendar = false,
-              tag_notation = "#tag",
-              show_tags_theme = "dropdown",
-              command_palette_theme = "dropdown",
-            })
-
-            if wk ~= nil then
-              wk.register({
-                n = {
-                  name = 'Notes',
-                  p = { '<cmd>Telekasten<cr>', 'Open command palette' },
-                  f = { '<cmd>Telekasten find_notes<cr>', 'Find notes' },
-                  s = { '<cmd>Telekasten search_notes<cr>', 'Search notes' },
-                  n = { '<cmd>Telekasten new_templated_note<cr>', 'New Note' },
-                  t = { '<cmd>Telekasten show_tags<cr>', 'Show tags' },
-                },
-              }, { prefix = '<leader>' })
-            end
-            vim.api.nvim_create_autocmd('FileType', {
-              pattern = 'telekasten',
-              callback = function()
-                vim.api.nvim_command('nnoremap <buffer> f <cmd>Telekasten follow_link<cr>')
-                vim.api.nvim_command('nnoremap <buffer> v <cmd>Telekasten show_backlinks<cr>')
-              end,
-            })
           '';
         }
         {
