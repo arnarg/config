@@ -29,7 +29,7 @@
       godef
     ];
 
-    programs.zsh.sessionVariables = {
+    home.sessionVariables = {
       ZK_NOTEBOOK_DIR = "$HOME/Documents/notes";
     };
   };
