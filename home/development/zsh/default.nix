@@ -7,14 +7,14 @@ with lib; {
     # fzf keybinding requires perl
     home.packages = [ pkgs.perl ];
 
-
     programs.zsh = rec {
       enable = true;
 
       dotDir = ".config/zsh";
       # This causes a lot of slowdown on zsh startup
-      enableCompletion = false;
-      enableAutosuggestions = false;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
 
       history = {
         size = mkDefault 50000;
@@ -25,8 +25,6 @@ with lib; {
       };
 
       sessionVariables = {
-        EDITOR   = "nvim";
-        LC_CTYPE = "en_US.UTF-8";
         PURE_GIT_PULL = 0;
         PURE_PROMPT_SYMBOL = ">>";
         PURE_PROMPT_VICMD_SYMBOL = "<<";

@@ -16,6 +16,10 @@ in with lib; {
       inconsolata-nerdfont
     ];
 
+    home.sessionVariables = {
+      EDITOR = "nvim";
+    };
+
     programs.neovim = {
       enable = true;
       viAlias = true;

@@ -8,8 +8,6 @@ in with pkgs.stdenv; with lib; {
 
   config = mkIf cfg.enable {
 
-    programs.zsh.enable = true;
-    programs.zsh.syntaxHighlighting.enable = true;
     users.users.arnar.shell = pkgs.zsh;
 
   };
