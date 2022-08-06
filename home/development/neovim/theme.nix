@@ -62,6 +62,26 @@
         '';
       }
       {
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          pname = "dirbuf-nvim";
+          version = "2022-08-03";
+          src = pkgs.fetchFromGitHub {
+            owner = "elihunter173";
+            repo = "dirbuf.nvim";
+            rev = "e0044552dfd865556e2ea5e603e4d56f705c5bba";
+            sha256 = "+lEylPTzChCeUkNl+DfUnIEJCR3A5/xqLxJY1sWlzDM=";
+          };
+        };
+        type = "lua";
+        config = ''
+          if wk ~= nil then
+            wk.register({
+              d = { '<cmd>Dirbuf<cr>', 'Dirbuf' }
+            }, { prefix = '<leader>' })
+          end
+        '';
+      }
+      {
         plugin = bufferline-nvim;
         type = "lua";
         config = ''
