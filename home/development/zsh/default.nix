@@ -11,9 +11,7 @@ with lib; {
       enable = true;
 
       dotDir = ".config/zsh";
-      # This causes a lot of slowdown on zsh startup
       enableCompletion = true;
-      enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
 
       history = {
@@ -48,8 +46,8 @@ with lib; {
           src = fetchFromGitHub {
             owner = "sindresorhus";
             repo = "pure";
-            rev = "v1.11.0";
-            sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
+            rev = "v1.20.1";
+            sha256 = "iuLi0o++e0PqK81AKWfIbCV0CTIxq2Oki6U2oEYsr68=";
           };
         }
         {
@@ -57,8 +55,8 @@ with lib; {
           src = fetchFromGitHub {
             owner = "spwhitt";
             repo = "nix-zsh-completions";
-            rev = "0.4.3";
-            sha256 = "0fq1zlnsj1bb7byli7mwlz7nm2yszwmyx43ccczcv51mjjfivyp3";
+            rev = "0.4.4";
+            sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
           };
         }
       ];

@@ -19,7 +19,9 @@
       }
       {
         plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
+        config = ''
+          colorscheme gruvbox
+        '';
       }
       {
         plugin = lualine-nvim;
@@ -42,7 +44,9 @@
       }
       {
         plugin = vim-numbertoggle;
-        config = "set nu rnu";
+        config = ''
+          set nu rnu
+        '';
       }
       {
         plugin = nvim-tree-lua;
