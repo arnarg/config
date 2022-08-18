@@ -1,15 +1,18 @@
 { lib, stdenv, fetchurl, appimageTools, makeDesktopItem, symlinkJoin }:
 let
-  version = "0.25.0";
+  version = "0.27.0";
 
+  # Extract the appimage first so we can get the icon inside
+  # for the desktop item
   extracted = appimageTools.extract {
     name = "anytype2";
     src = fetchurl {
       url = "https://at9412003.fra1.cdn.digitaloceanspaces.com/Anytype-${version}.AppImage";
-      sha256 = "0nwm51izyahgqaba0c7kdq4cgb0wribbmw30cmn6qmnsnxj95y3i";
+      sha256 = "08yy3z2jxdwxhz8zy3jkvl8pxqqfabix3dwlwfr9dbv7563dgj81";
     };
   };
 
+  # Wrap appimage
   wrapped = appimageTools.wrapAppImage {
     name = "anytype2";
     src = extracted;
