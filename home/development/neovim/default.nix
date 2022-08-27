@@ -71,14 +71,6 @@ in with lib; {
       viAlias = true;
       vimAlias = true;
 
-      extraConfig = ''
-        autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
-
-        let $PATH .= ":/home/arnar/go/bin"
-
-        lua require("conf")
-      '';
-
       extraPackages = with pkgs; [
         curl
         gnutar

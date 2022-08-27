@@ -32,6 +32,7 @@
     home.sessionVariables = {
       ZK_NOTEBOOK_DIR = "$HOME/Documents/notes";
       LC_CTYPE = "en_US.UTF-8";
+      GOPATH = "$HOME/go";
     };
   };
 }
