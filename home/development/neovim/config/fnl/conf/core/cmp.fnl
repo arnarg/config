@@ -1,3 +1,4 @@
+(import-macros {: setup!} :lib.macros)
 (local cmp (require :cmp))
 (local lspkind (require :lspkind))
 
@@ -8,7 +9,7 @@
          (fb#))
      nil))
 
-(cmp.setup {:preselect cmp.PreselectMode.None
+(setup! cmp {:preselect cmp.PreselectMode.None
             :mapping {:<Tab> (mapping! cmp.select_next_item)
                       :<S-Tab> (mapping! cmp.select_prev_item)}
             :sources [{:name :nvim_lsp} {:name :buffer} {:name :path}]

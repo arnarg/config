@@ -1,3 +1,3 @@
-(local cmt (require :Comment))
+(import-macros {: setup!} :lib.macros)
 
-(cmt.setup)
+(setup! (require :Comment))

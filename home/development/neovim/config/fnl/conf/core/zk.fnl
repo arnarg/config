@@ -1,4 +1,4 @@
-(import-macros {: wkmap!} :lib.macros)
+(import-macros {: wkmap! : setup!} :lib.macros)
 (import-macros {: nil?} :hibiscus.core)
 (import-macros {: map!} :hibiscus.vim)
 
@@ -8,7 +8,7 @@
 (local zk (require :zk))
 (local zkutil (require :zk.util))
 
-(zk.setup {:picker :telescope})
+(setup! zk {:picker :telescope})
 
 (wkmap! {:z {:name :Zettelkasten
              :n ["<cmd>ZkNew { title = vim.fn.input(\"Title: \") }<cr>"

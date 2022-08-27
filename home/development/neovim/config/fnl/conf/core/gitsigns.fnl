@@ -1,3 +1,3 @@
-(local gitsigns (require :gitsigns))
+(import-macros {: setup!} :lib.macros)
 
-(gitsigns.setup)
+(setup! (require :gitsigns))

@@ -1,3 +1,3 @@
-(local numb (require :numb))
+(import-macros {: setup!} :lib.macros)
 
-(numb.setup)
+(setup! (require :numb))

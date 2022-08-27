@@ -1,3 +1,4 @@
-(local scrollbar (require :scrollbar))
+(import-macros {: setup!} :lib.macros)
 
-(scrollbar.setup)
+(setup! (require :scrollbar))
+

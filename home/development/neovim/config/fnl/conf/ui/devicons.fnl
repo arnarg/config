@@ -1,3 +1,4 @@
-(let [devicons (require :nvim-web-devicons)]
-  (devicons.setup))
+(import-macros {: setup!} :lib.macros)
+
+(setup! (require :nvim-web-devicons))
 

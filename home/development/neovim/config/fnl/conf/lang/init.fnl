@@ -1,3 +1,4 @@
+(import-macros {: setup!} :lib.macros)
 (import-macros {: command!} :hibiscus.vim)
 
 (local create_augroup vim.api.nvim_create_augroup)
@@ -6,7 +7,7 @@
 ;; go-nvim
 (local go (require :go))
 (local gofmt (require :go.format))
-(go.setup)
+(setup! go)
 
 (local gogroup (create_augroup :go {:clear true}))
 (create_autocmd [:BufWritePre] {:pattern [:*.go]

@@ -1,3 +1,6 @@
+(import-macros {: setup!} :lib.macros)
+
 (local lualine (require :lualine))
 
-(lualine.setup {:options {:icons_enabled true :theme :gruvbox}})
+(setup! lualine {:options {:icons_enabled true :theme :gruvbox}})
+

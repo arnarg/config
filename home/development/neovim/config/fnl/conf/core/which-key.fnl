@@ -1,3 +1,3 @@
-(local wk (require :which-key))
+(import-macros {: setup!} :lib.macros)
 
-(wk.setup)
+(setup! (require :which-key))

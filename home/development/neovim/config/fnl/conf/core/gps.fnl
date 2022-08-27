@@ -1,3 +1,4 @@
-(local gps (require :nvim-gps))
+(import-macros {: setup!} :lib.macros)
 
-(gps.setup)
+(setup! (require :nvim-gps))
+
