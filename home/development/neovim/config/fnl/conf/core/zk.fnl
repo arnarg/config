@@ -24,16 +24,19 @@
   (if (not (nil? (zkutil.notebook_root (vim.fn.expand "%:p"))))
       (do
         (map! [n :buffer] :<cr> vim.lsp.buf.definition)
-	(map! [n :buffer] :K vim.lsp.buf.hover)
-	(map! [n :buffer] :<leader>znt ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
-	(map! [n :buffer] :<leader>znc ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
-	(map! [n :buffer] :<leader>zb "<cmd>ZkBacklinks<cr>")
-	(map! [n :buffer] :<leader>zl "<cmd>ZkLinks<cr>")
-	(map! [n :buffer] :<leader>za vim.lsp.buf.range_code_action "Code action")
-	nil)))
+        (map! [n :buffer] :K vim.lsp.buf.hover)
+        (map! [n :buffer] :<leader>znt
+              ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
+        (map! [n :buffer] :<leader>znc
+              ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
+        (map! [n :buffer] :<leader>zb :<cmd>ZkBacklinks<cr>)
+        (map! [n :buffer] :<leader>zl :<cmd>ZkLinks<cr>)
+        (map! [n :buffer] :<leader>za vim.lsp.buf.range_code_action
+              "Code action")
+        nil)))
 
 (local zkgroup (create_augroup :zk {:clear true}))
-(create_autocmd [:FileType]
-                {:pattern :markdown
-                 :callback on-load
-		 :group zkgroup})
+(create_autocmd [:FileType] {:pattern :markdown
+                             :callback on-load
+                             :group zkgroup})
+

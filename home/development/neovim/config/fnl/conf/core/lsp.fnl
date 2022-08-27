@@ -41,9 +41,10 @@
 (setup-lsp :rnix {:on_attach on-attach : capabilities})
 
 ;; yamlls
-(setup-lsp :yamlls {:on_attach on-attach
-                    : capabilities
-                    :settings {:yaml {:schemas {"https://json.schemastore.org/kustomization" :kustomization.yaml}}}})
+(setup-lsp :yamlls
+           {:on_attach on-attach
+            : capabilities
+            :settings {:yaml {:schemas {"https://json.schemastore.org/kustomization" :kustomization.yaml}}}})
 
 ;; pyright
 (fn find-venv [ws]
@@ -71,3 +72,4 @@
                      :before_init before-init})
 
 nil
+
