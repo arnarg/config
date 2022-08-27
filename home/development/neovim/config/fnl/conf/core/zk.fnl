@@ -1,8 +1,10 @@
 (import-macros {: wkmap!} :lib.macros)
 (import-macros {: nil?} :hibiscus.core)
 (import-macros {: map!} :hibiscus.vim)
+
 (local create_augroup vim.api.nvim_create_augroup)
 (local create_autocmd vim.api.nvim_create_autocmd)
+
 (local zk (require :zk))
 (local zkutil (require :zk.util))
 
@@ -27,7 +29,7 @@
 	(map! [n :buffer] :<leader>znc ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
 	(map! [n :buffer] :<leader>zb "<cmd>ZkBacklinks<cr>")
 	(map! [n :buffer] :<leader>zl "<cmd>ZkLinks<cr>")
-	(map! [n :buffer] :<leader>za vim.lsp.buf.range_code_action)
+	(map! [n :buffer] :<leader>za vim.lsp.buf.range_code_action "Code action")
 	nil)))
 
 (local zkgroup (create_augroup :zk {:clear true}))

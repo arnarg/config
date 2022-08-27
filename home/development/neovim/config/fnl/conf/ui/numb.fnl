@@ -1,2 +1,3 @@
-(let [numb (require :numb)]
-  (numb.setup))
+(local numb (require :numb))
+
+(numb.setup)

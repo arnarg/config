@@ -1,2 +1,3 @@
-(let [cmt (require :Comment)]
-  (cmt.setup))
+(local cmt (require :Comment))
+
+(cmt.setup)

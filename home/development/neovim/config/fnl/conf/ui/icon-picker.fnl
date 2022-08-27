@@ -1,6 +1,6 @@
-(import-macros {: wkmap!} :lib.macros)
+(import-macros {: map!} :hibiscus.vim)
 
 (require :icon-picker)
 
-(wkmap! {:<M-i> [:<cmd>PickIconsInsert<cr> "Insert emoji"]} {:mode :i})
-(wkmap! {:<M-i> [:<cmd>PickIcons<cr> "Insert emoji"]} {:mode :n})
+(map! [i] :<M-i> "<cmd>PickIconsInsert<cr>" "Insert emoji")
+(map! [n] :<M-i> "<cmd>PickIcons<cr>" "Insert emoji")

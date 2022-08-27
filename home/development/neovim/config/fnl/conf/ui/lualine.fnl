@@ -1,2 +1,3 @@
-(let [lualine (require :lualine)]
-  (lualine.setup {:options {:icons_enabled true :theme :gruvbox}}))
+(local lualine (require :lualine))
+
+(lualine.setup {:options {:icons_enabled true :theme :gruvbox}})

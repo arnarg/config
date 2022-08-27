@@ -1,3 +1,3 @@
-(import-macros {: wkmap!} :lib.macros)
+(import-macros {: map!} :hibiscus.vim)
 
-(wkmap! {:d [:<cmd>Dirbuf<cr> :Dirbuf]} {:prefix :<leader>})
+(map! [n] :<leader>d :<cmd>Dirbuf<cr> :Dirbuf)
