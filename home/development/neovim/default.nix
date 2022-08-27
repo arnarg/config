@@ -97,6 +97,7 @@ in with lib; {
         ## Languages ##
         ###############
         go
+        fnlfmt
       ] ++ optionals pkgs.stdenv.isLinux [
         wl-clipboard
       ];
