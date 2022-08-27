@@ -34,9 +34,6 @@ let
     FENNEL_MACRO_PATH = "${FENNEL_PATH};${hibiscus}/fnl/?.fnl;;";
 
     buildPhase = ''
-      # Compile init.fnl
-      fennel --compile ${src}/init.fnl > init.lua
-
       # Compile rest of the modules
       base_dir="${src}/fnl"
       while read file; do
@@ -74,9 +71,13 @@ in with lib; {
       viAlias = true;
       vimAlias = true;
 
-      # extraConfig = ''
-      #   autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
-      # '';
+      extraConfig = ''
+        autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
+
+        let $PATH .= ":/home/arnar/go/bin"
+
+        lua require("conf")
+      '';
 
       extraPackages = with pkgs; [
         curl
