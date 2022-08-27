@@ -1,5 +1,10 @@
 (import-macros {: wkmap!} :lib.macros)
+(import-macros {: nil?} :hibiscus.core)
+(import-macros {: map!} :hibiscus.vim)
+(local create_augroup vim.api.nvim_create_augroup)
+(local create_autocmd vim.api.nvim_create_autocmd)
 (local zk (require :zk))
+(local zkutil (require :zk.util))
 
 (zk.setup {:picker :telescope})
 
@@ -13,31 +18,20 @@
              :d ["<cmd>ZkNew { dir = \"journal\" }<cr>" "Open daily note"]}}
         {:prefix :<leader>})
 
-;; TODO!
-;; vim.api.nvim_create_autocmd('FileType', {
-;;   pattern = 'markdown',
-;;   callback = function()
-;;     if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
-;;       local function map(...) vim.api.nvim_buf_set_keymap(0, ...) end
-;;       local opts = { noremap=true, silent=false }
-;;
-;;       -- Open the link under the caret.
-;;       map("n", "<cr>", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-;;
-;;       -- Create a new note in the same directory as the current buffer, using the current selection for title.
-;;       map("v", "<leader>znt", ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>", opts)
-;;       -- Create a new note in the same directory as the current buffer, using the current selection for note content and asking for its title.
-;;       map("v", "<leader>znc", ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<cr>", opts)
-;;
-;;       -- Open notes linking to the current buffer.
-;;       map("n", "<leader>zb", "<cmd>ZkBacklinks<cr>", opts)
-;;       -- Open notes linked by the current buffer.
-;;       map("n", "<leader>zl", "<cmd>ZkLinks<cr>", opts)
-;;
-;;       -- Preview a linked note.
-;;       map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-;;       -- Open the code actions for a visual selection.
-;;       map("v", "<leader>za", ":'<,'>lua vim.lsp.buf.range_code_action()<cr>", opts)
-;;     end
-;;   end,
-;; })
+(fn on-load []
+  (if (not (nil? (zkutil.notebook_root (vim.fn.expand "%:p"))))
+      (do
+        (map! [n :buffer] :<cr> vim.lsp.buf.definition)
+	(map! [n :buffer] :K vim.lsp.buf.hover)
+	(map! [n :buffer] :<leader>znt ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
+	(map! [n :buffer] :<leader>znc ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>")
+	(map! [n :buffer] :<leader>zb "<cmd>ZkBacklinks<cr>")
+	(map! [n :buffer] :<leader>zl "<cmd>ZkLinks<cr>")
+	(map! [n :buffer] :<leader>za vim.lsp.buf.range_code_action)
+	nil)))
+
+(local zkgroup (create_augroup :zk {:clear true}))
+(create_autocmd [:FileType]
+                {:pattern :markdown
+                 :callback on-load
+		 :group zkgroup})
