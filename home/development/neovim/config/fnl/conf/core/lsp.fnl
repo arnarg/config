@@ -10,7 +10,7 @@
 
 (fn on-attach [client bufnr]
   (setbufopt! bufnr :omnifunc "v:lua.vim.lsp.omnifunc")
-  (map! [n] :<C-k> vim.lsp.buf.signature_help)
+  (map! [n] :<C-k> vim.lsp.buf.signature_help "Signature help")
   (wkmap! {:K [vim.lsp.buf.hover "Show signature"]
            :g {:D [vim.lsp.buf.declaration "Go to declaration"]
                :d [vim.lsp.buf.defintion "Go to definition"]
@@ -27,19 +27,22 @@
 (map! [n] "]d" vim.diagnostic.goto_next)
 (map! [n] :<space>q vim.diagnostic.setloclist)
 
+(macro setup-lsp [name conf]
+  `((. lspconfig ,name :setup) ,conf))
+
 ;; gopls
-((. lspconfig :gopls :setup) {:on_attach on-attach : capabilities})
+(setup-lsp :gopls {:on_attach on-attach : capabilities})
 
 ;; rust_analyzer
-((. lspconfig :rust_analyzer :setup) {:on_attach on-attach : capabilities})
+(setup-lsp :rust_analyzer {:on_attach on-attach : capabilities})
 
 ;;rnix
-((. lspconfig :rnix :setup) {:on_attach on-attach : capabilities})
+(setup-lsp :rnix {:on_attach on-attach : capabilities})
 
 ;; yamlls
-((. lspconfig :yamlls :setup) {:on_attach on-attach
-                               : capabilities
-                               :settings {:yaml {:schemas {"https://json.schemastore.org/kustomization" :kustomization.yaml}}}})
+(setup-lsp :yamlls {:on_attach on-attach
+                    : capabilities
+                    :settings {:yaml {:schemas {"https://json.schemastore.org/kustomization" :kustomization.yaml}}}})
 
 ;; pyright
 (fn find-venv [ws]
@@ -62,8 +65,8 @@
 (fn before-init [_ conf]
   (tset conf :settings :python :pythonPath (py-path (. conf :root_dir))))
 
-((. lspconfig :pyright :setup) {:on_attach on-attach
-                                : capabilities
-                                :before_init before-init})
+(setup-lsp :pyright {:on_attach on-attach
+                     : capabilities
+                     :before_init before-init})
 
 nil
