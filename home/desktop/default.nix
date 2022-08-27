@@ -10,6 +10,8 @@
     home.packages = with pkgs; [
       obsidian
       anytype
+      thunderbird
+      mailspring
     ];
   };
 }

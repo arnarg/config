@@ -1,14 +1,57 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.local.neovim;
-in with lib; {
-  imports = [
-    ./theme.nix
-    ./lsp.nix
-    ./go.nix
-    ./zk.nix
-  ];
+  hibiscus = pkgs.stdenv.mkDerivation rec {
+    pname = "hibiscus-nvim";
+    version = "v1.2";
 
+    src = pkgs.fetchFromGitHub {
+      owner = "udayvir-singh";
+      repo = "hibiscus.nvim";
+      rev = version;
+      sha256 = "BPLu65WD0dfim2kuJkPXsYxbt7Eatn4ej+ktLhUY+hs=";
+    };
+
+    phases = "unpackPhase patchPhase installPhase";
+
+    patchPhase = ''
+      sed -i"" -e 's|vim\.|_G.vim.|g' fnl/hibiscus/*.fnl
+    '';
+
+    installPhase = ''
+      mkdir $out
+      cp -r fnl $out
+    '';
+  };
+
+  cfg = pkgs.stdenv.mkDerivation rec {
+    name = "neovim-config-fennel";
+
+    src = ./config;
+
+    buildInputs = [ pkgs.fennel ];
+
+    FENNEL_PATH = "${src}/fnl/?.fnl;;";
+    FENNEL_MACRO_PATH = "${FENNEL_PATH};${hibiscus}/fnl/?.fnl;;";
+
+    buildPhase = ''
+      # Compile init.fnl
+      fennel --compile ${src}/init.fnl > init.lua
+
+      # Compile rest of the modules
+      base_dir="${src}/fnl"
+      while read file; do
+        echo "compiling $file"
+        mkdir -p "lua/$(dirname $file)"
+        fennel --compile "''${base_dir}/''${file}" > "lua/''${file%.fnl}.lua"
+      done < <(find "$base_dir" -type f -name '*.fnl' ! -name 'macros.fnl' | sed -e "s|$base_dir/||g")
+    '';
+
+    installPhase = ''
+      mkdir $out
+      cp -r * $out
+    '';
+  };
+in with lib; {
   config = {
 
     fonts.fontconfig.enable = true;
@@ -20,168 +63,78 @@ in with lib; {
       EDITOR = "nvim";
     };
 
+    # Put my config derivation in ~/.config/nvim
+    xdg.configFile.nvim = {
+      source = cfg;
+      recursive = true;
+    };
+
     programs.neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
 
-      extraConfig = ''
-        " lets not use arrow keys
-        noremap <Up> <NOP>
-        noremap <Down> <NOP>
-        noremap <Left> <NOP>
-        noremap <Right> <NOP>
-        inoremap <Up>    <NOP>
-        inoremap <Down>  <NOP>
-        inoremap <Left>  <NOP>
-        inoremap <Right> <NOP>
-
-        set cursorline
-
-        autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
-      '';
+      # extraConfig = ''
+      #   autocmd BufNewFile,BufRead todo.txt set filetype=todotxt
+      # '';
 
       extraPackages = with pkgs; [
         curl
         gnutar
         ripgrep
+        zk
 
         # For Treesitter
         gcc
+
+        #########
+        ## LSP ##
+        #########
+        gopls
+        pyright
+        rnix-lsp
+        rust-analyzer
+        nodePackages.yaml-language-server
+
+        # For rust-analyzer
+        cargo
+        rustc
+
+        ###############
+        ## Languages ##
+        ###############
+        go
       ] ++ optionals pkgs.stdenv.isLinux [
         wl-clipboard
       ];
 
       plugins = with pkgs.vimPlugins; mkBefore [
+        ##########
+        ## CORE ##
+        ##########
         # Which-key
-        {
-          plugin = which-key-nvim;
-          type = "lua";
-          config = ''
-            local wk = require('which-key')
+        which-key-nvim
 
-            wk.setup()
-          '';
-        }
+        # LSP
+        cmp-nvim-lsp
+        lspkind-nvim
+        nvim-lspconfig
+
         # Treesitter
-        {
-          plugin = nvim-treesitter;
-          type = "lua";
-          config = ''
-            require('nvim-treesitter.configs').setup({
-              ensure_installed = {
-                "bash",
-                "go",
-                "python",
-                "nix",
-                "cpp",
-                "c",
-                "javascript",
-                "markdown",
-                "json",
-                "yaml",
-                "todotxt"
-              },
-              highlight = {
-                  enable = true,
-              }
-            })
-          '';
-        }
-        {
-          plugin = nvim-treesitter-context;
-          type = "lua";
-          config = ''
-            require('treesitter-context').setup()
-          '';
-        }
-        {
-          plugin = nvim-gps;
-          type = "lua";
-          config = ''
-            require('nvim-gps').setup()
-          '';
-        }
+        nvim-treesitter
+        nvim-treesitter-context
+        nvim-gps
 
         # Autocomplete
         cmp-buffer
         cmp-path
-        {
-          plugin = nvim-cmp;
-          type = "lua";
-          config = ''
-            -- Setup nvim-cmp.
-            local cmp = require('cmp')
-
-            cmp.setup {
-              preselect = cmp.PreselectMode.None,
-              mapping = {
-                ["<Tab>"] = function(fallback)
-                  if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                  else
-                    fallback()
-                  end
-                end,
-                ["<S-Tab>"] = function(fallback)
-                  if cmp.visible() then
-                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-                  else
-                    fallback()
-                  end
-                end,
-              },
-              sources = {
-                { name = "nvim_lsp" },
-                { name = "buffer" },
-                { name = "path" },
-              },
-              formatting = {
-                format = require'lspkind'.cmp_format {
-                  with_text = true,
-                  maxwidth = 50,
-                }
-              },
-            }
-          '';
-        }
+        nvim-cmp
 
         # Telescope
-        {
-          plugin = telescope-nvim;
-          type = "lua";
-          config = ''
-            if wk ~= nil then
-              wk.register({
-                f = {
-                  name = "Find",
-                  f = { "<cmd>Telescope live_grep<cr>", "Find text" },
-                  c = { "<cmd>Telescope git_commits<cr>", "Find commits" },
-                },
-                s = {
-                  name = "Switch",
-                  t = { "<cmd>Telescope filetypes<cr>", "Switch filetype" },
-                }
-              }, { prefix = '<leader>' })
-            end
-            vim.api.nvim_set_keymap('n', '<C-P>', '<cmd>Telescope find_files<cr>', { noremap = true })
-          '';
-        }
+        telescope-nvim
 
-        # Dressing
-        {
-          plugin = dressing-nvim;
-          type = "lua";
-          config = ''
-            require('dressing').setup({
-              input = {
-                insert_only = false,
-                relative = 'editor',
-                min_width = { 40, 0.5 },
-              }
-            })
-          '';
-        }
+        # Commenting plugin
+        comment-nvim
 
         # Icon picker
         {
@@ -195,30 +148,27 @@ in with lib; {
               sha256 = "/4OeBu41PRW8hNI/166Y7Qv4OxmolBr/orarfXAw8mA=";
             };
           };
-          type = "lua";
-          config = ''
-            require('icon-picker')
-            if wk ~= nil then
-              wk.register({
-                ['<M-i>'] = { "<cmd>PickIconsInsert<cr>", "Insert emoji" },
-              }, { mode = 'i' })
-              wk.register({
-                ['<M-i>'] = { "<cmd>PickIcons<cr>", "Insert emoji" },
-              }, { mode = 'n' })
-            end
-          '';
         }
 
-        # Commenting plugin
+        # ZK
         {
-          plugin = comment-nvim;
-          type = "lua";
-          config = ''
-            require('Comment').setup()
-          '';
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            pname = "zk-nvim";
+            version = "2022-07-14";
+            src = pkgs.fetchFromGitHub {
+              owner = "mickael-menu";
+              repo = "zk-nvim";
+              rev = "73affbc95fba3655704e4993a8929675bc9942a1";
+              sha256 = "BQrF88hVSDc9zjCWcSSCnw1yhCfMu8zsMbilAI0Xh2c=";
+            };
+          };
         }
 
         # misc
+        numb-nvim
+        editorconfig-nvim
+        plenary-nvim
+        gitsigns-nvim
         {
           plugin = pkgs.vimUtils.buildVimPlugin {
             pname = "tmux-navigate";
@@ -232,22 +182,6 @@ in with lib; {
           };
         }
         {
-          plugin = numb-nvim;
-          type = "lua";
-          config = ''
-            require('numb').setup()
-          '';
-        }
-        editorconfig-nvim
-        plenary-nvim
-        {
-          plugin = gitsigns-nvim;
-          type = "lua";
-          config = ''
-            require('gitsigns').setup()
-          '';
-        }
-        {
           plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "project-nvim";
             version = "2022-05-29";
@@ -258,61 +192,99 @@ in with lib; {
               sha256 = "n5rbD0gBDsYSYvrjCDD1pWqS61c9/nRVEcyiVha0S20=";
             };
           };
-          type = "lua";
-          config = ''
-            require("project_nvim").setup({
-              detection_methods = { "lsp", "pattern" },
-              patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-            })
-            require('telescope').load_extension('projects')
-            if wk ~= nil then
-              wk.register({
-                s = {
-                  name = "Switch",
-                  p = { '<cmd>Telescope projects<cr>', 'Switch project' },
-                },
-              }, { prefix = '<leader>' })
-            end
-          '';
         }
 
-        # legacy vim plugins
-        vim-nix
-
-        # TODO-PROMPT
+        ########
+        ## UI ##
+        ########
+        dressing-nvim
+        nui-nvim
+        lush-nvim
+        indent-blankline-nvim-lua
+        nvim-web-devicons
+        gruvbox-nvim
+        lualine-nvim
+        vim-numbertoggle
+        nvim-tree-lua
+        bufferline-nvim
+        nvim-notify
         {
-          plugin = nui-nvim;
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            pname = "dirbuf-nvim";
+            version = "2022-08-03";
+            src = pkgs.fetchFromGitHub {
+              owner = "elihunter173";
+              repo = "dirbuf.nvim";
+              rev = "e0044552dfd865556e2ea5e603e4d56f705c5bba";
+              sha256 = "+lEylPTzChCeUkNl+DfUnIEJCR3A5/xqLxJY1sWlzDM=";
+            };
+          };
         }
         {
           plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-            pname = "todotxt-nvim";
-            version = "2022-02-08";
+            pname = "nvim-scrollbar";
+            version = "2022-02-26";
             src = pkgs.fetchFromGitHub {
-              owner = "arnarg";
-              repo = "todotxt.nvim";
-              rev = "646198187f5d8bcf28b0cfa66f95d1aef165064a";
-              sha256 = "5EZ430P3kmXV+xM+G0n0CyV2UtpOa2T3zTheVwTQ8Wo=";
+              owner = "petertriho";
+              repo = "nvim-scrollbar";
+              rev = "b10ece8f991e2c096bc2a6a92da2a635f9298d26";
+              sha256 = "0IwTzVgYi2Z7M2+vJuP+lrKVrTOBWdrIi3mtsj0E+wg=";
             };
           };
-          type = "lua";
-          config = ''
-            require('todotxt-nvim').setup({
-              todo_file = "~/Documents/todo.txt",
-            })
-
-            if wk ~= nil then
-              wk.register({
-                t = {
-                  name = 'Tasks',
-                  t = { '<cmd>ToDoTxtTasksToggle<cr>', 'Toggle tasks pane' },
-                  a = { '<cmd>ToDoTxtCapture<cr>', 'Capture task' },
-                },
-              }, { prefix = '<leader>' })
-            end
-            -- nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
-            -- nnoremap <leader>l <cmd>ToDoTxtTasksToggle<cr>
-          '';
         }
+
+        ###############
+        ## LANGUAGES ##
+        ###############
+        {
+          plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "go-nvim";
+            version = "2022-06-03";
+            src = pkgs.fetchFromGitHub {
+              owner = "ray-x";
+              repo = "go.nvim";
+              rev = "b22f8c7760727d8acace61711a9f095142e87099";
+              sha256 = "iqVG4zrrnoFe0mNbhKTREM3CvjODUsmgrSRyXjingjY=";
+            };
+          };
+        }
+
+        ############
+        ## LEGACY ##
+        ############
+        vim-nix
+
+        # TODO-PROMPT
+        # {
+        #   plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+        #     pname = "todotxt-nvim";
+        #     version = "2022-02-08";
+        #     src = pkgs.fetchFromGitHub {
+        #       owner = "arnarg";
+        #       repo = "todotxt.nvim";
+        #       rev = "646198187f5d8bcf28b0cfa66f95d1aef165064a";
+        #       sha256 = "5EZ430P3kmXV+xM+G0n0CyV2UtpOa2T3zTheVwTQ8Wo=";
+        #     };
+        #   };
+        #   type = "lua";
+        #   config = ''
+        #     require('todotxt-nvim').setup({
+        #       todo_file = "~/Documents/todo.txt",
+        #     })
+        #
+        #     if wk ~= nil then
+        #       wk.register({
+        #         t = {
+        #           name = 'Tasks',
+        #           t = { '<cmd>ToDoTxtTasksToggle<cr>', 'Toggle tasks pane' },
+        #           a = { '<cmd>ToDoTxtCapture<cr>', 'Capture task' },
+        #         },
+        #       }, { prefix = '<leader>' })
+        #     end
+        #     -- nnoremap <leader>a <cmd>ToDoTxtCapture<cr>
+        #     -- nnoremap <leader>l <cmd>ToDoTxtTasksToggle<cr>
+        #   '';
+        # }
       ];
     };
 
