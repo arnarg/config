@@ -8,3 +8,5 @@
 (require :conf.core.project)
 (require :conf.core.gps)
 (require :conf.core.zk)
+(require :conf.core.formatter)
+

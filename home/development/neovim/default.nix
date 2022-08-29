@@ -97,7 +97,13 @@ in with lib; {
         ## Languages ##
         ###############
         go
-        fnlfmt
+
+        # Formatters
+        stylua # Lua
+        fnlfmt # Fennel
+        alejandra # Nix
+        black # Python
+        nodePackages.prettier # Javascript
       ] ++ optionals pkgs.stdenv.isLinux [
         wl-clipboard
       ];
@@ -126,6 +132,9 @@ in with lib; {
 
         # Telescope
         telescope-nvim
+
+        # Formatter
+        formatter-nvim
 
         # Commenting plugin
         comment-nvim

@@ -16,14 +16,8 @@
                                 :group gogroup})
 
 ;; fennel
-(command! [] :FnlFmt "%!fnlfmt - || echo")
-
 (local fnlgroup (create_augroup :fennel {:clear true}))
 (create_autocmd [:FileType] {:pattern :fennel
                              :command "setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab"
                              :group fnlgroup})
-
-(create_autocmd [:BufWritePre] {:pattern [:*.fnl]
-                                :command :FnlFmt
-                                :group fnlgroup})
 
