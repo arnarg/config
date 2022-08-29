@@ -1,11 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; {
   config = {
-
     programs.fzf.enable = true;
     programs.fzf.enableZshIntegration = true;
     # fzf keybinding requires perl
-    home.packages = [ pkgs.perl ];
+    home.packages = [pkgs.perl];
 
     programs.zsh = rec {
       enable = true;
@@ -29,8 +33,8 @@ with lib; {
       };
 
       shellAliases = {
-        ls  = "${pkgs.coreutils}/bin/ls --color=auto";
-        ll  = "${pkgs.coreutils}/bin/ls -l --color=auto";
+        ls = "${pkgs.coreutils}/bin/ls --color=auto";
+        ll = "${pkgs.coreutils}/bin/ls -l --color=auto";
         cat = "${pkgs.bat}/bin/bat -p";
         ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
       };
@@ -61,6 +65,5 @@ with lib; {
         }
       ];
     };
-
   };
 }

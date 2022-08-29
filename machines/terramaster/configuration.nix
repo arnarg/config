@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   kernel = config.boot.kernelPackages.kernel;
   hddled = pkgs.stdenv.mkDerivation rec {
     name = "hddled_tmj33-${version}-${kernel.version}";
@@ -41,7 +45,7 @@ in {
     boot.loader.efi.canTouchEfiVariables = false;
 
     # Terramaster f2-221 has it8613e chip
-    boot.extraModulePackages = with pkgs.linuxPackages; [ it87 hddled ];
+    boot.extraModulePackages = with pkgs.linuxPackages; [it87 hddled];
     boot.kernelModules = ["coretemp" "it87" "hddled_tmj33"];
 
     # Prometheus
@@ -71,11 +75,11 @@ in {
     # TODO: Figure out how to allow less commands
     security.sudo.extraRules = [
       {
-        users = [ "arnar" ];
+        users = ["arnar"];
         commands = [
           {
             command = "ALL";
-            options = [ "NOPASSWD" ];
+            options = ["NOPASSWD"];
           }
         ];
       }
@@ -87,7 +91,7 @@ in {
     networking.interfaces.enp1s0.useDHCP = true;
 
     # My DNS has rebinding protection and Plex doesn't like that
-    networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
     # NixOS stuff
     system.stateVersion = "21.11";

@@ -1,10 +1,14 @@
-{ config, lib, pkgs, home, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  home,
+  ...
+}: {
   imports = [
     ./gnome
     ./kde
   ];
-
 
   config = with lib; {
     # Default packages for this profile
@@ -34,4 +38,4 @@
 
     time.timeZone = mkForce "Europe/Vienna";
   };
-} 
+}

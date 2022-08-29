@@ -1,5 +1,11 @@
-{ lib, stdenv, fetchurl, appimageTools, makeDesktopItem, symlinkJoin }:
-let
+{
+  lib,
+  stdenv,
+  fetchurl,
+  appimageTools,
+  makeDesktopItem,
+  symlinkJoin,
+}: let
   version = "0.27.0";
 
   # Extract the appimage first so we can get the icon inside
@@ -25,12 +31,13 @@ let
     icon = "${extracted}/anytype2.png";
     comment = "operating system for life";
     exec = "${wrapped}/bin/anytype2";
-    categories = [ "Utility" ];
+    categories = ["Utility"];
   };
-in symlinkJoin {
-  name = "anytype-${version}";
-  paths = [
-    wrapped
-    desktopItem
-  ];
-}
+in
+  symlinkJoin {
+    name = "anytype-${version}";
+    paths = [
+      wrapped
+      desktopItem
+    ];
+  }

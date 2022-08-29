@@ -1,5 +1,9 @@
-{ buildGoModule, lib, fetchFromGitHub, ... }:
-
+{
+  buildGoModule,
+  lib,
+  fetchFromGitHub,
+  ...
+}:
 buildGoModule rec {
   pname = "plex_exporter";
   version = "0.2.2";
@@ -13,7 +17,7 @@ buildGoModule rec {
 
   vendorSha256 = null;
 
-  subPackages = [ "." ];
+  subPackages = ["."];
 
   meta = with lib; {
     description = "A Prometheus exporter for a few metrics from Plex Media Server.";

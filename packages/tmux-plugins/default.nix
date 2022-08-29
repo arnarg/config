@@ -1,19 +1,22 @@
-{ lib
-, fetchFromGitHub
-, pkgs
-, reattach-to-user-namespace
-, stdenv
+{
+  lib,
+  fetchFromGitHub,
+  pkgs,
+  reattach-to-user-namespace,
+  stdenv,
 }:
 # Stolen from <nixpkgs>/pkgs/misc/tmux-plugins/default.nix
 let
   rtpPath = "share/tmux-plugins";
 
   addRtp = path: rtpFilePath: attrs: derivation:
-    derivation // { rtp = "${derivation}/${path}/${rtpFilePath}"; } // {
+    derivation
+    // {rtp = "${derivation}/${path}/${rtpFilePath}";}
+    // {
       overrideAttrs = f: mkDerivation (attrs // f attrs);
     };
 
-  mkDerivation = a@{
+  mkDerivation = a @ {
     pluginName,
     rtpFilePath ? (builtins.replaceStrings ["-"] ["_"] pluginName) + ".tmux",
     namePrefix ? "tmuxplugin-",
@@ -28,29 +31,28 @@ let
     dependencies ? [],
     ...
   }:
-    addRtp "${rtpPath}/${path}" rtpFilePath a (stdenv.mkDerivation (a // {
-      pname = namePrefix + pluginName;
+    addRtp "${rtpPath}/${path}" rtpFilePath a (stdenv.mkDerivation (a
+      // {
+        pname = namePrefix + pluginName;
 
-      inherit pluginName unpackPhase configurePhase buildPhase addonInfo preInstall postInstall;
+        inherit pluginName unpackPhase configurePhase buildPhase addonInfo preInstall postInstall;
 
-      installPhase = ''
-        runHook preInstall
+        installPhase = ''
+          runHook preInstall
 
-        target=$out/${rtpPath}/${path}
-        mkdir -p $out/${rtpPath}
-        cp -r . $target
-        if [ -n "$addonInfo" ]; then
-          echo "$addonInfo" > $target/addon-info.json
-        fi
+          target=$out/${rtpPath}/${path}
+          mkdir -p $out/${rtpPath}
+          cp -r . $target
+          if [ -n "$addonInfo" ]; then
+            echo "$addonInfo" > $target/addon-info.json
+          fi
 
-        runHook postInstall
-      '';
+          runHook postInstall
+        '';
 
-      dependencies = [ pkgs.bash ] ++ dependencies;
-    }));
-
+        dependencies = [pkgs.bash] ++ dependencies;
+      }));
 in rec {
-
   inherit mkDerivation;
 
   navigate = mkDerivation {

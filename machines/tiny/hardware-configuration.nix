@@ -1,18 +1,23 @@
-{ config, lib, pkgs, modulesPath, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "usbhid" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["usbhid"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=2G" "mode=755" ];
+    options = ["defaults" "size=2G" "mode=755"];
   };
 
   fileSystems."/nix" = {
@@ -29,7 +34,7 @@
   fileSystems."/var/log" = {
     device = "/nix/persist/var/log";
     fsType = "none";
-    options = [ "bind" ];
+    options = ["bind"];
   };
 
   local.immutable.persistDevice = "/nix";

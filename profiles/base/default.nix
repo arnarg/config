@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; {
   users = {
     users = {
@@ -6,7 +11,7 @@ with lib; {
         isNormalUser = true;
         uid = 1000;
         group = "arnar";
-        extraGroups = [ "wheel" ];
+        extraGroups = ["wheel"];
         home = "/home/arnar";
         openssh.authorizedKeys.keys = [
           # Yubikey 1

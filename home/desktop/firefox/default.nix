@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   config = {
     # This needs to be set in order for firefox to build
     home.stateVersion = "20.09";

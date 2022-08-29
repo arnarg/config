@@ -1,19 +1,23 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "uas" "sd_mod" "sdhci_pci" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "usb_storage" "uas" "sd_mod" "sdhci_pci"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=2G" "mode=755" ];
+    options = ["defaults" "size=2G" "mode=755"];
   };
 
   fileSystems."/boot" = {
@@ -30,18 +34,18 @@
   fileSystems."/var/log" = {
     device = "/nix/persist/var/log";
     fsType = "none";
-    options = [ "bind" ];
+    options = ["bind"];
   };
 
   fileSystems."/tank" = {
     device = "/dev/disk/by-uuid/4f87db74-309f-4256-baaa-4596a22b04e5";
     fsType = "btrfs";
-    options = [ "rw" "relatime" "space_cache" "subvolid=257" "subvol=/tank" ];
+    options = ["rw" "relatime" "space_cache" "subvolid=257" "subvol=/tank"];
   };
 
   services.btrfs.autoScrub = {
     enable = true;
-    fileSystems = [ "/tank" ];
+    fileSystems = ["/tank"];
     interval = "Mon *-*-* 03:00:00";
   };
 

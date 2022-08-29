@@ -1,18 +1,21 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.local.development.libvirt;
-in with lib; {
-  options.local.development.libvirt = {
-    enable = mkEnableOption "libvirt";
-  };
+in
+  with lib; {
+    options.local.development.libvirt = {
+      enable = mkEnableOption "libvirt";
+    };
 
-  config = mkIf cfg.enable {
+    config = mkIf cfg.enable {
+      virtualisation.libvirtd.enable = true;
 
-    virtualisation.libvirtd.enable = true;
+      users.users.arnar.extraGroups = ["libvirtd"];
 
-    users.users.arnar.extraGroups = [ "libvirtd" ];
-
-    environment.systemPackages = with pkgs; [ virt-manager vagrant ];
-
-  };
-}
+      environment.systemPackages = with pkgs; [virt-manager vagrant];
+    };
+  }

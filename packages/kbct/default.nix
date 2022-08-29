@@ -1,5 +1,10 @@
-{ lib, rustPlatform, fetchFromGitHub, pkgconfig, udev }:
-
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkgconfig,
+  udev,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "kbct";
   version = "v0.1.0";

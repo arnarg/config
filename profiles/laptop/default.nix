@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./kbct
   ];
@@ -10,8 +14,8 @@
 
     # Enable networkmanager
     networking.networkmanager.enable = true;
-    users.users.arnar.extraGroups = [ "networkmanager" ];
-  
+    users.users.arnar.extraGroups = ["networkmanager"];
+
     # Enable tlp
     #services.tlp.enable = true;
     #services.tlp.settings = {
@@ -19,7 +23,7 @@
     #  CPU_SCALING_GOVERNOR_ON_AC = "performance";
     #  CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
     #};
-  
+
     # Enable light to control backlight
     programs.light.enable = true;
 
@@ -28,7 +32,7 @@
 
     # Enable bluetooth
     hardware.bluetooth.enable = true;
-  
+
     # Files to persist on laptops with immutable profile turned on
     local.immutable.links.etc = [
       "/etc/NetworkManager/system-connections"

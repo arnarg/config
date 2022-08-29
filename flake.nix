@@ -1,5 +1,4 @@
 {
-
   description = "arnarg's NixOS configuration";
 
   ############
@@ -19,17 +18,24 @@
   #############
   ## OUTPUTS ##
   #############
-  outputs = inputs@{ self, utils, home, nixpkgs, unstable, ... }:
+  outputs = inputs @ {
+    self,
+    utils,
+    home,
+    nixpkgs,
+    unstable,
+    ...
+  }:
     utils.lib.mkFlake {
       inherit self inputs;
 
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      supportedSystems = ["x86_64-linux" "aarch64-linux"];
 
       ############
       # Channels #
       ############
-      sharedOverlays = [ self.overlay ];
-      channelsConfig = { allowUnfree = true; };
+      sharedOverlays = [self.overlay];
+      channelsConfig = {allowUnfree = true;};
 
       #########
       # Hosts #
@@ -39,7 +45,7 @@
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
-          nix.trustedUsers = [ "root" "arnar" ];
+          nix.trustedUsers = ["root" "arnar"];
         }
       ];
 
@@ -104,34 +110,32 @@
       ########
       # HOME #
       ########
-      homeConfigurations =
-        let
-          username = "arnar";
-          homeDirectory = "/home/arnar";
-          system = "x86_64-linux";
-          extraSpecialArgs = { inherit inputs; };
-          generateHome = home.lib.homeManagerConfiguration;
-          pkgs = import unstable {
-            inherit system;
-            overlays = [
-              self.overlay
+      homeConfigurations = let
+        username = "arnar";
+        homeDirectory = "/home/arnar";
+        system = "x86_64-linux";
+        extraSpecialArgs = {inherit inputs;};
+        generateHome = home.lib.homeManagerConfiguration;
+        pkgs = import unstable {
+          inherit system;
+          overlays = [
+            self.overlay
+          ];
+          config.allowUnfree = true;
+        };
+      in {
+        arnar = generateHome {
+          inherit system username homeDirectory extraSpecialArgs pkgs;
+          configuration = {
+            imports = [
+              self.homeModules.development
+              self.homeModules.desktop
+              ./home/desktop/gnome
+              ./home/development/redpanda
             ];
-            config.allowUnfree = true;
           };
-        in
-          {
-            arnar = generateHome {
-              inherit system username homeDirectory extraSpecialArgs pkgs;
-              configuration = {
-                imports = [
-                  self.homeModules.development
-                  self.homeModules.desktop
-                  ./home/desktop/gnome
-                  ./home/development/redpanda
-                ];
-              };
-            };
-          };
+        };
+      };
 
       homeModules = utils.lib.exportModules [
         ./home/development
@@ -140,12 +144,11 @@
 
       overlay = import ./packages/overlay.nix;
 
-      outputsBuilder =
-        let
-          overlays = utils.lib.exportOverlays { inherit (self) inputs pkgs; };
-        in channels: {
-        packages = utils.lib.exportPackages overlays channels;
-      };
+      outputsBuilder = let
+        overlays = utils.lib.exportOverlays {inherit (self) inputs pkgs;};
+      in
+        channels: {
+          packages = utils.lib.exportPackages overlays channels;
+        };
     };
-
 }

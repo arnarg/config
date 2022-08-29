@@ -1,11 +1,11 @@
-{ lib,
-stdenv,
-fetchFromGitHub,
-gtk3,
-hicolor-icon-theme,
-
-bold ? true }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  gtk3,
+  hicolor-icon-theme,
+  bold ? true,
+}:
 stdenv.mkDerivation rec {
   pname = "whitesur-icon-theme";
   version = "2021-10-13";
@@ -17,9 +17,9 @@ stdenv.mkDerivation rec {
     sha256 = "BP5hGi3G9zNUSfeCbwYUvd3jMcWhstXiDeZCJ6Hgey8=";
   };
 
-  nativeBuildInputs = [ gtk3 ];
+  nativeBuildInputs = [gtk3];
 
-  propagatedBuildInputs = [ hicolor-icon-theme ];
+  propagatedBuildInputs = [hicolor-icon-theme];
 
   dontDropIconThemeCache = true;
 
@@ -27,10 +27,12 @@ stdenv.mkDerivation rec {
   dontPatchELF = true;
   dontRewriteSymlinks = true;
 
-  params = [
-    "-d $out/share/icons"
-    "--name WhiteSur"
-  ] ++ lib.optional bold "--bold";
+  params =
+    [
+      "-d $out/share/icons"
+      "--name WhiteSur"
+    ]
+    ++ lib.optional bold "--bold";
 
   installPhase = ''
     runHook preInstall

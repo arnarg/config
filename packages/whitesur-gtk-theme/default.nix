@@ -1,20 +1,20 @@
-{ lib,
-stdenv,
-fetchFromGitHub,
-fetchzip,
-glib,
-inkscape,
-optipng,
-sassc,
-which,
-gtk_engines,
-gtk-engine-murrine,
-util-linux,
-
-icon ? "simple",
-opacity ? "default",
-monterey ? true }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  fetchzip,
+  glib,
+  inkscape,
+  optipng,
+  sassc,
+  which,
+  gtk_engines,
+  gtk-engine-murrine,
+  util-linux,
+  icon ? "simple",
+  opacity ? "default",
+  monterey ? true,
+}:
 stdenv.mkDerivation rec {
   pname = "whitesur-gtk-theme";
   version = "2021-12-28";
@@ -39,9 +39,9 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [glib inkscape optipng sassc which util-linux];
 
-  buildInputs = [ gtk_engines ];
+  buildInputs = [gtk_engines];
 
-  propagatedUserEnvPkgs = [ gtk-engine-murrine ];
+  propagatedUserEnvPkgs = [gtk-engine-murrine];
 
   postPatch = ''
     patchShebangs .
@@ -67,12 +67,14 @@ stdenv.mkDerivation rec {
     export HOME="$NIX_BUILD_ROOT"
   '';
 
-  params = [
-    "-d $out/share/themes"
-    "--silent-mode"
-    "--icon ${icon}"
-    "--panel-opacity ${opacity}"
-  ] ++ lib.optional monterey "--monterey";
+  params =
+    [
+      "-d $out/share/themes"
+      "--silent-mode"
+      "--icon ${icon}"
+      "--panel-opacity ${opacity}"
+    ]
+    ++ lib.optional monterey "--monterey";
 
   installPhase = ''
     mkdir -p $out/share/themes
