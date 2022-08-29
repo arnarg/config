@@ -9,3 +9,4 @@
         {:prefix :<leader>})
 
 (map! [n] :<C-P> "<cmd>Telescope find_files<cr>" "Find files")
+

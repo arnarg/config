@@ -11,3 +11,4 @@
                 {:command "if &nu | set nornu | endif"
                  :pattern ["*"]
                  :group numbertoggle})
+
