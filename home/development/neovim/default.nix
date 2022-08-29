@@ -108,7 +108,7 @@ in with lib; {
         wl-clipboard
       ];
 
-      plugins = with pkgs.vimPlugins; mkBefore [
+      plugins = with pkgs.vimPlugins; [
         ##########
         ## CORE ##
         ##########
