@@ -71,6 +71,14 @@ in with lib; {
       viAlias = true;
       vimAlias = true;
 
+      # Because of issue where init.vim is always created
+      # and init.vim and init.lua can't co-exist I have to
+      # explicitly load my lua entrypoint from init.vim.
+      # https://github.com/nix-community/home-manager/issues/1907
+      extraConfig = ''
+        luafile ~/.config/nvim/config.lua
+      '';
+
       extraPackages = with pkgs; [
         curl
         gnutar
