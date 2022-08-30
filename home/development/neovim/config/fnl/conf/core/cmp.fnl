@@ -13,7 +13,10 @@
         {:preselect cmp.PreselectMode.None
          :mapping {:<Tab> (mapping! cmp.select_next_item)
                    :<S-Tab> (mapping! cmp.select_prev_item)}
-         :sources [{:name :nvim_lsp} {:name :buffer} {:name :path}]
+         :sources [{:name :nvim_lsp}
+                   {:name :buffer}
+                   {:name :path}
+                   {:name :orgmode}]
          :formatting {:format (lspkind.cmp_format {:with_text true
                                                    :maxwidth 50})}})
 

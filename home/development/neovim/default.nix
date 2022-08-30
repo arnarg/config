@@ -150,6 +150,9 @@ in
           # Formatter
           formatter-nvim
 
+          # Org mode
+          orgmode
+
           # Commenting plugin
           comment-nvim
 

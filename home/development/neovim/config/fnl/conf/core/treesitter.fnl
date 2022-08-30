@@ -12,6 +12,7 @@
                                        :json
                                        :markdown
                                        :nix
+                                       :org
                                        :python
                                        :todotxt
                                        :typescript
