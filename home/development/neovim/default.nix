@@ -38,6 +38,13 @@
     FENNEL_MACRO_PATH = "${FENNEL_PATH};${hibiscus}/fnl/?.fnl;;";
 
     buildPhase = ''
+      # Compile snippets
+      snippet_dir="${src}/snippets"
+      while read file; do
+        echo "compiling snippet $file"
+        fennel --compile "''${snippet_dir}/''${file}" > "snippets/''${file%.fnl}.lua"
+      done < <(find "$snippet_dir" -type f -name '*.fnl' | sed -e "s|$snippet_dir/||g")
+
       # Compile rest of the modules
       base_dir="${src}/fnl"
       while read file; do
@@ -152,6 +159,10 @@ in
 
           # Org mode
           orgmode
+
+          # Snippets
+          luasnip
+          cmp_luasnip
 
           # Commenting plugin
           comment-nvim

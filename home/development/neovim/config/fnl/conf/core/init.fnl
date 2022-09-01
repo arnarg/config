@@ -3,6 +3,7 @@
 (require :conf.core.lsp)
 (require :conf.core.treesitter)
 (require :conf.core.telescope)
+(require :conf.core.luasnip)
 (require :conf.core.cmp)
 (require :conf.core.gitsigns)
 (require :conf.core.comment)
