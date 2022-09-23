@@ -104,6 +104,7 @@ in
             ## LSP ##
             #########
             gopls
+            clojure-lsp
             pyright
             rnix-lsp
             rust-analyzer

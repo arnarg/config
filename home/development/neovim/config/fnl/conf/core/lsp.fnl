@@ -34,10 +34,13 @@
 ;; gopls
 (setup-lsp :gopls {:on_attach on-attach : capabilities})
 
+;; clojure-lsp
+(setup-lsp :clojure_lsp {:on_attach on-attach : capabilities})
+
 ;; rust_analyzer
 (setup-lsp :rust_analyzer {:on_attach on-attach : capabilities})
 
-;;rnix
+;; rnix
 (setup-lsp :rnix {:on_attach on-attach : capabilities})
 
 ;; yamlls
