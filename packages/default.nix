@@ -5,6 +5,7 @@
 
   self = {
     anytype = callPackage ./anytype {};
+    morgen = callPackage ./morgen {};
     plex-exporter = callPackage ./plex-exporter {};
     kbct = callPackage ./kbct {};
     whitesur-gtk-theme = callPackage ./whitesur-gtk-theme {};

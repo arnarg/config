@@ -14,7 +14,7 @@
     home.packages = with pkgs; [
       obsidian
       anytype
-      thunderbird
+      morgen
       mailspring
     ];
   };

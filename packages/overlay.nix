@@ -1,5 +1,6 @@
 final: prev: {
   anytype = prev.callPackage ./anytype {};
+  morgen = prev.callPackage ./morgen {};
   kbct = prev.callPackage ./kbct {};
   plex-exporter = prev.callPackage ./plex-exporter {};
   whitesur-gtk-theme = prev.callPackage ./whitesur-gtk-theme {};
