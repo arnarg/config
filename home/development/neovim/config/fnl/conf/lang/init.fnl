@@ -7,7 +7,7 @@
 ;; go-nvim
 (local go (require :go))
 (local gofmt (require :go.format))
-(setup! go)
+(setup! go {:textobjects false})
 
 (local gogroup (create_augroup :go {:clear true}))
 (create_autocmd [:BufWritePre] {:pattern [:*.go]

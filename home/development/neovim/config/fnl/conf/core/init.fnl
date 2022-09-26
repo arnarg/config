@@ -8,7 +8,6 @@
 (require :conf.core.gitsigns)
 (require :conf.core.comment)
 (require :conf.core.project)
-(require :conf.core.gps)
 (require :conf.core.zk)
 (require :conf.core.formatter)
 
