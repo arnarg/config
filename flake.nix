@@ -8,6 +8,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
+    hardware.url = "github:nixos/nixos-hardware/master";
 
     home = {
       url = "github:nix-community/home-manager/release-22.05";
@@ -24,6 +25,7 @@
     home,
     nixpkgs,
     unstable,
+    hardware,
     ...
   }:
     utils.lib.mkFlake {
@@ -56,6 +58,21 @@
           self.nixosModules.desktop
           self.nixosModules.development
           self.nixosModules.laptop
+          {
+            # Get home manager in path
+            environment.systemPackages = [
+              nixpkgs.legacyPackages.x86_64-linux.git
+              home.packages.x86_64-linux.home-manager
+            ];
+          }
+        ];
+        framework.modules = [
+          ./machines/framework/configuration.nix
+          self.nixosModules.immutable
+          self.nixosModules.desktop
+          self.nixosModules.development
+          self.nixosModules.laptop
+          hardware.nixosModules.framework-12th-gen-intel
           {
             # Get home manager in path
             environment.systemPackages = [

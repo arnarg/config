@@ -19,6 +19,8 @@
     services.pipewire.enable = true;
     services.pipewire.pulse.enable = true;
 
+    hardware.opengl.enable = true;
+
     fonts = {
       enableDefaultFonts = true;
       fonts = with pkgs; [
