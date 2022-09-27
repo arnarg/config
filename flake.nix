@@ -9,6 +9,7 @@
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
     hardware.url = "github:nixos/nixos-hardware/master";
+    impermanence.url = "github:nix-community/impermanence/master";
 
     home = {
       url = "github:nix-community/home-manager/release-22.05";
@@ -26,6 +27,7 @@
     nixpkgs,
     unstable,
     hardware,
+    impermanence,
     ...
   }:
     utils.lib.mkFlake {
@@ -44,6 +46,7 @@
       #########
       hostDefaults.modules = [
         self.nixosModules.base
+        impermanence.nixosModules.impermanence
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;

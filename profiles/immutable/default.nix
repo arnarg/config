@@ -11,12 +11,12 @@ in
     options.local.immutable = {
       persistPath = mkOption {
         type = types.str;
-        default = "/persist";
+        default = "${cfg.persistDevice}/persist";
         description = "Path to a persisted folder.";
       };
       persistDevice = mkOption {
         type = types.str;
-        default = cfg.persistPath;
+        default = "/nix";
         description = "The device the persisted folder is on.";
       };
       users = mkOption {

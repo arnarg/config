@@ -98,5 +98,8 @@
   # Enable vulkan
   hardware.opengl.driSupport = true;
 
+  local.immutable.persistDevice = "/persist";
+  local.immutable.persistPath = "/persist";
+
   nix.maxJobs = lib.mkDefault 8;
 }

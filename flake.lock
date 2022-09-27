@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1661933071,
+        "narHash": "sha256-RFgfzldpbCvS+H2qwH+EvNejvqs+NhPVD5j1I7HQQPY=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "def994adbdfc28974e87b0e4c949e776207d5557",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1664107978,
@@ -72,6 +88,7 @@
       "inputs": {
         "hardware": "hardware",
         "home": "home",
+        "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
         "unstable": "unstable",
         "utils": "utils"

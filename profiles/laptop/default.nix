@@ -24,6 +24,12 @@
     #  CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
     #};
 
+    # Automatically suspend-then-hibernate when lid is closed
+    services.logind.lidSwitch = "suspend-then-hibernate";
+    systemd.sleep.extraConfig = ''
+      HibernateDelaySec=1h
+    '';
+
     # Enable light to control backlight
     programs.light.enable = true;
 
@@ -34,14 +40,17 @@
     hardware.bluetooth.enable = true;
 
     # Files to persist on laptops with immutable profile turned on
-    local.immutable.links.etc = [
-      "/etc/NetworkManager/system-connections"
-    ];
-    local.immutable.links.tmpfiles = [
-      "/var/lib/NetworkManager/secret_key"
-      "/var/lib/NetworkManager/seen-bssids"
-      "/var/lib/NetworkManager/timestamps"
-      "/var/lib/bluetooth"
-    ];
+    environment.persistence."${config.local.immutable.persistPath}" = {
+      hideMounts = true;
+      directories = [
+        "/var/lib/bluetooth"
+        "/etc/NetworkManager/system-connections"
+      ];
+      files = [
+        "/var/lib/NetworkManager/secret_key"
+        "/var/lib/NetworkManager/seen-bssids"
+        "/var/lib/NetworkManager/timestamps"
+      ];
+    };
   };
 }

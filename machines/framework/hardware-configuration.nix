@@ -58,9 +58,6 @@
     }
   ];
 
-  local.immutable.persistDevice = "/nix";
-  local.immutable.persistPath = "/nix/persist";
-
   hardware.opengl.extraPackages = with pkgs; [
     vaapiIntel
   ];
