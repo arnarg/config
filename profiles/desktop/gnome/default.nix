@@ -19,5 +19,8 @@ in
         displayManager.gdm.wayland = true;
         desktopManager.gnome.enable = true;
       };
+
+      # I want to use tlp instead
+      services.power-profiles-daemon.enable = false;
     };
   }

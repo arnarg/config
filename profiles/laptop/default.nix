@@ -17,12 +17,10 @@
     users.users.arnar.extraGroups = ["networkmanager"];
 
     # Enable tlp
-    #services.tlp.enable = true;
-    #services.tlp.settings = {
-    #  TLP_DEFAULT_MODE = "BAT";
-    #  CPU_SCALING_GOVERNOR_ON_AC = "performance";
-    #  CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
-    #};
+    services.tlp.enable = true;
+
+    # Enable thermald
+    services.thermald.enable = true;
 
     # Automatically suspend-then-hibernate when lid is closed
     services.logind.lidSwitch = "suspend-then-hibernate";
