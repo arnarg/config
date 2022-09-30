@@ -3,6 +3,24 @@
   pkgs,
   ...
 }: let
+  # Get a wallpaper from the internet
+  wallpaper = pkgs.stdenv.mkDerivation {
+    name = "gnome-wallpaper";
+
+    src = pkgs.fetchurl {
+      url = "https://w.wallhaven.cc/full/y8/wallhaven-y8jx3x.jpg";
+      sha256 = "17hngmh4zixziipbjmrxs6mrl8465hlr23fwb745aknn53vhh63x";
+    };
+
+    phases = ["install"];
+
+    install = ''
+      mkdir -p $out
+      cp $src $out/wallpaper.jpg
+    '';
+  };
+
+  # My custom colorscheme for gnome terminal (copied from gruvbox dark)
   profile = {
     visible-name = "Gruvbox Dark";
     allow-bold = true;
@@ -71,16 +89,18 @@ in {
         button-layout = "close,minimize,maximize:appmenu";
       };
       "org/gnome/desktop/background" = {
-        picture-uri-dark = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
+        picture-uri = "${wallpaper}/wallpaper.jpg";
+        picture-uri-dark = "${wallpaper}/wallpaper.jpg";
       };
       "org/gnome/desktop/screensaver" = {
-        picture-uri = "${pkgs.whitesur-gtk-theme}/share/wallpapers/WhiteSur-light.png";
+        picture-uri = "${wallpaper}/wallpaper.jpg";
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen
         screensaver = ["<Super>q"];
         custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
       };
+      ## Terminal stuff
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>Return";
         command = "gnome-terminal";
@@ -94,6 +114,22 @@ in {
         list = ["56fdd740-fe3c-4add-89ad-a78feae91866"];
       };
       "org/gnome/terminal/legacy/profiles:/:56fdd740-fe3c-4add-89ad-a78feae91866" = profile;
+      ## Dash-to-dock
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        apply-custom-theme = false;
+        apply-glossy-effect = false;
+        custom-background-color = true;
+        transparency-mode = "FIXED";
+        background-color = "rgb(36,31,49)";
+        background-opacity = 0.65000000000000000;
+        dash-max-icon-size = 68;
+        dock-position = "BOTTOM";
+        extend-height = false;
+        running-indicator-style = "DOTS";
+      };
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+        blur = false;
+      };
     };
   };
 }

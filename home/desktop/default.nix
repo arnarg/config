@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./alacritty
     ./firefox
     ./spotify
   ];
