@@ -11,6 +11,7 @@
     whitesur-gtk-theme = callPackage ./whitesur-gtk-theme {};
     whitesur-icon-theme = callPackage ./whitesur-icon-theme {};
     whitesur-kde = callPackage ./whitesur-kde {};
+    tpm-fido = callPackage ./tpm-fido {};
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
   };
