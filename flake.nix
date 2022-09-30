@@ -98,11 +98,6 @@
             ./machines/terramaster/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
-            {
-              environment.systemPackages = [
-                pkgs.redpanda
-              ];
-            }
           ];
         };
         tiny1 = {
@@ -151,7 +146,6 @@
               self.homeModules.development
               self.homeModules.desktop
               ./home/desktop/gnome
-              ./home/development/redpanda
             ];
           };
         };

@@ -8,7 +8,6 @@
     ./hardware-configuration.nix
   ];
 
-  boot.tmpOnTmpfs = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
