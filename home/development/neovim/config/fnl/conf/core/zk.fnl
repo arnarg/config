@@ -1,6 +1,6 @@
 (import-macros {: wkmap! : setup!} :lib.macros)
 (import-macros {: nil?} :hibiscus.core)
-(import-macros {: map!} :hibiscus.vim)
+(import-macros {: map! : exec} :hibiscus.vim)
 
 (local create_augroup vim.api.nvim_create_augroup)
 (local create_autocmd vim.api.nvim_create_autocmd)
@@ -20,9 +20,15 @@
              :d ["<cmd>ZkNew { dir = \"journal\" }<cr>" "Open daily note"]}}
         {:prefix :<leader>})
 
+;; Runs in every markdown file
 (fn on-load []
+  ;; Checks if file is in a zk notebook
   (if (not (nil? (zkutil.notebook_root (vim.fn.expand "%:p"))))
       (do
+        ;; I don't want zk buffers to hand around as I might
+        ;; potentially open them in many vim intances and don't
+        ;; want to deal with swap files and such.
+        (exec [[:setlocal :bufhidden=delete]])
         (map! [n :buffer] :<cr> vim.lsp.buf.definition)
         (map! [n :buffer] :K vim.lsp.buf.hover)
         (map! [n :buffer] :<leader>znt
