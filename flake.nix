@@ -75,6 +75,7 @@
           self.nixosModules.desktop
           self.nixosModules.development
           self.nixosModules.laptop
+          self.nixosModules.tpm
           hardware.nixosModules.framework-12th-gen-intel
           {
             # Get home manager in path
@@ -120,6 +121,7 @@
         ./profiles/immutable
         ./profiles/laptop
         ./profiles/server
+        ./profiles/tpm
       ];
 
       ########
@@ -146,6 +148,7 @@
               self.homeModules.development
               self.homeModules.desktop
               ./home/desktop/gnome
+              ./home/desktop/tpm-fido
             ];
           };
         };
