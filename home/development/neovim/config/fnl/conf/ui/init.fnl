@@ -5,6 +5,7 @@
 (set! :background :dark)
 (set! :laststatus 3)
 (set! :cursorline true)
+(set! :mouse nil)
 (each [_ opt (ipairs [:nu :rnu])]
   (set! opt true))
 
