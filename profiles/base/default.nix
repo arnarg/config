@@ -31,5 +31,9 @@ with lib; {
 
   security.sudo.enable = true;
 
+  services.avahi.enable = true;
+  services.avahi.publish.enable = true;
+  services.avahi.publish.addresses = true;
+
   time.timeZone = mkDefault "utc";
 }

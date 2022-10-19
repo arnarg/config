@@ -29,6 +29,8 @@
       ];
     };
 
+    services.avahi.nssmdns = true;
+
     users.users.arnar.extraGroups = [
       "audio"
       "cdrom"

@@ -7,7 +7,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
 
@@ -50,6 +50,7 @@
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
+          nix.linkInputs = true;
           nix.trustedUsers = ["root" "arnar"];
         }
       ];
@@ -112,6 +113,17 @@
             self.nixosModules.server
           ];
         };
+        tiny2 = {
+          system = "aarch64-linux";
+          modules = [
+            {
+              networking.hostName = "tiny2";
+            }
+            ./machines/tiny/configuration.nix
+            self.nixosModules.immutable
+            self.nixosModules.server
+          ];
+        };
       };
 
       nixosModules = utils.lib.exportModules [
@@ -150,6 +162,8 @@
               ./home/desktop/gnome
               ./home/desktop/tpm-fido
             ];
+            # https://github.com/nix-community/home-manager/issues/3342
+            manual.manpages.enable = false;
           };
         };
       };

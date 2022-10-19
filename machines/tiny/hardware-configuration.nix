@@ -37,8 +37,5 @@
     options = ["bind"];
   };
 
-  local.immutable.persistDevice = "/nix";
-  local.immutable.persistPath = "/nix/persist";
-
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

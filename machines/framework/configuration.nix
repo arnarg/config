@@ -29,6 +29,9 @@
     "/var/lib/fprint"
   ];
 
+  # I want to cross-compile
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
   networking = {
     hostId = "ba0a056f";
     hostName = "framework";
