@@ -4,6 +4,11 @@
 (setup! bufferline
         {:options {:show_buffer_close_icons false
                    :show_close_icon false
+                   :diagnostics :nvim_lsp
+                   :diagnostics_indicator (fn [count level dict ctx]
+                                            (if (level:match :error)
+                                                (.. " " count)
+                                                ""))
                    :offsets [{:filetype :NvimTree
                               :text "File Explorer"
                               :highlight :Directory
@@ -11,6 +16,7 @@
 
 (wkmap! {:b {:name :Buffer
              :p [:<cmd>BufferLinePick<cr> "Pick buffer"]
+             :l [:<cmd>BufferLineTogglePin<cr> "Pin buffer"]
              :q {:name "Close buffer"
                  :p [:<cmd>BufferLinePickClose<cr> "Pick buffer to close"]
                  :l [:<cmd>BufferLineCloseLeft<cr>

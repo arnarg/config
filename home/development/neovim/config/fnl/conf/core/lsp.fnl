@@ -7,7 +7,7 @@
 (local lspconfig (require :lspconfig))
 (local {: path} (require :lspconfig.util))
 (local capabilities
-       (cmp-lsp.update_capabilities (vim.lsp.protocol.make_client_capabilities)))
+       (cmp-lsp.default_capabilities (vim.lsp.protocol.make_client_capabilities)))
 
 (fn on-attach [client bufnr]
   (setbufopt! bufnr :omnifunc "v:lua.vim.lsp.omnifunc")
