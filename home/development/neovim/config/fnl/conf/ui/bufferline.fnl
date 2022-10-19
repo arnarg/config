@@ -1,6 +1,7 @@
 (import-macros {: wkmap! : setup!} :lib.macros)
 
 (local bufferline (require :bufferline))
+(local bl_groups (require :bufferline.groups))
 (setup! bufferline
         {:options {:show_buffer_close_icons false
                    :show_close_icon false
@@ -12,7 +13,8 @@
                    :offsets [{:filetype :NvimTree
                               :text "File Explorer"
                               :highlight :Directory
-                              :text_align :left}]}})
+                              :text_align :left}]
+                   :groups {:items [(bl_groups.builtin.pinned:with {:icon ""})]}}})
 
 (wkmap! {:b {:name :Buffer
              :p [:<cmd>BufferLinePick<cr> "Pick buffer"]

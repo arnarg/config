@@ -155,6 +155,9 @@ in
           # Telescope
           telescope-nvim
 
+          # Leap
+          leap-nvim
+
           # Formatter
           formatter-nvim
 

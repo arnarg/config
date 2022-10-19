@@ -10,4 +10,5 @@
 (require :conf.core.project)
 (require :conf.core.zk)
 (require :conf.core.formatter)
+(require :conf.core.leap)
 
