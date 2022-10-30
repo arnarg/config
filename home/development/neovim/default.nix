@@ -109,6 +109,7 @@ in
             rnix-lsp
             rust-analyzer
             nodePackages.yaml-language-server
+            nodePackages.vls
 
             # For rust-analyzer
             cargo

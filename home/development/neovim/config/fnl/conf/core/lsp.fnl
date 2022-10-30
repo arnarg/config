@@ -31,25 +31,23 @@
 (macro setup-lsp [name conf]
   `((. lspconfig ,name :setup) ,conf))
 
-;; gopls
 (setup-lsp :gopls {:on_attach on-attach : capabilities})
 
-;; clojure-lsp
 (setup-lsp :clojure_lsp {:on_attach on-attach : capabilities})
 
-;; rust_analyzer
 (setup-lsp :rust_analyzer {:on_attach on-attach : capabilities})
 
-;; rnix
 (setup-lsp :rnix {:on_attach on-attach : capabilities})
 
-;; yamlls
+(setup-lsp :vuels {:on_attach on-attach : capabilities})
+
 (setup-lsp :yamlls
            {:on_attach on-attach
             : capabilities
             :settings {:yaml {:schemas {"https://json.schemastore.org/kustomization" :kustomization.yaml}}}})
 
 ;; pyright
+
 (fn find-venv [ws]
   (local m (vim.fn.glob (path.join ws :venv)))
   (if m m))
