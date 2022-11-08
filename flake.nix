@@ -102,24 +102,24 @@
             self.nixosModules.server
           ];
         };
-        tiny1 = {
+        links = {
           system = "aarch64-linux";
           modules = [
             {
-              networking.hostName = "tiny1";
+              networking.hostName = "links";
             }
-            ./machines/tiny/configuration.nix
+            ./machines/links/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
           ];
         };
-        tiny2 = {
+        rechts = {
           system = "aarch64-linux";
           modules = [
             {
-              networking.hostName = "tiny2";
+              networking.hostName = "rechts";
             }
-            ./machines/tiny/configuration.nix
+            ./machines/links/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
           ];
