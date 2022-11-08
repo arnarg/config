@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
@@ -16,17 +17,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # DNS over HTTPS
-  services.nextdns.enable = true;
-  services.nextdns.arguments = [
-    "-config-file"
-    "/nix/persist/etc/nextdns/nextdns.conf"
-    "-auto-activate"
-  ];
+  # Enable tailscale
+  services.tailscale.enable = true;
+  services.tailscale.package = inputs.unstable.legacyPackages.x86_64-linux.tailscale;
+
+  # Having resolved with a networkmanager setup helps with resolv.conf handling
+  # when using tailscale dns
+  services.resolved.enable = true;
 
   # Persist fingerprints
   environment.persistence."/nix/persist".directories = [
     "/var/lib/fprint"
+    "/var/lib/tailscale"
   ];
 
   # I want to cross-compile

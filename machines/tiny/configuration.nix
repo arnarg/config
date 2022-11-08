@@ -24,5 +24,13 @@
 
   services.openssh.enable = true;
 
+  # tailscale
+  services.tailscale.enable = true;
+
+  # For setting up a tailscale exit node
+  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
+  boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = true;
+  networking.firewall.checkReversePath = "loose";
+
   system.stateVersion = "22.05";
 }
