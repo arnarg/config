@@ -62,6 +62,7 @@ in {
       gnome.gnome-terminal
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
+      gnomeExtensions.tailscale-status
       whitesur-icon-theme
     ];
     dconf.settings = {
@@ -70,6 +71,7 @@ in {
           "user-theme@gnome-shell-extensions.gcampax.github.com"
           "dash-to-dock@micxgx.gmail.com"
           "blur-my-shell@aunetx"
+          "tailscale-status@maxgallup.github.com"
         ];
       };
       "org/gnome/shell/keybindings" = {
