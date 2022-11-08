@@ -19,6 +19,17 @@
       "extensions.pocket.enable" = false;
       # Disable firefox reacting to media keys
       "media.hardwaremediakeys.enabled" = false;
+      # Enale userContent loading
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
+    programs.firefox.profiles.default.userContent = ''
+      /* Workaround for vim-vixen issue
+       * https://github.com/ueokande/vim-vixen/issues/1424
+       */
+      .vimvixen-console-frame {
+        height: 0px;
+        color-scheme: light !important;
+      }
+    '';
   };
 }
