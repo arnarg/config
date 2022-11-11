@@ -2,119 +2,52 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
-    ../tiny/configuration.nix
+    ./hardware-configuration.nix
+    ./services.nix
     ./proxy.nix
     ./dns.nix
   ];
 
-  ############
-  ## SHIORI ##
-  ############
-  services.shiori.enable = true;
+  networking.hostName = "links";
 
-  ##########
-  ## YARR ##
-  ##########
-  systemd.services.yarr = let
-    yarrPkg = inputs.unstable.legacyPackages.${config.nixpkgs.system}.yarr;
-  in {
-    description = "Yet another rss reader";
-    wantedBy = ["multi-user.target"];
+  # According to https://nixos.wiki/wiki/NixOS_on_ARM/UEFI
+  # only grub2 works for now on ARM with UEFI
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.device = "nodev";
 
-    environment = {
-      XDG_CONFIG_HOME = "/var/lib/yarr";
-      YARR_DB = "/var/lib/yarr/yarr.db";
-      YARR_ADDR = "127.0.0.1:7070";
-    };
+  networking.interfaces.eth0.useDHCP = true;
 
-    serviceConfig = {
-      ExecStart = "${yarrPkg}/bin/yarr";
+  # tailscale
+  services.tailscale.enable = true;
 
-      DynamicUser = true;
-      StateDirectory = "yarr";
-      # As the RootDirectory
-      RuntimeDirectory = "yarr";
+  # For setting up a tailscale exit node
+  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
+  boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = true;
+  networking.firewall.checkReversePath = "loose";
 
-      # Security options
-      BindReadOnlyPaths = [
-        "/nix/store"
-        # For SSL certificates, and the resolv.conf
-        "/etc"
+  # So I can use nixos-rebuild with --use-remote-sudo
+  # TODO: Figure out how to allow less commands
+  security.sudo.extraRules = [
+    {
+      users = ["arnar"];
+      commands = [
+        {
+          command = "ALL";
+          options = ["NOPASSWD"];
+        }
       ];
-      CapabilityBoundingSet = "";
-      DeviceAllow = "";
-      LockPersonality = true;
-      MemoryDenyWriteExecute = true;
-      PrivateDevices = true;
-      PrivateUsers = true;
-      ProtectClock = true;
-      ProtectControlGroups = true;
-      ProtectHome = true;
-      ProtectHostname = true;
-      ProtectKernelLogs = true;
-      ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      RestrictNamespaces = true;
-      RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      RootDirectory = "/run/yarr";
-      SystemCallArchitectures = "native";
-      SystemCallErrorNumber = "EPERM";
-      SystemCallFilter = [
-        "@system-service"
-        "~@cpu-emulation"
-        "~@debug"
-        "~@keyring"
-        "~@memlock"
-        "~@obsolete"
-        "~@privileged"
-        "~@setuid"
-      ];
-    };
-  };
+    }
+  ];
 
-  ###########
-  ## HASTE ##
-  ###########
-  services.haste-server.enable = true;
-  services.haste-server.settings = {
-    host = "localhost";
-    port = 7777;
-
-    storage = {
-      path = "/nix/persist/var/lib/haste/data";
-      type = "file";
-    };
-  };
-
-  ##################################
-  ## Persisting state directories ##
-  ##################################
+  # Persisting state
   environment.persistence."/nix/persist".directories = [
-    "/var/lib/shiori"
-    "/var/lib/yarr"
+    "/var/lib/tailscale"
   ];
 
-  ###########
-  ## Proxy ##
-  ###########
-  local.proxy.services = [
-    {
-      name = "shiori";
-      url = "http://localhost:8080";
-    }
-    {
-      name = "reader";
-      url = "http://localhost:7070";
-    }
-    {
-      name = "haste";
-      url = "http://localhost:7777";
-    }
-  ];
+  system.stateVersion = "22.05";
 }

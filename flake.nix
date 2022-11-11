@@ -105,9 +105,6 @@
         links = {
           system = "aarch64-linux";
           modules = [
-            {
-              networking.hostName = "links";
-            }
             ./machines/links/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
@@ -116,10 +113,7 @@
         rechts = {
           system = "aarch64-linux";
           modules = [
-            {
-              networking.hostName = "rechts";
-            }
-            ./machines/links/configuration.nix
+            ./machines/rechts/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
           ];
