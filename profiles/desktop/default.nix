@@ -7,7 +7,6 @@
 }: {
   imports = [
     ./gnome
-    ./kde
   ];
 
   config = with lib; {

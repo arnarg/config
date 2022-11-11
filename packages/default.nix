@@ -5,13 +5,12 @@
 
   self = {
     anytype = callPackage ./anytype {};
+    kbct = callPackage ./kbct {};
     morgen = callPackage ./morgen {};
     plex-exporter = callPackage ./plex-exporter {};
-    kbct = callPackage ./kbct {};
+    tpm-fido = callPackage ./tpm-fido {};
     whitesur-gtk-theme = callPackage ./whitesur-gtk-theme {};
     whitesur-icon-theme = callPackage ./whitesur-icon-theme {};
-    whitesur-kde = callPackage ./whitesur-kde {};
-    tpm-fido = callPackage ./tpm-fido {};
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
   };

@@ -1,12 +1,11 @@
 final: prev: {
   anytype = prev.callPackage ./anytype {};
-  morgen = prev.callPackage ./morgen {};
   kbct = prev.callPackage ./kbct {};
+  morgen = prev.callPackage ./morgen {};
   plex-exporter = prev.callPackage ./plex-exporter {};
+  tpm-fido = prev.callPackage ./tpm-fido {};
   whitesur-gtk-theme = prev.callPackage ./whitesur-gtk-theme {};
   whitesur-icon-theme = prev.callPackage ./whitesur-icon-theme {};
-  whitesur-kde = prev.callPackage ./whitesur-kde {};
-  tpm-fido = prev.callPackage ./tpm-fido {};
 
   myTmuxPlugins = prev.lib.recurseIntoAttrs (prev.callPackage ./tmux-plugins {});
 }
