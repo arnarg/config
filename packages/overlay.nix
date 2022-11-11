@@ -4,6 +4,7 @@ final: prev: {
   morgen = prev.callPackage ./morgen {};
   plex-exporter = prev.callPackage ./plex-exporter {};
   tpm-fido = prev.callPackage ./tpm-fido {};
+  w4-bin = callPackage ./w4-bin {};
   whitesur-gtk-theme = prev.callPackage ./whitesur-gtk-theme {};
   whitesur-icon-theme = prev.callPackage ./whitesur-icon-theme {};
 
