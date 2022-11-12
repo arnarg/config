@@ -1,40 +1,20 @@
 {
   config,
+  lib,
   pkgs,
-  inputs,
   ...
 }: {
-  imports = [
-    ./services/bin.nix
-  ];
-
-  ############
-  ## SHIORI ##
-  ############
-  services.shiori.enable = true;
-
-  ##########
-  ## YARR ##
-  ##########
-  systemd.services.yarr = let
-    yarrPkg = inputs.unstable.legacyPackages.${config.nixpkgs.system}.yarr;
-  in {
-    description = "Yet another rss reader";
+  systemd.services.w4-bin = {
+    description = "a paste bin";
     wantedBy = ["multi-user.target"];
 
-    environment = {
-      XDG_CONFIG_HOME = "/var/lib/yarr";
-      YARR_DB = "/var/lib/yarr/yarr.db";
-      YARR_ADDR = "127.0.0.1:7070";
-    };
-
     serviceConfig = {
-      ExecStart = "${yarrPkg}/bin/yarr";
+      ExecStart = "${pkgs.w4-bin}/bin/bin 127.0.0.1:8820";
 
       DynamicUser = true;
-      StateDirectory = "yarr";
+      StateDirectory = "w4-bin";
       # As the RootDirectory
-      RuntimeDirectory = "yarr";
+      RuntimeDirectory = "w4-bin";
 
       # Security options
       BindReadOnlyPaths = [
@@ -59,7 +39,7 @@
       RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
-      RootDirectory = "/run/yarr";
+      RootDirectory = "/run/w4-bin";
       SystemCallArchitectures = "native";
       SystemCallErrorNumber = "EPERM";
       SystemCallFilter = [
@@ -75,25 +55,10 @@
     };
   };
 
-  ##################################
-  ## Persisting state directories ##
-  ##################################
-  environment.persistence."/nix/persist".directories = [
-    "/var/lib/shiori"
-    "/var/lib/yarr"
-  ];
-
-  ###########
-  ## Proxy ##
-  ###########
   local.proxy.services = [
     {
-      name = "shiori";
-      url = "http://localhost:8080";
-    }
-    {
-      name = "reader";
-      url = "http://localhost:7070";
+      name = "bin";
+      url = "http://localhost:8820";
     }
   ];
 }
