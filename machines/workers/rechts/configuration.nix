@@ -5,13 +5,12 @@
   ...
 }: {
   imports = [
+    ../configuration.nix
     ./hardware-configuration.nix
     ./services.nix
-    ./proxy.nix
-    ./dns.nix
   ];
 
-  networking.hostName = "links";
+  networking.hostName = "rechts";
 
   # According to https://nixos.wiki/wiki/NixOS_on_ARM/UEFI
   # only grub2 works for now on ARM with UEFI

@@ -1,20 +1,28 @@
 {
   config,
-  lib,
   pkgs,
+  inputs,
   ...
 }: {
-  systemd.services.w4-bin = {
-    description = "a paste bin";
+  systemd.services.yarr = let
+    pkg = inputs.unstable.legacyPackages.${config.nixpkgs.system}.yarr;
+  in {
+    description = "Yet another rss reader";
     wantedBy = ["multi-user.target"];
 
+    environment = {
+      XDG_CONFIG_HOME = "/var/lib/yarr";
+      YARR_DB = "/var/lib/yarr/yarr.db";
+      YARR_ADDR = "127.0.0.1:7070";
+    };
+
     serviceConfig = {
-      ExecStart = "${pkgs.w4-bin}/bin/bin 127.0.0.1:8820";
+      ExecStart = "${pkg}/bin/yarr";
 
       DynamicUser = true;
-      StateDirectory = "w4-bin";
+      StateDirectory = "yarr";
       # As the RootDirectory
-      RuntimeDirectory = "w4-bin";
+      RuntimeDirectory = "yarr";
 
       # Security options
       BindReadOnlyPaths = [
@@ -39,7 +47,7 @@
       RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
-      RootDirectory = "/run/w4-bin";
+      RootDirectory = "/run/yarr";
       SystemCallArchitectures = "native";
       SystemCallErrorNumber = "EPERM";
       SystemCallFilter = [
@@ -55,10 +63,13 @@
     };
   };
 
-  local.proxy.services = [
-    {
-      name = "bin";
-      url = "http://localhost:8820";
-    }
+  environment.persistence."/nix/persist".directories = [
+    "/var/lib/private/yarr"
   ];
+
+  local.consul.services.reader = {
+    name = "reader";
+    port = 7070;
+    connect.sidecar_service = {};
+  };
 }

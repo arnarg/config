@@ -29,10 +29,9 @@
     };
   };
 
-  local.proxy.services = [
-    {
-      name = "bin";
-      url = "http://localhost:9080";
-    }
-  ];
+  local.consul.services.bin = {
+    name = "bin";
+    port = 9080;
+    connect.sidecar_service = {};
+  };
 }
