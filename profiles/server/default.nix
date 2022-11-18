@@ -9,7 +9,7 @@
     ./prometheus
   ];
   config = {
-    networking.firewall.enable = true;
+    networking.firewall.enable = lib.mkDefault true;
 
     services.openssh.enable = true;
 

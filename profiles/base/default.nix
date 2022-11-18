@@ -31,9 +31,17 @@ with lib; {
 
   security.sudo.enable = true;
 
-  services.avahi.enable = true;
-  services.avahi.publish.enable = true;
-  services.avahi.publish.addresses = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    ipv6 = false;
+    publish.enable = true;
+    publish.addresses = true;
+    extraConfig = ''
+      [publish]
+      publish-aaaa-on-ipv4=no
+    '';
+  };
 
   time.timeZone = mkDefault "utc";
 }
