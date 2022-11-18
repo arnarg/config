@@ -102,10 +102,18 @@
             self.nixosModules.server
           ];
         };
+        r4s = {
+          system = "aarch64-linux";
+          modules = [
+            ./machines/r4s/configuration.nix
+            self.nixosModules.immutable
+            self.nixosModules.server
+          ];
+        };
         links = {
           system = "aarch64-linux";
           modules = [
-            ./machines/links/configuration.nix
+            ./machines/workers/links/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
           ];
@@ -113,7 +121,7 @@
         rechts = {
           system = "aarch64-linux";
           modules = [
-            ./machines/rechts/configuration.nix
+            ./machines/workers/rechts/configuration.nix
             self.nixosModules.immutable
             self.nixosModules.server
           ];
