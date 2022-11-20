@@ -9,9 +9,16 @@
   ##############
   # Neither of the interfaces in my NanoPI R4S
   # have a stable MAC address.
-  # Since they use different drivers I use that
-  # for matching the interface in a systemd.link
-  # file, rename them and set a stable MAC address.
+  # To differentiate them I need to set some unique matcher.
+  # The wan interface uses the "st_gmac" driver according
+  # to ethtool but setting `matchConfig.Driver` to `st_gmac`
+  # didn't work so matching on `OriginalName` as `eth0` is
+  # necessary.
+  # This is stable anyway since with the lan interface I match
+  # on the driver which is `r8169` and that _does_ work on that
+  # interface.
+  # After matching those I set a custom name and a stable MAC
+  # address on both interfaces.
   systemd.network.links."10-wan" = {
     matchConfig.OriginalName = "eth0";
     linkConfig.Name = "wan0";
