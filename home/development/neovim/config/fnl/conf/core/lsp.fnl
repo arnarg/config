@@ -31,7 +31,7 @@
 (macro setup-lsp [name conf]
   `((. lspconfig ,name :setup) ,conf))
 
-(setup-lsp :gopls {:on_attach on-attach : capabilities})
+(setup-lsp :gopls {:on_attach on-attach})
 
 (setup-lsp :clojure_lsp {:on_attach on-attach : capabilities})
 
