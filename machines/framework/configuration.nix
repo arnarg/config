@@ -31,6 +31,9 @@
     "/var/lib/tailscale"
   ];
 
+  # Disable fingerprint pam auth
+  security.pam.services.login.fprintAuth = false;
+
   # I want to cross-compile
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
