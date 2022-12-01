@@ -9,6 +9,10 @@
     ./hardware-configuration.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    teams
+  ];
+
   # For protection!
   # https://www.phoronix.com/news/Intel-iGPU-Avoid-Linux-5.19.12
   boot.kernelPackages = assert lib.assertMsg (pkgs.linuxPackages_latest.kernel.version != "5.19.12") "Linux 5.19.12 broken!";

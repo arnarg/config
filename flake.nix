@@ -5,8 +5,7 @@
   ## INPUTS ##
   ############
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
-    next.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a";
     hardware.url = "github:nixos/nixos-hardware/master";
@@ -71,7 +70,6 @@
             ];
           }
         ];
-        framework.channelName = "next";
         framework.modules = [
           ./machines/framework/configuration.nix
           self.nixosModules.immutable
