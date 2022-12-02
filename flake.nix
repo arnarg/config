@@ -51,7 +51,7 @@
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
           nix.linkInputs = true;
-          nix.trustedUsers = ["root" "arnar"];
+          nix.settings.trusted-users = ["root" "arnar"];
         }
       ];
 
@@ -163,6 +163,9 @@
               self.homeModules.desktop
               ./home/desktop/gnome
               ./home/desktop/tpm-fido
+              {
+                home.packages = with pkgs; [teams slack];
+              }
             ];
             # https://github.com/nix-community/home-manager/issues/3342
             manual.manpages.enable = false;
