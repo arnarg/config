@@ -17,7 +17,11 @@
                     :fennel (fn []
                               {:exe :fnlfmt :args ["-"] :stdin true})
                     :nix (fn []
-                           {:exe :alejandra :args ["-"] :stdin true})}})
+                           {:exe :alejandra :args ["-"] :stdin true})
+                    :terraform (fn []
+                                 {:exe :terraform :args [:fmt "-"] :stdin true})
+                    :hcl (fn []
+                           {:exe :hclfmt :stdin true})}})
 
 (local fmtgroup (create_augroup :FormatAutogroup {:clear true}))
 (create_autocmd [:BufWritePost]

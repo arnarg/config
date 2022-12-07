@@ -39,7 +39,7 @@
 
 (setup-lsp :rnix {:on_attach on-attach : capabilities})
 
-(setup-lsp :vuels {:on_attach on-attach : capabilities})
+(setup-lsp :terraformls {:on_attach on-attach : capabilities})
 
 (setup-lsp :yamlls
            {:on_attach on-attach

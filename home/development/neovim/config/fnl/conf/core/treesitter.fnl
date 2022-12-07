@@ -10,6 +10,7 @@
                                        :cpp
                                        :fennel
                                        :go
+                                       :hcl
                                        :javascript
                                        :json
                                        :markdown

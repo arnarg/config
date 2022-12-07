@@ -109,6 +109,7 @@ in
             rnix-lsp
             rust-analyzer
             nodePackages.yaml-language-server
+            terraform-ls
 
             # For rust-analyzer
             cargo
@@ -125,6 +126,8 @@ in
             alejandra # Nix
             black # Python
             nodePackages.prettier # Javascript
+            terraform # Terraform
+            hclfmt # HCL2
           ]
           ++ optionals pkgs.stdenv.isLinux [
             wl-clipboard
