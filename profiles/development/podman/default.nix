@@ -14,6 +14,7 @@ in
     config = mkIf cfg.enable {
       virtualisation.podman.enable = true;
       virtualisation.podman.dockerCompat = true;
+      virtualisation.podman.dockerSocket.enable = true;
 
       users.users.arnar.subUidRanges = [
         {
@@ -27,5 +28,7 @@ in
           startGid = 100000;
         }
       ];
+
+      users.users.arnar.extraGroups = ["podman"];
     };
   }
