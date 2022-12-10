@@ -19,7 +19,6 @@
 
   # Enable tailscale
   services.tailscale.enable = true;
-  services.tailscale.package = inputs.unstable.legacyPackages.x86_64-linux.tailscale;
 
   # Having resolved with a networkmanager setup helps with resolv.conf handling
   # when using tailscale dns

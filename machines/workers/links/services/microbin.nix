@@ -13,7 +13,7 @@
   users.groups.microbin.name = "microbin";
 
   systemd.services.microbin = let
-    pkg = inputs.unstable.legacyPackages.${config.nixpkgs.system}.microbin;
+    pkg = pkgs.microbin;
   in {
     description = "The tiny, self-contained, configurable paste bin.";
     wantedBy = ["multi-user.target"];

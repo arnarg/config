@@ -5,7 +5,7 @@
   ...
 }: {
   systemd.services.yarr = let
-    pkg = inputs.unstable.legacyPackages.${config.nixpkgs.system}.yarr;
+    pkg = pkgs.yarr;
   in {
     description = "Yet another rss reader";
     wantedBy = ["multi-user.target"];
