@@ -9,6 +9,7 @@
     ./dns.nix
     ./proxy.nix
     ./consul.nix
+    ./vault.nix
   ];
 
   ############
