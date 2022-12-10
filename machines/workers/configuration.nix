@@ -6,6 +6,10 @@
 }: let
   localServices = config.local.consul.services;
 in {
+  imports = [
+    ./proxy.nix
+  ];
+
   options.local.consul.services = with lib;
     mkOption {
       type = types.attrsOf types.attrs;
@@ -24,6 +28,8 @@ in {
         node_name = config.networking.hostName;
         data_dir = "/nix/persist/var/lib/consul";
         leave_on_terminate = false;
+
+        retry_join = ["provider=mdns service=_consul-server._tcp domain=local"];
 
         ports.grpc = 8502;
         connect.enabled = true;

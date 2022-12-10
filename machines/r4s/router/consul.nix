@@ -31,6 +31,18 @@
     };
   };
 
+  services.avahi.extraServiceFiles.consul-server = ''
+    <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+    <service-group>
+      <name replace-wildcards="yes">consul-%h</name>
+      <service>
+        <type>_consul-server._tcp</type>
+        <port>8301</port>
+      </service>
+    </service-group>
+  '';
+
   networking.firewall.interfaces.lan0.allowedTCPPorts = [8300 8301 8502];
   networking.firewall.interfaces.lan0.allowedUDPPorts = [8301];
 

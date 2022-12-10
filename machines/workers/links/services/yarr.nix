@@ -72,4 +72,8 @@
     port = 7070;
     connect.sidecar_service = {};
   };
+  local.proxy.services.yarr = {
+    name = "reader";
+    url = "http://localhost:7070";
+  };
 }

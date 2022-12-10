@@ -50,7 +50,7 @@ in {
             } udp dport 53 counter accept
 
             # Allow mDNS
-            ip daddr 224.0.0.251 udp dport 5353 counter accept
+            ip saddr {192.168.0.0/24, 10.10.10.0/24} udp dport 5353 counter accept
             ip6 daddr ff02::fb udp dport 5353 counter accept
 
             # Always allow icmpv6
@@ -67,8 +67,8 @@ in {
             udp dport dhcpv6-client udp sport dhcpv6-server counter accept comment "IPv6 DHCP"
 
             # Allow returning traffic from wan0 and drop everthing else
-            iifname {"wan0", "lan0"} ct state { established, related } counter accept
-            iifname {"wan0", "lan0"} drop
+            iifname {"wan0", "lan0", "tailscale0"} ct state { established, related } counter accept
+            iifname {"wan0", "lan0", "tailscale0"} drop
           }
 
           chain FORWARD {
@@ -77,8 +77,14 @@ in {
             # Allow icmpv6 ping
             ip6 nexthdr icmpv6 icmpv6 type echo-request counter accept
 
-            # Reject ipv4 traffic to local network
-            ip daddr 192.168.0.0/24 counter reject
+            # Allow tailscale's wireguard traffic between wan0 and lan0
+            iifname {
+              "wan0",
+              "lan0"
+            } oifname {
+              "wan0",
+              "lan0"
+            } udp sport 41641 counter accept comment "Allow wireguard point to point traffic"
 
             # Allow trusted network WAN access
             iifname {

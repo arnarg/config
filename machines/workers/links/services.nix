@@ -7,6 +7,7 @@
   imports = [
     ./services/yarr.nix
     ./services/microbin.nix
+    ./services/vikunja.nix
   ];
 
   ############
@@ -17,6 +18,9 @@
     name = "shiori";
     port = 8080;
     connect.sidecar_service = {};
+  };
+  local.proxy.services.shiori = {
+    url = "http://localhost:8080";
   };
 
   ##################################

@@ -34,4 +34,8 @@
     port = 9080;
     connect.sidecar_service = {};
   };
+  local.proxy.services.microbin = {
+    name = "bin";
+    url = "http://localhost:9080";
+  };
 }

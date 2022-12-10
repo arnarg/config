@@ -19,6 +19,8 @@
   boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.grub.device = "nodev";
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking.interfaces.eth0.useDHCP = true;
 
   # tailscale

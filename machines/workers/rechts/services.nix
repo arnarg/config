@@ -22,4 +22,8 @@
       connect.sidecar_service = {};
     };
   };
+  local.proxy.services = {
+    sonarr.url = "http://localhost:8989";
+    radarr.url = "http://localhost:7878";
+  };
 }
