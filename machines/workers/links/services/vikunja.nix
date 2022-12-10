@@ -11,6 +11,7 @@
     settings = {
       service = {
         enablecaldav = true;
+        enableregistration = false;
       };
     };
   };
@@ -25,4 +26,8 @@
   local.proxy.services.todo = {
     url = "http://localhost:80";
   };
+
+  environment.persistence."/nix/persist".directories = [
+    "/var/lib/private/vikunja"
+  ];
 }
