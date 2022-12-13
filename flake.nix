@@ -12,7 +12,7 @@
     impermanence.url = "github:nix-community/impermanence/master";
 
     home = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "unstable";
     };
   };
@@ -56,20 +56,6 @@
       ];
 
       hosts = {
-        flex.modules = [
-          ./machines/flex/configuration.nix
-          self.nixosModules.immutable
-          self.nixosModules.desktop
-          self.nixosModules.development
-          self.nixosModules.laptop
-          {
-            # Get home manager in path
-            environment.systemPackages = [
-              nixpkgs.legacyPackages.x86_64-linux.git
-              home.packages.x86_64-linux.home-manager
-            ];
-          }
-        ];
         framework.modules = [
           ./machines/framework/configuration.nix
           self.nixosModules.immutable
@@ -78,6 +64,23 @@
           self.nixosModules.laptop
           self.nixosModules.tpm
           hardware.nixosModules.framework-12th-gen-intel
+          {
+            # Get home manager in path
+            environment.systemPackages = [
+              nixpkgs.legacyPackages.x86_64-linux.git
+              home.packages.x86_64-linux.home-manager
+            ];
+          }
+        ];
+        thinkpad.modules = [
+          ./machines/thinkpad/configuration.nix
+          self.nixosModules.immutable
+          self.nixosModules.desktop
+          self.nixosModules.development
+          self.nixosModules.laptop
+          self.nixosModules.tpm
+          hardware.nixosModules.common-cpu-amd
+          hardware.nixosModules.common-gpu-amd
           {
             # Get home manager in path
             environment.systemPackages = [
@@ -142,10 +145,11 @@
       # HOME #
       ########
       homeConfigurations = let
-        username = "arnar";
-        homeDirectory = "/home/arnar";
         system = "x86_64-linux";
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit (self) homeModules;
+        };
         generateHome = home.lib.homeManagerConfiguration;
         pkgs = import unstable {
           inherit system;
@@ -155,21 +159,13 @@
           config.allowUnfree = true;
         };
       in {
-        arnar = generateHome {
-          inherit system username homeDirectory extraSpecialArgs pkgs;
-          configuration = {
-            imports = [
-              self.homeModules.development
-              self.homeModules.desktop
-              ./home/desktop/gnome
-              ./home/desktop/tpm-fido
-              {
-                home.packages = with pkgs; [teams slack];
-              }
-            ];
-            # https://github.com/nix-community/home-manager/issues/3342
-            manual.manpages.enable = false;
-          };
+        framework = generateHome {
+          inherit pkgs extraSpecialArgs;
+          modules = [./home/framework.nix];
+        };
+        thinkpad = generateHome {
+          inherit pkgs extraSpecialArgs;
+          modules = [./home/thinkpad.nix];
         };
       };
 

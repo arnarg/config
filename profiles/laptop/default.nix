@@ -15,6 +15,7 @@
     # Enable networkmanager
     networking.networkmanager.enable = true;
     users.users.arnar.extraGroups = ["networkmanager"];
+    services.resolved.enable = true;
 
     # Enable tlp
     services.tlp.enable = true;
