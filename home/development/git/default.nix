@@ -39,7 +39,6 @@ in
 
       programs.git.extraConfig = {
         pull.rebase = true;
-        init.defaultBranch = "master";
       };
     };
   }

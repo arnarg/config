@@ -20,6 +20,14 @@
     terraform
   ];
 
+  # Load work git config
+  programs.git.includes = [
+    {
+      condition = "gitdir:~/Code/work/";
+      path = "~/Code/work/.gitconfig";
+    }
+  ];
+
   # https://github.com/nix-community/home-manager/issues/3342
   manual.manpages.enable = false;
 }
