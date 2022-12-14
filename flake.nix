@@ -38,7 +38,12 @@
       ############
       # Channels #
       ############
-      sharedOverlays = [self.overlay];
+      sharedOverlays = [
+        self.overlay
+        (p: _: {
+          home-manager = home.packages.${p.system}.home-manager;
+        })
+      ];
       channelsConfig = {allowUnfree = true;};
 
       #########
@@ -47,72 +52,13 @@
       hostDefaults.modules = [
         self.nixosModules.base
         impermanence.nixosModules.impermanence
-        {
-          nix.generateNixPathFromInputs = true;
-          nix.generateRegistryFromInputs = true;
-          nix.linkInputs = true;
-          nix.settings.trusted-users = ["root" "arnar"];
-        }
       ];
 
       hosts = {
-        framework.modules = [
-          ./machines/framework/configuration.nix
-          self.nixosModules.immutable
-          self.nixosModules.desktop
-          self.nixosModules.development
-          self.nixosModules.laptop
-          self.nixosModules.tpm
-          hardware.nixosModules.framework-12th-gen-intel
-          {
-            # Get home manager in path
-            environment.systemPackages = [
-              nixpkgs.legacyPackages.x86_64-linux.git
-              home.packages.x86_64-linux.home-manager
-            ];
-          }
-        ];
-        thinkpad.modules = [
-          ./machines/thinkpad/configuration.nix
-          self.nixosModules.immutable
-          self.nixosModules.desktop
-          self.nixosModules.development
-          self.nixosModules.laptop
-          self.nixosModules.tpm
-          hardware.nixosModules.common-cpu-amd
-          hardware.nixosModules.common-gpu-amd
-          {
-            # Get home manager in path
-            environment.systemPackages = [
-              nixpkgs.legacyPackages.x86_64-linux.git
-              home.packages.x86_64-linux.home-manager
-            ];
-          }
-        ];
-        terramaster = let
-          system = "x86_64-linux";
-          pkgs = import unstable {
-            inherit system;
-            overlays = [
-              self.overlay
-            ];
-            config.allowUnfree = true;
-          };
-        in {
-          modules = [
-            ./machines/terramaster/configuration.nix
-            self.nixosModules.immutable
-            self.nixosModules.server
-          ];
-        };
-        r4s = {
-          system = "aarch64-linux";
-          modules = [
-            ./machines/r4s/configuration.nix
-            self.nixosModules.immutable
-            self.nixosModules.server
-          ];
-        };
+        framework = import ./machines/framework {inherit inputs;};
+        thinkpad = import ./machines/thinkpad {inherit inputs;};
+        terramaster = import ./machines/terramaster {inherit inputs;};
+        r4s = import ./machines/r4s {inherit inputs;};
         links = {
           system = "aarch64-linux";
           modules = [

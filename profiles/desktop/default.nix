@@ -10,6 +10,8 @@
   ];
 
   config = with lib; {
+    environment.systemPackages = with pkgs; [git home-manager];
+
     # Default packages for this profile
     local.desktop.gnome.enable = mkDefault true;
 

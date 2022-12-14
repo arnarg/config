@@ -32,7 +32,7 @@ with lib; {
   security.sudo.enable = true;
 
   services.avahi = {
-    enable = true;
+    enable = lib.mkDefault true;
     nssmdns = true;
     ipv6 = false;
     publish.enable = true;
@@ -41,6 +41,13 @@ with lib; {
       [publish]
       publish-aaaa-on-ipv4=no
     '';
+  };
+
+  nix = {
+    generateNixPathFromInputs = true;
+    generateRegistryFromInputs = true;
+    linkInputs = true;
+    settings.trusted-users = ["root" "arnar"];
   };
 
   time.timeZone = mkDefault "utc";

@@ -19,6 +19,8 @@
     RESTORE_THRESHOLDS_ON_BAT = 1;
   };
 
+  services.avahi.enable = false;
+
   networking = {
     hostId = "7d7c4e6f";
     hostName = "thinkpad";
