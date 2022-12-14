@@ -28,6 +28,9 @@
     }
   ];
 
+  # Set smaller icon size in dock
+  dconf.settings."org/gnome/shell/extensions/dash-to-dock".dash-max-icon-size = 54;
+
   # https://github.com/nix-community/home-manager/issues/3342
   manual.manpages.enable = false;
 }

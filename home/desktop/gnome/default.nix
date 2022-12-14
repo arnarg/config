@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: let
@@ -124,7 +125,7 @@ in {
         transparency-mode = "FIXED";
         background-color = "rgb(36,31,49)";
         background-opacity = 0.65000000000000000;
-        dash-max-icon-size = 68;
+        dash-max-icon-size = lib.mkDefault 68;
         dock-position = "BOTTOM";
         extend-height = false;
         running-indicator-style = "DOTS";
