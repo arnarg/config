@@ -60,22 +60,8 @@
         thinkpad = import ./machines/thinkpad {inherit inputs;};
         terramaster = import ./machines/terramaster {inherit inputs;};
         r4s = import ./machines/r4s {inherit inputs;};
-        links = {
-          system = "aarch64-linux";
-          modules = [
-            ./machines/workers/links/configuration.nix
-            self.nixosModules.immutable
-            self.nixosModules.server
-          ];
-        };
-        rechts = {
-          system = "aarch64-linux";
-          modules = [
-            ./machines/workers/rechts/configuration.nix
-            self.nixosModules.immutable
-            self.nixosModules.server
-          ];
-        };
+        links = import ./machines/workers/links {inherit inputs;};
+        rechts = import ./machines/workers/rechts {inherit inputs;};
       };
 
       nixosModules = utils.lib.exportModules [
