@@ -42,6 +42,7 @@
         self.overlay
         (p: _: {
           home-manager = home.packages.${p.system}.home-manager;
+          tailscale = unstable.legacyPackages.${p.system}.tailscale;
         })
       ];
       channelsConfig = {allowUnfree = true;};
