@@ -19,6 +19,8 @@
     RESTORE_THRESHOLDS_ON_BAT = 1;
   };
 
+  services.tailscale.enable = true;
+
   services.avahi.enable = false;
 
   networking = {
