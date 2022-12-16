@@ -33,14 +33,20 @@ in {
     {{- end }}
   '';
 
+  systemd.tmpfiles.rules = [
+    "f /tmp/coredns/hosts 0644 root root"
+  ];
+
   systemd.services.hosts-consul-template = {
     description = "Consul template service to generate hosts file from services";
     wantedBy = ["multi-user.target"];
-    after = ["consul.service"];
+    requires = ["network-online.target"];
+    after = ["network-online.target" "consul.service"];
 
     serviceConfig = {
       ExecStart = "${pkgs.consul-template}/bin/consul-template --template=\"/etc/coredns/hosts.tmpl:/tmp/coredns/hosts\"";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGHUP $MAINPID";
+      KillSignal = "SIGINT";
       Restart = "always";
     };
   };
