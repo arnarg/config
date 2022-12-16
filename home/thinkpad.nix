@@ -18,6 +18,7 @@
     teams
     slack
     terraform
+    azure-cli
   ];
 
   # Load work git config
@@ -30,6 +31,8 @@
 
   # Set smaller icon size in dock
   dconf.settings."org/gnome/shell/extensions/dash-to-dock".dash-max-icon-size = 54;
+  # Enable fractional scaling
+  dconf.settings."org/gnome/mutter".experimental-features = "['scale-monitor-framebuffer']";
 
   # https://github.com/nix-community/home-manager/issues/3342
   manual.manpages.enable = false;
