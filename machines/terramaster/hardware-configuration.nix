@@ -52,6 +52,6 @@
   local.immutable.persistDevice = "/nix";
   local.immutable.persistPath = "/nix/persist";
 
-  nix.maxJobs = 2;
+  nix.settings.max-jobs = 2;
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }
