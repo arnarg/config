@@ -100,4 +100,9 @@ in
     local.immutable.links.tmpfiles = [
       "/etc/plex_exporter/environment" # Plex exporter
     ];
+
+    # Fix permissions between generations
+    systemd.tmpfiles.rules = [
+      "z /nix/persist/var/lib/traefik/acme.json 0600 traefik traefik"
+    ];
   }
