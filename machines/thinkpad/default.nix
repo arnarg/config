@@ -1,5 +1,4 @@
 {inputs, ...}: {
-  channelName = "unstable";
   modules = [
     ./configuration.nix
     inputs.self.nixosModules.immutable
