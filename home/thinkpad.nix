@@ -19,6 +19,7 @@
     slack
     terraform
     azure-cli
+    chromium
   ];
 
   # Load work git config
