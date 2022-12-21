@@ -20,6 +20,7 @@
     terraform
     azure-cli
     chromium
+    obsidian
   ];
 
   # Load work git config
