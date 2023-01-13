@@ -13,6 +13,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  programs.evolution.enable = true;
+  programs.evolution.plugins = [pkgs.evolution-ews];
+
   services.tlp.settings = {
     START_CHARGE_THRESH_BAT0 = 75;
     STOP_CHARGE_THRESH_BAT0 = 80;
