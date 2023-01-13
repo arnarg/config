@@ -13,6 +13,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
+  boot.kernelParams = ["mem_sleep_default=deep"];
 
   boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/47f531af-e03f-445e-a9e2-ff702936b852";
 
