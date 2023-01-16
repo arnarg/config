@@ -15,12 +15,13 @@
   home.homeDirectory = "/home/arnar";
 
   home.packages = with pkgs; [
-    teams
-    slack
-    terraform
     azure-cli
+    bless
     chromium
     obsidian
+    slack
+    teams
+    terraform
   ];
 
   # Load work git config
