@@ -22,6 +22,7 @@
     slack
     teams
     terraform
+    terragrunt
   ];
 
   # Load work git config
