@@ -15,7 +15,6 @@
   home.homeDirectory = "/home/arnar";
 
   home.packages = with pkgs; [
-    azure-cli
     bless
     chromium
     obsidian

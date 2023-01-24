@@ -24,7 +24,7 @@
     services.thermald.enable = true;
 
     # Automatically suspend-then-hibernate when lid is closed
-    services.logind.lidSwitch = "suspend-then-hibernate";
+    services.logind.lidSwitch = lib.mkDefault "suspend-then-hibernate";
     systemd.sleep.extraConfig = ''
       HibernateDelaySec=1h
     '';

@@ -8,6 +8,15 @@
     ./hardware-configuration.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    # This breaks too often in unstable
+    # so I put it here
+    azure-cli
+  ];
+
+  # I haven't got hibernate to work nicely with the AMD CPU
+  services.logind.lidSwitch = "suspend";
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader.systemd-boot.enable = true;
