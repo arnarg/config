@@ -44,6 +44,8 @@ in
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi 'v' send -X begin-selection
         bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel '${cfg.copyCommand}'
+        # Set tmux-256color
+        set -g default-terminal "tmux-256color"
       '';
     };
   }

@@ -1,11 +1,10 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }: {
   imports = [
     ./git
+    ./helix
     ./neovim
     ./pass
     ./tmux
