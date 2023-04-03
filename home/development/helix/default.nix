@@ -45,11 +45,23 @@ in {
   programs.helix.settings = {
     theme = "gruvbox";
     editor = {
+      # Disable mouse mode
       mouse = false;
+      # Enable cursorline
       cursorline = true;
+      # Set relative line numbers
       line-number = "relative";
+      # Change bg color of current mode in statusline
       color-modes = true;
+      # Render indent guides
       indent-guides.render = true;
+
+      file-picker = {
+        # Display hidden files in file picker
+        hidden = false;
+        # Display git ignored files in file picker
+        git-ignore = false;
+      };
     };
   };
 
