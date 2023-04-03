@@ -45,6 +45,7 @@ in {
       mouse = false;
       cursorline = true;
       line-number = "relative";
+      color-modes = true;
       indent-guides.render = true;
     };
   };
