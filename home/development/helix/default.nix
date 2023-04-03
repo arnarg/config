@@ -44,6 +44,7 @@ in {
 
   programs.helix.settings = {
     theme = "gruvbox";
+
     editor = {
       # Disable mouse mode
       mouse = false;
@@ -66,6 +67,13 @@ in {
       statusline = {
         left = ["mode" "spinner" "file-name"];
         right = ["diagnostics" "selections" "position" "file-type" "file-encoding"];
+      };
+    };
+
+    # Key remapping
+    keys = {
+      normal = {
+        C-r = ":reload";
       };
     };
   };
