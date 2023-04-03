@@ -62,6 +62,11 @@ in {
         # Display git ignored files in file picker
         git-ignore = false;
       };
+
+      statusline = {
+        left = ["mode" "spinner" "file-name"];
+        right = ["diagnostics" "selections" "position" "file-type" "file-encoding"];
+      };
     };
   };
 
