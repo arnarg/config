@@ -21,6 +21,9 @@
     # Nix
     nil
     alejandra
+
+    # For accessing system clipboard
+    wl-clipboard
   ];
 
   # Wrap helix to add packages above in PATH
