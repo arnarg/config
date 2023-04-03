@@ -21,6 +21,8 @@
     # Nix
     nil
     alejandra
+    # TOML
+    taplo
 
     # For accessing system clipboard
     wl-clipboard
@@ -79,6 +81,7 @@ in {
   };
 
   programs.helix.languages = [
+    # Nix
     {
       name = "nix";
       formatter = {
@@ -86,11 +89,21 @@ in {
         args = ["-"];
       };
     }
+    # HCL
     {
       name = "hcl";
       formatter = {
         command = "hclfmt";
       };
+    }
+    # TOML
+    {
+      name = "toml";
+      file-types = [
+        # editorconfig doesn't have .toml extension but is toml
+        ".editorconfig"
+        "toml"
+      ];
     }
   ];
 }
