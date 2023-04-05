@@ -7,6 +7,7 @@
   extraPaths = with pkgs; [
     # Go
     gopls
+    gotools
     delve
     # Python
     python311Packages.python-lsp-server
@@ -81,6 +82,13 @@ in {
   };
 
   programs.helix.languages = [
+    # Go
+    {
+      name = "go";
+      formatter = {
+        command = "goimports";
+      };
+    }
     # Nix
     {
       name = "nix";
