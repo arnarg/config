@@ -61,6 +61,8 @@ in {
       color-modes = true;
       # Render indent guides
       indent-guides.render = true;
+      # Enable soft-wrap
+      soft-wrap.enable = true;
       # By default show no inlay LSP hints
       lsp.display-inlay-hints = false;
 
