@@ -115,5 +115,12 @@ in {
         "toml"
       ];
     }
+    # YAML
+    {
+      name = "yaml";
+      config = {
+        yaml.keyOrdering = false;
+      };
+    }
   ];
 }
