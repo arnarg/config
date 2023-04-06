@@ -19,22 +19,24 @@
       htop
       jq
       nix-prefetch-github
+      nurl
       python3
       silver-searcher
       timewarrior
       wget
       wireshark
       yubikey-manager
-      zk
 
       # Go
       go
       gocode
       godef
+
+      # Gleam
+      gleam
     ];
 
     home.sessionVariables = {
-      ZK_NOTEBOOK_DIR = "$HOME/Documents/notes";
       LC_CTYPE = "en_US.UTF-8";
       GOPATH = "$HOME/go";
       TIMEWARRIORDB = "$HOME/.local/share/timewarrior";

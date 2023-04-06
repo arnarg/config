@@ -15,6 +15,7 @@
       anytype
       morgen
       mailspring
+      wl-clipboard
     ];
   };
 }

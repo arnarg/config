@@ -24,6 +24,8 @@
     alejandra
     # TOML
     taplo
+    # Gleam
+    gleam
 
     # For accessing system clipboard
     wl-clipboard
