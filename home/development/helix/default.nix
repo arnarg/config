@@ -61,6 +61,8 @@ in {
       color-modes = true;
       # Render indent guides
       indent-guides.render = true;
+      # By default show no inlay LSP hints
+      lsp.display-inlay-hints = false;
 
       file-picker = {
         # Display hidden files in file picker
@@ -79,6 +81,7 @@ in {
     keys = {
       normal = {
         C-r = ":reload";
+        C-h = ":toggle-option lsp.display-inlay-hints";
       };
     };
   };
