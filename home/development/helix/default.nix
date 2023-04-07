@@ -69,8 +69,6 @@ in {
       file-picker = {
         # Display hidden files in file picker
         hidden = false;
-        # Display git ignored files in file picker
-        git-ignore = false;
       };
 
       statusline = {
