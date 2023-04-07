@@ -34,6 +34,7 @@
 
       # Gleam
       gleam
+      erlang # erlang is needed to compile gleam
     ];
 
     home.sessionVariables = {
