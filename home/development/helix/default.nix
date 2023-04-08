@@ -125,5 +125,13 @@ in {
         yaml.keyOrdering = false;
       };
     }
+    # Gleam
+    {
+      name = "gleam";
+      formatter = {
+        command = "gleam";
+        args = ["format" "--stdin"];
+      };
+    }
   ];
 }
