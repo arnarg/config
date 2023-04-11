@@ -35,6 +35,8 @@
       # Gleam
       gleam
       erlang # erlang is needed to compile gleam
+      elixir # for elixir dependencies
+      rebar3 # sometimes also needed
     ];
 
     home.sessionVariables = {
