@@ -97,6 +97,7 @@ in {
     # Nix
     {
       name = "nix";
+      auto-format = true;
       formatter = {
         command = "alejandra";
         args = ["-"];
@@ -128,6 +129,7 @@ in {
     # Gleam
     {
       name = "gleam";
+      auto-format = true;
       formatter = {
         command = "gleam";
         args = ["format" "--stdin"];
