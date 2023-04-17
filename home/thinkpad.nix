@@ -15,11 +15,8 @@
   home.homeDirectory = "/home/arnar";
 
   home.packages = with pkgs; [
-    bless
     chromium
-    obsidian
     slack
-    teams
     terraform
     terragrunt
   ];
