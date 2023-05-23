@@ -14,5 +14,7 @@ in
 
     config = mkIf cfg.enable {
       users.users.arnar.shell = pkgs.zsh;
+
+      programs.zsh.enable = true;
     };
   }
