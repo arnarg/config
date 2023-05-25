@@ -5,7 +5,6 @@
 
   self = {
     anytype = callPackage ./anytype {};
-    kbct = callPackage ./kbct {};
     morgen = callPackage ./morgen {};
     plex-exporter = callPackage ./plex-exporter {};
     tpm-fido = callPackage ./tpm-fido {};

@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./kbct
+    ./keyd
   ];
 
   config = {
@@ -32,8 +32,8 @@
     # Enable light to control backlight
     programs.light.enable = true;
 
-    # Enable kbct key rebinder
-    local.laptop.kbct.enable = true;
+    # Enable keyd key rebinder
+    local.laptop.keyd.enable = true;
 
     # Enable bluetooth
     hardware.bluetooth.enable = true;

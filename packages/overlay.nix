@@ -1,6 +1,5 @@
 final: prev: {
   anytype = prev.callPackage ./anytype {};
-  kbct = prev.callPackage ./kbct {};
   morgen = prev.callPackage ./morgen {};
   plex-exporter = prev.callPackage ./plex-exporter {};
   tpm-fido = prev.callPackage ./tpm-fido {};
