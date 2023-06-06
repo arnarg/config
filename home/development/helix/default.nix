@@ -86,54 +86,56 @@ in {
     };
   };
 
-  programs.helix.languages = [
-    # Go
-    {
-      name = "go";
-      formatter = {
-        command = "goimports";
-      };
-    }
-    # Nix
-    {
-      name = "nix";
-      auto-format = true;
-      formatter = {
-        command = "alejandra";
-        args = ["-"];
-      };
-    }
-    # HCL
-    {
-      name = "hcl";
-      formatter = {
-        command = "hclfmt";
-      };
-    }
-    # TOML
-    {
-      name = "toml";
-      file-types = [
-        # editorconfig doesn't have .toml extension but is toml
-        ".editorconfig"
-        "toml"
-      ];
-    }
-    # YAML
-    {
-      name = "yaml";
-      config = {
-        yaml.keyOrdering = false;
-      };
-    }
-    # Gleam
-    {
-      name = "gleam";
-      auto-format = true;
-      formatter = {
-        command = "gleam";
-        args = ["format" "--stdin"];
-      };
-    }
-  ];
+  programs.helix.languages = {
+    language = [
+      # Go
+      {
+        name = "go";
+        formatter = {
+          command = "goimports";
+        };
+      }
+      # Nix
+      {
+        name = "nix";
+        auto-format = true;
+        formatter = {
+          command = "alejandra";
+          args = ["-"];
+        };
+      }
+      # HCL
+      {
+        name = "hcl";
+        formatter = {
+          command = "hclfmt";
+        };
+      }
+      # TOML
+      {
+        name = "toml";
+        file-types = [
+          # editorconfig doesn't have .toml extension but is toml
+          ".editorconfig"
+          "toml"
+        ];
+      }
+      # YAML
+      {
+        name = "yaml";
+        config = {
+          yaml.keyOrdering = false;
+        };
+      }
+      # Gleam
+      {
+        name = "gleam";
+        auto-format = true;
+        formatter = {
+          command = "gleam";
+          args = ["format" "--stdin"];
+        };
+      }
+    ];
+  };
 }
