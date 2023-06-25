@@ -13,6 +13,8 @@
     python311Packages.python-lsp-server
     # Rust
     rust-analyzer
+    rustup
+    rustfmt
     # YAML
     nodePackages.yaml-language-server
     # Terraform
