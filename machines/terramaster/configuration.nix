@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: let
   kernel = config.boot.kernelPackages.kernel;
@@ -37,7 +36,7 @@ in {
 
   config = {
     # Whether to delete all files in /tmp during boot.
-    boot.cleanTmpDir = true;
+    boot.tmp.cleanOnBoot = true;
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     # I'm booting from an external USB drive so I
