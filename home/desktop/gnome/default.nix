@@ -130,6 +130,9 @@ in {
         extend-height = false;
         running-indicator-style = "DOTS";
       };
+      "org/gnome/shell/extensions/blur-my-shell/applications" = {
+        blur = false;
+      };
       "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
         blur = false;
       };
