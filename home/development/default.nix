@@ -22,6 +22,7 @@
       wget
       wireshark
       yubikey-manager
+      kubectl
 
       # Go
       go
