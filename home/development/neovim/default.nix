@@ -67,10 +67,6 @@ in
         inconsolata-nerdfont
       ];
 
-      home.sessionVariables = {
-        EDITOR = "nvim";
-      };
-
       # Put my config derivation in ~/.config/nvim
       xdg.configFile.nvim = {
         source = cfg;

@@ -39,6 +39,7 @@
     home.sessionVariables = {
       LC_CTYPE = "en_US.UTF-8";
       GOPATH = "$HOME/go";
+      EDITOR = "hx";
     };
   };
 }
