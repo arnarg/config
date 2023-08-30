@@ -28,6 +28,8 @@
     taplo
     # Gleam
     gleam
+    # d2
+    d2
 
     # For accessing system clipboard
     wl-clipboard
@@ -136,6 +138,18 @@ in {
         formatter = {
           command = "gleam";
           args = ["format" "--stdin"];
+        };
+      }
+      # d2
+      {
+        name = "d2";
+        scope = "text.d2";
+        roots = [];
+        auto-format = true;
+        file-types = ["d2"];
+        formatter = {
+          command = "d2";
+          args = ["fmt" "-"];
         };
       }
     ];
