@@ -46,7 +46,7 @@
   services.btrfs.autoScrub = {
     enable = true;
     fileSystems = ["/tank"];
-    interval = "Mon *-*-* 03:00:00";
+    interval = "Mon *-*-* 00:00:00";
   };
 
   local.immutable.persistDevice = "/nix";
