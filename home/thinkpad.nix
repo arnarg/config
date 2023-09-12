@@ -19,6 +19,7 @@
     slack
     terraform
     terragrunt
+    awscli
   ];
 
   # Load work git config
