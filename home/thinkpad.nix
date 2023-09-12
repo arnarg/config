@@ -28,6 +28,10 @@
       condition = "gitdir:~/Code/work/";
       path = "~/Code/work/.gitconfig";
     }
+    {
+      condition = "gitdir:~/Code/bnt/";
+      path = "~/Code/bnt/.gitconfig";
+    }
   ];
 
   # Set smaller icon size in dock
