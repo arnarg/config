@@ -38,6 +38,9 @@
 
   services.avahi.enable = false;
 
+  # I want to cross-compile
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
   networking = {
     hostId = "7d7c4e6f";
     hostName = "thinkpad";
