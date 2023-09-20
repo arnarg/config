@@ -12,6 +12,8 @@
     # This breaks too often in unstable
     # so I put it here
     azure-cli
+
+    citrix_workspace
   ];
 
   # I haven't got hibernate to work nicely with the AMD CPU
