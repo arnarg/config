@@ -13,6 +13,10 @@
     # so I put it here
     azure-cli
 
+    # Chromium is better for some stuff
+    chromium
+
+    # Citrix needed for some stuff
     citrix_workspace
   ];
 

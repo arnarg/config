@@ -5,10 +5,9 @@
 }: {
   config = {
     # This needs to be set in order for firefox to build
-    home.stateVersion = "20.09";
+    home.stateVersion = "21.05";
 
     programs.firefox.enable = true;
-    programs.firefox.package = pkgs.firefox-wayland;
 
     programs.firefox.profiles.default.id = 0;
     programs.firefox.profiles.default.isDefault = true;
