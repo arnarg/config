@@ -1,13 +1,16 @@
 {
   config,
   pkgs,
+  stable,
   ...
 }: {
   config = {
     # This needs to be set in order for firefox to build
-    home.stateVersion = "21.05";
+    home.stateVersion = "22.05";
 
     programs.firefox.enable = true;
+    # Webrtc screen sharing only works if I get it from stable
+    programs.firefox.package = stable.firefox;
 
     programs.firefox.profiles.default.id = 0;
     programs.firefox.profiles.default.isDefault = true;

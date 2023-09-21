@@ -80,6 +80,7 @@
         extraSpecialArgs = {
           inherit inputs;
           inherit (self) homeModules;
+          stable = inputs.nixpkgs.legacyPackages.${system};
         };
         generateHome = home.lib.homeManagerConfiguration;
         pkgs = import unstable {
