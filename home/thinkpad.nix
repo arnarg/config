@@ -15,7 +15,6 @@
   home.homeDirectory = "/home/arnar";
 
   home.packages = with pkgs; [
-    slack
     terraform
     terragrunt
     awscli

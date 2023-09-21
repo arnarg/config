@@ -9,8 +9,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # This breaks too often in unstable
-    # so I put it here
+    slack
     azure-cli
 
     # Chromium is better for some stuff
