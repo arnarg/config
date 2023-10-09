@@ -5,7 +5,6 @@
 
   config = {
     home.packages = with pkgs; [
-      mailspring
       wl-clipboard
       spotify
     ];
