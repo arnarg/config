@@ -23,6 +23,7 @@
       wireshark
       yubikey-manager
       kubectl
+      talosctl
 
       # Go
       go
