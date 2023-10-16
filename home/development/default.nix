@@ -22,8 +22,11 @@
       wget
       wireshark
       yubikey-manager
+
+      # Kubernetes
       kubectl
       talosctl
+      kubernetes-helm
 
       # Go
       go
