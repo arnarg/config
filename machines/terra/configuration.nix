@@ -129,7 +129,6 @@
     #######################
     services.plex.enable = true;
     services.plex.openFirewall = true;
-    services.plex.dataDir = "/nix/persist/var/lib/plex";
 
     ###############
     ## Tailscale ##
@@ -141,6 +140,7 @@
     #######################
     environment.persistence."/nix/persist".directories = [
       "/var/lib/tailscale"
+      "/var/lib/plex"
     ];
 
     ##########
