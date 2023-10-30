@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  stable,
+  ...
+}: {
   imports = [
     ./firefox
   ];
@@ -6,7 +10,7 @@
   config = {
     home.packages = with pkgs; [
       wl-clipboard
-      spotify
+      stable.spotify
     ];
   };
 }
