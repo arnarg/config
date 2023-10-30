@@ -91,6 +91,12 @@ in {
   };
 
   programs.helix.languages = {
+    # Update language server settings
+    language-server = {
+      yaml-language-server.config = {yaml.keyOrdering = false;};
+    };
+
+    # Update language settings
     language = [
       # Go
       {
@@ -123,13 +129,6 @@ in {
           ".editorconfig"
           "toml"
         ];
-      }
-      # YAML
-      {
-        name = "yaml";
-        config = {
-          yaml.keyOrdering = false;
-        };
       }
       # Gleam
       {
