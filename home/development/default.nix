@@ -25,7 +25,6 @@
 
       # Kubernetes
       kubectl
-      talosctl
       kubernetes-helm
 
       # Go
