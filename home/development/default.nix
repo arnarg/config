@@ -2,7 +2,6 @@
   imports = [
     ./git
     ./helix
-    ./neovim
     ./pass
     ./tmux
     ./zsh
