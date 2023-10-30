@@ -89,9 +89,6 @@ in
     ];
 
     # Immutable
-    environment.persistence."/nix/persist".directories = [
-      "/var/lib/plex"
-    ];
     local.immutable.links.tmpfiles = [
       "/etc/plex_exporter/environment" # Plex exporter
     ];

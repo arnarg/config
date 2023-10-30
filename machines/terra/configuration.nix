@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./services.nix
     ./hardware-configuration.nix
   ];
 
