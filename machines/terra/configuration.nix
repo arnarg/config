@@ -35,8 +35,8 @@
     # Terramaster F2-221's fan is connected to a case fan header.
     # It doesn't spin up under load so I set up fancontrol to take
     # care of this.
-    local.services.fancontrol.enable = true;
-    local.services.fancontrol.config = ''
+    hardware.fancontrol.enable = true;
+    hardware.fancontrol.config = ''
       INTERVAL=10
       DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon1=devices/platform/it87.2592
       DEVNAME=hwmon0=coretemp hwmon1=it8613

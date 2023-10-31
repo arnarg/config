@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./fancontrol
     ./grafana
     ./prometheus
   ];
