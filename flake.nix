@@ -60,7 +60,7 @@
         terra = import ./machines/terra {inherit inputs;};
         r4s = import ./machines/r4s {inherit inputs;};
         links = import ./machines/workers/links {inherit inputs;};
-        rechts = import ./machines/workers/rechts {inherit inputs;};
+        rechts = import ./machines/rechts {inherit inputs;};
       };
 
       nixosModules = utils.lib.exportModules [
