@@ -29,6 +29,23 @@
     # My DNS has rebinding protection and Plex doesn't like that
     networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
+    # Firewall settings
+    networking.firewall.checkReversePath = "loose";
+    networking.firewall.interfaces.enp1s0.allowedTCPPorts = [
+      # K3s api server
+      6443
+      # Kubelet port
+      10250
+      # NFS Server
+      2049
+      # PostgreSQL Server
+      5432
+    ];
+    networking.firewall.interfaces.enp1s0.allowedUDPPorts = [
+      # Flannel VXLAN
+      8472
+    ];
+
     #######################
     ## Setup Fan control ##
     #######################
@@ -99,18 +116,12 @@
         # Use persisted data directory
         data-dir = "/nix/persist/var/lib/rancher/k3s";
 
-        # Instead cilium will be deployed
-        flannel-backend = "none";
         # Running on bare metal
         disable-cloud-controller = true;
-        # Will run cilium with kube proxy replacement
-        disable-kube-proxy = true;
-        # Will run cilium for network policy enforcement
-        disable-network-policy = true;
         # Don't need the helm controller
         disable-helm-controller = true;
         # Extra stuff to disable that I will deploy manually
-        disable = ["traefik" "servicelb" "local-storage"];
+        disable = ["traefik" "servicelb" "local-storage" "metrics-server"];
 
         # Don't schedule workloads on the server
         node-taint = [
@@ -124,6 +135,24 @@
         ];
       });
     in "--config ${serverConfig}";
+
+    ################
+    ## NFS Server ##
+    ################
+    services.nfs.server.enable = true;
+    services.nfs.server.exports = ''
+      /exports/kubernetes 192.168.0.148(rw,sync,no_root_squash)
+    '';
+    services.nfs.server.createMountPoints = true;
+
+    #######################
+    ## PostgreSQL Server ##
+    #######################
+    services.postgresql.enable = true;
+    services.postgresql.enableTCPIP = true;
+    services.postgresql.authentication = ''
+      host sameuser +ext 192.168.0.0/24 scram-sha-256
+    '';
 
     #######################
     ## Plex Media Server ##
@@ -142,6 +171,8 @@
     environment.persistence."/nix/persist".directories = [
       "/var/lib/tailscale"
       "/var/lib/plex"
+      "/var/lib/postgresql"
+      "/exports"
     ];
 
     ##########

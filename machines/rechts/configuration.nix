@@ -29,6 +29,24 @@
     networking.useDHCP = false;
     networking.interfaces.eth0.useDHCP = true;
 
+    # Firewall settings
+    networking.firewall.checkReversePath = "loose";
+    networking.firewall.interfaces.eth0 = {
+      allowedTCPPorts = [
+        # Kubelet port
+        10250
+      ];
+      allowedUDPPorts = [
+        # Flannel VXLAN
+        8472
+      ];
+    };
+    networking.firewall.trustedInterfaces = [
+      "flannel+"
+      "cni0"
+      "veth+"
+    ];
+
     # Enable SSH server
     services.openssh.enable = true;
 
@@ -39,15 +57,6 @@
     services.k3s.role = "agent";
     services.k3s.serverAddr = "https://192.168.0.10:6443";
     services.k3s.tokenFile = "/etc/rancher/k3s/token";
-    services.k3s.extraFlags = let
-      # Config options for k3s agent
-      agentConfig = pkgs.writeText "k3s-config.yaml" (lib.generators.toYAML {} {
-        # Don't schedule workloads until cilium is ready
-        node-taint = [
-          "node.cilium.io/agent-not-ready=true:NoSchedule"
-        ];
-      });
-    in "--config ${agentConfig}";
 
     ###############
     ## Tailscale ##

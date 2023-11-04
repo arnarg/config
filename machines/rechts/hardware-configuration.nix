@@ -19,7 +19,7 @@
   hardware.deviceTree.filter = "meson-g12b-odroid-n2.dtb";
 
   fileSystems."/" = {
-    label = "nix";
+    label = "nixos";
     fsType = "ext4";
   };
 
