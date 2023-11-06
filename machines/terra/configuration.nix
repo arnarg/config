@@ -31,20 +31,24 @@
 
     # Firewall settings
     networking.firewall.checkReversePath = "loose";
-    networking.firewall.interfaces.enp1s0.allowedTCPPorts = [
-      # K3s api server
-      6443
-      # Kubelet port
-      10250
-      # NFS Server
-      2049
-      # PostgreSQL Server
-      5432
-    ];
-    networking.firewall.interfaces.enp1s0.allowedUDPPorts = [
-      # Flannel VXLAN
-      8472
-    ];
+    networking.firewall.interfaces.enp1s0 = {
+      allowedTCPPorts = [
+        # K3s api server
+        6443
+        # Kubelet port
+        10250
+        # NFS Server
+        2049
+        # PostgreSQL Server
+        5432
+      ];
+      allowedUDPPorts = [
+        # Flannel VXLAN
+        8472
+      ];
+    };
+    # Also allow tailscale to access k3s api server
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [6443];
 
     #######################
     ## Setup Fan control ##
