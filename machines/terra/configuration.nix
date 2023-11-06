@@ -83,6 +83,16 @@
       ];
     };
 
+    # hd-idle needs to be stopped while btrfs scrub is running
+    systemd.services.btrfs-scrub-tank = {
+      # Conflicts with hd-idle
+      conflicts = ["hd-idle.service"];
+
+      # Always restart hd-idle
+      unitConfig.OnFailure = ["hd-idle.service"];
+      unitConfig.OnSuccess = ["hd-idle.service"];
+    };
+
     ################
     ## K3s Server ##
     ################
