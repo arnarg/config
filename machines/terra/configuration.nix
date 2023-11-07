@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -37,18 +36,26 @@
         6443
         # Kubelet port
         10250
+        # Cilium health checks
+        4240
         # NFS Server
         2049
         # PostgreSQL Server
         5432
       ];
       allowedUDPPorts = [
-        # Flannel VXLAN
+        # Cilium VXLAN
         8472
       ];
     };
     # Also allow tailscale to access k3s api server
     networking.firewall.interfaces.tailscale0.allowedTCPPorts = [6443];
+    networking.firewall.trustedInterfaces = [
+      "cilium_host"
+      "cilium_net"
+      "cilium_vxlan"
+      "lxc+"
+    ];
 
     #######################
     ## Setup Fan control ##
@@ -130,8 +137,14 @@
         # Use persisted data directory
         data-dir = "/nix/persist/var/lib/rancher/k3s";
 
+        # Instead cilium will be deployed
+        flannel-backend = "none";
         # Running on bare metal
         disable-cloud-controller = true;
+        # Will run cilium with kube proxy replacement
+        disable-kube-proxy = true;
+        # Will run cilium for network policy enforcement
+        disable-network-policy = true;
         # Don't need the helm controller
         disable-helm-controller = true;
         # Extra stuff to disable that I will deploy manually

@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -35,16 +30,19 @@
       allowedTCPPorts = [
         # Kubelet port
         10250
+        # Cilium health checks
+        4240
       ];
       allowedUDPPorts = [
-        # Flannel VXLAN
+        # Cilium VXLAN
         8472
       ];
     };
     networking.firewall.trustedInterfaces = [
-      "flannel+"
-      "cni0"
-      "veth+"
+      "cilium_host"
+      "cilium_net"
+      "cilium_vxlan"
+      "lxc+"
     ];
 
     # Enable SSH server
