@@ -1,7 +1,5 @@
 {
-  config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -11,30 +9,23 @@
 
   boot.initrd.availableKernelModules = ["usbhid"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
   boot.extraModulePackages = [];
+  boot.kernelModules = [
+    # Odroid N2 has PCF5863 RTC
+    "rtc-pcf8563"
+  ];
+
+  # Install the dtb for Odroid N2
+  hardware.deviceTree.filter = "meson-g12b-odroid-n2.dtb";
 
   fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
-  };
-
-  fileSystems."/nix" = {
-    label = "nix";
+    label = "nixos";
     fsType = "ext4";
-    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
     label = "boot";
     fsType = "vfat";
-  };
-
-  fileSystems."/var/log" = {
-    device = "/nix/persist/var/log";
-    fsType = "none";
-    options = ["bind"];
   };
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";

@@ -59,7 +59,7 @@
         terramaster = import ./machines/terramaster {inherit inputs;};
         terra = import ./machines/terra {inherit inputs;};
         r4s = import ./machines/r4s {inherit inputs;};
-        links = import ./machines/workers/links {inherit inputs;};
+        links = import ./machines/links {inherit inputs;};
         rechts = import ./machines/rechts {inherit inputs;};
       };
 
