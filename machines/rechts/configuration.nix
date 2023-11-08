@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -14,6 +18,11 @@
     # According to https://nixos.wiki/wiki/NixOS_on_ARM/UEFI
     boot.loader.efi.canTouchEfiVariables = false;
     boot.loader.systemd-boot.enable = true;
+
+    # Copy dtb to /boot
+    boot.loader.systemd-boot.extraFiles = {
+      "dtb/amlogic/meson-g12b-odroid-n2.dtb" = "${config.hardware.deviceTree.package}/amlogic/meson-g12b-odroid-n2.dtb";
+    };
 
     # Run latest kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
