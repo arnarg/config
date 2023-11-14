@@ -159,6 +159,8 @@
         kube-apiserver-arg = [
           # Set admission control config
           "admission-control-config-file=${admissionControlConfig}"
+          # Allow anonymous auth
+          "anonymous-auth=true"
         ];
       });
     in "--config ${serverConfig}";
@@ -180,6 +182,37 @@
     services.postgresql.enableTCPIP = true;
     services.postgresql.authentication = ''
       host sameuser +ext 192.168.0.0/24 scram-sha-256
+      host all +k8s_sa 192.168.0.0/24 pam pamservice=psql-k8s-sa
+    '';
+
+    # Nixpkgs' postgresql isn't built with PAM support.
+    # Here I enable that.
+    # See: https://github.com/NixOS/nixpkgs/pull/267393
+    services.postgresql.package = pkgs.postgresql.overrideAttrs (final: prev: {
+      buildInputs = prev.buildInputs ++ [pkgs.linux-pam];
+      configureFlags = prev.configureFlags ++ ["--with-pam"];
+    });
+
+    # Configure PAM module k8s-sa-auth
+    environment.etc."rancher/k3s/ca.crt".text = ''
+      -----BEGIN CERTIFICATE-----
+      MIIBdjCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+      dmVyLWNhQDE2OTg5MjU5NjUwHhcNMjMxMTAyMTE1MjQ1WhcNMzMxMDMwMTE1MjQ1
+      WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE2OTg5MjU5NjUwWTATBgcqhkjO
+      PQIBBggqhkjOPQMBBwNCAAQrAs7S23Vz4zrkIX+aE+sp+u+fThVGN6rDCOxVfsdf
+      V2ROZHTeURMGuDtg7uTkjtK8g7rl361dbuSBsDpdS7F2o0IwQDAOBgNVHQ8BAf8E
+      BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUHW2vATCQpZShfxOrWcKz
+      OvBd6AQwCgYIKoZIzj0EAwIDRwAwRAIhAKar0ufLAd0cspHEu1R2HgEFc2/WuacD
+      utPMTsi9boiZAh9E/tUltRzSwnzcD4ElJECdmmuhJfUpBYpqXtVNE307
+      -----END CERTIFICATE-----
+    '';
+    security.pam.services."psql-k8s-sa".text = ''
+      account required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so
+      auth required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so \
+        discovery_url=https://127.0.0.1:6443 \
+        issuer=https://kubernetes.default.svc.cluster.local \
+        ca_file=/etc/rancher/k3s/ca.crt \
+        audience=k3s
     '';
 
     #######################

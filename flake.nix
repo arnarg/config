@@ -10,6 +10,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
+    psql-k8s-sa.url = "github:arnarg/psql-k8s-sa-auth/main";
 
     home = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -26,6 +27,7 @@
     home,
     unstable,
     impermanence,
+    psql-k8s-sa,
     ...
   }:
     utils.lib.mkFlake {
@@ -38,6 +40,7 @@
       ############
       sharedOverlays = [
         self.overlay
+        psql-k8s-sa.overlays.default
         (p: _: {
           home-manager = home.packages.${p.system}.home-manager;
           tailscale = unstable.legacyPackages.${p.system}.tailscale;
