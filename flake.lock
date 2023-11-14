@@ -107,11 +107,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1699099776,
-        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
+        "lastModified": 1699781429,
+        "narHash": "sha256-UYefjidASiLORAjIvVsUHG6WBtRhM67kTjEY4XfZOFs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
+        "rev": "e44462d6021bfe23dfb24b775cc7c390844f773d",
         "type": "github"
       },
       "original": {
@@ -121,23 +121,23 @@
         "type": "github"
       }
     },
-    "psql-k8s-sa": {
+    "pam-k8s-sa": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1699970230,
-        "narHash": "sha256-zwzYopJxSpdVBdx+0nOiM8ABfYTC4l/RAYwLQVafTgg=",
+        "lastModified": 1699980459,
+        "narHash": "sha256-PyMPSsxkilGSU3Aa4UQb1MwhvW0EL+7B+pJC1WhHgxA=",
         "owner": "arnarg",
-        "repo": "psql-k8s-sa-auth",
-        "rev": "fb19f2710d9967eb8763067daae951eb11b2bc86",
+        "repo": "pam-k8s-sa",
+        "rev": "e213c93ac2c1a7764276f8b10208877229b779d1",
         "type": "github"
       },
       "original": {
         "owner": "arnarg",
         "ref": "main",
-        "repo": "psql-k8s-sa-auth",
+        "repo": "pam-k8s-sa",
         "type": "github"
       }
     },
@@ -147,7 +147,7 @@
         "home": "home",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
-        "psql-k8s-sa": "psql-k8s-sa",
+        "pam-k8s-sa": "pam-k8s-sa",
         "unstable": "unstable",
         "utils": "utils"
       }
