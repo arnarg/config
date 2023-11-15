@@ -159,7 +159,7 @@
         kube-apiserver-arg = [
           # Set admission control config
           "admission-control-config-file=${admissionControlConfig}"
-          # Allow anonymous auth
+          # Allow anonymous auth for OIDC discovery URL
           "anonymous-auth=true"
         ];
       });
@@ -194,6 +194,15 @@
     });
 
     # Configure PAM module k8s-sa-auth
+    security.pam.services."psql-k8s-sa".text = ''
+      auth required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so \
+        server_url=https://127.0.0.1:6443 \
+        ca_file=/etc/rancher/k3s/ca.crt \
+        audience=k3s
+      account required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so
+    '';
+
+    # Write k3s cluster CA to file for PAM module to use
     environment.etc."rancher/k3s/ca.crt".text = ''
       -----BEGIN CERTIFICATE-----
       MIIBdjCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
@@ -205,14 +214,6 @@
       OvBd6AQwCgYIKoZIzj0EAwIDRwAwRAIhAKar0ufLAd0cspHEu1R2HgEFc2/WuacD
       utPMTsi9boiZAh9E/tUltRzSwnzcD4ElJECdmmuhJfUpBYpqXtVNE307
       -----END CERTIFICATE-----
-    '';
-    security.pam.services."psql-k8s-sa".text = ''
-      account required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so
-      auth required ${pkgs.pam_k8s_sa}/lib/security/pam_k8s_sa.so \
-        discovery_url=https://127.0.0.1:6443 \
-        issuer=https://kubernetes.default.svc.cluster.local \
-        ca_file=/etc/rancher/k3s/ca.crt \
-        audience=k3s
     '';
 
     #######################
