@@ -127,11 +127,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1700051162,
-        "narHash": "sha256-GDLf9JxHpthe8nhBPDFp7AVBwkPiVqANUiZmVd+/eEU=",
+        "lastModified": 1700060686,
+        "narHash": "sha256-c83bgQ+gNOZ1m5huAMxkA3PmKtHLxOEiDYcepRGnDw4=",
         "owner": "arnarg",
         "repo": "pam-k8s-sa",
-        "rev": "76c332d176f15d9320c374cc9e438909cd056029",
+        "rev": "dacb33cf44188538a2abf28560bfdd1736d1af28",
         "type": "github"
       },
       "original": {
