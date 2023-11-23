@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{lib, ...}:
 with lib; {
   users = {
     users = {

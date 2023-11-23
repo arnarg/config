@@ -23,8 +23,8 @@
     hardware.opengl.enable = true;
 
     fonts = {
-      enableDefaultFonts = true;
-      fonts = with pkgs; [
+      enableDefaultPackages = true;
+      packages = with pkgs; [
         inconsolata
         powerline-fonts
       ];

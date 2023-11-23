@@ -5,7 +5,7 @@
   ## INPUTS ##
   ############
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     hardware.url = "github:nixos/nixos-hardware/master";

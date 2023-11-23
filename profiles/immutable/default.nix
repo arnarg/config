@@ -62,9 +62,9 @@ in
       users.mutableUsers = false;
       fileSystems."${cfg.persistDevice}".neededForBoot = true;
       users.users = mkMerge (
-        [{root.passwordFile = "${cfg.persistPath}/passwords/root";}]
+        [{root.hashedPasswordFile = "${cfg.persistPath}/passwords/root";}]
         ++ forEach cfg.users (
-          u: {"${u}".passwordFile = "${cfg.persistPath}/passwords/${u}";}
+          u: {"${u}".hashedPasswordFile = "${cfg.persistPath}/passwords/${u}";}
         )
       );
     };
