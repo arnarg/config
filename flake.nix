@@ -13,7 +13,7 @@
     pam-k8s-sa.url = "github:arnarg/pam-k8s-sa/main";
 
     home = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "unstable";
     };
   };

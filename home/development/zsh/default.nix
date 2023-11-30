@@ -16,7 +16,7 @@ with lib; {
 
       dotDir = ".config/zsh";
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
 
       history = {
         size = mkDefault 50000;
