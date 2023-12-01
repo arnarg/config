@@ -43,7 +43,7 @@ in
 
     # Reverse Proxy
     systemd.services.traefik.serviceConfig = {
-      EnvironmentFile = concatStrings ["-" config.services.traefik.dataDir "/acme.env"];
+      EnvironmentFile = [(concatStrings ["-" config.services.traefik.dataDir "/acme.env"])];
     };
     services.traefik.enable = true;
     services.traefik.dataDir = "/nix/persist/var/lib/traefik";
