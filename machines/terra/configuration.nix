@@ -188,7 +188,7 @@
     # Nixpkgs' postgresql isn't built with PAM support.
     # Here I enable that.
     # See: https://github.com/NixOS/nixpkgs/pull/267393
-    services.postgresql.package = pkgs.postgresql.overrideAttrs (final: prev: {
+    services.postgresql.package = pkgs.postgresql_14.overrideAttrs (final: prev: {
       buildInputs = prev.buildInputs ++ [pkgs.linux-pam];
       configureFlags = prev.configureFlags ++ ["--with-pam"];
     });
