@@ -96,11 +96,11 @@
           config.allowUnfree = true;
         };
       in {
-        framework = generateHome {
+        "arnar@framework" = generateHome {
           inherit pkgs extraSpecialArgs;
           modules = [./home/framework.nix];
         };
-        thinkpad = generateHome {
+        "arnar@thinkpad" = generateHome {
           inherit pkgs extraSpecialArgs;
           modules = [./home/thinkpad.nix];
         };

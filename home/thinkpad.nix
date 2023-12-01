@@ -14,6 +14,10 @@
   home.username = "arnar";
   home.homeDirectory = "/home/arnar";
 
+  # I'm using a stable version of home-manager with
+  # untable channel of nixpkgs.
+  home.enableNixpkgsReleaseCheck = false;
+
   home.packages = with pkgs; [
     terraform
     terragrunt
