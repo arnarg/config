@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  stable,
   ...
 }: let
   # Get a wallpaper from the internet
@@ -61,9 +60,9 @@ in {
     home.packages = with pkgs; [
       gnome.gnome-tweaks
       gnome.gnome-terminal
-      stable.gnomeExtensions.dash-to-dock
-      stable.gnomeExtensions.blur-my-shell
-      stable.gnomeExtensions.tailscale-status
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.tailscale-status
       whitesur-icon-theme
     ];
     dconf.settings = {

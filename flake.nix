@@ -6,7 +6,6 @@
   ############
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
@@ -14,7 +13,7 @@
 
     home = {
       url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -23,101 +22,57 @@
   #############
   outputs = inputs @ {
     self,
+    nixpkgs,
+    impermanence,
     utils,
     home,
-    unstable,
-    impermanence,
     pam-k8s-sa,
     ...
-  }:
-    utils.lib.mkFlake {
-      inherit self inputs;
+  }: let
+    directory = ./hosts;
+  in {
+    lib = import ./lib;
 
-      supportedSystems = ["x86_64-linux" "aarch64-linux"];
+    ###########
+    ## NixOS ##
+    ###########
+    nixosConfigurations = self.lib.genNixOSHosts {
+      inherit inputs nixpkgs directory;
 
-      ############
-      # Channels #
-      ############
-      sharedOverlays = [
-        self.overlay
-        pam-k8s-sa.overlays.default
-        (p: _: {
-          home-manager = home.packages.${p.system}.home-manager;
-          tailscale = unstable.legacyPackages.${p.system}.tailscale;
-        })
-      ];
-      channelsConfig = {allowUnfree = true;};
-
-      #########
-      # Hosts #
-      #########
-      hostDefaults.modules = [
-        self.nixosModules.base
+      baseModules = [
+        utils.nixosModules.autoGenFromInputs
         impermanence.nixosModules.impermanence
+        self.nixosModules.default
       ];
 
-      hosts = {
-        framework = import ./machines/framework {inherit inputs;};
-        thinkpad = import ./machines/thinkpad {inherit inputs;};
-        terra = import ./machines/terra {inherit inputs;};
-        links = import ./machines/links {inherit inputs;};
-        rechts = import ./machines/rechts {inherit inputs;};
-      };
-
-      nixosModules = utils.lib.exportModules [
-        ./profiles/base
-        ./profiles/desktop
-        ./profiles/development
-        ./profiles/immutable
-        ./profiles/laptop
-        ./profiles/server
-        ./profiles/tpm
+      overlays = [
+        (import ./packages/overlay.nix)
+        pam-k8s-sa.overlays.default
       ];
 
-      ########
-      # HOME #
-      ########
-      homeConfigurations = let
-        system = "x86_64-linux";
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit (self) homeModules;
-          stable = import inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        };
-        generateHome = home.lib.homeManagerConfiguration;
-        pkgs = import unstable {
-          inherit system;
-          overlays = [
-            self.overlay
-          ];
-          config.allowUnfree = true;
-        };
-      in {
-        "arnar@framework" = generateHome {
-          inherit pkgs extraSpecialArgs;
-          modules = [./home/framework.nix];
-        };
-        "arnar@thinkpad" = generateHome {
-          inherit pkgs extraSpecialArgs;
-          modules = [./home/thinkpad.nix];
-        };
-      };
-
-      homeModules = utils.lib.exportModules [
-        ./home/development
-        ./home/desktop
-      ];
-
-      overlay = import ./packages/overlay.nix;
-
-      outputsBuilder = let
-        overlays = utils.lib.exportOverlays {inherit (self) inputs pkgs;};
-      in
-        channels: {
-          packages = utils.lib.exportPackages overlays channels;
-        };
+      config.allowUnfree = true;
     };
+
+    nixosModules.default = import ./modules;
+
+    ##################
+    ## Home Manager ##
+    ##################
+    homeConfigurations = self.lib.genHomeHosts {
+      inherit inputs nixpkgs home directory;
+
+      user = "arnar";
+
+      overlays = [
+        (import ./packages/overlay.nix)
+      ];
+
+      config.allowUnfree = true;
+    };
+
+    homeModules = {
+      desktop = import ./home/desktop;
+      development = import ./home/development;
+    };
+  };
 }
