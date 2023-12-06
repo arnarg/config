@@ -1,21 +1,23 @@
 let
+  inherit (builtins) readDir hasAttr attrNames filter concatMap listToAttrs;
+
   loadHosts = dir: inputs: let
     loadConf = dir: n:
       (import "${dir}/${n}" inputs)
       // {hostname = n;};
 
     hosts' = let
-      contents = builtins.readDir dir;
+      contents = readDir dir;
     in
-      builtins.filter
+      filter
       (n: contents."${n}" == "directory")
-      (builtins.attrNames contents);
+      (attrNames contents);
   in
-    builtins.concatMap
+    concatMap
     (
       n: let
-        contents = builtins.readDir "${dir}/${n}";
-        hasDefault = (builtins.hasAttr "default.nix" contents) && (contents."default.nix" == "regular");
+        contents = readDir "${dir}/${n}";
+        hasDefault = (hasAttr "default.nix" contents) && (contents."default.nix" == "regular");
       in
         if hasDefault
         then [(loadConf dir n)]
@@ -56,9 +58,9 @@ in {
           ++ modules;
       };
   in
-    builtins.listToAttrs (builtins.map (conf: {
+    listToAttrs (map (conf: {
         name = conf.hostname;
-        value = mkHost (builtins.removeAttrs conf ["home"]);
+        value = mkHost (removeAttrs conf ["home"]);
       })
       (loadHosts directory inputs));
 
@@ -74,11 +76,11 @@ in {
     config ? {},
   }: let
     homeHosts =
-      builtins.concatMap
+      concatMap
       (
         h:
-          if (builtins.hasAttr "home" h)
-          then [((builtins.removeAttrs h ["home" "modules"]) // h.home)]
+          if (hasAttr "home" h)
+          then [((removeAttrs h ["home" "modules"]) // h.home)]
           else []
       )
       (loadHosts directory inputs);
@@ -107,7 +109,7 @@ in {
           ++ modules;
       };
   in
-    builtins.listToAttrs (builtins.map (conf: {
+    listToAttrs (map (conf: {
         name = "${user}@${conf.hostname}";
         value = mkHost conf;
       })
