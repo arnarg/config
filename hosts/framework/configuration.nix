@@ -16,6 +16,9 @@
     "/var/lib/tailscale"
   ];
 
+  # Setup TPM profile.
+  profiles.tpm.enable = true;
+
   # Setup bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
