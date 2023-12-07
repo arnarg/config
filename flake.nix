@@ -9,7 +9,6 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
-    pam-k8s-sa.url = "github:arnarg/pam-k8s-sa/main";
 
     home = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -26,7 +25,6 @@
     impermanence,
     utils,
     home,
-    pam-k8s-sa,
     ...
   }: let
     directory = ./hosts;
@@ -47,7 +45,6 @@
 
       overlays = [
         (import ./packages/overlay.nix)
-        pam-k8s-sa.overlays.default
       ];
 
       config.allowUnfree = true;
