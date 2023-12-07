@@ -1,25 +1,35 @@
-{pkgs, ...}: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  cfg = config.profiles.development;
+in {
   imports = [
-    ./git
-    ./helix
-    ./pass
-    ./tmux
-    ./zsh
+    ./git.nix
+    ./helix.nix
+    ./tmux.nix
+    ./zsh.nix
   ];
 
-  config = {
+  options.profiles.development = with lib; {
+    enable = mkEnableOption "development profile";
+  };
+
+  config = lib.mkIf cfg.enable {
+    # Useful packages in development environments.
     home.packages = with pkgs; [
-      cachix
       curl
       dnsutils
       htop
       jq
       nix-prefetch-github
       nurl
-      python3
       silver-searcher
       wget
       wireshark
+      yq-go
       yubikey-manager
 
       # Kubernetes

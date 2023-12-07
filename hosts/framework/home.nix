@@ -1,9 +1,9 @@
-{inputs, ...}: {
-  imports = [
-    "${inputs.self}/home/desktop/gnome"
-    "${inputs.self}/home/desktop/tpm-fido"
-  ];
+{...}: {
+  # Setup desktop profile.
+  profiles.desktop.enable = true;
+  profiles.desktop.gnome.enable = true;
+  profiles.desktop.tpm-fido.enable = true;
 
-  # https://github.com/nix-community/home-manager/issues/3342
-  manual.manpages.enable = false;
+  # Setup development profile.
+  profiles.development.enable = true;
 }

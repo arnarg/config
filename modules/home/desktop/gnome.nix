@@ -1,23 +1,15 @@
 {
   lib,
+  config,
   pkgs,
   ...
 }: let
-  # Get a wallpaper from the internet
-  wallpaper = pkgs.stdenv.mkDerivation {
-    name = "gnome-wallpaper";
+  cfg = config.profiles.desktop;
 
-    src = pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/y8/wallhaven-y8jx3x.jpg";
-      sha256 = "17hngmh4zixziipbjmrxs6mrl8465hlr23fwb745aknn53vhh63x";
-    };
-
-    phases = ["install"];
-
-    install = ''
-      mkdir -p $out
-      cp $src $out/wallpaper.jpg
-    '';
+  # Get a wallpaper form wallhaven.
+  wallpaper = pkgs.fetchurl {
+    url = "https://w.wallhaven.cc/full/y8/wallhaven-y8jx3x.jpg";
+    sha256 = "17hngmh4zixziipbjmrxs6mrl8465hlr23fwb745aknn53vhh63x";
   };
 
   # My custom colorscheme for gnome terminal (copied from gruvbox dark)
@@ -56,7 +48,12 @@
     ];
   };
 in {
-  config = {
+  options.profiles.desktop.gnome = with lib; {
+    enable = mkEnableOption "gnome integration";
+  };
+
+  config = lib.mkIf (cfg.enable && cfg.gnome.enable) {
+    # Install various tools and extensions for gnome.
     home.packages = with pkgs; [
       gnome.gnome-tweaks
       gnome.gnome-terminal
@@ -65,13 +62,14 @@ in {
       gnomeExtensions.tailscale-status
       whitesur-icon-theme
     ];
+
+    # Persisted dconf settings for gnome.
     dconf.settings = {
       "org/gnome/shell" = {
         enabled-extensions = [
           "user-theme@gnome-shell-extensions.gcampax.github.com"
           "dash-to-dock@micxgx.gmail.com"
           "blur-my-shell@aunetx"
-          "tailscale-status@maxgallup.github.com"
         ];
       };
       "org/gnome/shell/keybindings" = {
@@ -91,11 +89,11 @@ in {
         button-layout = "close,minimize,maximize:appmenu";
       };
       "org/gnome/desktop/background" = {
-        picture-uri = "${wallpaper}/wallpaper.jpg";
-        picture-uri-dark = "${wallpaper}/wallpaper.jpg";
+        picture-uri = "${wallpaper}";
+        picture-uri-dark = "${wallpaper}";
       };
       "org/gnome/desktop/screensaver" = {
-        picture-uri = "${wallpaper}/wallpaper.jpg";
+        picture-uri = "${wallpaper}";
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen

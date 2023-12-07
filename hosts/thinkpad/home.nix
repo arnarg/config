@@ -1,19 +1,19 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    "${inputs.self}/home/desktop/gnome"
-  ];
+{pkgs, ...}: {
+  # Setup desktop profile.
+  profiles.desktop.enable = true;
+  profiles.desktop.gnome.enable = true;
 
+  # Setup development profile.
+  profiles.development.enable = true;
+
+  # Extra packages needed on this host only.
   home.packages = with pkgs; [
     terraform
     terragrunt
     awscli
   ];
 
-  # Load work git config
+  # Load work git config.
   programs.git.includes = [
     {
       condition = "gitdir:~/Code/work/";
@@ -25,11 +25,8 @@
     }
   ];
 
-  # Set smaller icon size in dock
+  # Set smaller icon size in dock.
   dconf.settings."org/gnome/shell/extensions/dash-to-dock".dash-max-icon-size = 54;
-  # Enable fractional scaling
+  # Enable fractional scaling.
   dconf.settings."org/gnome/mutter".experimental-features = ["scale-monitor-framebuffer"];
-
-  # https://github.com/nix-community/home-manager/issues/3342
-  manual.manpages.enable = false;
 }

@@ -1,8 +1,4 @@
-{
-  self,
-  hardware,
-  ...
-}: {
+{hardware, ...}: {
   system = "x86_64-linux";
 
   modules = [
@@ -14,7 +10,5 @@
 
   home.modules = [
     ./home.nix
-    self.homeModules.development
-    self.homeModules.desktop
   ];
 }

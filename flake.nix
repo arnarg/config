@@ -63,6 +63,10 @@
 
       user = "arnar";
 
+      baseModules = [
+        self.homeModules.default
+      ];
+
       overlays = [
         (import ./packages/overlay.nix)
       ];
@@ -71,6 +75,7 @@
     };
 
     homeModules = {
+      default = import ./modules/home;
       desktop = import ./home/desktop;
       development = import ./home/development;
     };
