@@ -25,21 +25,25 @@ let
     )
     hosts';
 in {
+  # Discover NixOS configurations.
+  # It will find all sub-directories in `directory` and
+  # include it if it has a default.nix.
   genNixOSHosts = {
     inputs,
-    nixpkgs,
-    directory,
+    directory ? "${inputs.self}/hosts",
+    nixpkgs ? inputs.nixpkgs,
+    builder ? nixpkgs.lib.nixosSystem,
     specialArgs ? {},
     baseModules ? [],
     overlays ? [],
-    config ? {},
+    config ? {allowUnfree = true;},
   }: let
     mkHost = {
       system,
       modules,
       hostname,
     }:
-      nixpkgs.lib.nixosSystem {
+      builder {
         inherit system;
 
         specialArgs = {inherit inputs;} // specialArgs;
@@ -64,16 +68,20 @@ in {
       })
       (loadHosts directory inputs));
 
+  # Discover home-manager configurations.
+  # It will find all sub-directories in `directory` and
+  # include it if it has a default.nix.
   genHomeHosts = {
     inputs,
-    nixpkgs,
-    home,
-    directory,
     user,
+    directory ? "${inputs.self}/hosts",
+    nixpkgs ? inputs.nixpkgs,
+    home ? inputs.home,
+    builder ? home.lib.homeManagerConfiguration,
     specialArgs ? {},
     baseModules ? [],
     overlays ? [],
-    config ? {},
+    config ? {allowUnfree = true;},
   }: let
     homeHosts =
       concatMap
@@ -94,7 +102,7 @@ in {
         inherit system config overlays;
       };
     in
-      home.lib.homeManagerConfiguration {
+      builder {
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;} // specialArgs;
 

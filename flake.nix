@@ -26,16 +26,14 @@
     utils,
     home,
     ...
-  }: let
-    directory = ./hosts;
-  in {
+  }: {
     lib = import ./lib;
 
     ###########
     ## NixOS ##
     ###########
     nixosConfigurations = self.lib.genNixOSHosts {
-      inherit inputs nixpkgs directory;
+      inherit inputs;
 
       baseModules = [
         utils.nixosModules.autoGenFromInputs
@@ -46,8 +44,6 @@
       overlays = [
         (import ./packages/overlay.nix)
       ];
-
-      config.allowUnfree = true;
     };
 
     nixosModules.default = import ./modules;
@@ -56,7 +52,7 @@
     ## Home Manager ##
     ##################
     homeConfigurations = self.lib.genHomeHosts {
-      inherit inputs nixpkgs home directory;
+      inherit inputs;
 
       user = "arnar";
 
@@ -67,14 +63,8 @@
       overlays = [
         (import ./packages/overlay.nix)
       ];
-
-      config.allowUnfree = true;
     };
 
-    homeModules = {
-      default = import ./modules/home;
-      desktop = import ./home/desktop;
-      development = import ./home/development;
-    };
+    homeModules.default = import ./modules/home;
   };
 }
