@@ -189,7 +189,6 @@
     ## PostgreSQL Server ##
     #######################
     services.postgresql.enable = true;
-    services.postgresql.package = pkgs.postgresql_14;
     services.postgresql.enableTCPIP = true;
     services.postgresql.authentication = ''
       host sameuser +ext 192.168.0.0/24 scram-sha-256
