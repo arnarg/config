@@ -20,6 +20,7 @@ in {
     home.packages = with pkgs; [
       wl-clipboard
       spotify
+      kicad-small
     ];
 
     # Setup firefox.
