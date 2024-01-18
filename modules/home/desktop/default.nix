@@ -8,6 +8,7 @@
 in {
   imports = [
     ./gnome.nix
+    ./kicad.nix
     ./tpm-fido.nix
   ];
 
@@ -20,7 +21,6 @@ in {
     home.packages = with pkgs; [
       wl-clipboard
       spotify
-      kicad-small
     ];
 
     # Setup firefox.
