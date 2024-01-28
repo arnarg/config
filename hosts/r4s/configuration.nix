@@ -23,11 +23,11 @@
     ################
     systemd.network.links = {
       "10-wan" = {
-        matchConfig.MACAddress = "02:6c:69:8d:29:47";
+        matchConfig.MACAddress = "68:27:19:a5:79:51";
         linkConfig.Name = "wan0";
       };
       "10-lan" = {
-        matchConfig.MACAddress = "02:6c:69:8d:29:46";
+        matchConfig.MACAddress = "68:27:19:a5:79:52";
         linkConfig.Name = "lan0";
       };
     };

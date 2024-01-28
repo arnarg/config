@@ -1,7 +1,6 @@
 {
   lib,
   modulesPath,
-  config,
   ...
 }: {
   imports = [
@@ -11,9 +10,7 @@
   boot.initrd.availableKernelModules = ["usb_storage" "uas"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [];
-  boot.extraModulePackages = [
-    (config.boot.kernelPackages.callPackage ./rk-spi.nix {})
-  ];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     label = "nixos";
