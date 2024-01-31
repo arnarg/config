@@ -1,11 +1,22 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
+    ./interfaces.nix
   ];
 
   config = {
     # Setup server profile.
     profiles.server.enable = true;
+
+    # Setup immutable profile.
+    profiles.immutable.enable = true;
+    profiles.immutable.directories = [
+      "/var/lib/tailscale"
+    ];
 
     ################
     ## Bootloader ##
@@ -21,46 +32,99 @@
     ################
     ## Networking ##
     ################
-    systemd.network.links = {
-      "10-wan" = {
-        matchConfig.MACAddress = "68:27:19:a5:79:51";
-        linkConfig.Name = "wan0";
-      };
-      "10-lan" = {
-        matchConfig.MACAddress = "68:27:19:a5:79:52";
-        linkConfig.Name = "lan0";
-      };
-    };
-
-    # The device has 2 leds to correspond to the 2
-    # ethernet interfaces.
-    # The device tree defines these leds as 'green:wan'
-    # and 'green:lan'.
-    # Here we load the 'ledtrig-netdev' module and setup
-    # the leds to trigger on events on those interfaces.
-    boot.kernelModules = ["ledtrig-netdev"];
-    systemd.services.ledsetup = {
-      script = ''
-        # Wan interface led setup
-        echo "netdev" > /sys/class/leds/green\:wan/trigger
-        echo "wan0"   > /sys/class/leds/green\:wan/device_name
-        echo "1"      > /sys/class/leds/green\:wan/link
-        echo "1"      > /sys/class/leds/green\:wan/rx
-        echo "1"      > /sys/class/leds/green\:wan/tx
-        # Lan interface led setup
-        echo "netdev" > /sys/class/leds/green\:lan/trigger
-        echo "lan0"   > /sys/class/leds/green\:lan/device_name
-        echo "1"      > /sys/class/leds/green\:lan/link
-        echo "1"      > /sys/class/leds/green\:lan/rx
-        echo "1"      > /sys/class/leds/green\:lan/tx
-      '';
-
-      wantedBy = ["multi-user.target"];
-      serviceConfig.type = "oneshot";
-    };
-
     networking.useDHCP = false;
     networking.interfaces.wan0.useDHCP = true;
+
+    # Firewall settings
+    networking.firewall.checkReversePath = "loose";
+    networking.firewall.interfaces.wan0 = {
+      allowedTCPPorts = [
+        # K3s api server
+        6443
+        # Kubelet port
+        10250
+        # Cilium health checks
+        4240
+      ];
+      allowedUDPPorts = [
+        # Cilium VXLAN
+        8472
+      ];
+    };
+    # Also allow tailscale to access k3s api server
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [6443];
+    networking.firewall.trustedInterfaces = [
+      "cilium_host"
+      "cilium_net"
+      "cilium_vxlan"
+      "lxc+"
+    ];
+
+    ################
+    ## K3s Server ##
+    ################
+    services.k3s.enable = true;
+    services.k3s.role = "server";
+    services.k3s.extraFlags = let
+      # Addmission control config for k3s cluster
+      admissionControlConfig = pkgs.writeText "k3s-admission-control-config.yaml" ''
+        apiVersion: apiserver.config.k8s.io/v1
+        kind: AdmissionConfiguration
+        plugins:
+        - name: PodSecurity
+          configuration:
+            apiVersion: pod-security.admission.config.k8s.io/v1beta1
+            kind: PodSecurityConfiguration
+            defaults:
+              enforce: "baseline"
+              enforce-version: "latest"
+              audit: "restricted"
+              audit-version: "latest"
+              warn: "restricted"
+              warn-version: "latest"
+            exemptions:
+              usernames: []
+              runtimeClasses: []
+              namespaces: [kube-system]
+      '';
+
+      # Config options for k3s server
+      serverConfig = pkgs.writeText "k3s-config.yaml" (lib.generators.toYAML {} {
+        # Use persisted data directory
+        data-dir = "/nix/persist/var/lib/rancher/k3s";
+
+        # Instead cilium will be deployed
+        flannel-backend = "none";
+        # Running on bare metal
+        disable-cloud-controller = true;
+        # Will run cilium with kube proxy replacement
+        disable-kube-proxy = true;
+        # Will run cilium for network policy enforcement
+        disable-network-policy = true;
+        # Don't need the helm controller
+        disable-helm-controller = true;
+        # Extra stuff to disable that I will deploy manually
+        disable = ["traefik" "servicelb" "local-storage" "metrics-server"];
+
+        # Don't schedule workloads on the server
+        node-taint = [
+          "node.kubernetes.io/control-plane:NoSchedule"
+        ];
+
+        # Add kube apiserver flags
+        kube-apiserver-arg = [
+          # Set admission control config
+          "admission-control-config-file=${admissionControlConfig}"
+          # Allow anonymous auth for OIDC discovery URL
+          "anonymous-auth=true"
+        ];
+      });
+    in "--config ${serverConfig}";
+
+    ###############
+    ## Tailscale ##
+    ###############
+    services.tailscale.enable = true;
 
     ##########
     ## Sudo ##

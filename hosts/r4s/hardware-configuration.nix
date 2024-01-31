@@ -12,9 +12,11 @@
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
+  # Root on tmpfs
   fileSystems."/" = {
-    label = "nixos";
-    fsType = "ext4";
+    device = "none";
+    fsType = "tmpfs";
+    options = ["defaults" "size=2G" "mode=755"];
   };
 
   fileSystems."/boot" = {
@@ -22,8 +24,20 @@
     fsType = "vfat";
   };
 
+  fileSystems."/nix" = {
+    label = "nix";
+    fsType = "ext4";
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/log" = {
+    device = "/nix/persist/var/log";
+    fsType = "none";
+    options = ["bind"];
+  };
+
   swapDevices = [
-    {device = "/dev/disk/by-uuid/ca7761f8-d4be-4076-81e2-75bdeff59b1e";}
+    {label = "swap";}
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
