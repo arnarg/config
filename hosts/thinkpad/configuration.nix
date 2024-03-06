@@ -14,6 +14,9 @@
     citrix_workspace
   ];
 
+  # Run a stable kernel
+  boot.kernelPackages = pkgs.linuxPackages;
+
   # Setup laptop profile.
   profiles.laptop.enable = true;
   profiles.laptop.suspendThenHibernate.enable = false;
