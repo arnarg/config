@@ -36,10 +36,6 @@
     options = ["bind"];
   };
 
-  swapDevices = [
-    {label = "swap";}
-  ];
-
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }
