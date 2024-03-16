@@ -5,6 +5,7 @@
 
   # Setup development profile.
   profiles.development.enable = true;
+  profiles.development.radicle.enable = true;
 
   # Extra packages needed on this host only.
   home.packages = with pkgs; [
