@@ -25,9 +25,6 @@
     ## Bootloader ##
     ################
     boot.loader.systemd-boot.enable = true;
-    # I'm booting from an external USB drive so I
-    # prefer not touching the EFI variables
-    boot.loader.efi.canTouchEfiVariables = false;
 
     ################
     ## Networking ##
