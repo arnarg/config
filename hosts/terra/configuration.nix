@@ -73,14 +73,14 @@
     hardware.fancontrol.enable = true;
     hardware.fancontrol.config = ''
       INTERVAL=10
-      DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon1=devices/platform/it87.2592
-      DEVNAME=hwmon0=coretemp hwmon1=it8613
-      FCTEMPS=hwmon1/pwm3=hwmon0/temp1_input
-      FCFANS=hwmon1/pwm3=hwmon1/fan3_input
-      MINTEMP=hwmon1/pwm3=50
-      MAXTEMP=hwmon1/pwm3=80
-      MINSTART=hwmon1/pwm3=52
-      MINSTOP=hwmon1/pwm3=12
+      DEVPATH=hwmon1=devices/platform/coretemp.0 hwmon2=devices/platform/it87.2592
+      DEVNAME=hwmon1=coretemp hwmon2=it8613
+      FCTEMPS=hwmon2/pwm3=hwmon1/temp1_input
+      FCFANS= hwmon2/pwm3=hwmon2/fan3_input
+      MINTEMP=hwmon2/pwm3=40
+      MAXTEMP=hwmon2/pwm3=80
+      MINSTART=hwmon2/pwm3=112
+      MINSTOP=hwmon2/pwm3=12
     '';
 
     ###################
