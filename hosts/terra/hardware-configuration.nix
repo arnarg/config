@@ -70,16 +70,24 @@ in {
   };
 
   fileSystems."/nix" = {
-    label = "nix";
-    fsType = "ext4";
+    label = "nixos";
+    fsType = "btrfs";
+    options = ["subvol=nix" "compress=zstd" "noatime"];
     neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
-    device = "/nix/persist/var/log";
-    fsType = "none";
-    options = ["bind"];
+    label = "nixos";
+    fsType = "btrfs";
+    options = ["subvol=log" "compress=zstd" "noatime"];
+    neededForBoot = true;
   };
+
+  swapDevices = [
+    {
+      label = "swap";
+    }
+  ];
 
   fileSystems."/tank" = {
     device = "/dev/disk/by-uuid/4f87db74-309f-4256-baaa-4596a22b04e5";
@@ -94,5 +102,5 @@ in {
   };
 
   nix.settings.max-jobs = 2;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }
