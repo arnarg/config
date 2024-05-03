@@ -76,10 +76,17 @@ in
           permanent = true;
         };
         http.routers.transmission.middlewares = ["redirect-transmission"];
+        # Strip prefix for duplicati
+        http.middlewares.strip-duplicati.stripprefix = {
+          prefixes = "/duplicati";
+          forceSlash = false;
+        };
+        http.routers.duplicati.middlewares = ["strip-duplicati"];
       }
       (mkServiceConfig "sonarr" "http://127.0.0.1:8989/")
       (mkServiceConfig "radarr" "http://127.0.0.1:7878/")
       (mkServiceConfig "transmission" "http://127.0.0.1:9091/")
+      (mkServiceConfig "duplicati" "http://127.0.0.1:8200/")
     ];
 
     # Firewall

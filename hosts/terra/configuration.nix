@@ -18,6 +18,7 @@
       "/var/lib/tailscale"
       "/var/lib/plex"
       "/var/lib/postgresql"
+      "/var/lib/duplicati"
       "/exports"
     ];
 
@@ -201,6 +202,11 @@
     ## Tailscale ##
     ###############
     services.tailscale.enable = true;
+
+    ######################
+    ## Duplicati Backup ##
+    ######################
+    services.duplicati.enable = true;
 
     ##########
     ## Sudo ##
