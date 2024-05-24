@@ -16,7 +16,7 @@ in {
         Description = "TPM Fido";
       };
       Service = {
-        Environment = "PATH=${pkgs.pinentry-gnome}/bin/";
+        Environment = "PATH=${pkgs.pinentry-gnome3}/bin/";
         ExecStart = "${pkgs.tpm-fido}/bin/tpm-fido";
         Restart = "always";
         RestartSec = 10;

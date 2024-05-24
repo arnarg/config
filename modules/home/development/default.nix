@@ -39,8 +39,8 @@ in {
 
       # Go
       go
-      gocode
       godef
+      gopls
 
       # Gleam
       gleam
