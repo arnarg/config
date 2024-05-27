@@ -12,6 +12,11 @@ in {
   config = lib.mkIf cfg.enable {
     boot.kernelModules = ["uhid"];
 
+    users.users.tss = {
+      name = "tss";
+      group = "tss";
+      isSystemUser = true;
+    };
     users.groups.tss.name = "tss";
     users.groups.uhid.name = "uhid";
 
