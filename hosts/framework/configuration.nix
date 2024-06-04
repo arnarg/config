@@ -32,5 +32,5 @@
   # I want to cross-compile
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
