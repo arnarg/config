@@ -29,14 +29,15 @@ in
     # Transmission
     services.transmission.enable = true;
     services.transmission.settings = {
-      download-dir = "/nix/persist/var/lib/transmission/Downloads";
-      incomplete-dir = "/nix/persist/var/lib/transmission/.incomplete";
-      incomplete-dir-enabled = true;
       rpc-bind-address = "0.0.0.0";
       rpc-host-whitelist = "lab.codedbearder.com,localhost";
       rpc-host-whitelist-enabled = true;
     };
     services.transmission.group = "mediaowners";
+
+    profiles.immutable.directories = [
+      "/var/lib/transmission"
+    ];
 
     users.groups.mediaowners.members = ["sonarr"];
     users.groups.mediaowners.gid = 3000;
