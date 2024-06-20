@@ -48,8 +48,10 @@ in {
   boot.kernelModules = [
     # For virtualization
     "kvm-intel"
-    # For fancontrol
+    # For fan control
     "coretemp"
+    # Get temperature for hard drives
+    "drivetemp"
     # Terramaster F2-221 has an it8613e chip
     "it87"
     # Custom kernel module for controlling the HDD leds

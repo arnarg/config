@@ -6,6 +6,7 @@
   imports = [
     ./services.nix
     ./hardware-configuration.nix
+    ./fan2go.nix
   ];
 
   config = {
@@ -19,6 +20,7 @@
       "/var/lib/plex"
       "/var/lib/postgresql"
       "/var/lib/duplicati"
+      "/var/lib/fan2go"
       "/exports"
     ];
 
@@ -69,20 +71,9 @@
     ## Setup Fan control ##
     #######################
     # Terramaster F2-221's fan is connected to a case fan header.
-    # It doesn't spin up under load so I set up fancontrol to take
+    # It doesn't spin up under load so I set up fan2go to take
     # care of this.
-    hardware.fancontrol.enable = true;
-    hardware.fancontrol.config = ''
-      INTERVAL=10
-      DEVPATH=hwmon1=devices/platform/coretemp.0 hwmon2=devices/platform/it87.2592
-      DEVNAME=hwmon1=coretemp hwmon2=it8613
-      FCTEMPS=hwmon2/pwm3=hwmon1/temp1_input
-      FCFANS= hwmon2/pwm3=hwmon2/fan3_input
-      MINTEMP=hwmon2/pwm3=40
-      MAXTEMP=hwmon2/pwm3=80
-      MINSTART=hwmon2/pwm3=112
-      MINSTOP=hwmon2/pwm3=12
-    '';
+    hardware.fan2go.enable = true;
 
     ###################
     ## Setup hd-idle ##
