@@ -45,6 +45,9 @@ in {
       ];
     };
 
+    # Enable pcscd for use with yubikey-manager.
+    services.pcscd.enable = true;
+
     # Extra groups for user "arnar" on desktops.
     users.users.arnar.extraGroups = [
       "audio"
