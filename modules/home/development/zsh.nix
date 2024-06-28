@@ -69,7 +69,7 @@ in {
           bindkey '^?' backward-delete-char
           bindkey '^h' backward-delete-char
 
-          ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+          ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
         '';
 
         plugins = with pkgs; [
@@ -78,8 +78,8 @@ in {
             src = fetchFromGitHub {
               owner = "sindresorhus";
               repo = "pure";
-              rev = "v1.22.0";
-              sha256 = "sha256-TR4CyBZ+KoZRs9XDmWE5lJuUXXU1J8E2Z63nt+FS+5w=";
+              rev = "v1.23.0";
+              sha256 = "sha256-BmQO4xqd/3QnpLUitD2obVxL0UulpboT8jGNEh4ri8k=";
             };
           }
           {
@@ -87,8 +87,8 @@ in {
             src = fetchFromGitHub {
               owner = "spwhitt";
               repo = "nix-zsh-completions";
-              rev = "0.5.0";
-              sha256 = "sha256-DKvCpjAeCiUwD5l6PUW7WlEvM0cNZEOk41IiVXoh9D8=";
+              rev = "0.5.1";
+              sha256 = "sha256-bgbMc4HqigqgdkvUe/CWbUclwxpl17ESLzCIP8Sz+F8=";
             };
           }
         ];
