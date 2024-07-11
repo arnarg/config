@@ -51,6 +51,9 @@ in {
       bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel '${cfg.tmux.copyCommand}'
       # Set tmux-256color
       set -g default-terminal "tmux-256color"
+      set -g terminal-overrides ",xterm-256color:RGB"
+      # Automatically set window title to working directory
+      setw -g automatic-rename-format "#{b:pane_current_path}"
     '';
   };
 }
