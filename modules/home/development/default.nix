@@ -11,7 +11,6 @@ in {
     ./helix.nix
     ./tmux.nix
     ./zsh.nix
-    ./radicle.nix
   ];
 
   options.profiles.development = with lib; {

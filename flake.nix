@@ -9,7 +9,6 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
-    radicle.url = "git+https://seed.radicle.xyz/z3gqcJUoA1n9HaHKufZs5FCSGazv5.git?rev=54aacc96197a48b79fcc260f94312d824f5e0a34";
 
     home = {
       url = "github:nix-community/home-manager/release-24.05";

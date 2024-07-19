@@ -6,5 +6,4 @@
 
   # Setup development profile.
   profiles.development.enable = true;
-  profiles.development.radicle.enable = true;
 }
