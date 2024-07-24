@@ -22,7 +22,11 @@ in {
       gnome.gnome-tweaks
       gnomeExtensions.dash-to-dock
       gnomeExtensions.blur-my-shell
-      whitesur-icon-theme
+      (whitesur-icon-theme.override {
+        boldPanelIcons = true;
+        alternativeIcons = true;
+        themeVariants = ["default"];
+      })
     ];
 
     programs.gnome-terminal = {

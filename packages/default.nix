@@ -9,8 +9,6 @@
     plex-exporter = callPackage ./plex-exporter {};
     tpm-fido = callPackage ./tpm-fido {};
     w4-bin = callPackage ./w4-bin {};
-    whitesur-gtk-theme = callPackage ./whitesur-gtk-theme {};
-    whitesur-icon-theme = callPackage ./whitesur-icon-theme {};
 
     tmuxPlugins = lib.recurseIntoAttrs (callPackage ./tmux-plugins {});
   };
