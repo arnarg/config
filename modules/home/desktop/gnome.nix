@@ -14,6 +14,16 @@
 in {
   options.profiles.desktop.gnome = with lib; {
     enable = mkEnableOption "gnome integration";
+    textScalingFactor = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "Text scaling factor for Gnome.";
+    };
+    wallpaper = mkOption {
+      type = types.package;
+      default = wallpaper;
+      description = "The wallpaper to use in Gnome.";
+    };
   };
 
   config = lib.mkIf (cfg.enable && cfg.gnome.enable) {
@@ -80,6 +90,7 @@ in {
       };
       "org/gnome/desktop/interface" = {
         icon-theme = "WhiteSur-dark";
+        text-scaling-factor = cfg.gnome.textScalingFactor;
       };
       "org/gnome/desktop/wm/keybindings" = {
         minimize = [""];
@@ -92,11 +103,11 @@ in {
         button-layout = "close,minimize,maximize:appmenu";
       };
       "org/gnome/desktop/background" = {
-        picture-uri = "${wallpaper}";
-        picture-uri-dark = "${wallpaper}";
+        picture-uri = "${cfg.gnome.wallpaper}";
+        picture-uri-dark = "${cfg.gnome.wallpaper}";
       };
       "org/gnome/desktop/screensaver" = {
-        picture-uri = "${wallpaper}";
+        picture-uri = "${cfg.gnome.wallpaper}";
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen
