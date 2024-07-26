@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./profiles/desktop.nix
     ./profiles/development.nix
@@ -41,6 +45,7 @@
       generateRegistryFromInputs = true;
       linkInputs = true;
       settings.trusted-users = ["root" "arnar"];
+      package = pkgs.lix;
     };
 
     # Setup persistence paths.
