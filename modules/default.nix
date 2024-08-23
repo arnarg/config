@@ -51,6 +51,7 @@
     # Setup persistence paths.
     profiles.immutable.files = [
       "/etc/machine-id"
+      "/var/lib/nixos"
     ];
   };
 }
