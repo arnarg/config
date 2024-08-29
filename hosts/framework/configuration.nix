@@ -5,6 +5,7 @@
 
   # Setup laptop profile.
   profiles.laptop.enable = true;
+  profiles.laptop.plymouth.enable = true;
 
   # Setup development profile.
   profiles.development.enable = true;

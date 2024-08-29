@@ -12,6 +12,9 @@ in {
       default = true;
       description = "Whether to use TLP instead of power profiles daemon.";
     };
+    plymouth = {
+      enable = mkEnableOption "ploymouth support";
+    };
     suspendThenHibernate = {
       enable = mkOption {
         type = types.bool;
@@ -74,6 +77,17 @@ in {
       "/var/lib/NetworkManager/seen-bssids"
       "/var/lib/NetworkManager/timestamps"
     ];
+
+    # Enable plymouth
+    boot = lib.mkIf cfg.plymouth.enable {
+      plymouth = {
+        enable = true;
+        theme = lib.mkDefault "bgrt";
+      };
+      initrd.systemd.enable = true;
+      kernelParams = ["quiet"];
+      loader.timeout = 0;
+    };
 
     # Setup keyboard rebinding.
     services.keyd.enable = cfg.rebindKeyboard.enable;
