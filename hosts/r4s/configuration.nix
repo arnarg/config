@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./interfaces.nix
@@ -16,6 +12,8 @@
     profiles.immutable.enable = true;
     profiles.immutable.directories = [
       "/var/lib/tailscale"
+      "/var/lib/private/lldap"
+      "/var/lib/authelia-main"
     ];
 
     ################
@@ -35,96 +33,67 @@
     networking.useDHCP = false;
     networking.interfaces.wan0.useDHCP = true;
 
-    # Firewall settings
-    networking.firewall.checkReversePath = "loose";
-    networking.firewall.interfaces.wan0 = {
-      allowedTCPPorts = [
-        # K3s api server
-        6443
-        # Kubelet port
-        10250
-        # Cilium health checks
-        4240
-      ];
-      allowedUDPPorts = [
-        # Cilium VXLAN
-        8472
-      ];
-    };
-    # Also allow tailscale to access k3s api server
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [6443];
-    networking.firewall.trustedInterfaces = [
-      "cilium_host"
-      "cilium_net"
-      "cilium_vxlan"
-      "lxc+"
-    ];
-
-    ################
-    ## K3s Server ##
-    ################
-    services.k3s.enable = true;
-    services.k3s.role = "server";
-    services.k3s.extraFlags = let
-      # Addmission control config for k3s cluster
-      admissionControlConfig = pkgs.writeText "k3s-admission-control-config.yaml" ''
-        apiVersion: apiserver.config.k8s.io/v1
-        kind: AdmissionConfiguration
-        plugins:
-        - name: PodSecurity
-          configuration:
-            apiVersion: pod-security.admission.config.k8s.io/v1beta1
-            kind: PodSecurityConfiguration
-            defaults:
-              enforce: "baseline"
-              enforce-version: "latest"
-              audit: "restricted"
-              audit-version: "latest"
-              warn: "restricted"
-              warn-version: "latest"
-            exemptions:
-              usernames: []
-              runtimeClasses: []
-              namespaces: [kube-system]
-      '';
-
-      # Config options for k3s server
-      serverConfig = pkgs.writeText "k3s-config.yaml" (lib.generators.toYAML {} {
-        # Use persisted data directory
-        data-dir = "/nix/persist/var/lib/rancher/k3s";
-
-        # Instead cilium will be deployed
-        flannel-backend = "none";
-        # Running on bare metal
-        disable-cloud-controller = true;
-        # Will run cilium with kube proxy replacement
-        disable-kube-proxy = true;
-        # Will run cilium for network policy enforcement
-        disable-network-policy = true;
-        # Don't need the helm controller
-        disable-helm-controller = true;
-        # Extra stuff to disable that I will deploy manually
-        disable = ["traefik" "servicelb" "local-storage" "metrics-server"];
-
-        # Don't schedule workloads on the server
-        node-taint = [
-          "node.kubernetes.io/control-plane:NoSchedule"
-        ];
-
-        # Add kube apiserver flags
-        kube-apiserver-arg = [
-          # Set admission control config
-          "admission-control-config-file=${admissionControlConfig}"
-          # Allow anonymous auth for OIDC discovery URL
-          "anonymous-auth=true"
-        ];
-      });
-    in "--config ${serverConfig}";
-
     ###############
     ## Tailscale ##
     ###############
     services.tailscale.enable = true;
+
+    #################
+    ## LDAP Server ##
+    #################
+    services.lldap.enable = true;
+    services.lldap.settings = {
+      ldap_base_dn = "dc=cdbrdr,dc=com";
+    };
+
+    # ##################
+    # ## Authelia SSO ##
+    # ##################
+    services.authelia.instances.main = {
+      enable = true;
+      settings = {
+        theme = "light";
+        default_2fa_method = "totp";
+        log.level = "debug";
+        access_control.default_policy = "two_factor";
+        session.domain = "localhost";
+        storage.local.path = "/var/lib/authelia-main/db.sqlite3";
+        notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
+        authentication_backend = {
+          password_reset.disable = false;
+          refresh_interval = "1m";
+          ldap = {
+            url = "ldap://127.0.0.1:3890";
+            implementation = "custom";
+            start_tls = false;
+            base_dn = "dc=cdbrdr,dc=com";
+            additional_users_dn = "ou=people";
+            users_filter = "(&({username_attribute}={input})(objectClass=person))";
+            additional_groups_dn = "ou=groups";
+            groups_filter = "(member={dn})";
+            display_name_attribute = "displayName";
+            username_attribute = "uid";
+            group_name_attribute = "cn";
+            mail_attribute = "mail";
+            user = "uid=authelia,ou=people,dc=cdbrdr,dc=com";
+          };
+        };
+      };
+      # Use systemd's LoadCredential instead
+      secrets.manual = true;
+    };
+    systemd.services.authelia-main = {
+      environment = {
+        AUTHELIA_JWT_SECRET_FILE = "%d/jwt_secret";
+        AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE = "%d/encryption_key";
+        AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = "%d/ldap_password";
+      };
+      serviceConfig.LoadCredential = [
+        "jwt_secret:/nix/persist/etc/authelia/jwt_secret"
+        "encryption_key:/nix/persist/etc/authelia/encryption_key"
+        "ldap_password:/nix/persist/etc/authelia/ldap_password"
+      ];
+    };
 
     ##########
     ## Sudo ##
