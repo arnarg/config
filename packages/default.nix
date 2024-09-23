@@ -5,6 +5,7 @@
 
   self = {
     anytype = callPackage ./anytype {};
+    ente-desktop = callPackage ./ente-desktop {};
     morgen = callPackage ./morgen {};
     plex-exporter = callPackage ./plex-exporter {};
     tpm-fido = callPackage ./tpm-fido {};
