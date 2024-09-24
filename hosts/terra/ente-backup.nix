@@ -35,6 +35,7 @@ in {
       groups.${cfg.group}.name = cfg.group;
     };
 
+    # Backup from Ente Photos to SSD
     systemd.services.ente-backup = {
       description = "Backup of Ente Photos";
       after = ["network.target"];
@@ -47,7 +48,7 @@ in {
         User = cfg.user;
         Group = cfg.group;
         ExecStart = "${pkgs.ente-cli}/bin/ente export";
-        Restart = "always";
+        Restart = "on-failure";
         RestartSec = "10s";
         StateDirectory = "ente-backup";
         StateDirectoryMode = "0700";
@@ -92,6 +93,59 @@ in {
       timerConfig = {
         # Daily at 10:00 UTC
         OnCalendar = "*-*-* 10:00:00";
+        Persistent = true;
+      };
+    };
+
+    # rsync from SSD to HDD mirror
+    systemd.services.ente-tank-backup = {
+      description = "Backup Ente Photos to tank storage";
+      serviceConfig = {
+        User = cfg.user;
+        Group = cfg.group;
+        ExecStart = "${pkgs.rsync}/bin/rsync --verbose --archive --delete /var/backups/ente/ /tank/BACKUP/ente";
+        Restart = "on-failure";
+        RestartSec = "10s";
+
+        # Give read-write access to destination backup directory
+        ReadWritePaths = ["/tank/BACKUP/ente"];
+
+        # Security options:
+        AmbientCapabilities = "";
+        CapabilityBoundingSet = "";
+        DeviceAllow = "";
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+
+        PrivateTmp = true;
+        PrivateDevices = true;
+        PrivateUsers = true;
+
+        ProtectClock = true;
+        ProtectControlGroups = true;
+        ProtectHome = "read-only";
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "noaccess";
+        ProtectSystem = "strict";
+
+        RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_UNIX"];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+      };
+    };
+
+    systemd.timers.ente-tank-backup = {
+      description = "Periodically rsync Ente Photos backup to tank storage";
+      partOf = ["ente-tank-backup.service"];
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        # Weekly on Wednesdays at 15:00 UTC
+        OnCalendar = "Wed *-*-* 15:00:00";
         Persistent = true;
       };
     };
