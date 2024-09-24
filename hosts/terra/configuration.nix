@@ -10,6 +10,10 @@
   ];
 
   config = {
+    environment.systemPackages = with pkgs; [
+      ente-cli
+    ];
+
     # Setup server profile.
     profiles.server.enable = true;
 
