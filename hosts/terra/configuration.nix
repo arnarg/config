@@ -7,6 +7,7 @@
     ./services.nix
     ./hardware-configuration.nix
     ./fan2go.nix
+    ./ente-backup.nix
   ];
 
   config = {
@@ -202,6 +203,11 @@
     ## Duplicati Backup ##
     ######################
     services.duplicati.enable = true;
+
+    #################
+    ## Ente Backup ##
+    #################
+    services.ente-backup.enable = true;
 
     ##########
     ## Sudo ##
