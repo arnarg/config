@@ -29,6 +29,8 @@ in {
       rustfmt
       # YAML
       nodePackages.yaml-language-server
+      # Helm
+      helm-ls
       # Terraform
       terraform-ls
       # HCL
