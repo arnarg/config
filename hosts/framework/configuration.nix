@@ -26,6 +26,7 @@
 
   # Setup tailscale.
   services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
 
   # Disable fingerprint pam auth
   security.pam.services.login.fprintAuth = false;

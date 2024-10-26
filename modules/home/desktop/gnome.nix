@@ -24,20 +24,27 @@ in {
       default = wallpaper;
       description = "The wallpaper to use in Gnome.";
     };
+    extensions.tailscale = {
+      enable = mkEnableOption "tailscale extension";
+    };
   };
 
   config = lib.mkIf (cfg.enable && cfg.gnome.enable) {
     # Install various tools and extensions for gnome.
-    home.packages = with pkgs; [
-      gnome.gnome-tweaks
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.blur-my-shell
-      (whitesur-icon-theme.override {
-        boldPanelIcons = true;
-        alternativeIcons = true;
-        themeVariants = ["default"];
-      })
-    ];
+    home.packages = with pkgs;
+      [
+        gnome.gnome-tweaks
+        gnomeExtensions.dash-to-dock
+        gnomeExtensions.blur-my-shell
+        (whitesur-icon-theme.override {
+          boldPanelIcons = true;
+          alternativeIcons = true;
+          themeVariants = ["default"];
+        })
+      ]
+      ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
+        gnomeExtensions.tailscale-qs
+      ]);
 
     programs.gnome-terminal = {
       enable = true;
@@ -79,11 +86,15 @@ in {
     # Persisted dconf settings for gnome.
     dconf.settings = {
       "org/gnome/shell" = {
-        enabled-extensions = [
-          "user-theme@gnome-shell-extensions.gcampax.github.com"
-          "dash-to-dock@micxgx.gmail.com"
-          "blur-my-shell@aunetx"
-        ];
+        enabled-extensions =
+          [
+            "user-theme@gnome-shell-extensions.gcampax.github.com"
+            "dash-to-dock@micxgx.gmail.com"
+            "blur-my-shell@aunetx"
+          ]
+          ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
+            "tailscale@joaophi.github.com"
+          ]);
       };
       "org/gnome/shell/keybindings" = {
         toggle-overview = ["<Primary>Up"];
