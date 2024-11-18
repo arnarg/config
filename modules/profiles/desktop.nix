@@ -28,13 +28,12 @@ in {
     };
 
     # Use pipewire instead of pulseaudio for sound.
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     services.pipewire.enable = true;
     services.pipewire.pulse.enable = true;
 
-    # Enable opengl.
-    hardware.opengl.enable = true;
+    # Enable graphics.
+    hardware.graphics.enable = true;
 
     # Setup system fonts.
     fonts = {

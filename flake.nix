@@ -5,13 +5,13 @@
   ## INPUTS ##
   ############
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.5.1";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
 
     home = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

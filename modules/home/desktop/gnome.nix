@@ -33,7 +33,7 @@ in {
     # Install various tools and extensions for gnome.
     home.packages = with pkgs;
       [
-        gnome.gnome-tweaks
+        gnome-tweaks
         gnomeExtensions.dash-to-dock
         gnomeExtensions.blur-my-shell
         (whitesur-icon-theme.override {

@@ -8,7 +8,7 @@
 in {
   imports = [
     ./gnome.nix
-    ./kicad.nix
+    # ./kicad.nix
     ./tpm-fido.nix
   ];
 
