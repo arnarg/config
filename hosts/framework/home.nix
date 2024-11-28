@@ -12,5 +12,6 @@
 
   home.packages = with pkgs; [
     ente-desktop
+    ente-auth
   ];
 }
