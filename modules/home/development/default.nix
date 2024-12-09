@@ -48,6 +48,9 @@ in {
       rebar3 # sometimes also needed
     ];
 
+    # Enable nh
+    programs.nh.enable = true;
+
     home.sessionVariables = {
       LC_CTYPE = "en_US.UTF-8";
       GOPATH = "$HOME/go";
