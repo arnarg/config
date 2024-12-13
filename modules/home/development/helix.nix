@@ -22,7 +22,13 @@ in {
       gotools
       delve
       # Python
-      python311Packages.python-lsp-server
+      (python3.withPackages
+        (ps:
+          with ps; [
+            python-lsp-server
+            python-lsp-black
+            python-lsp-ruff
+          ]))
       # Rust
       rust-analyzer
       rustup
@@ -92,6 +98,12 @@ in {
       # Update language server settings
       language-server = {
         yaml-language-server.config = {yaml.keyOrdering = false;};
+        pylsp.config = {
+          pylsp.plugins = {
+            black.enabled = true;
+            ruff.enabled = true;
+          };
+        };
       };
 
       # Update language settings
@@ -148,6 +160,11 @@ in {
             command = "d2";
             args = ["fmt" "-"];
           };
+        }
+        # python
+        {
+          name = "python";
+          auto-format = true;
         }
       ];
     };
