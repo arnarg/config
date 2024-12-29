@@ -9,6 +9,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.5.1";
     hardware.url = "github:nixos/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence/master";
+    ghostty.url = "github:ghostty-org/ghostty/v1.0.0";
 
     home = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -25,6 +26,7 @@
     impermanence,
     utils,
     home,
+    ghostty,
     ...
   }: {
     lib = import ./lib;
@@ -62,6 +64,9 @@
 
       overlays = [
         (import ./packages/overlay.nix)
+        (_:_: {
+          ghostty = ghostty.packages.x86_64-linux.default;
+        })
       ];
     };
 

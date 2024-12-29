@@ -7,6 +7,7 @@
   cfg = config.profiles.development;
 in {
   imports = [
+    ./ghostty.nix
     ./git.nix
     ./helix.nix
     ./tmux.nix
