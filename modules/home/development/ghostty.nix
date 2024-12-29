@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.profiles.development;
+  sf = config.profiles.desktop.gnome.textScalingFactor;
 in {
   options.profiles.development.ghostty = with lib; {
     enable = mkOption {
@@ -25,7 +26,7 @@ in {
 
     xdg.configFile."ghostty/config".text = ''
       font-family = Inconsolata
-      font-size = 14
+      font-size = ${toString (builtins.floor (12 * sf))}
       theme = GruvboxDark
       cursor-style = block
 
