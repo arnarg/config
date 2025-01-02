@@ -30,6 +30,11 @@ in {
       theme = GruvboxDark
       cursor-style = block
 
+      # Disable font ligatures
+      font-feature = -calt
+      font-feature = -liga
+      font-feature = -dlig
+
       # Unbind alt+<number> to allow tmux
       # to handle that
       keybind = alt+one=unbind
