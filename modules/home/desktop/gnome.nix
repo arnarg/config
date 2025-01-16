@@ -36,6 +36,7 @@ in {
         gnome-tweaks
         gnomeExtensions.dash-to-dock
         gnomeExtensions.blur-my-shell
+        gnomeExtensions.paperwm
         (whitesur-icon-theme.override {
           boldPanelIcons = true;
           alternativeIcons = true;
@@ -91,6 +92,7 @@ in {
             "user-theme@gnome-shell-extensions.gcampax.github.com"
             "dash-to-dock@micxgx.gmail.com"
             "blur-my-shell@aunetx"
+            "paperwm@paperwm.github.com"
           ]
           ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
             "tailscale@joaophi.github.com"
@@ -149,6 +151,15 @@ in {
       };
       "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
         blur = false;
+      };
+      ## PaperWM
+      "org/gnome/shell/extensions/paperwm" = {
+        default-focus-mode = 2;
+        horizontal-margin = 0;
+        vertical-margin = 0;
+        vertical-margin-bottom = 0;
+        selection-border-size = 0;
+        window-gap = 4;
       };
     };
   };
