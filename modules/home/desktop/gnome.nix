@@ -153,7 +153,14 @@ in {
         blur = false;
       };
       ## PaperWM
-      "org/gnome/shell/extensions/paperwm" = {
+      "org/gnome/shell/extensions/paperwm" = let
+        winprops = [
+          {
+            wm_class = "firefox";
+            preferredWidth = "90%";
+          }
+        ];
+      in {
         default-focus-mode = 2;
         open-window-position = 0;
         horizontal-margin = 0;
@@ -161,6 +168,7 @@ in {
         vertical-margin-bottom = 0;
         selection-border-size = 0;
         window-gap = 4;
+        winprops = map builtins.toJSON winprops;
       };
     };
   };
