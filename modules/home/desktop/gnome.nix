@@ -173,6 +173,8 @@ in {
         move-up = ["<Control><Super>Up" "<Shift><Super>k"];
         move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Control><Super>Left" "<Shift><Super>h"];
         move-right = ["<Control><Super>period" "<Shift><Super>period" "<Control><Super>Right" "<Shift><Super>l"];
+        move-down-workspace = ["<Shift><Control><Super>j"];
+        move-up-workspace = ["<Shift><Control><Super>k"];
         switch-down = ["<Super>Down" "<Super>j"];
         switch-up = ["<Super>Up" "<Super>k"];
         switch-left = ["<Super>Left" "<Super>h"];
