@@ -153,14 +153,7 @@ in {
         blur = false;
       };
       ## PaperWM
-      "org/gnome/shell/extensions/paperwm" = let
-        winprops = [
-          {
-            wm_class = "firefox";
-            preferredWidth = "90%";
-          }
-        ];
-      in {
+      "org/gnome/shell/extensions/paperwm" = {
         default-focus-mode = 2;
         open-window-position = 0;
         horizontal-margin = 0;
@@ -168,7 +161,26 @@ in {
         vertical-margin-bottom = 0;
         selection-border-size = 0;
         window-gap = 4;
-        winprops = map builtins.toJSON winprops;
+        winprops = map builtins.toJSON [
+          {
+            wm_class = "firefox";
+            preferredWidth = "90%";
+          }
+        ];
+      };
+      "org/gnome/shell/extensions/paperwm/keybindings" = {
+        move-down = ["<Control><Super>Down" "<Shift><Super>j"];
+        move-up = ["<Control><Super>Up" "<Shift><Super>k"];
+        move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Control><Super>Left" "<Shift><Super>h"];
+        move-right = ["<Control><Super>period" "<Shift><Super>period" "<Control><Super>Right" "<Shift><Super>l"];
+        switch-down = ["<Super>Down" "<Super>j"];
+        switch-up = ["<Super>Up" "<Super>k"];
+        switch-left = ["<Super>Left" "<Super>h"];
+        switch-right = ["<Super>Right" "<Super>l"];
+        switch-down-workspace = ["<Control><Super>j"];
+        switch-up-workspace = ["<Control><Super>k"];
+        # Unbind take-window
+        take-window = [""];
       };
     };
   };
