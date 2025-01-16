@@ -155,6 +155,7 @@ in {
       ## PaperWM
       "org/gnome/shell/extensions/paperwm" = {
         default-focus-mode = 2;
+        open-window-position = 0;
         horizontal-margin = 0;
         vertical-margin = 0;
         vertical-margin-bottom = 0;
