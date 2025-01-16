@@ -27,6 +27,23 @@ in {
     extensions.tailscale = {
       enable = mkEnableOption "tailscale extension";
     };
+    extensions.paperwm.winprops = mkOption {
+      type = with types;
+        attrsOf (submodule ({name, ...}: {
+          options = {
+            preferredWidth = mkOption {
+              type = with types; nullOr str;
+              default = null;
+            };
+            spaceIndex = mkOption {
+              type = with types; nullOr int;
+              default = null;
+            };
+          };
+        }));
+      default = {};
+      apply = mapAttrsToList (n: v: {vm_class = n;} // v);
+    };
   };
 
   config = lib.mkIf (cfg.enable && cfg.gnome.enable) {
@@ -130,7 +147,7 @@ in {
       ## Terminal stuff
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>Return";
-        command = "gnome-terminal";
+        command = "ghostty";
         name = "Open Terminal";
       };
       ## Dash-to-dock
@@ -161,28 +178,37 @@ in {
         vertical-margin-bottom = 0;
         selection-border-size = 0;
         window-gap = 4;
-        winprops = map builtins.toJSON [
-          {
-            wm_class = "firefox";
-            preferredWidth = "90%";
-          }
-        ];
+        winprops = map builtins.toJSON cfg.gnome.extensions.paperwm.winprops;
       };
       "org/gnome/shell/extensions/paperwm/keybindings" = {
         move-down = ["<Control><Super>Down" "<Shift><Super>j"];
         move-up = ["<Control><Super>Up" "<Shift><Super>k"];
         move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Control><Super>Left" "<Shift><Super>h"];
         move-right = ["<Control><Super>period" "<Shift><Super>period" "<Control><Super>Right" "<Shift><Super>l"];
-        move-down-workspace = ["<Shift><Control><Super>j"];
-        move-up-workspace = ["<Shift><Control><Super>k"];
+        move-down-workspace = ["<Shift><Control>j"];
+        move-up-workspace = ["<Shift><Control>k"];
         switch-down = ["<Super>Down" "<Super>j"];
         switch-up = ["<Super>Up" "<Super>k"];
         switch-left = ["<Super>Left" "<Super>h"];
         switch-right = ["<Super>Right" "<Super>l"];
         switch-down-workspace = ["<Control><Super>j"];
         switch-up-workspace = ["<Control><Super>k"];
+        switch-monitor-down = ["<Shift><Super>Down" "<Control><Super>j"];
+        switch-monitor-up = ["<Shift><Super>Up" "<Control><Super>k"];
+        switch-monitor-left = ["<Shift><Super>Left" "<Control><Super>h"];
+        switch-monitor-right = ["<Shift><Super>Right" "<Control><Super>l"];
         # Unbind take-window
         take-window = [""];
+        # new-window overrides <Super>Enter by default
+        new-window = ["<Super>n"];
+      };
+    };
+
+    # Set paperwm winprops
+    profiles.desktop.gnome.extensions.paperwm.winprops = {
+      firefox = {
+        preferredWidth = "90%";
+        spaceIndex = 0;
       };
     };
   };
