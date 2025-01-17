@@ -42,7 +42,7 @@ in {
           };
         }));
       default = {};
-      apply = mapAttrsToList (n: v: {wm_class = n;} // v);
+      apply = mapAttrsToList (n: v: {wm_class = n;} // (filterAttrs (_: opt: opt != null) v));
     };
   };
 
@@ -193,10 +193,10 @@ in {
         switch-right = ["<Super>Right" "<Super>l"];
         switch-down-workspace = ["<Control><Super>j"];
         switch-up-workspace = ["<Control><Super>k"];
-        switch-monitor-down = ["<Shift><Super>Down" "<Control><Super>j"];
-        switch-monitor-up = ["<Shift><Super>Up" "<Control><Super>k"];
-        switch-monitor-left = ["<Shift><Super>Left" "<Control><Super>h"];
-        switch-monitor-right = ["<Shift><Super>Right" "<Control><Super>l"];
+        switch-monitor-down = ["<Shift><Super>Down" "<Shift><Control><Super>j"];
+        switch-monitor-up = ["<Shift><Super>Up" "<Shift><Control><Super>k"];
+        switch-monitor-left = ["<Shift><Super>Left" "<Shift><Control><Super>h"];
+        switch-monitor-right = ["<Shift><Super>Right" "<Shift><Control><Super>l"];
         # Unbind take-window
         take-window = [""];
         # new-window overrides <Super>Enter by default
@@ -207,7 +207,6 @@ in {
     # Set paperwm winprops
     profiles.desktop.gnome.extensions.paperwm.winprops = {
       firefox = {
-        preferredWidth = "90%";
         spaceIndex = 0;
       };
     };
