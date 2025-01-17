@@ -42,7 +42,7 @@ in {
           };
         }));
       default = {};
-      apply = mapAttrsToList (n: v: {vm_class = n;} // v);
+      apply = mapAttrsToList (n: v: {wm_class = n;} // v);
     };
   };
 
