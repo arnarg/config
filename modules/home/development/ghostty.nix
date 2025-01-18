@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: let
   cfg = config.profiles.development;
@@ -16,36 +15,42 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && cfg.ghostty.enable) {
-    home.packages = with pkgs; [
-      ghostty
-    ];
+    programs.ghostty.enable = true;
+    programs.ghostty.enableZshIntegration = true;
+    programs.ghostty.installBatSyntax = true;
+    programs.ghostty.settings = {
+      theme = "GruvboxDark";
+
+      font-family = "Inconsolata";
+      font-size = toString (builtins.floor (12 * sf));
+
+      cursor-style = "block";
+      cursor-style-blink = true;
+
+      # Disable font ligatures
+      font-feature = [
+        "-calt"
+        "-liga"
+        "-dlig"
+      ];
+
+      # Unbind alt+<number> to allow tmux
+      # to handle that
+      keybind = [
+        "alt+one=unbind"
+        "alt+two=unbind"
+        "alt+three=unbind"
+        "alt+four=unbind"
+        "alt+five=unbind"
+        "alt+six=unbind"
+        "alt+seven=unbind"
+        "alt+eight=unbind"
+        "alt+nine=unbind"
+      ];
+    };
 
     dconf.settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       command = lib.mkForce "ghostty";
     };
-
-    xdg.configFile."ghostty/config".text = ''
-      font-family = Inconsolata
-      font-size = ${toString (builtins.floor (12 * sf))}
-      theme = GruvboxDark
-      cursor-style = block
-
-      # Disable font ligatures
-      font-feature = -calt
-      font-feature = -liga
-      font-feature = -dlig
-
-      # Unbind alt+<number> to allow tmux
-      # to handle that
-      keybind = alt+one=unbind
-      keybind = alt+two=unbind
-      keybind = alt+three=unbind
-      keybind = alt+four=unbind
-      keybind = alt+five=unbind
-      keybind = alt+six=unbind
-      keybind = alt+seven=unbind
-      keybind = alt+eight=unbind
-      keybind = alt+nine=unbind
-    '';
   };
 }
