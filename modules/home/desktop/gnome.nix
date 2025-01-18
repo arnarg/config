@@ -193,10 +193,14 @@ in {
         switch-right = ["<Super>Right" "<Super>l"];
         switch-down-workspace = ["<Control><Super>j"];
         switch-up-workspace = ["<Control><Super>k"];
-        switch-monitor-down = ["<Shift><Super>Down" "<Shift><Control><Super>j"];
-        switch-monitor-up = ["<Shift><Super>Up" "<Shift><Control><Super>k"];
+        switch-monitor-below = ["<Shift><Super>Down" "<Shift><Control><Super>j"];
+        switch-monitor-above = ["<Shift><Super>Up" "<Shift><Control><Super>k"];
         switch-monitor-left = ["<Shift><Super>Left" "<Shift><Control><Super>h"];
         switch-monitor-right = ["<Shift><Super>Right" "<Shift><Control><Super>l"];
+        move-space-monitor-below = ["<Shift><Control><Alt>Down" "<Shift><Control><Alt>j"];
+        move-space-monitor-above = ["<Shift><Control><Alt>Up" "<Shift><Control><Alt>k"];
+        move-space-monitor-left = ["<Shift><Control><Alt>Left" "<Shift><Control><Alt>l"];
+        move-space-monitor-right = ["<Shift><Control><Alt>Right" "<Shift><Control><Alt>h"];
         # Unbind take-window
         take-window = [""];
         # new-window overrides <Super>Enter by default
