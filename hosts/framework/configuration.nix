@@ -20,6 +20,10 @@
   # Setup TPM profile.
   profiles.tpm.enable = true;
 
+  # framework kmod is not building
+  # and I'm not really using it
+  hardware.framework.enableKmod = false;
+
   # Setup bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
