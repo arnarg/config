@@ -1,6 +1,5 @@
 final: prev: {
   anytype = prev.callPackage ./anytype {};
-  ente-cli = prev.callPackage ./ente-cli {};
   ente-desktop = prev.callPackage ./ente-desktop {};
   morgen = prev.callPackage ./morgen {};
   plex-exporter = prev.callPackage ./plex-exporter {};
