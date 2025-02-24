@@ -21,6 +21,7 @@ in {
     home.packages = with pkgs; [
       wl-clipboard
       spotify
+      lsq
     ];
 
     # Setup firefox.
@@ -45,6 +46,17 @@ in {
         .vimvixen-console-frame {
           height: 0px;
           color-scheme: light !important;
+        }
+      '';
+    };
+
+    # Setup lsq
+    xdg.configFile."lsq/config.edn" = {
+      text = ''
+        {
+          :directory "${config.home.homeDirectory}/Documents/notes"
+          :file/type "Markdown"
+          :file/format "yyyy_MM_dd"
         }
       '';
     };
