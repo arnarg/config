@@ -1,6 +1,15 @@
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    logseq
+  ];
+
+  # For logseq
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
   ];
 
   # Setup laptop profile.
