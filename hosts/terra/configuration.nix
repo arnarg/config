@@ -181,10 +181,16 @@
     ################
     ## NFS Server ##
     ################
+    fileSystems."/exports/storage" = {
+      device = "/tank/SHARE/Storage";
+      options = ["bind"];
+    };
+
     services.nfs.server.enable = true;
     services.nfs.server.exports = ''
       /exports/kubernetes 192.168.0.148(rw,sync,no_root_squash)
       /exports/kubernetes 192.168.0.157(rw,sync,no_root_squash)
+      /exports/storage    192.168.0.5(rw,sync,no_root_squash)
     '';
     services.nfs.server.createMountPoints = true;
 
