@@ -37,13 +37,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Setup NAS NFS mount
-  fileSystems."/media/storage" = {
-    device = "192.168.0.10:/exports/storage";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=120"];
-  };
-
   # Setup tailscale.
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
