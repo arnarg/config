@@ -50,6 +50,9 @@ in
       systems.nixos = {
         framework.modules = [
           config.inputs.hardware.result.nixosModules.framework-12th-gen-intel
+          {
+            environment.systemPackages = [config.inputs.lila.result.packages.default.result.x86_64-linux];
+          }
         ];
       };
     };

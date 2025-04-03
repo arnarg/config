@@ -1,5 +1,17 @@
 {
   "pins": {
+    "hardware": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixos-hardware"
+      },
+      "branch": "master",
+      "revision": "de6fc5551121c59c01e2a3d45b277a6d05077bc4",
+      "url": "https://github.com/nixos/nixos-hardware/archive/de6fc5551121c59c01e2a3d45b277a6d05077bc4.tar.gz",
+      "hash": "0yi5jb00zrlads7p00cp9cg74bxa6x1006wqcl6n2bhj6h6b3xvg"
+    },
     "impermanence": {
       "type": "Git",
       "repository": {
@@ -11,6 +23,18 @@
       "revision": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
       "url": "https://github.com/nix-community/impermanence/archive/4b3e914cdf97a5b536a889e939fb2fd2b043a170.tar.gz",
       "hash": "04l16szln2x0ajq2x799krb53ykvc6vm44x86ppy1jg9fr82161c"
+    },
+    "lila": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "arnarg",
+        "repo": "lila"
+      },
+      "branch": "main",
+      "revision": "9c8f910d031c102258eebd4b052c6fe9c5aa6355",
+      "url": "https://github.com/arnarg/lila/archive/9c8f910d031c102258eebd4b052c6fe9c5aa6355.tar.gz",
+      "hash": "007mnjig9s0qsgg5xnsar29n5h9cdqddh1s0x24lzfmgv2lfasjr"
     },
     "nilla": {
       "type": "Git",
@@ -35,18 +59,6 @@
       "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
       "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
       "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
-    },
-    "hardware": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "nixos",
-        "repo": "nixos-hardware"
-      },
-      "branch": "master",
-      "revision": "de6fc5551121c59c01e2a3d45b277a6d05077bc4",
-      "url": "https://github.com/nixos/nixos-hardware/archive/de6fc5551121c59c01e2a3d45b277a6d05077bc4.tar.gz",
-      "hash": "0yi5jb00zrlads7p00cp9cg74bxa6x1006wqcl6n2bhj6h6b3xvg"
     },
     "nixpkgs": {
       "type": "Channel",
