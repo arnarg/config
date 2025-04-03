@@ -16,27 +16,6 @@ in
         modules = [
           ./modules
           config.inputs.impermanence.result.nixosModules.default
-          {
-            # Set nixpkgs in registry.json
-            nix.registry.nixpkgs = {
-              from = {
-                id = "nixpkgs";
-                type = "indirect";
-              };
-              to = {
-                type = "path";
-                path = config.inputs.nixpkgs.src;
-              };
-            };
-
-            # Set NIX_PATH to /etc/nix/inputs and create those symlinks
-            nix.nixPath = ["/etc/nix/inputs"];
-            environment.etc = builtins.listToAttrs (config.lib.attrs.mapToList (n: val: {
-                name = "nix/inputs/${n}";
-                value.source = val.src;
-              })
-              config.inputs);
-          }
         ];
       };
 
@@ -47,14 +26,14 @@ in
         impermanence.loader = "flake";
       };
 
-      systems.nixos = {
-        framework.modules = [
-          config.inputs.hardware.result.nixosModules.framework-12th-gen-intel
-          {
-            environment.systemPackages = [config.inputs.lila.result.packages.default.result.x86_64-linux];
-          }
-        ];
-      };
+      systems.nixos.framework.modules = [
+        config.inputs.hardware.result.nixosModules.framework-12th-gen-intel
+        {
+          environment.systemPackages = [
+            config.inputs.lila.result.packages.default.result.x86_64-linux
+          ];
+        }
+      ];
 
       shells.default = {
         systems = ["x86_64-linux" "aarch64-linux"];
