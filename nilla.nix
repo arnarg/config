@@ -55,5 +55,21 @@ in
           }
         ];
       };
+
+      shells.default = {
+        systems = ["x86_64-linux" "aarch64-linux"];
+
+        builder = "nixpkgs";
+        settings.pkgs = config.inputs.nixpkgs.result;
+
+        shell = {
+          mkShellNoCC,
+          npins,
+          ...
+        }:
+          mkShellNoCC {
+            packages = [npins];
+          };
+      };
     };
   })
