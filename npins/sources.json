@@ -1,0 +1,59 @@
+{
+  "pins": {
+    "impermanence": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "impermanence"
+      },
+      "branch": "master",
+      "revision": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
+      "url": "https://github.com/nix-community/impermanence/archive/4b3e914cdf97a5b536a889e939fb2fd2b043a170.tar.gz",
+      "hash": "04l16szln2x0ajq2x799krb53ykvc6vm44x86ppy1jg9fr82161c"
+    },
+    "nilla": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nilla-nix",
+        "repo": "nilla"
+      },
+      "branch": "main",
+      "revision": "6747fe62879d7d15c96808bc370a52941287772c",
+      "url": "https://github.com/nilla-nix/nilla/archive/6747fe62879d7d15c96808bc370a52941287772c.tar.gz",
+      "hash": "0sg9chk7y8h8sh8647vi0d2liqxa0vnidpd3acs763p6alxnf23y"
+    },
+    "nilla-nixos": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nilla-nix",
+        "repo": "nixos"
+      },
+      "branch": "main",
+      "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
+      "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
+      "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
+    },
+    "hardware": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixos-hardware"
+      },
+      "branch": "master",
+      "revision": "de6fc5551121c59c01e2a3d45b277a6d05077bc4",
+      "url": "https://github.com/nixos/nixos-hardware/archive/de6fc5551121c59c01e2a3d45b277a6d05077bc4.tar.gz",
+      "hash": "0yi5jb00zrlads7p00cp9cg74bxa6x1006wqcl6n2bhj6h6b3xvg"
+    },
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixos-24.11",
+      "url": "https://releases.nixos.org/nixos/24.11/nixos-24.11.716632.44a69ed68878/nixexprs.tar.xz",
+      "hash": "0n12h5kqxidympa6mg8fa9hyfjrzd1v7rlcjsf1ldnxnji8m5fpc"
+    }
+  },
+  "version": 3
+}

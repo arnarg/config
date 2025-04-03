@@ -41,9 +41,9 @@
     # Setup nix config for all systems.
     nix = {
       extraOptions = "extra-experimental-features = nix-command flakes";
-      generateNixPathFromInputs = true;
-      generateRegistryFromInputs = true;
-      linkInputs = true;
+      # generateNixPathFromInputs = true;
+      # generateRegistryFromInputs = true;
+      # linkInputs = true;
       settings.trusted-users = ["root" "arnar"];
       package = pkgs.lix;
     };
