@@ -6,7 +6,6 @@ in
   nilla.create ({config}: {
     includes = [
       ./nilla
-      "${pins.nilla-nixos}/modules/nixos.nix"
     ];
 
     config = {
@@ -23,8 +22,8 @@ in
           overlays = [(import ./packages/overlay.nix)];
         };
 
-        hardware.loader = "flake";
-        impermanence.loader = "flake";
+        hardware.loader = "raw";
+        impermanence.loader = "raw";
       };
 
       ###########
@@ -36,7 +35,7 @@ in
         args.inputs = config.inputs;
         modules = [
           ./nilla/modules/nixos
-          config.inputs.impermanence.result.nixosModules.default
+          "${config.inputs.impermanence.result}/nixos.nix"
         ];
       };
 
