@@ -44,9 +44,9 @@
         "repo": "lila"
       },
       "branch": "main",
-      "revision": "9c8f910d031c102258eebd4b052c6fe9c5aa6355",
-      "url": "https://github.com/arnarg/lila/archive/9c8f910d031c102258eebd4b052c6fe9c5aa6355.tar.gz",
-      "hash": "007mnjig9s0qsgg5xnsar29n5h9cdqddh1s0x24lzfmgv2lfasjr"
+      "revision": "2846b13f89e8d8db34ec6b3589092d0b9ecbda08",
+      "url": "https://github.com/arnarg/lila/archive/2846b13f89e8d8db34ec6b3589092d0b9ecbda08.tar.gz",
+      "hash": "0n5397wvh7pcfnc6acpnhw9psn4xsbaw3gh6g77nm06zqv6h64x2"
     },
     "nilla": {
       "type": "Git",
@@ -68,9 +68,9 @@
         "repo": "nixos"
       },
       "branch": "main",
-      "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
-      "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
-      "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
+      "revision": "2d1baf07fd814421a8f4a275287def5ba4e6d9a4",
+      "url": "https://github.com/nilla-nix/nixos/archive/2d1baf07fd814421a8f4a275287def5ba4e6d9a4.tar.gz",
+      "hash": "0f06spp06f2q5gd5b0fxjqvs1yq7x8garf9mr518k8wbx37g48wh"
     },
     "nixpkgs": {
       "type": "Channel",

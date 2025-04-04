@@ -18,6 +18,7 @@
     ente-desktop
     ente-auth
     argocd
+    npins
     inputs.lila.result.packages.default.result.x86_64-linux
   ];
 }
