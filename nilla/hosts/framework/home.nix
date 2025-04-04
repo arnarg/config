@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # Setup desktop profile.
   profiles.desktop.enable = true;
   profiles.desktop.tpm-fido.enable = true;
@@ -14,5 +18,6 @@
     ente-desktop
     ente-auth
     argocd
+    inputs.lila.result.packages.default.result.x86_64-linux
   ];
 }

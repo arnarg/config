@@ -12,6 +12,18 @@
       "url": "https://github.com/nixos/nixos-hardware/archive/de6fc5551121c59c01e2a3d45b277a6d05077bc4.tar.gz",
       "hash": "0yi5jb00zrlads7p00cp9cg74bxa6x1006wqcl6n2bhj6h6b3xvg"
     },
+    "home": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "home-manager"
+      },
+      "branch": "release-24.11",
+      "revision": "15c5f9d04fabd176f30286c8f52bbdb2c853a146",
+      "url": "https://github.com/nix-community/home-manager/archive/15c5f9d04fabd176f30286c8f52bbdb2c853a146.tar.gz",
+      "hash": "0snr7vyr4z3d09mvn7pirvl30xc034x82kbzcwmbcrcr1cs7g0yv"
+    },
     "impermanence": {
       "type": "Git",
       "repository": {

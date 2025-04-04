@@ -1,6 +1,7 @@
-{
+{inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    inputs.hardware.result.nixosModules.framework-12th-gen-intel
   ];
 
   # Setup laptop profile.

@@ -10,31 +10,53 @@ in
     ];
 
     config = {
+      ############
+      ## Inputs ##
+      ############
+      # Generate inputs from npins
       generators.inputs.pins = pins;
-      generators.nixos = {
-        folder = ./nilla/hosts;
-        modules = [
-          ./modules
-          config.inputs.impermanence.result.nixosModules.default
-        ];
-      };
 
+      # Override specific input settings and loaders
       inputs = {
-        nixpkgs.settings.configuration.allowUnfree = true;
+        nixpkgs.settings = {
+          configuration.allowUnfree = true;
+          overlays = [(import ./packages/overlay.nix)];
+        };
 
         hardware.loader = "flake";
         impermanence.loader = "flake";
       };
 
-      systems.nixos.framework.modules = [
-        config.inputs.hardware.result.nixosModules.framework-12th-gen-intel
-        {
-          environment.systemPackages = [
-            config.inputs.lila.result.packages.default.result.x86_64-linux
-          ];
-        }
-      ];
+      ###########
+      ## NixOS ##
+      ###########
+      # Generate nixos hosts from folders in ./nilla/hosts
+      generators.nixos = {
+        folder = ./nilla/hosts;
+        args.inputs = config.inputs;
+        modules = [
+          ./nilla/modules/nixos
+          config.inputs.impermanence.result.nixosModules.default
+        ];
+      };
 
+      ##################
+      ## Home Manager ##
+      ##################
+      # Generate home-manager configurations from folders in
+      # ./nilla/hosts
+      generators.home = {
+        username = "arnar";
+        folder = ./nilla/hosts;
+        args.inputs = config.inputs;
+        modules = [
+          ./nilla/modules/home
+        ];
+      };
+
+      ############
+      ## Shells ##
+      ############
       shells.default = {
         systems = ["x86_64-linux" "aarch64-linux"];
 
