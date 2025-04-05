@@ -16,6 +16,14 @@ in {
             default.value = {};
           };
 
+          system = lib.options.create {
+            description = ''
+              The hostPlatform of the host. The NixOS option `nixpkgs.hostPlatform` in a NixOS module takes precedence over this.
+            '';
+            type = lib.types.string;
+            default.value = "x86_64-linux";
+          };
+
           nixpkgs = lib.options.create {
             description = "The Nixpkgs input to use.";
             type = lib.types.raw;
@@ -46,10 +54,14 @@ in {
                       # Set settings from nixpkgs input as defaults.
                       nixpkgs = {
                         overlays = config.nixpkgs.settings.overlays or [];
+
                         # Set every leaf in inputs.nixpkgs.settings.configuration
                         # as default with `mkDefault` so it can be overwritten
                         # more easily in a module.
                         config = lib.mapAttrsRecursive (_: lib.mkDefault) (config.nixpkgs.settings.configuration or {});
+
+                        # Higher priority than `mkOptionDefault` but lower than `mkDefault`.
+                        hostPlatform = lib.mkOverride 1400 config.system;
                       };
                     }
                   )

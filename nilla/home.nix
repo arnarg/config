@@ -16,6 +16,12 @@ in {
             default.value = {};
           };
 
+          system = lib.options.create {
+            description = "The system of pkgs to use.";
+            type = lib.types.string;
+            default.value = "x86_64-linux";
+          };
+
           home-manager = lib.options.create {
             description = "The home-manager input to use.";
             type = lib.types.raw;
@@ -32,8 +38,8 @@ in {
               if
                 inputs
                 ? nixpkgs
-                && inputs.nixpkgs.result ? x86_64-linux
-              then inputs.nixpkgs.result.x86_64-linux
+                && inputs.nixpkgs.result ? ${config.system}
+              then inputs.nixpkgs.result.${config.system}
               else null;
           };
 
