@@ -21,7 +21,7 @@ in {
             type = lib.types.raw;
             default.value =
               if inputs ? home
-              then inputs.home.result
+              then inputs.home
               else null;
           };
 
@@ -47,12 +47,39 @@ in {
             description = "The created home-manager system.";
             type = lib.types.raw;
             writable = false;
-            default.value = config.home-manager.lib.homeManagerConfiguration {
-              pkgs = config.pkgs;
-              lib = config.pkgs.lib;
-              extraSpecialArgs = config.args;
-              modules = config.modules;
-            };
+            default.value = let
+              src = config.home-manager.src;
+              contents = builtins.readDir src;
+              directories = lib.attrs.filter (name: value: value == "directory") contents;
+
+              builder =
+                if directories ? "lib" && (builtins.readDir "${src}/lib") ? "default.nix"
+                then (import "${src}/lib").homeManagerConfiguration
+                else
+                  {
+                    pkgs,
+                    lib,
+                    extraSpecialArgs,
+                    modules,
+                  }:
+                    import "${src}/modules" {
+                      inherit pkgs lib extraSpecialArgs;
+                      check = true;
+                      configuration = {lib, ...}: {
+                        imports = modules;
+                        nixpkgs = {
+                          config = lib.mkDefault pkgs.config;
+                          inherit (pkgs) overlays;
+                        };
+                      };
+                    };
+            in
+              builder {
+                pkgs = config.pkgs;
+                lib = config.pkgs.lib;
+                extraSpecialArgs = config.args;
+                modules = config.modules;
+              };
           };
         };
       }));
