@@ -41,10 +41,18 @@ in {
               modules =
                 config.modules
                 ++ [
-                  {
-                    nixpkgs.config = config.nixpkgs.settings.configuration or {};
-                    nixpkgs.overlays = config.nixpkgs.settings.overlays or [];
-                  }
+                  (
+                    {lib, ...}: {
+                      # Set settings from nixpkgs input as defaults.
+                      nixpkgs = {
+                        overlays = config.nixpkgs.settings.overlays or [];
+                        # Set every leaf in inputs.nixpkgs.settings.configuration
+                        # as default with `mkDefault` so it can be overwritten
+                        # more easily in a module.
+                        config = lib.mapAttrsRecursive (_: lib.mkDefault) (config.nixpkgs.settings.configuration or {});
+                      };
+                    }
+                  )
                 ];
               modulesLocation = null;
             };

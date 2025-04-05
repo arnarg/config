@@ -7,7 +7,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  nixpkgs.hostPlatform.system = "aarch64-linux";
+  nixpkgs.hostPlatform = "aarch64-linux";
 
   boot.initrd.availableKernelModules = ["usbhid"];
   boot.initrd.kernelModules = [];
