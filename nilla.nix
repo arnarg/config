@@ -5,7 +5,7 @@ let
 in
   nilla.create ({config}: {
     includes = [
-      ./nilla
+      "${pins.nilla-utils}/modules"
     ];
 
     config = {
@@ -32,7 +32,6 @@ in
       # Generate nixos hosts from folders in ./nilla/hosts
       generators.nixos = {
         folder = ./nilla/hosts;
-        args.inputs = config.inputs;
         modules = [
           ./nilla/modules/nixos
           "${config.inputs.impermanence.result}/nixos.nix"
@@ -47,7 +46,6 @@ in
       generators.home = {
         username = "arnar";
         folder = ./nilla/hosts;
-        args.inputs = config.inputs;
         modules = [
           ./nilla/modules/home
         ];
