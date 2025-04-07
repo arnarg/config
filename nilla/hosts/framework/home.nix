@@ -19,6 +19,7 @@
     ente-auth
     argocd
     npins
-    inputs.lila.result.packages.default.result.x86_64-linux
+    inputs.nilla-cli.result.packages.nilla-cli.result.x86_64-linux
+    inputs.nilla-utils.result.packages.nilla-utils-plugins.result.x86_64-linux
   ];
 }
