@@ -12,7 +12,7 @@ nixos-install -f nilla.nix -A systems.nixos.<name>.result
 
 ```
 .
-├── hosts/*              # My hosts for NixOS and home-manager
-├── modules/             # Modules for NixOS and home-manager
-└── packages             # My own packages that are not available in nixpkgs
+├── hosts/    # My hosts for NixOS and home-manager
+├── modules/  # Modules for NixOS and home-manager
+└── packages  # My own packages that are not available in nixpkgs
 ```
