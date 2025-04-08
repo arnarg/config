@@ -20,9 +20,9 @@
         "repo": "home-manager"
       },
       "branch": "release-24.11",
-      "revision": "a9f8b3db211b4609ddd83683f9db89796c7f6ac6",
-      "url": "https://github.com/nix-community/home-manager/archive/a9f8b3db211b4609ddd83683f9db89796c7f6ac6.tar.gz",
-      "hash": "1gaar6r1afma67ly6kr2q9f76mvimzqyy4hp7whdikx5x42d0l6s"
+      "revision": "b4e98224ad1336751a2ac7493967a4c9f6d9cb3f",
+      "url": "https://github.com/nix-community/home-manager/archive/b4e98224ad1336751a2ac7493967a4c9f6d9cb3f.tar.gz",
+      "hash": "0qk1qn04willw5qrzfjs9b7815np8mr6ci68a2787g3q7444bdxp"
     },
     "impermanence": {
       "type": "Git",
@@ -68,9 +68,9 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "0f85eea08a760767059fc3c4248b66d3340fb0de",
-      "url": "https://github.com/arnarg/nilla-utils/archive/0f85eea08a760767059fc3c4248b66d3340fb0de.tar.gz",
-      "hash": "17x4r295vg72gbhm9wh5mn8yn6jma4qxm5xqb8czpygd1vwq82h7"
+      "revision": "24f3c2754e20e1829b4fa871d3bb437005230cea",
+      "url": "https://github.com/arnarg/nilla-utils/archive/24f3c2754e20e1829b4fa871d3bb437005230cea.tar.gz",
+      "hash": "1ffw57gbx54wcfx2hnkp0zssv7rja2bannjnfyiznc9xhq0y2fd9"
     },
     "nixpkgs": {
       "type": "Channel",

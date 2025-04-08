@@ -6,7 +6,6 @@ in
   nilla.create ({config}: {
     includes = [
       "${pins.nilla-utils}/modules"
-      ./nilla
     ];
 
     config = {
@@ -30,26 +29,32 @@ in
       ###########
       ## NixOS ##
       ###########
-      # Generate nixos hosts from folders in ./nilla/hosts
+      # Generate nixos hosts from folders in ./hosts
       generators.nixos = {
-        folder = ./nilla/hosts;
+        folder = ./hosts;
         modules = [
           config.modules.nixos.default
         ];
       };
 
+      # Export NixOS module
+      modules.nixos.default = ./modules/nixos;
+
       ##################
       ## Home Manager ##
       ##################
       # Generate home-manager configurations from folders in
-      # ./nilla/hosts
+      # ./hosts
       generators.home = {
         username = "arnar";
-        folder = ./nilla/hosts;
+        folder = ./hosts;
         modules = [
           config.modules.home.default
         ];
       };
+
+      # Export home-manager module
+      modules.home.default = ./modules/home;
 
       ############
       ## Shells ##
@@ -69,5 +74,8 @@ in
             packages = [npins];
           };
       };
+
+      # Export overlay
+      overlays.default = import ./packages/overlay.nix;
     };
   })

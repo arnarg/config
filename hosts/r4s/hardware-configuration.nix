@@ -7,6 +7,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  nixpkgs.hostPlatform = "aarch64-linux";
+
   boot.initrd.availableKernelModules = ["usb_storage" "uas"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [];
@@ -37,5 +39,4 @@
   };
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

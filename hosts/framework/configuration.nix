@@ -1,6 +1,7 @@
-{
+{inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    "${inputs.hardware.result}/framework/13-inch/12th-gen-intel"
   ];
 
   # Setup laptop profile.
