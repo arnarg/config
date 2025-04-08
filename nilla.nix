@@ -6,6 +6,7 @@ in
   nilla.create ({config}: {
     includes = [
       "${pins.nilla-utils}/modules"
+      ./nilla
     ];
 
     config = {
@@ -19,7 +20,7 @@ in
       inputs = {
         nixpkgs.settings = {
           configuration.allowUnfree = true;
-          overlays = [(import ./packages/overlay.nix)];
+          overlays = [config.overlays.default];
         };
 
         hardware.loader = "raw";
@@ -33,8 +34,7 @@ in
       generators.nixos = {
         folder = ./nilla/hosts;
         modules = [
-          ./nilla/modules/nixos
-          "${config.inputs.impermanence.result}/nixos.nix"
+          config.modules.nixos.default
         ];
       };
 
@@ -47,7 +47,7 @@ in
         username = "arnar";
         folder = ./nilla/hosts;
         modules = [
-          ./nilla/modules/home
+          config.modules.home.default
         ];
       };
 

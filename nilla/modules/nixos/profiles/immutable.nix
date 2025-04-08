@@ -1,10 +1,15 @@
 {
   lib,
   config,
+  inputs,
   ...
 }: let
   cfg = config.profiles.immutable;
 in {
+  imports = [
+    "${inputs.impermanence.result}/nixos.nix"
+  ];
+
   options.profiles.immutable = with lib; {
     enable = mkEnableOption "immutable profile";
     device = mkOption {
