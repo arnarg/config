@@ -5,7 +5,7 @@ This repository hosts NixOS configuration for my various machines. It uses [nill
 ## Install
 
 ```
-nixos-install -f nilla.nix -A systems.nixos.<name>.result.config.system.build.toplevel
+nixos-install -f nilla.nix -A systems.nixos.<name>.result
 ```
 
 ## Layout
