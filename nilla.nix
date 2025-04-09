@@ -26,6 +26,8 @@ in
         impermanence.loader = "raw";
       };
 
+      generators.packages.folder = ./packages;
+
       ###########
       ## NixOS ##
       ###########
@@ -56,26 +58,11 @@ in
       # Export home-manager module
       modules.home.default = ./modules/home;
 
-      ############
-      ## Shells ##
-      ############
-      shells.default = {
-        systems = ["x86_64-linux" "aarch64-linux"];
-
-        builder = "nixpkgs";
-        settings.pkgs = config.inputs.nixpkgs.result;
-
-        shell = {
-          mkShellNoCC,
-          npins,
-          ...
-        }:
-          mkShellNoCC {
-            packages = [npins];
-          };
-      };
-
-      # Export overlay
-      overlays.default = import ./packages/overlay.nix;
+      ##############
+      ## Overlays ##
+      ##############
+      # Generate `default` overlay using `./packages`
+      # folder structure
+      generators.overlays.default.folder = ./packages;
     };
   })
