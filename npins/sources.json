@@ -68,9 +68,9 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "54b14cdff31cd2e106b872600b3fb1ef7f8ee286",
-      "url": "https://github.com/arnarg/nilla-utils/archive/54b14cdff31cd2e106b872600b3fb1ef7f8ee286.tar.gz",
-      "hash": "0ab0hai32cplw1gnmzjnghcd5nrcpkrc8s92gj0x1ghmdbbrdcg5"
+      "revision": "6f5604208927559c4e7123600bff31a3b97df899",
+      "url": "https://github.com/arnarg/nilla-utils/archive/6f5604208927559c4e7123600bff31a3b97df899.tar.gz",
+      "hash": "0bcfmzvmdfpgybjpl0qalbhhmg6p21rnbd3chinmhj889vgv82cq"
     },
     "nixpkgs": {
       "type": "Channel",
