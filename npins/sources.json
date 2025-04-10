@@ -68,15 +68,15 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "35333033dac06571d8c88ec7e5f5acf6446e4822",
-      "url": "https://github.com/arnarg/nilla-utils/archive/35333033dac06571d8c88ec7e5f5acf6446e4822.tar.gz",
-      "hash": "1ydwxfd4dgqfvm7l6mha1y93nmc834isv969nxjmadzf1v18sgmd"
+      "revision": "54b14cdff31cd2e106b872600b3fb1ef7f8ee286",
+      "url": "https://github.com/arnarg/nilla-utils/archive/54b14cdff31cd2e106b872600b3fb1ef7f8ee286.tar.gz",
+      "hash": "0ab0hai32cplw1gnmzjnghcd5nrcpkrc8s92gj0x1ghmdbbrdcg5"
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-24.11",
-      "url": "https://releases.nixos.org/nixos/24.11/nixos-24.11.716793.a880f49904d6/nixexprs.tar.xz",
-      "hash": "0mpndcj70gc8fnzlymfdidvdywlrizrng0x4r6jnhw73b794fpnv"
+      "url": "https://releases.nixos.org/nixos/24.11/nixos-24.11.716868.60e405b241ed/nixexprs.tar.xz",
+      "hash": "111zrdbnd2b7w64q07773ksf4gfbm4gq7riggxld1gmxpimprj0j"
     }
   },
   "version": 3
