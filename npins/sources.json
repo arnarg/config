@@ -8,9 +8,9 @@
         "repo": "nixos-hardware"
       },
       "branch": "master",
-      "revision": "de6fc5551121c59c01e2a3d45b277a6d05077bc4",
-      "url": "https://github.com/nixos/nixos-hardware/archive/de6fc5551121c59c01e2a3d45b277a6d05077bc4.tar.gz",
-      "hash": "0yi5jb00zrlads7p00cp9cg74bxa6x1006wqcl6n2bhj6h6b3xvg"
+      "revision": "1fe3cc2bc5d2dc9c81cb4e63d2f67c1543340df1",
+      "url": "https://github.com/nixos/nixos-hardware/archive/1fe3cc2bc5d2dc9c81cb4e63d2f67c1543340df1.tar.gz",
+      "hash": "1j10w1vls3pn1l82i5bbv0jac6xdmhbpwqhhviwpjg1bq75f3qis"
     },
     "home-manager": {
       "type": "Git",
@@ -68,9 +68,9 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "6f5604208927559c4e7123600bff31a3b97df899",
-      "url": "https://github.com/arnarg/nilla-utils/archive/6f5604208927559c4e7123600bff31a3b97df899.tar.gz",
-      "hash": "0bcfmzvmdfpgybjpl0qalbhhmg6p21rnbd3chinmhj889vgv82cq"
+      "revision": "788bb49eb4976906f3c0a9519e15867cfcac59f3",
+      "url": "https://github.com/arnarg/nilla-utils/archive/788bb49eb4976906f3c0a9519e15867cfcac59f3.tar.gz",
+      "hash": "0dz2s0c1fnv2z3przf7z7z1f0why8l42jlm8ms0gh3jx5q30lgf7"
     },
     "nixpkgs": {
       "type": "Channel",
