@@ -21,12 +21,11 @@ in
           configuration.allowUnfree = true;
           overlays = [config.overlays.default];
         };
+        nixos-unstable.settings.configuration.allowUnfree = true;
 
         hardware.loader = "raw";
         impermanence.loader = "raw";
       };
-
-      generators.packages.folder = ./packages;
 
       ###########
       ## NixOS ##

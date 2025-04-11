@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
@@ -208,6 +209,7 @@
     #######################
     services.plex.enable = true;
     services.plex.openFirewall = true;
+    services.plex.package = inputs.nixos-unstable.result.x86_64-linux.plex;
 
     ###############
     ## Tailscale ##

@@ -72,6 +72,12 @@
       "url": "https://github.com/arnarg/nilla-utils/archive/788bb49eb4976906f3c0a9519e15867cfcac59f3.tar.gz",
       "hash": "0dz2s0c1fnv2z3przf7z7z1f0why8l42jlm8ms0gh3jx5q30lgf7"
     },
+    "nixos-unstable": {
+      "type": "Channel",
+      "name": "nixos-unstable",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.05pre781462.f675531bc7e6/nixexprs.tar.xz",
+      "hash": "1lxafasrxb4bn6pg8n9d6qlbs8yv7fnbchwplfr4idf551byl5iv"
+    },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-24.11",
