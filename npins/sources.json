@@ -68,9 +68,9 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "e300a2b4035775c3c482623615e1e5c55da20801",
-      "url": "https://github.com/arnarg/nilla-utils/archive/e300a2b4035775c3c482623615e1e5c55da20801.tar.gz",
-      "hash": "18258dmynacz6jwmnppp68w6jq29znl8i00x5n2hgsvyn4y4s35q"
+      "revision": "91d5f44762a19a994f88abb5f732135e7447f6d3",
+      "url": "https://github.com/arnarg/nilla-utils/archive/91d5f44762a19a994f88abb5f732135e7447f6d3.tar.gz",
+      "hash": "0ig9304z7k8m9pnhv63gqdfkx492mmblx8kp9mfbg9fdxl6fa81f"
     },
     "nixos-unstable": {
       "type": "Channel",
