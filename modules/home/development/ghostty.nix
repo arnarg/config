@@ -16,7 +16,7 @@ in {
 
   config = lib.mkIf (cfg.enable && cfg.ghostty.enable) {
     programs.ghostty.enable = true;
-    programs.ghostty.enableZshIntegration = true;
+    programs.ghostty.enableZshIntegration = false;
     programs.ghostty.installBatSyntax = true;
     programs.ghostty.settings = {
       theme = "GruvboxDark";
