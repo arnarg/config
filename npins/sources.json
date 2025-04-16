@@ -20,9 +20,9 @@
         "repo": "home-manager"
       },
       "branch": "release-24.11",
-      "revision": "b4e98224ad1336751a2ac7493967a4c9f6d9cb3f",
-      "url": "https://github.com/nix-community/home-manager/archive/b4e98224ad1336751a2ac7493967a4c9f6d9cb3f.tar.gz",
-      "hash": "0qk1qn04willw5qrzfjs9b7815np8mr6ci68a2787g3q7444bdxp"
+      "revision": "c61bfe3ae692f42ce688b5865fac9e0de58e1387",
+      "url": "https://github.com/nix-community/home-manager/archive/c61bfe3ae692f42ce688b5865fac9e0de58e1387.tar.gz",
+      "hash": "024jcyjxsr0cj4ycz4r8i60bydrl13l6vc16innv6wq32rcgyacb"
     },
     "impermanence": {
       "type": "Git",
@@ -79,10 +79,16 @@
       "hash": "15yczhqnr4wqf7kvxwp9h42r8zwdh7z0xb78xfd25ds5yk9f1rsq"
     },
     "nixpkgs": {
-      "type": "Channel",
-      "name": "nixos-24.11",
-      "url": "https://releases.nixos.org/nixos/24.11/nixos-24.11.716947.26d499fc9f1d/nixexprs.tar.xz",
-      "hash": "01ssp6v1h64fahbzjr4zcg9pacr9sfx9bahyr9j6iarxghq85ap7"
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-24.11",
+      "revision": "26d499fc9f1d567283d5d56fcf367edd815dba1d",
+      "url": "https://github.com/nixos/nixpkgs/archive/26d499fc9f1d567283d5d56fcf367edd815dba1d.tar.gz",
+      "hash": "1kj5i5k7jzr9ahm2hrb5bnf9dmv89grykgpw4r7zr645va854y8l"
     }
   },
   "version": 3
