@@ -14,8 +14,8 @@
   # Extract the appimage first so we can get the icon inside
   # for the desktop item
   extracted = appimageTools.extract {
-    inherit src;
-    name = "ente-desktop";
+    inherit src version;
+    pname = "ente-desktop";
   };
 
   # Wrap appimage

@@ -28,7 +28,6 @@ in {
     };
 
     # Use pipewire instead of pulseaudio for sound.
-    hardware.pulseaudio.enable = false;
     services.pipewire.enable = true;
     services.pipewire.pulse.enable = true;
 

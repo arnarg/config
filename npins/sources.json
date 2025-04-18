@@ -19,10 +19,10 @@
         "owner": "nix-community",
         "repo": "home-manager"
       },
-      "branch": "release-24.11",
-      "revision": "c61bfe3ae692f42ce688b5865fac9e0de58e1387",
-      "url": "https://github.com/nix-community/home-manager/archive/c61bfe3ae692f42ce688b5865fac9e0de58e1387.tar.gz",
-      "hash": "024jcyjxsr0cj4ycz4r8i60bydrl13l6vc16innv6wq32rcgyacb"
+      "branch": "master",
+      "revision": "72526a5f7cde2ef9075637802a1e2a8d2d658f70",
+      "url": "https://github.com/nix-community/home-manager/archive/72526a5f7cde2ef9075637802a1e2a8d2d658f70.tar.gz",
+      "hash": "0kr9ckh1bhaimifsxim3h7wn9i14d24wdhyvfwidhmzndlyjr690"
     },
     "impermanence": {
       "type": "Git",
@@ -68,15 +68,21 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
-      "revision": "91d5f44762a19a994f88abb5f732135e7447f6d3",
-      "url": "https://github.com/arnarg/nilla-utils/archive/91d5f44762a19a994f88abb5f732135e7447f6d3.tar.gz",
-      "hash": "0ig9304z7k8m9pnhv63gqdfkx492mmblx8kp9mfbg9fdxl6fa81f"
+      "revision": "f587ae4494c316661723b77ebd526d30f6be4521",
+      "url": "https://github.com/arnarg/nilla-utils/archive/f587ae4494c316661723b77ebd526d30f6be4521.tar.gz",
+      "hash": "1vchb1nhfjdv01x5c42ad6ijlb15dr0309ikrsmaksgb5pf7l1l0"
     },
     "nixos-unstable": {
-      "type": "Channel",
-      "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.05pre782401.2631b0b7abce/nixexprs.tar.xz",
-      "hash": "15yczhqnr4wqf7kvxwp9h42r8zwdh7z0xb78xfd25ds5yk9f1rsq"
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-unstable",
+      "revision": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
+      "url": "https://github.com/nixos/nixpkgs/archive/2631b0b7abcea6e640ce31cd78ea58910d31e650.tar.gz",
+      "hash": "0crx0vfmvxxzj8viqpky4k8k7f744dsqnn1ki5qj270bx2w9ssid"
     },
     "nixpkgs": {
       "type": "Git",
