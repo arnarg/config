@@ -8,6 +8,7 @@
         "repo": "nixos-hardware"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "9a049b4a421076d27fee3eec664a18b2066824cb",
       "url": "https://github.com/nixos/nixos-hardware/archive/9a049b4a421076d27fee3eec664a18b2066824cb.tar.gz",
       "hash": "0fadhgi4dba981fdr6l5m6916g5qillzp9x88gsf3sbhgbhq9dbx"
@@ -20,6 +21,7 @@
         "repo": "home-manager"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "72526a5f7cde2ef9075637802a1e2a8d2d658f70",
       "url": "https://github.com/nix-community/home-manager/archive/72526a5f7cde2ef9075637802a1e2a8d2d658f70.tar.gz",
       "hash": "0kr9ckh1bhaimifsxim3h7wn9i14d24wdhyvfwidhmzndlyjr690"
@@ -32,6 +34,7 @@
         "repo": "impermanence"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
       "url": "https://github.com/nix-community/impermanence/archive/4b3e914cdf97a5b536a889e939fb2fd2b043a170.tar.gz",
       "hash": "04l16szln2x0ajq2x799krb53ykvc6vm44x86ppy1jg9fr82161c"
@@ -44,6 +47,7 @@
         "repo": "nilla"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "6747fe62879d7d15c96808bc370a52941287772c",
       "url": "https://github.com/nilla-nix/nilla/archive/6747fe62879d7d15c96808bc370a52941287772c.tar.gz",
       "hash": "0sg9chk7y8h8sh8647vi0d2liqxa0vnidpd3acs763p6alxnf23y"
@@ -56,6 +60,7 @@
         "repo": "cli"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "3cf22075a47bfadd408725037390249826e42080",
       "url": "https://github.com/nilla-nix/cli/archive/3cf22075a47bfadd408725037390249826e42080.tar.gz",
       "hash": "0ppb01lf1zf7yl1kw3558ij6dcxmvla7iaixk6l94ds1h0h5bvn1"
@@ -68,6 +73,7 @@
         "repo": "nilla-utils"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "f587ae4494c316661723b77ebd526d30f6be4521",
       "url": "https://github.com/arnarg/nilla-utils/archive/f587ae4494c316661723b77ebd526d30f6be4521.tar.gz",
       "hash": "1vchb1nhfjdv01x5c42ad6ijlb15dr0309ikrsmaksgb5pf7l1l0"
@@ -80,6 +86,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-unstable",
+      "submodules": false,
       "revision": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
       "url": "https://github.com/nixos/nixpkgs/archive/2631b0b7abcea6e640ce31cd78ea58910d31e650.tar.gz",
       "hash": "0crx0vfmvxxzj8viqpky4k8k7f744dsqnn1ki5qj270bx2w9ssid"
@@ -92,10 +99,11 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-24.11",
+      "submodules": false,
       "revision": "26d499fc9f1d567283d5d56fcf367edd815dba1d",
       "url": "https://github.com/nixos/nixpkgs/archive/26d499fc9f1d567283d5d56fcf367edd815dba1d.tar.gz",
       "hash": "1kj5i5k7jzr9ahm2hrb5bnf9dmv89grykgpw4r7zr645va854y8l"
     }
   },
-  "version": 3
+  "version": 5
 }
