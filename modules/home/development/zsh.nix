@@ -49,7 +49,7 @@ in {
           ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
         };
 
-        initExtra = mkBefore ''
+        initContent = mkBefore ''
           setopt HIST_IGNORE_SPACE
 
           # Pure theme settings
