@@ -13,6 +13,7 @@
 
   # Setup development profile.
   profiles.development.enable = true;
+  profiles.development.zsh.legacy = false;
 
   home.packages = with pkgs; [
     ente-desktop
