@@ -1,4 +1,6 @@
-# config
+![Logo saying "config" in the style of a pink death metal band logo.](./logo.svg)
+
+---
 
 This repository hosts NixOS configuration for my various machines. It uses [nilla](https://github.com/nilla-nix/nilla) with [nilla-utils](https://github.com/arnarg/nilla-utils).
 
