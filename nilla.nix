@@ -21,7 +21,6 @@ in
           configuration.allowUnfree = true;
           overlays = [config.overlays.default];
         };
-        nixos-unstable.settings = config.inputs.nixpkgs.settings;
 
         hardware.loader = "raw";
         impermanence.loader = "raw";
@@ -63,12 +62,5 @@ in
       # Generate `default` overlay using `./packages`
       # folder structure
       generators.overlays.default.folder = ./packages;
-
-      #######################
-      ## Special overrides ##
-      #######################
-      # Move framework to nixos-unstable
-      systems.nixos.framework.nixpkgs = config.inputs.nixos-unstable;
-      systems.home."arnar@framework".pkgs = config.inputs.nixos-unstable.result.x86_64-linux;
     };
   })
