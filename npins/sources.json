@@ -74,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "795c0beca8b9637cdd7943e234b59cc1023dcae7",
-      "url": "https://github.com/arnarg/nilla-utils/archive/795c0beca8b9637cdd7943e234b59cc1023dcae7.tar.gz",
-      "hash": "1xxizi2fg05r3vv6shmkw4r8n8r2hl35q85v6dfm7vaw0zc3raym"
+      "revision": "228f4141f1da3e31f12f9a9f61da02d96f185998",
+      "url": "https://github.com/arnarg/nilla-utils/archive/228f4141f1da3e31f12f9a9f61da02d96f185998.tar.gz",
+      "hash": "1lf4r7yqb0fa4rigg9vyqh163zgpdgj628pl0krcihjx8z354prj"
     },
     "nixpkgs": {
       "type": "Git",
