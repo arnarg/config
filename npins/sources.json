@@ -9,9 +9,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "daa628a725ab4948e0e2b795e8fb6f4c3e289a7a",
-      "url": "https://github.com/nixos/nixos-hardware/archive/daa628a725ab4948e0e2b795e8fb6f4c3e289a7a.tar.gz",
-      "hash": "0sr2hdk4arna8i6n8852ca4q7xd2qzw7351fnazc8xyflrpgi4d5"
+      "revision": "029bd66faa180e11262dd1bc2732254c33415f52",
+      "url": "https://github.com/nixos/nixos-hardware/archive/029bd66faa180e11262dd1bc2732254c33415f52.tar.gz",
+      "hash": "1i3g1dbsv9d9aaw2321csq2pcldhlf00dq19mijsdx3mnjxdr120"
     },
     "home-manager": {
       "type": "Git",
@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "79822ed96b182190df3a84658626b899c9dfc73c",
-      "url": "https://github.com/nilla-nix/cli/archive/79822ed96b182190df3a84658626b899c9dfc73c.tar.gz",
-      "hash": "0yddl1dfbcanazgpqsrv6iq3bq5bvf24qn2hslgrar6771f0l4mz"
+      "revision": "947962d937bbb96d5134a707a2c0fce274f75076",
+      "url": "https://github.com/nilla-nix/cli/archive/947962d937bbb96d5134a707a2c0fce274f75076.tar.gz",
+      "hash": "0gvndk3yagkswvarb925n7mfybpvqa3h6am753k3mh5ggpsw0x62"
     },
     "nilla-utils": {
       "type": "Git",
@@ -87,9 +87,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "10d7f8d34e5eb9c0f9a0485186c1ca691d2c5922",
-      "url": "https://github.com/nixos/nixpkgs/archive/10d7f8d34e5eb9c0f9a0485186c1ca691d2c5922.tar.gz",
-      "hash": "16ag6ac2szq60bm17cdj5ybg46gkvffkmq6a34wpx38v28r25ghx"
+      "revision": "8f1b52b04f2cb6e5ead50bd28d76528a2f0380ef",
+      "url": "https://github.com/nixos/nixpkgs/archive/8f1b52b04f2cb6e5ead50bd28d76528a2f0380ef.tar.gz",
+      "hash": "0854a0169bh2rlfvrsibaqlmsql0dp3ycwq5z8178kdl7q9h6rrq"
     }
   },
   "version": 5
