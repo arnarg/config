@@ -7,6 +7,7 @@
   cfg = config.profiles.development;
 in {
   imports = [
+    ./aichat.nix
     ./ghostty.nix
     ./git.nix
     ./helix.nix
