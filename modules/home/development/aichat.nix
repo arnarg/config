@@ -104,6 +104,29 @@ in {
             api_base = "https://api.mistral.ai/v1";
           }
           {
+            type = "gemini";
+            name = "gemini";
+            api_base = "https://generativelanguage.googleapis.com/v1beta";
+            patch.chat_completions.".*".body.safetySettings = [
+              {
+                category = "HARM_CATEGORY_HARASSMENT";
+                threshold = "BLOCK_NONE";
+              }
+              {
+                category = "HARM_CATEGORY_HATE_SPEECH";
+                threshold = "BLOCK_NONE";
+              }
+              {
+                category = "HARM_CATEGORY_SEXUALLY_EXPLICIT";
+                threshold = "BLOCK_NONE";
+              }
+              {
+                category = "HARM_CATEGORY_DANGEROUS_CONTENT";
+                threshold = "BLOCK_NONE";
+              }
+            ];
+          }
+          {
             type = "openai-compatible";
             name = "hyperbolic";
             api_base = "https://api.hyperbolic.xyz/v1";
