@@ -87,6 +87,7 @@
 in {
   home.packages = with pkgs; [
     aichat
+    files-to-prompt
   ];
 
   # Setup aichat
@@ -95,7 +96,7 @@ in {
       format = pkgs.formats.yaml {};
 
       config = {
-        model = "mistral:mistral-large-latest";
+        model = "mistral:mistral-medium-latest";
 
         clients = [
           {
