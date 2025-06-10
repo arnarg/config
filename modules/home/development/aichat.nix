@@ -103,6 +103,20 @@ in {
             type = "openai-compatible";
             name = "mistral";
             api_base = "https://api.mistral.ai/v1";
+            models = [
+              {
+                name = "large";
+                real_name = "mistral-large-latest";
+              }
+              {
+                name = "medium";
+                real_name = "mistral-medium-latest";
+              }
+              {
+                name = "small";
+                real_name = "mistral-small-latest";
+              }
+            ];
           }
           {
             type = "gemini";
@@ -126,6 +140,16 @@ in {
                 threshold = "BLOCK_NONE";
               }
             ];
+            models = [
+              {
+                name = "flash";
+                real_name = "gemini-2.5-flash-preview-05-20";
+              }
+              {
+                name = "pro";
+                real_name = "gemini-2.5-pro-preview-06-05";
+              }
+            ];
           }
           {
             type = "openai-compatible";
@@ -133,15 +157,18 @@ in {
             api_base = "https://api.hyperbolic.xyz/v1";
             models = [
               {
-                name = "deepseek-ai/DeepSeek-R1-0528";
+                name = "deepseek-r1";
+                real_name = "deepseek-ai/DeepSeek-R1-0528";
                 max_input_tokens = 131072;
               }
               {
-                name = "deepseek-ai/DeepSeek-V3-0324";
+                name = "deepseek-v3";
+                real_name = "deepseek-ai/DeepSeek-V3-0324";
                 max_input_tokens = 131072;
               }
               {
-                name = "meta-llama/Llama-3.3-70B-Instruct";
+                name = "llama";
+                real_name = "meta-llama/Llama-3.3-70B-Instruct";
                 max_input_tokens = 131072;
               }
             ];
