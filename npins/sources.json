@@ -90,6 +90,19 @@
       "revision": "70c74b02eac46f4e4aa071e45a6189ce0f6d9265",
       "url": "https://github.com/nixos/nixpkgs/archive/70c74b02eac46f4e4aa071e45a6189ce0f6d9265.tar.gz",
       "hash": "0b4jz58kkm7dbq6c6fmbgrh29smchhs6d96czhms7wddlni1m71p"
+    },
+    "tm-proxy": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "arnarg",
+        "repo": "tm-proxy"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "ef15e1b23c30d64bd4f7a6af127f66db0b793267",
+      "url": "https://github.com/arnarg/tm-proxy/archive/ef15e1b23c30d64bd4f7a6af127f66db0b793267.tar.gz",
+      "hash": "12cl8ynnm2s317rc2pwkf1ybjp02w1nsh4cjdf0kb68pmfh90hi5"
     }
   },
   "version": 5

@@ -62,5 +62,6 @@ in
       # Generate `default` overlay using `./packages`
       # folder structure
       generators.overlays.default.folder = ./packages;
+      generators.packages.folder = ./packages;
     };
   })
