@@ -100,9 +100,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "327142f24bb2568a9382c400c49d0b00095fe084",
-      "url": "https://github.com/arnarg/tm-proxy/archive/327142f24bb2568a9382c400c49d0b00095fe084.tar.gz",
-      "hash": "1vlapysckiqx3aciq7mqvammaq8h7s9z4qwh63fc01458l6zn6w2"
+      "revision": "79dcfb562a3e590de2ad1487982a682b2b8e70a6",
+      "url": "https://github.com/arnarg/tm-proxy/archive/79dcfb562a3e590de2ad1487982a682b2b8e70a6.tar.gz",
+      "hash": "180n79k64s8d4cacsl84qx8vap5fq944v8xcdjfyzp0sdv7ssjdm"
     }
   },
   "version": 5
