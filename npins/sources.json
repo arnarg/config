@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f07ebceebaf2ab7ebea69e3f8f2a3c6f2bed74df",
-      "url": "https://github.com/nilla-nix/cli/archive/f07ebceebaf2ab7ebea69e3f8f2a3c6f2bed74df.tar.gz",
-      "hash": "0x0841aasg25lqbr3mbaf7qh3jkzsahs0z6lxm6zf9yph4wh1aj6"
+      "revision": "dea86652c07dcd6302f48df8b0397f5efc3a2103",
+      "url": "https://github.com/nilla-nix/cli/archive/dea86652c07dcd6302f48df8b0397f5efc3a2103.tar.gz",
+      "hash": "14hszcd854nr17cwjw5gix5m1k7gp90f3sbf9igw145jys1y2mzw"
     },
     "nilla-utils": {
       "type": "Git",
@@ -74,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "de9f178ddca0b21c46162e66bf71be4d241b1992",
-      "url": "https://github.com/arnarg/nilla-utils/archive/de9f178ddca0b21c46162e66bf71be4d241b1992.tar.gz",
-      "hash": "0bh4r7nir55kw3p4ci7adbb6mh2yfn0sqh3df6q528cqj93w36m7"
+      "revision": "9ba02662053c38abe2d942abbd799c8a7892cb0d",
+      "url": "https://github.com/arnarg/nilla-utils/archive/9ba02662053c38abe2d942abbd799c8a7892cb0d.tar.gz",
+      "hash": "1f8yk2a0hl4v1fd992qa618dnz07xdgww07jjmrdil7izinfbqwr"
     },
     "nixpkgs": {
       "type": "Git",
