@@ -17,6 +17,9 @@ in {
   config = lib.mkIf (cfg.enable && cfg.helix.enable) {
     programs.helix.enable = true;
     programs.helix.extraPackages = with pkgs; [
+      # General
+      harper
+
       # Go
       gopls
       gotools
@@ -50,6 +53,10 @@ in {
       gleam
       # d2
       d2
+      # python
+      ruff
+      # Markdown
+      marksman
 
       # For accessing system clipboard
       wl-clipboard
@@ -104,6 +111,14 @@ in {
             ruff.enabled = true;
           };
         };
+        harper-ls = {
+          command = "harper-ls";
+          args = ["--stdio"];
+          config.harper-ls.linters = {
+            SpellCheck = false;
+            SentenceCapitalization = false;
+          };
+        };
       };
 
       # Update language settings
@@ -111,9 +126,8 @@ in {
         # Go
         {
           name = "go";
-          formatter = {
-            command = "goimports";
-          };
+          formatter.command = "goimports";
+          language-servers = ["gopls" "harper-ls"];
         }
         # Nix
         {
@@ -123,6 +137,12 @@ in {
             command = "alejandra";
             args = ["-"];
           };
+          language-servers = ["nil" "harper-ls"];
+        }
+        # Rust
+        {
+          name = "rust";
+          language-servers = ["rust-analyzer" "harper-ls"];
         }
         # HCL
         {
@@ -165,6 +185,12 @@ in {
         {
           name = "python";
           auto-format = true;
+          language-servers = ["ruff" "harper-ls"];
+        }
+        # git-commit
+        {
+          name = "git-commit";
+          language-servers = ["harper-ls"];
         }
       ];
     };
