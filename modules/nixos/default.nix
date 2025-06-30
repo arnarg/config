@@ -45,7 +45,6 @@
       generateNixPathFromInputs = true;
       generateRegistryFromInputs = true;
       settings.trusted-users = ["root" "arnar"];
-      package = pkgs.lix;
     };
 
     # Setup persistence paths.

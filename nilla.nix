@@ -19,11 +19,19 @@ in
       inputs = {
         nixpkgs.settings = {
           configuration.allowUnfree = true;
-          overlays = [config.overlays.default];
+          overlays = [
+            config.overlays.default
+            (final: prev: {
+              lix = final.callPackage "${config.inputs.lix.src}/package.nix" {
+                stdenv = final.clangStdenv;
+              };
+            })
+          ];
         };
 
         hardware.loader = "raw";
         impermanence.loader = "raw";
+        lix.loader = "raw";
       };
 
       ###########

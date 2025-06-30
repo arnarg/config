@@ -39,6 +39,18 @@
       "url": "https://github.com/nix-community/impermanence/archive/4b3e914cdf97a5b536a889e939fb2fd2b043a170.tar.gz",
       "hash": "04l16szln2x0ajq2x799krb53ykvc6vm44x86ppy1jg9fr82161c"
     },
+    "lix": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://git.lix.systems/lix-project/lix.git"
+      },
+      "branch": "release-2.93",
+      "submodules": false,
+      "revision": "f3a7bbe5f8d1a8504ddb6362d50106904523e440",
+      "url": null,
+      "hash": "17qdah45whnmzdwppmg262lfy7fhhkyw7k2x6ssbz03nyqlbff97"
+    },
     "nilla": {
       "type": "Git",
       "repository": {
