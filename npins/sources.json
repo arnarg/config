@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v1.11.0",
-      "revision": "cdf8deded8813edfa6e65544f69fdd3a59fa2bb4",
-      "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.11.0",
-      "hash": "13brimg7z7k9y36n4jc1pssqyw94nd8qvgfjv53z66lv4xkhin92"
+      "version": "v1.12.0",
+      "revision": "7121f74b976481bc36877abaf52adab2a178fcbe",
+      "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.12.0",
+      "hash": "0wbx518d2x54yn4xh98cgm65wvj0gpy6nia6ra7ns4j63hx14fkq"
     },
     "hardware": {
       "type": "Git",
@@ -115,9 +115,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "b2485d56967598da068b5a6946dadda8bfcbcd37",
-      "url": "https://github.com/nixos/nixpkgs/archive/b2485d56967598da068b5a6946dadda8bfcbcd37.tar.gz",
-      "hash": "1q0m25p83mk0zz42yyi0avyvm77x09ydgrlkkfpzwf22ghb27yfy"
+      "revision": "b43c397f6c213918d6cfe6e3550abfe79b5d1c51",
+      "url": "https://github.com/nixos/nixpkgs/archive/b43c397f6c213918d6cfe6e3550abfe79b5d1c51.tar.gz",
+      "hash": "1dkp9sxci4b4f111x0ck493fiag68qjs5c927khzcj2a5pdbsayl"
     },
     "tm-proxy": {
       "type": "Git",
