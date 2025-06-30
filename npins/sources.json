@@ -1,5 +1,21 @@
 {
   "pins": {
+    "disko": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "disko"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.11.0",
+      "revision": "cdf8deded8813edfa6e65544f69fdd3a59fa2bb4",
+      "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.11.0",
+      "hash": "13brimg7z7k9y36n4jc1pssqyw94nd8qvgfjv53z66lv4xkhin92"
+    },
     "hardware": {
       "type": "Git",
       "repository": {
@@ -86,9 +102,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9ba02662053c38abe2d942abbd799c8a7892cb0d",
-      "url": "https://github.com/arnarg/nilla-utils/archive/9ba02662053c38abe2d942abbd799c8a7892cb0d.tar.gz",
-      "hash": "1f8yk2a0hl4v1fd992qa618dnz07xdgww07jjmrdil7izinfbqwr"
+      "revision": "01e931d86ceb14a04a7461068ae7fd352d08d283",
+      "url": "https://github.com/arnarg/nilla-utils/archive/01e931d86ceb14a04a7461068ae7fd352d08d283.tar.gz",
+      "hash": "12bw4mwfbwgs6canz1wkwiws5vd1v4qdz8y8apaxamx733nm3sv9"
     },
     "nixpkgs": {
       "type": "Git",

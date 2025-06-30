@@ -32,6 +32,7 @@ in
         hardware.loader = "raw";
         impermanence.loader = "raw";
         lix.loader = "raw";
+        disko.loader = "raw";
       };
 
       ###########
