@@ -8,6 +8,7 @@
     "${inputs.disko.result}/module.nix"
     ./hardware-configuration.nix
     ./disk-config.nix
+    ./typingmind.nix
   ];
 
   config = {

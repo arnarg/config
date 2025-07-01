@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     ./interfaces.nix
-    ./typingmind.nix
   ];
 
   config = {
