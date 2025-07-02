@@ -1,8 +1,15 @@
-{inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     "${inputs.hardware.result}/framework/13-inch/12th-gen-intel"
   ];
+
+  # Switch to stable kernel
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Setup laptop profile.
   profiles.laptop.enable = true;
