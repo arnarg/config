@@ -9,6 +9,8 @@
     ./hardware-configuration.nix
     ./disk-config.nix
     ./typingmind.nix
+    ./crowdsec.nix
+    ./traefik.nix
   ];
 
   config = {
@@ -39,6 +41,9 @@
     networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
       22
     ];
+
+    services.openssh.settings.PermitRootLogin = "no";
+    services.openssh.settings.PasswordAuthentication = false;
 
     ###############
     ## Tailscale ##
