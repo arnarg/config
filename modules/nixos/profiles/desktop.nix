@@ -19,9 +19,6 @@ in {
     # Use latest kernel.
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
-    # Use lix instead of nix
-    nix.package = pkgs.lix;
-
     # Use Gnome wayland.
     services.xserver = {
       enable = true;
