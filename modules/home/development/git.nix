@@ -17,6 +17,7 @@ in {
     programs.git.enable = true;
     programs.git.userName = "Arnar Gauti Ingason";
     programs.git.userEmail = "arnarg@fastmail.com";
+    programs.git.difftastic.enable = true;
     programs.git.extraConfig = {
       pull.rebase = true;
       init.defaultBranch = "main";
