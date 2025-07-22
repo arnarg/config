@@ -14,13 +14,28 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && cfg.git.enable) {
-    programs.git.enable = true;
-    programs.git.userName = "Arnar Gauti Ingason";
-    programs.git.userEmail = "arnarg@fastmail.com";
-    programs.git.difftastic.enable = true;
-    programs.git.extraConfig = {
-      pull.rebase = true;
-      init.defaultBranch = "main";
+    programs.git = {
+      enable = true;
+      userName = "Arnar Gauti Ingason";
+      userEmail = "arnarg@fastmail.com";
+      difftastic = {
+        enable = true;
+        display = "inline";
+      };
+      extraConfig = {
+        pull.rebase = true;
+        init.defaultBranch = "main";
+      };
+    };
+
+    programs.jujutsu = {
+      enable = true;
+      settings = {
+        user = {
+          name = "Arnar Gauti Ingason";
+          email = "arnarg@fastmail.com";
+        };
+      };
     };
   };
 }
