@@ -35,6 +35,9 @@ in {
           name = "Arnar Gauti Ingason";
           email = "arnarg@fastmail.com";
         };
+        ui = {
+          default-command = ["log" "--limit" "10" "--no-pager"];
+        };
       };
     };
   };
