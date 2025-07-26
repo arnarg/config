@@ -15,6 +15,10 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && cfg.git.enable) {
+    home.packages = with pkgs; [
+      jjui
+    ];
+
     programs.git = {
       enable = true;
       userName = "Arnar Gauti Ingason";
