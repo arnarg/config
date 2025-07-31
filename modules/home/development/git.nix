@@ -23,10 +23,6 @@ in {
       enable = true;
       userName = "Arnar Gauti Ingason";
       userEmail = "arnarg@fastmail.com";
-      difftastic = {
-        enable = true;
-        display = "inline";
-      };
       extraConfig = {
         pull.rebase = true;
         init.defaultBranch = "main";
