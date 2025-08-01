@@ -1,2 +1,5 @@
 # Nix builds output a result symlink
 result
+
+# Crush stuff
+.crush/
