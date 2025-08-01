@@ -5,10 +5,6 @@
 }: let
   tmProxyPort = 8081;
 in {
-  profiles.immutable.directories = [
-    "/var/lib/mcp"
-  ];
-
   ##################
   ## Plugin Proxy ##
   ##################
