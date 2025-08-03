@@ -25,9 +25,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "cc66fddc6cb04ab479a1bb062f4d4da27c936a22",
-      "url": "https://github.com/nixos/nixos-hardware/archive/cc66fddc6cb04ab479a1bb062f4d4da27c936a22.tar.gz",
-      "hash": "10xfsi90sy0kflswv7dhg9nfv1r55rn0m98hjygg29ixb7r48p4w"
+      "revision": "a872d985392ee5b19d8409bfcc3f106de2070070",
+      "url": "https://github.com/nixos/nixos-hardware/archive/a872d985392ee5b19d8409bfcc3f106de2070070.tar.gz",
+      "hash": "14si1k80qrhqsy0w6j4pg7mcl21a9z1b2sgbhxkgsfzs8m27psf8"
     },
     "home-manager": {
       "type": "Git",
@@ -103,9 +103,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "1f08a4df998e21f4e8be8fb6fbf61d11a1a5076a",
-      "url": "https://github.com/nixos/nixpkgs/archive/1f08a4df998e21f4e8be8fb6fbf61d11a1a5076a.tar.gz",
-      "hash": "0ghn99k0nsbs8a83mhz5ylibvlps19yy690jgj5g6v9v3dkh8fgs"
+      "revision": "59e69648d345d6e8fef86158c555730fa12af9de",
+      "url": "https://github.com/nixos/nixpkgs/archive/59e69648d345d6e8fef86158c555730fa12af9de.tar.gz",
+      "hash": "1yai46329qflr2q96if28dcf3ppgjbyp269hmfa2wkj3f03rfa12"
     },
     "tm-proxy": {
       "type": "Git",
