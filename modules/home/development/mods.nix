@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    libsecret
     files-to-prompt
   ];
 
@@ -17,7 +16,7 @@
     default-model = "gemini-flash";
     apis = {
       google = {
-        api-key-cmd = "secret-tool lookup llm gemini";
+        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm gemini";
         models = {
           "gemini-2.5-flash" = {
             aliases = ["gemini-flash" "flash"];
@@ -36,7 +35,7 @@
 
       mistral = {
         base-url = "https://api.mistral.ai/v1";
-        api-key-cmd = "secret-tool lookup llm mistral";
+        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm mistral";
         models = {
           mistral-large-latest = {
             aliases = ["mistral-large"];
@@ -55,7 +54,7 @@
 
       hyperbolic = {
         base-url = "https://api.hyperbolic.xyz/v1";
-        api-key-cmd = "secret-tool lookup llm hyperbolic";
+        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm hyperbolic";
         models = {
           "deepseek-ai/DeepSeek-R1-0528" = {
             aliases = ["deepseek-r1" "dsr1"];

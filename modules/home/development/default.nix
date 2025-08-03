@@ -9,6 +9,7 @@ in {
   imports = [
     ./aichat.nix
     ./aider.nix
+    ./crush.nix
     ./ghostty.nix
     ./git.nix
     ./helix.nix
