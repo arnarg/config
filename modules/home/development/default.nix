@@ -12,6 +12,7 @@ in {
     ./ghostty.nix
     ./git.nix
     ./helix.nix
+    ./mods.nix
     ./tmux.nix
     ./zsh.nix
   ];
