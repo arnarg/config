@@ -70,6 +70,14 @@
                 default_max_tokens = 50000;
                 can_reason = false;
               }
+              {
+                id = "moonshotai/Kimi-K2-Instruct";
+                name = "Kimi K2";
+                cost_per_1m_out = 2;
+                context_window = 131072;
+                default_max_tokens = 50000;
+                can_reason = false;
+              }
             ];
           };
         };

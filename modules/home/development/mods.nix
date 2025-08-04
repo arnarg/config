@@ -68,6 +68,10 @@
             aliases = ["llama3" "llama"];
             max-input-chars = 131072;
           };
+          "moonshotai/Kimi-K2-Instruct" = {
+            aliases = ["kimi-k2"];
+            max-input-chars = 131072;
+          };
         };
       };
     };
