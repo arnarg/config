@@ -23,4 +23,7 @@
     inputs.nilla-cli.result.packages.nilla-cli.result.x86_64-linux
     inputs.nilla-utils.result.packages.nilla-utils-plugins.result.x86_64-linux
   ];
+
+  # Prefer internal differ in nilla-utils
+  home.sessionVariables.NILLA_UTILS_DIFF = "internal";
 }
