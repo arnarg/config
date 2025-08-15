@@ -3,7 +3,7 @@
   fetchFromGitHub,
   ...
 }: let
-  version = "0.5.0";
+  version = "0.6.1";
 in
   buildGoModule {
     inherit version;
@@ -14,10 +14,10 @@ in
       owner = "charmbracelet";
       repo = "crush";
       rev = "v${version}";
-      hash = "sha256-u2w19Xmcm3cx/B8QRNGaP2qeg+Cif/L92RNlJav6H3w=";
+      hash = "sha256-QUYNJ2Ifny9Zj9YVQHcH80E2qa4clWVg2T075IEWujM=";
     };
 
-    vendorHash = "sha256-H92TgZoWdYQ863AAb2116zJtmgkKXh2hRoEBRcn5zeA=";
+    vendorHash = "sha256-vdzAVVGr7uTW/A/I8TcYW189E3960SCIqatu7Kb60hg=";
 
     ldflags = [
       "-s"
