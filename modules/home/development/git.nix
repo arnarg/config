@@ -38,7 +38,7 @@ in {
         };
         ui = {
           default-command = ["log" "--limit" "10" "--no-pager"];
-          diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "--display=inline" "$left" "$right"];
+          diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
           pager = ":builtin";
           streampager.interface = "quit-if-one-page";
         };
