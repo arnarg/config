@@ -26,6 +26,10 @@ in {
       extraConfig = {
         pull.rebase = true;
         init.defaultBranch = "main";
+        core.excludesFile = builtins.toString (pkgs.writeText "git-excludes-file" ''
+          # All crush state keeping
+          .crush/
+        '');
       };
     };
 
