@@ -1,6 +1,39 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  extraPackages = with pkgs; [
+    # Go
+    gopls
+    # Python
+    (python3.withPackages
+      (ps:
+        with ps; [
+          python-lsp-server
+          python-lsp-black
+          python-lsp-ruff
+        ]))
+    ruff
+    # Rust
+    rust-analyzer
+    # YAML
+    nodePackages.yaml-language-server
+    # Helm
+    helm-ls
+    # Nix
+    nil
+    # Markdown
+    marksman
+  ];
+in {
   home.packages = with pkgs; [
-    crush
+    (pkgs.symlinkJoin {
+      name = "${lib.getName crush}-wrapped-${lib.getVersion crush}";
+      paths = [crush];
+      preferLocalBuild = true;
+      nativeBuildInputs = [pkgs.makeWrapper];
+      postBuild = ''
+        wrapProgram $out/bin/crush \
+          --suffix PATH : ${lib.makeBinPath extraPackages}
+      '';
+    })
   ];
 
   xdg.configFile = {
