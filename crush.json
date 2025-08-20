@@ -1,0 +1,16 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "nix": {
+      "command": "nil",
+      "filetypes": ["nix"]
+    }
+  },
+  "mcp": {
+    "nixos": {
+      "type": "stdio",
+      "command": "nix",
+      "args": ["run", "github:utensils/mcp-nixos", "--"]
+    }
+  }
+}
