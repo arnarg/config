@@ -54,12 +54,18 @@ in {
 
         plugins = with pkgs; [
           {
-            name = "pure";
+            name = "powerlevel10k";
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+            src = zsh-powerlevel10k;
+          }
+          {
+            name = "zsh-async";
+            file = "async.zsh";
             src = fetchFromGitHub {
-              owner = "sindresorhus";
-              repo = "pure";
-              rev = "v1.23.0";
-              sha256 = "sha256-BmQO4xqd/3QnpLUitD2obVxL0UulpboT8jGNEh4ri8k=";
+              owner = "mafredri";
+              repo = "zsh-async";
+              rev = "v1.8.6";
+              hash = "sha256-Js/9vGGAEqcPmQSsumzLfkfwljaFWHJ9sMWOgWDi0NI=";
             };
           }
           {
@@ -76,12 +82,7 @@ in {
         initContent = ''
           setopt HIST_IGNORE_SPACE
 
-          # Pure theme settings
-          zstyle ':prompt:pure:path' color '#fb4934'
-          zstyle ':prompt:pure:prompt:success' color white
-
-          # nix-shell
-          prompt_nix_shell_setup
+          source ${./zsh/p10k.zsh}
 
           # Key bindings
           bindkey -v
