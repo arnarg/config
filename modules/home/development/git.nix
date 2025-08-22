@@ -50,6 +50,7 @@ in {
           log = "ancestors(@)";
         };
         aliases = {
+          rtr = ["rebase" "-d" "trunk()"];
           fresh = ["new" "trunk()"];
           tug = ["bookmark" "move" "--from" "closest_bookmark(@)" "--to" "closest_pushable(@)"];
         };
