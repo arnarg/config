@@ -54,10 +54,10 @@ _jujutsu_async() {
   revision=$(jj log --repository "$workspace" --ignore-working-copy \
     --no-graph --limit 1 --color always \
     --revisions @ -T 'separate(" ",
-      change_id.shortest(6),
-      commit_id.shortest(6),
+      change_id.shortest(4),
+      commit_id.shortest(4),
       if(empty, label("empty", "(empty)"), ""),
-      if(description == "", label("description placeholder", "(no description)"), ""),
+      if(description == "", label("description placeholder", "(no desc)"), ""),
       if(conflict, label("conflict", "(conflict)"), "")
     )')
 
