@@ -31,7 +31,7 @@
 in {
   options.profiles.development.crush = {
     settings = lib.mkOption {
-      type = lib.types.attrs;
+      type = with lib.types; attrsOf anything;
       default = {};
       description = "Settings for crush";
     };
