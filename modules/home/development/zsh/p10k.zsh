@@ -119,6 +119,9 @@ async_register_callback _jujutsu_worker _jujutsu_callback
   # Zsh >= 5.1 is required.
   [[ $ZSH_VERSION == (5.<1->*|<6->.*) ]] || return
 
+  # Set color scheme
+  typeset -g POWERLEVEL9K_COLOR_SCHEME='light'
+
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
