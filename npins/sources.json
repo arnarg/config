@@ -90,9 +90,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "df0904d10e26778b5936c4f29652777e795e2938",
-      "url": "https://github.com/arnarg/nilla-utils/archive/df0904d10e26778b5936c4f29652777e795e2938.tar.gz",
-      "hash": "0hrk3d3v4fjrn4ipa8dii82qxr3gchgvvhb2yc99dgf3rkrzq29z"
+      "revision": "aa97555118e7839412a43f6f840ffe839d27ac6a",
+      "url": "https://github.com/arnarg/nilla-utils/archive/aa97555118e7839412a43f6f840ffe839d27ac6a.tar.gz",
+      "hash": "1vhzralsfbgbp4lam04m9895a86z91rvc0vlbx6hc2nq82h30vab"
     },
     "nixpkgs": {
       "type": "Git",
@@ -103,9 +103,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "4e7667a90c167f7a81d906e5a75cba4ad8bee620",
-      "url": "https://github.com/nixos/nixpkgs/archive/4e7667a90c167f7a81d906e5a75cba4ad8bee620.tar.gz",
-      "hash": "1spjsasb7krm1063sxy93mjv0jq09kdqh3s7xq479nzr4dym4zac"
+      "revision": "84c26d62ce9e15489c63b83fc44e6eb62705d2c9",
+      "url": "https://github.com/nixos/nixpkgs/archive/84c26d62ce9e15489c63b83fc44e6eb62705d2c9.tar.gz",
+      "hash": "1q1jh7q1kg181brvmpgcvsvzxa215r1iyp4rlyzv6pk6vrq18pba"
     },
     "tm-proxy": {
       "type": "Git",
