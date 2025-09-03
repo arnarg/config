@@ -41,7 +41,7 @@ in {
           email = "arnarg@fastmail.com";
         };
         ui = {
-          default-command = ["log" "--limit" "10" "--no-pager"];
+          default-command = ["log" "-r" "default() & recent()"];
           diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
           pager = ":builtin";
           streampager.interface = "quit-if-one-page";
@@ -57,6 +57,12 @@ in {
         revset-aliases = {
           "closest_bookmark(to)" = "heads(::to & bookmarks())";
           "closest_pushable(to)" = "heads(::to & mutable() & ~description(exact:\"\") & (~empty() | merges()))";
+          "default()" = "coalesce(trunk(),root())::present(@) | ancestors((visible_heads() | reachable(@, mutable())) & recent(), 5)";
+          "recent()" = "committer_date(after:\"1 month ago\")";
+        };
+        template-aliases = {
+          "format_short_change_id(id)" = "id.shortest(4)";
+          "format_short_commit_id(id)" = "id.shortest(6)";
         };
       };
     };
