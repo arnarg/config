@@ -1,34 +1,27 @@
 {
-  buildGoModule,
-  fetchFromGitHub,
+  stdenv,
+  fetchzip,
   ...
 }: let
-  version = "0.6.1";
+  version = "0.7.7";
+
+  bin = fetchzip {
+    url = "https://github.com/charmbracelet/crush/releases/download/v${version}/crush_${version}_Linux_x86_64.tar.gz";
+    hash = "sha256-zpDhkwsCWLo3y0UWELRQD2eloWup3cIMYMoK4k+eAWw=";
+  };
 in
-  buildGoModule {
+  stdenv.mkDerivation {
     inherit version;
 
     pname = "crush";
 
-    src = fetchFromGitHub {
-      owner = "charmbracelet";
-      repo = "crush";
-      rev = "v${version}";
-      hash = "sha256-QUYNJ2Ifny9Zj9YVQHcH80E2qa4clWVg2T075IEWujM=";
-    };
+    src = bin;
 
-    vendorHash = "sha256-vdzAVVGr7uTW/A/I8TcYW189E3960SCIqatu7Kb60hg=";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp $src/crush $out/bin/crush
 
-    ldflags = [
-      "-s"
-      "-w"
-      "-X 'github.com/charmbracelet/crush/internal/version.Version=${version}'"
-    ];
-
-    postInstall = ''
       mkdir -p $out/share/bash-completion/completions
       $out/bin/crush completion bash > $out/share/bash-completion/completions/crush
     '';
-
-    doCheck = false;
   }
