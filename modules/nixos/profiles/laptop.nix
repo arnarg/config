@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.laptop;
-in {
+in
+{
   options.profiles.laptop = with lib; {
     enable = mkEnableOption "laptop profile";
     preferTLP = mkOption {
@@ -35,7 +37,7 @@ in {
       };
       devices = mkOption {
         type = types.listOf types.str;
-        default = ["0001:0001"];
+        default = [ "0001:0001" ];
         description = ''
           List of `<vendor_id>:<product_id>` of the keyboards to apply the rebinding to. By default this only uses `0001:0001` which I've always observed for the built-in keyboard in my laptops.
 
@@ -55,7 +57,7 @@ in {
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;
-    users.users.arnar.extraGroups = ["networkmanager"];
+    users.users.arnar.extraGroups = [ "networkmanager" ];
     services.resolved.enable = true;
 
     # Enable thermald.
@@ -85,7 +87,7 @@ in {
         theme = lib.mkDefault "bgrt";
       };
       initrd.systemd.enable = true;
-      kernelParams = ["quiet"];
+      kernelParams = [ "quiet" ];
       loader.timeout = 0;
     };
 
@@ -130,9 +132,7 @@ in {
 
     # Setup suspend then hibernate.
     services.logind.lidSwitch =
-      if cfg.suspendThenHibernate.enable
-      then "suspend-then-hibernate"
-      else "suspend";
+      if cfg.suspendThenHibernate.enable then "suspend-then-hibernate" else "suspend";
     systemd.sleep.extraConfig = lib.optionalString cfg.suspendThenHibernate.enable ''
       HibernateDelaySec=${builtins.toString cfg.suspendThenHibernate.delayHours}h
     '';

@@ -2,10 +2,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
   sf = config.profiles.desktop.gnome.textScalingFactor;
-in {
+in
+{
   options.profiles.development.ghostty = with lib; {
     enable = mkOption {
       type = types.bool;

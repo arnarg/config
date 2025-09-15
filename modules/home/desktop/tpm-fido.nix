@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.desktop;
-in {
+in
+{
   options.profiles.desktop.tpm-fido = with lib; {
     enable = mkEnableOption "tpm-fido";
   };
@@ -22,7 +24,7 @@ in {
         RestartSec = 10;
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

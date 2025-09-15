@@ -3,10 +3,10 @@ let
 
   nilla = import pins.nilla;
 in
-  nilla.create ({config}: {
-    includes = [
-      "${pins.nilla-utils}/modules"
-    ];
+nilla.create (
+  { config }:
+  {
+    includes = [ "${pins.nilla-utils}/modules" ];
 
     config = {
       ############
@@ -19,9 +19,7 @@ in
       inputs = {
         nixpkgs.settings = {
           configuration.allowUnfree = true;
-          overlays = [
-            config.overlays.default
-          ];
+          overlays = [ config.overlays.default ];
         };
 
         hardware.loader = "raw";
@@ -35,9 +33,7 @@ in
       # Generate nixos hosts from folders in ./hosts
       generators.nixos = {
         folder = ./hosts;
-        modules = [
-          config.modules.nixos.default
-        ];
+        modules = [ config.modules.nixos.default ];
       };
 
       # Export NixOS module
@@ -51,9 +47,7 @@ in
       generators.home = {
         username = "arnar";
         folder = ./hosts;
-        modules = [
-          config.modules.home.default
-        ];
+        modules = [ config.modules.home.default ];
       };
 
       # Export home-manager module
@@ -67,4 +61,5 @@ in
       generators.overlays.default.folder = ./packages;
       generators.packages.folder = ./packages;
     };
-  })
+  }
+)

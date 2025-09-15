@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   gruvbox-theme = pkgs.fetchFromGitHub {
     owner = "subnut";
     repo = "gruvbox-tmTheme";
@@ -20,7 +21,7 @@
       hash = "sha256-+w57l6jmJ9F+eJXU3lMJ5BkpL4E5ie3g+KbOYQEF9Ac=";
     };
 
-    nativeBuildInputs = with pkgs; [makeWrapper];
+    nativeBuildInputs = with pkgs; [ makeWrapper ];
 
     buildInputs = with pkgs; [
       argc
@@ -66,25 +67,28 @@
       done
     '';
 
-    installPhase = let
-      deps = with pkgs; [
-        curl
-        jq
-        argc
-        gawk
-        git
-      ];
-    in ''
-      mkdir $out
-      cp -r {agents,bin,scripts,tools,utils,functions.json,agents.txt,tools.txt} $out/
+    installPhase =
+      let
+        deps = with pkgs; [
+          curl
+          jq
+          argc
+          gawk
+          git
+        ];
+      in
+      ''
+        mkdir $out
+        cp -r {agents,bin,scripts,tools,utils,functions.json,agents.txt,tools.txt} $out/
 
-      for tool in $out/tools/*.sh; do
-        wrapProgram $tool \
-          --prefix PATH : ${lib.makeBinPath deps}
-      done
-    '';
+        for tool in $out/tools/*.sh; do
+          wrapProgram $tool \
+            --prefix PATH : ${lib.makeBinPath deps}
+        done
+      '';
   };
-in {
+in
+{
   home.packages = with pkgs; [
     aichat
     files-to-prompt
@@ -92,92 +96,94 @@ in {
 
   # Setup aichat
   xdg.configFile = {
-    "aichat/config.yaml" = let
-      format = pkgs.formats.yaml {};
+    "aichat/config.yaml" =
+      let
+        format = pkgs.formats.yaml { };
 
-      config = {
-        model = "mistral:mistral-medium-latest";
+        config = {
+          model = "mistral:mistral-medium-latest";
 
-        clients = [
-          {
-            type = "openai-compatible";
-            name = "mistral";
-            api_base = "https://api.mistral.ai/v1";
-            models = [
-              {
-                name = "large";
-                real_name = "mistral-large-latest";
-              }
-              {
-                name = "medium";
-                real_name = "mistral-medium-latest";
-              }
-              {
-                name = "small";
-                real_name = "mistral-small-latest";
-              }
-            ];
-          }
-          {
-            type = "gemini";
-            name = "gemini";
-            api_base = "https://generativelanguage.googleapis.com/v1beta";
-            patch.chat_completions.".*".body.safetySettings = [
-              {
-                category = "HARM_CATEGORY_HARASSMENT";
-                threshold = "BLOCK_NONE";
-              }
-              {
-                category = "HARM_CATEGORY_HATE_SPEECH";
-                threshold = "BLOCK_NONE";
-              }
-              {
-                category = "HARM_CATEGORY_SEXUALLY_EXPLICIT";
-                threshold = "BLOCK_NONE";
-              }
-              {
-                category = "HARM_CATEGORY_DANGEROUS_CONTENT";
-                threshold = "BLOCK_NONE";
-              }
-            ];
-            models = [
-              {
-                name = "flash";
-                real_name = "gemini-2.5-flash-preview-05-20";
-              }
-              {
-                name = "pro";
-                real_name = "gemini-2.5-pro-preview-06-05";
-              }
-            ];
-          }
-          {
-            type = "openai-compatible";
-            name = "hyperbolic";
-            api_base = "https://api.hyperbolic.xyz/v1";
-            models = [
-              {
-                name = "deepseek-r1";
-                real_name = "deepseek-ai/DeepSeek-R1-0528";
-                max_input_tokens = 131072;
-              }
-              {
-                name = "deepseek-v3";
-                real_name = "deepseek-ai/DeepSeek-V3-0324";
-                max_input_tokens = 131072;
-              }
-              {
-                name = "llama";
-                real_name = "meta-llama/Llama-3.3-70B-Instruct";
-                max_input_tokens = 131072;
-              }
-            ];
-          }
-        ];
+          clients = [
+            {
+              type = "openai-compatible";
+              name = "mistral";
+              api_base = "https://api.mistral.ai/v1";
+              models = [
+                {
+                  name = "large";
+                  real_name = "mistral-large-latest";
+                }
+                {
+                  name = "medium";
+                  real_name = "mistral-medium-latest";
+                }
+                {
+                  name = "small";
+                  real_name = "mistral-small-latest";
+                }
+              ];
+            }
+            {
+              type = "gemini";
+              name = "gemini";
+              api_base = "https://generativelanguage.googleapis.com/v1beta";
+              patch.chat_completions.".*".body.safetySettings = [
+                {
+                  category = "HARM_CATEGORY_HARASSMENT";
+                  threshold = "BLOCK_NONE";
+                }
+                {
+                  category = "HARM_CATEGORY_HATE_SPEECH";
+                  threshold = "BLOCK_NONE";
+                }
+                {
+                  category = "HARM_CATEGORY_SEXUALLY_EXPLICIT";
+                  threshold = "BLOCK_NONE";
+                }
+                {
+                  category = "HARM_CATEGORY_DANGEROUS_CONTENT";
+                  threshold = "BLOCK_NONE";
+                }
+              ];
+              models = [
+                {
+                  name = "flash";
+                  real_name = "gemini-2.5-flash-preview-05-20";
+                }
+                {
+                  name = "pro";
+                  real_name = "gemini-2.5-pro-preview-06-05";
+                }
+              ];
+            }
+            {
+              type = "openai-compatible";
+              name = "hyperbolic";
+              api_base = "https://api.hyperbolic.xyz/v1";
+              models = [
+                {
+                  name = "deepseek-r1";
+                  real_name = "deepseek-ai/DeepSeek-R1-0528";
+                  max_input_tokens = 131072;
+                }
+                {
+                  name = "deepseek-v3";
+                  real_name = "deepseek-ai/DeepSeek-V3-0324";
+                  max_input_tokens = 131072;
+                }
+                {
+                  name = "llama";
+                  real_name = "meta-llama/Llama-3.3-70B-Instruct";
+                  max_input_tokens = 131072;
+                }
+              ];
+            }
+          ];
+        };
+      in
+      {
+        source = format.generate "aichat-config" config;
       };
-    in {
-      source = format.generate "aichat-config" config;
-    };
 
     "aichat/dark.tmTheme".source = "${gruvbox-theme}/gruvbox (Dark) (Medium).tmTheme";
     "aichat/light.tmTheme".source = "${gruvbox-theme}/gruvbox (Light) (Medium).tmTheme";

@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   # Setup desktop profile.
   profiles.desktop.enable = true;
   profiles.desktop.tpm-fido.enable = true;

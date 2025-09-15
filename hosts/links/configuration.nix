@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -20,7 +21,8 @@
 
     # Copy dtb to /boot
     boot.loader.systemd-boot.extraFiles = {
-      "dtb/amlogic/meson-g12b-odroid-n2.dtb" = "${config.hardware.deviceTree.package}/amlogic/meson-g12b-odroid-n2.dtb";
+      "dtb/amlogic/meson-g12b-odroid-n2.dtb" =
+        "${config.hardware.deviceTree.package}/amlogic/meson-g12b-odroid-n2.dtb";
     };
 
     # Run latest kernel
@@ -73,11 +75,11 @@
     # TODO: Figure out how to allow less commands
     security.sudo.extraRules = [
       {
-        users = ["arnar"];
+        users = [ "arnar" ];
         commands = [
           {
             command = "ALL";
-            options = ["NOPASSWD"];
+            options = [ "NOPASSWD" ];
           }
         ];
       }

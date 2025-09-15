@@ -3,9 +3,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   options.profiles.development.git = with lib; {
     enable = mkOption {
       type = types.bool;
@@ -26,10 +28,12 @@ in {
       extraConfig = {
         pull.rebase = true;
         init.defaultBranch = "main";
-        core.excludesFile = builtins.toString (pkgs.writeText "git-excludes-file" ''
-          # All crush state keeping
-          .crush/
-        '');
+        core.excludesFile = builtins.toString (
+          pkgs.writeText "git-excludes-file" ''
+            # All crush state keeping
+            .crush/
+          ''
+        );
       };
     };
 
@@ -41,8 +45,17 @@ in {
           email = "arnarg@fastmail.com";
         };
         ui = {
-          default-command = ["log" "-r" "default() & recent()"];
-          diff.tool = ["${pkgs.difftastic}/bin/difft" "--color=always" "$left" "$right"];
+          default-command = [
+            "log"
+            "-r"
+            "default() & recent()"
+          ];
+          diff.tool = [
+            "${pkgs.difftastic}/bin/difft"
+            "--color=always"
+            "$left"
+            "$right"
+          ];
           pager = ":builtin";
           streampager.interface = "quit-if-one-page";
         };
@@ -50,14 +63,30 @@ in {
           log = "ancestors(@)";
         };
         aliases = {
-          rtr = ["rebase" "-d" "trunk()"];
-          fresh = ["new" "trunk()"];
-          tug = ["bookmark" "move" "--from" "closest_bookmark(@)" "--to" "closest_pushable(@)"];
+          rtr = [
+            "rebase"
+            "-d"
+            "trunk()"
+          ];
+          fresh = [
+            "new"
+            "trunk()"
+          ];
+          tug = [
+            "bookmark"
+            "move"
+            "--from"
+            "closest_bookmark(@)"
+            "--to"
+            "closest_pushable(@)"
+          ];
         };
         revset-aliases = {
           "closest_bookmark(to)" = "heads(::to & bookmarks())";
-          "closest_pushable(to)" = "heads(::to & mutable() & ~description(exact:\"\") & (~empty() | merges()))";
-          "default()" = "coalesce(trunk(),root())::present(@) | ancestors((visible_heads() | reachable(@, mutable())) & recent(), 5)";
+          "closest_pushable(to)" =
+            "heads(::to & mutable() & ~description(exact:\"\") & (~empty() | merges()))";
+          "default()" =
+            "coalesce(trunk(),root())::present(@) | ancestors((visible_heads() | reachable(@, mutable())) & recent(), 5)";
           "recent()" = "committer_date(after:\"1 month ago\")";
         };
         template-aliases = {

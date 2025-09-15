@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.desktop;
-in {
+in
+{
   options.profiles.desktop = with lib; {
     enable = mkEnableOption "desktop profile";
   };

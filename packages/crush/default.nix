@@ -2,7 +2,8 @@
   stdenv,
   fetchzip,
   ...
-}: let
+}:
+let
   version = "0.8.1";
 
   bin = fetchzip {
@@ -10,18 +11,18 @@
     hash = "sha256-GsIi99n/CI+XFrz4abvFLM503sspAgL1Fa0WO7qaQIU=";
   };
 in
-  stdenv.mkDerivation {
-    inherit version;
+stdenv.mkDerivation {
+  inherit version;
 
-    pname = "crush";
+  pname = "crush";
 
-    src = bin;
+  src = bin;
 
-    installPhase = ''
-      mkdir -p $out/bin
-      cp $src/crush $out/bin/crush
+  installPhase = ''
+    mkdir -p $out/bin
+    cp $src/crush $out/bin/crush
 
-      mkdir -p $out/share/bash-completion/completions
-      $out/bin/crush completion bash > $out/share/bash-completion/completions/crush
-    '';
-  }
+    mkdir -p $out/share/bash-completion/completions
+    $out/bin/crush completion bash > $out/share/bash-completion/completions/crush
+  '';
+}

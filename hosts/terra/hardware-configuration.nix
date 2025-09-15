@@ -4,7 +4,8 @@
   pkgs,
   modulesPath,
   ...
-}: let
+}:
+let
   kernel = config.boot.kernelPackages.kernel;
   hddled = pkgs.stdenv.mkDerivation rec {
     name = "hddled_tmj33-${version}-${kernel.version}";
@@ -30,13 +31,21 @@
       "MODDESTDIR=$(out)/lib/modules/${kernel.modDirVersion}/kernel/drivers/misc"
     ];
   };
-in {
+in
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "usb_storage" "uas" "sd_mod" "sdhci_pci"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.availableKernelModules = [
+    "ahci"
+    "xhci_pci"
+    "usb_storage"
+    "uas"
+    "sd_mod"
+    "sdhci_pci"
+  ];
+  boot.initrd.kernelModules = [ ];
 
   boot.extraModulePackages = with pkgs.linuxPackages; [
     # Terramaster F2-221 has an it8613e chip
@@ -63,7 +72,11 @@ in {
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
+    options = [
+      "defaults"
+      "size=2G"
+      "mode=755"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -74,14 +87,22 @@ in {
   fileSystems."/nix" = {
     label = "nixos";
     fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
     neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
     label = "nixos";
     fsType = "btrfs";
-    options = ["subvol=log" "compress=zstd" "noatime"];
+    options = [
+      "subvol=log"
+      "compress=zstd"
+      "noatime"
+    ];
     neededForBoot = true;
   };
 
@@ -94,12 +115,18 @@ in {
   fileSystems."/tank" = {
     device = "/dev/disk/by-uuid/4f87db74-309f-4256-baaa-4596a22b04e5";
     fsType = "btrfs";
-    options = ["rw" "relatime" "space_cache" "subvolid=257" "subvol=/tank"];
+    options = [
+      "rw"
+      "relatime"
+      "space_cache"
+      "subvolid=257"
+      "subvol=/tank"
+    ];
   };
 
   services.btrfs.autoScrub = {
     enable = true;
-    fileSystems = ["/tank"];
+    fileSystems = [ "/tank" ];
     interval = "Mon *-*-* 00:00:00";
   };
 

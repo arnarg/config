@@ -3,9 +3,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.immutable;
-in {
+in
+{
   imports = [
     "${inputs.impermanence.result}/nixos.nix"
   ];
@@ -24,12 +26,12 @@ in {
     };
     directories = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "List of directories that should be persisted.";
     };
     files = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "List of files that should be persisted.";
     };
   };

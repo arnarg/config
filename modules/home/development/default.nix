@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   imports = [
     ./aichat.nix
     ./aider.nix

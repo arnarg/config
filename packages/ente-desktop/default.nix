@@ -3,7 +3,8 @@
   appimageTools,
   makeDesktopItem,
   symlinkJoin,
-}: let
+}:
+let
   version = "1.7.10";
 
   src = fetchurl {
@@ -22,7 +23,11 @@
   wrapped = appimageTools.wrapAppImage {
     name = "ente-desktop";
     src = extracted;
-    extraPkgs = pkgs: with pkgs; [libsodium fuse];
+    extraPkgs =
+      pkgs: with pkgs; [
+        libsodium
+        fuse
+      ];
   };
 
   desktopItem = makeDesktopItem {
@@ -31,13 +36,13 @@
     icon = "${extracted}/ente.png";
     comment = "Desktop client for Ente Photos";
     exec = "${wrapped}/bin/ente-desktop";
-    categories = ["Photography"];
+    categories = [ "Photography" ];
   };
 in
-  symlinkJoin {
-    name = "ente-desktop-${version}";
-    paths = [
-      wrapped
-      desktopItem
-    ];
-  }
+symlinkJoin {
+  name = "ente-desktop-${version}";
+  paths = [
+    wrapped
+    desktopItem
+  ];
+}

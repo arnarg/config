@@ -2,16 +2,17 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
 
-  boot.initrd.availableKernelModules = ["usbhid"];
-  boot.initrd.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [ "usbhid" ];
+  boot.initrd.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
   boot.kernelModules = [
     # Odroid N2 has PCF5863 RTC
     "rtc-pcf8563"

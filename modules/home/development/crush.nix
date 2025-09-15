@@ -3,19 +3,20 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development.crush;
   extraPackages = with pkgs; [
     # Go
     gopls
     # Python
-    (python3.withPackages
-      (ps:
-        with ps; [
-          python-lsp-server
-          python-lsp-black
-          python-lsp-ruff
-        ]))
+    (python3.withPackages (
+      ps: with ps; [
+        python-lsp-server
+        python-lsp-black
+        python-lsp-ruff
+      ]
+    ))
     ruff
     # Rust
     rust-analyzer
@@ -28,11 +29,12 @@
     # Markdown
     marksman
   ];
-in {
+in
+{
   options.profiles.development.crush = {
     settings = lib.mkOption {
       type = with lib.types; attrsOf anything;
-      default = {};
+      default = { };
       description = "Settings for crush";
     };
   };
@@ -41,9 +43,9 @@ in {
     home.packages = with pkgs; [
       (pkgs.symlinkJoin {
         name = "${lib.getName crush}-wrapped-${lib.getVersion crush}";
-        paths = [crush];
+        paths = [ crush ];
         preferLocalBuild = true;
-        nativeBuildInputs = [pkgs.makeWrapper];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/crush \
             --suffix PATH : ${lib.makeBinPath extraPackages}

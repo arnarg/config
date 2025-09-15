@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.desktop;
-in {
+in
+{
   imports = [
     ./gnome.nix
     # ./kicad.nix

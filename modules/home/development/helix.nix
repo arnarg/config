@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   options.profiles.development.helix = with lib; {
     enable = mkOption {
       type = types.bool;
@@ -25,13 +27,13 @@ in {
       gotools
       delve
       # Python
-      (python3.withPackages
-        (ps:
-          with ps; [
-            python-lsp-server
-            python-lsp-black
-            python-lsp-ruff
-          ]))
+      (python3.withPackages (
+        ps: with ps; [
+          python-lsp-server
+          python-lsp-black
+          python-lsp-ruff
+        ]
+      ))
       # Rust
       rust-analyzer
       rustup
@@ -46,7 +48,7 @@ in {
       hclfmt
       # Nix
       nil
-      alejandra
+      nixfmt-rfc-style
       # TOML
       taplo
       # Gleam
@@ -87,8 +89,18 @@ in {
         };
 
         statusline = {
-          left = ["mode" "spinner" "file-name"];
-          right = ["diagnostics" "selections" "position" "file-type" "file-encoding"];
+          left = [
+            "mode"
+            "spinner"
+            "file-name"
+          ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "file-type"
+            "file-encoding"
+          ];
         };
       };
 
@@ -104,7 +116,9 @@ in {
     programs.helix.languages = {
       # Update language server settings
       language-server = {
-        yaml-language-server.config = {yaml.keyOrdering = false;};
+        yaml-language-server.config = {
+          yaml.keyOrdering = false;
+        };
         pylsp.config = {
           pylsp.plugins = {
             black.enabled = true;
@@ -113,7 +127,7 @@ in {
         };
         harper-ls = {
           command = "harper-ls";
-          args = ["--stdio"];
+          args = [ "--stdio" ];
           config.harper-ls.linters = {
             SpellCheck = false;
             SentenceCapitalization = false;
@@ -127,22 +141,30 @@ in {
         {
           name = "go";
           formatter.command = "goimports";
-          language-servers = ["gopls" "harper-ls"];
+          language-servers = [
+            "gopls"
+            "harper-ls"
+          ];
         }
         # Nix
         {
           name = "nix";
           auto-format = true;
           formatter = {
-            command = "alejandra";
-            args = ["-"];
+            command = "nixfmt";
           };
-          language-servers = ["nil" "harper-ls"];
+          language-servers = [
+            "nil"
+            "harper-ls"
+          ];
         }
         # Rust
         {
           name = "rust";
-          language-servers = ["rust-analyzer" "harper-ls"];
+          language-servers = [
+            "rust-analyzer"
+            "harper-ls"
+          ];
         }
         # HCL
         {
@@ -166,31 +188,40 @@ in {
           auto-format = true;
           formatter = {
             command = "gleam";
-            args = ["format" "--stdin"];
+            args = [
+              "format"
+              "--stdin"
+            ];
           };
         }
         # d2
         {
           name = "d2";
           scope = "text.d2";
-          roots = [];
+          roots = [ ];
           auto-format = true;
-          file-types = ["d2"];
+          file-types = [ "d2" ];
           formatter = {
             command = "d2";
-            args = ["fmt" "-"];
+            args = [
+              "fmt"
+              "-"
+            ];
           };
         }
         # python
         {
           name = "python";
           auto-format = true;
-          language-servers = ["ruff" "harper-ls"];
+          language-servers = [
+            "ruff"
+            "harper-ls"
+          ];
         }
         # git-commit
         {
           name = "git-commit";
-          language-servers = ["harper-ls"];
+          language-servers = [ "harper-ls" ];
         }
       ];
     };

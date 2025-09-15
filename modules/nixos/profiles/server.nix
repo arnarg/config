@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.server;
-in {
+in
+{
   options.profiles.server = with lib; {
     enable = mkEnableOption "server profile";
   };

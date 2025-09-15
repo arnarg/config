@@ -1,11 +1,13 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   kicadThemes = pkgs.fetchFromGitHub {
     owner = "pointhi";
     repo = "kicad-color-schemes";
     rev = "2021-12-05";
     hash = "sha256-PYgFOyK5MyDE1vTkz5jGnPWAz0pwo6Khu91ANgJ2OO4=";
   };
-in {
+in
+{
   home.packages = with pkgs; [
     kicad-small
   ];

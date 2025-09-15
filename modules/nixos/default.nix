@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./profiles/desktop.nix
     ./profiles/development.nix
@@ -20,7 +21,7 @@
         isNormalUser = true;
         uid = 1000;
         group = "arnar";
-        extraGroups = ["wheel"];
+        extraGroups = [ "wheel" ];
         home = "/home/arnar";
         openssh.authorizedKeys.keys = [
           # Framework key
@@ -44,7 +45,10 @@
       extraOptions = "extra-experimental-features = nix-command flakes";
       generateNixPathFromInputs = true;
       generateRegistryFromInputs = true;
-      settings.trusted-users = ["root" "arnar"];
+      settings.trusted-users = [
+        "root"
+        "arnar"
+      ];
       package = pkgs.lixPackageSets.latest.lix;
     };
 

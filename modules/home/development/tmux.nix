@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   options.profiles.development.tmux = with lib; {
     enable = mkOption {
       type = types.bool;

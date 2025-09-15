@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   options.profiles.development = with lib; {
     enable = mkEnableOption "development profile";
   };
@@ -16,7 +18,7 @@ in {
     virtualisation.podman.dockerCompat = true;
     virtualisation.podman.dockerSocket.enable = true;
 
-    users.users.arnar.extraGroups = ["podman"];
+    users.users.arnar.extraGroups = [ "podman" ];
     users.users.arnar.subUidRanges = [
       {
         count = 65536;

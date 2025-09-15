@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.desktop;
 
   # Get a wallpaper form wallhaven.
@@ -11,7 +12,8 @@
     url = "https://w.wallhaven.cc/full/y8/wallhaven-y8jx3x.jpg";
     sha256 = "17hngmh4zixziipbjmrxs6mrl8465hlr23fwb745aknn53vhh63x";
   };
-in {
+in
+{
   options.profiles.desktop.gnome = with lib; {
     enable = mkEnableOption "gnome integration";
     textScalingFactor = mkOption {
@@ -28,27 +30,34 @@ in {
       enable = mkEnableOption "tailscale extension";
     };
     extensions.paperwm.winprops = mkOption {
-      type = with types;
-        attrsOf (submodule ({name, ...}: {
-          options = {
-            preferredWidth = mkOption {
-              type = with types; nullOr str;
-              default = null;
-            };
-            spaceIndex = mkOption {
-              type = with types; nullOr int;
-              default = null;
-            };
-          };
-        }));
-      default = {};
-      apply = mapAttrsToList (n: v: {wm_class = n;} // (filterAttrs (_: opt: opt != null) v));
+      type =
+        with types;
+        attrsOf (
+          submodule (
+            { name, ... }:
+            {
+              options = {
+                preferredWidth = mkOption {
+                  type = with types; nullOr str;
+                  default = null;
+                };
+                spaceIndex = mkOption {
+                  type = with types; nullOr int;
+                  default = null;
+                };
+              };
+            }
+          )
+        );
+      default = { };
+      apply = mapAttrsToList (n: v: { wm_class = n; } // (filterAttrs (_: opt: opt != null) v));
     };
   };
 
   config = lib.mkIf (cfg.enable && cfg.gnome.enable) {
     # Install various tools and extensions for gnome.
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         gnome-tweaks
         gnomeExtensions.dash-to-dock
@@ -57,7 +66,7 @@ in {
         (whitesur-icon-theme.override {
           boldPanelIcons = true;
           alternativeIcons = true;
-          themeVariants = ["default"];
+          themeVariants = [ "default" ];
         })
       ]
       ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
@@ -104,30 +113,35 @@ in {
     # Persisted dconf settings for gnome.
     dconf.settings = {
       "org/gnome/shell" = {
-        enabled-extensions =
-          [
-            "user-theme@gnome-shell-extensions.gcampax.github.com"
-            "dash-to-dock@micxgx.gmail.com"
-            "blur-my-shell@aunetx"
-            "paperwm@paperwm.github.com"
-          ]
-          ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
-            "tailscale@joaophi.github.com"
-          ]);
+        enabled-extensions = [
+          "user-theme@gnome-shell-extensions.gcampax.github.com"
+          "dash-to-dock@micxgx.gmail.com"
+          "blur-my-shell@aunetx"
+          "paperwm@paperwm.github.com"
+        ]
+        ++ (lib.optionals cfg.gnome.extensions.tailscale.enable [
+          "tailscale@joaophi.github.com"
+        ]);
       };
       "org/gnome/shell/keybindings" = {
-        toggle-overview = ["<Primary>Up"];
+        toggle-overview = [ "<Primary>Up" ];
       };
       "org/gnome/desktop/interface" = {
         icon-theme = "WhiteSur-dark";
         text-scaling-factor = cfg.gnome.textScalingFactor;
       };
       "org/gnome/desktop/wm/keybindings" = {
-        minimize = [""];
-        switch-input-source = ["<Super>t"];
-        switch-input-source-backward = ["<Shift><Super>t"];
-        switch-to-workspace-left = ["<Primary>Left" "<Super>h"];
-        switch-to-workspace-right = ["<Primary>Right" "<Super>l"];
+        minimize = [ "" ];
+        switch-input-source = [ "<Super>t" ];
+        switch-input-source-backward = [ "<Shift><Super>t" ];
+        switch-to-workspace-left = [
+          "<Primary>Left"
+          "<Super>h"
+        ];
+        switch-to-workspace-right = [
+          "<Primary>Right"
+          "<Super>l"
+        ];
       };
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "close,minimize,maximize:appmenu";
@@ -141,8 +155,10 @@ in {
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         # Lock screen
-        screensaver = ["<Super>q"];
-        custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
+        screensaver = [ "<Super>q" ];
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        ];
       };
       ## Terminal stuff
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -181,30 +197,82 @@ in {
         winprops = map builtins.toJSON cfg.gnome.extensions.paperwm.winprops;
       };
       "org/gnome/shell/extensions/paperwm/keybindings" = {
-        move-down = ["<Control><Super>Down" "<Shift><Super>j"];
-        move-up = ["<Control><Super>Up" "<Shift><Super>k"];
-        move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Control><Super>Left" "<Shift><Super>h"];
-        move-right = ["<Control><Super>period" "<Shift><Super>period" "<Control><Super>Right" "<Shift><Super>l"];
-        move-down-workspace = ["<Shift><Control>j"];
-        move-up-workspace = ["<Shift><Control>k"];
-        switch-down = ["<Super>Down" "<Super>j"];
-        switch-up = ["<Super>Up" "<Super>k"];
-        switch-left = ["<Super>Left" "<Super>h"];
-        switch-right = ["<Super>Right" "<Super>l"];
-        switch-down-workspace = ["<Control><Super>j"];
-        switch-up-workspace = ["<Control><Super>k"];
-        switch-monitor-below = ["<Shift><Super>Down" "<Shift><Control><Super>j"];
-        switch-monitor-above = ["<Shift><Super>Up" "<Shift><Control><Super>k"];
-        switch-monitor-left = ["<Shift><Super>Left" "<Shift><Control><Super>h"];
-        switch-monitor-right = ["<Shift><Super>Right" "<Shift><Control><Super>l"];
-        move-space-monitor-below = ["<Shift><Control><Alt>Down" "<Shift><Control><Alt>j"];
-        move-space-monitor-above = ["<Shift><Control><Alt>Up" "<Shift><Control><Alt>k"];
-        move-space-monitor-left = ["<Shift><Control><Alt>Left" "<Shift><Control><Alt>l"];
-        move-space-monitor-right = ["<Shift><Control><Alt>Right" "<Shift><Control><Alt>h"];
+        move-down = [
+          "<Control><Super>Down"
+          "<Shift><Super>j"
+        ];
+        move-up = [
+          "<Control><Super>Up"
+          "<Shift><Super>k"
+        ];
+        move-left = [
+          "<Control><Super>comma"
+          "<Shift><Super>comma"
+          "<Control><Super>Left"
+          "<Shift><Super>h"
+        ];
+        move-right = [
+          "<Control><Super>period"
+          "<Shift><Super>period"
+          "<Control><Super>Right"
+          "<Shift><Super>l"
+        ];
+        move-down-workspace = [ "<Shift><Control>j" ];
+        move-up-workspace = [ "<Shift><Control>k" ];
+        switch-down = [
+          "<Super>Down"
+          "<Super>j"
+        ];
+        switch-up = [
+          "<Super>Up"
+          "<Super>k"
+        ];
+        switch-left = [
+          "<Super>Left"
+          "<Super>h"
+        ];
+        switch-right = [
+          "<Super>Right"
+          "<Super>l"
+        ];
+        switch-down-workspace = [ "<Control><Super>j" ];
+        switch-up-workspace = [ "<Control><Super>k" ];
+        switch-monitor-below = [
+          "<Shift><Super>Down"
+          "<Shift><Control><Super>j"
+        ];
+        switch-monitor-above = [
+          "<Shift><Super>Up"
+          "<Shift><Control><Super>k"
+        ];
+        switch-monitor-left = [
+          "<Shift><Super>Left"
+          "<Shift><Control><Super>h"
+        ];
+        switch-monitor-right = [
+          "<Shift><Super>Right"
+          "<Shift><Control><Super>l"
+        ];
+        move-space-monitor-below = [
+          "<Shift><Control><Alt>Down"
+          "<Shift><Control><Alt>j"
+        ];
+        move-space-monitor-above = [
+          "<Shift><Control><Alt>Up"
+          "<Shift><Control><Alt>k"
+        ];
+        move-space-monitor-left = [
+          "<Shift><Control><Alt>Left"
+          "<Shift><Control><Alt>l"
+        ];
+        move-space-monitor-right = [
+          "<Shift><Control><Alt>Right"
+          "<Shift><Control><Alt>h"
+        ];
         # Unbind take-window
-        take-window = [""];
+        take-window = [ "" ];
         # new-window overrides <Super>Enter by default
-        new-window = ["<Super>n"];
+        new-window = [ "<Super>n" ];
       };
     };
 

@@ -2,15 +2,17 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.profiles.tpm;
-in {
+in
+{
   options.profiles.tpm = with lib; {
     enable = mkEnableOption "tpm profile";
   };
 
   config = lib.mkIf cfg.enable {
-    boot.kernelModules = ["uhid"];
+    boot.kernelModules = [ "uhid" ];
 
     users.users.tss = {
       name = "tss";
@@ -20,7 +22,10 @@ in {
     users.groups.tss.name = "tss";
     users.groups.uhid.name = "uhid";
 
-    users.users.arnar.extraGroups = ["tss" "uhid"];
+    users.users.arnar.extraGroups = [
+      "tss"
+      "uhid"
+    ];
 
     services.udev.extraRules = ''
       # tpm devices can only be accessed by the tss user but the tss

@@ -3,9 +3,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   cfg = config.services.ente-backup;
-in {
+in
+{
   options.services.ente-backup = with lib; {
     enable = mkEnableOption "ente-backup";
     user = mkOption {
@@ -38,7 +40,7 @@ in {
     # Backup from Ente Photos to SSD
     systemd.services.ente-backup = {
       description = "Backup of Ente Photos";
-      after = ["network.target"];
+      after = [ "network.target" ];
       environment = {
         ENTE_CLI_SECRETS_PATH = "%S/ente-backup/secrets";
         ENTE_CLI_CONFIG_PATH = "%S/ente-backup/config";
@@ -54,7 +56,7 @@ in {
         StateDirectoryMode = "0700";
 
         # Give read-write access to the backups directory
-        ReadWritePaths = ["/var/backups/ente"];
+        ReadWritePaths = [ "/var/backups/ente" ];
 
         # Security options:
         AmbientCapabilities = "";
@@ -78,7 +80,11 @@ in {
         ProtectProc = "noaccess";
         ProtectSystem = "strict";
 
-        RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_UNIX"];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
@@ -87,9 +93,9 @@ in {
 
     systemd.timers.ente-backup = {
       description = "Periodically run Ente Photos backup";
-      partOf = ["ente-backup.service"];
-      wantedBy = ["timers.target"];
-      after = ["network.target"];
+      partOf = [ "ente-backup.service" ];
+      wantedBy = [ "timers.target" ];
+      after = [ "network.target" ];
       timerConfig = {
         # Daily at 10:00 UTC
         OnCalendar = "*-*-* 10:00:00";
@@ -108,7 +114,7 @@ in {
         RestartSec = "10s";
 
         # Give read-write access to destination backup directory
-        ReadWritePaths = ["/tank/BACKUP/ente"];
+        ReadWritePaths = [ "/tank/BACKUP/ente" ];
 
         # Security options:
         AmbientCapabilities = "";
@@ -132,7 +138,11 @@ in {
         ProtectProc = "noaccess";
         ProtectSystem = "strict";
 
-        RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_UNIX"];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
@@ -141,8 +151,8 @@ in {
 
     systemd.timers.ente-tank-backup = {
       description = "Periodically rsync Ente Photos backup to tank storage";
-      partOf = ["ente-tank-backup.service"];
-      wantedBy = ["timers.target"];
+      partOf = [ "ente-tank-backup.service" ];
+      wantedBy = [ "timers.target" ];
       timerConfig = {
         # Weekly on Wednesdays at 15:00 UTC
         OnCalendar = "Wed *-*-* 15:00:00";

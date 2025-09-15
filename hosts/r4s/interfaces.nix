@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # Rename the interfaces based on the MAC addresses
   # that are set by u-boot.
   systemd.network.links = {
@@ -18,7 +19,7 @@
   # and 'green:lan'.
   # Here we load the 'ledtrig-netdev' module and setup
   # the leds to trigger on events on those interfaces.
-  boot.kernelModules = ["ledtrig-netdev"];
+  boot.kernelModules = [ "ledtrig-netdev" ];
   systemd.services.eth-ledsetup = {
     script = ''
       # Wan interface led setup
@@ -33,7 +34,7 @@
       echo "1"      > /sys/class/leds/green\:lan/tx
     '';
 
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig.type = "oneshot";
   };
 }

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     files-to-prompt
   ];
@@ -19,15 +20,21 @@
         api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm gemini";
         models = {
           "gemini-2.5-flash" = {
-            aliases = ["gemini-flash" "flash"];
+            aliases = [
+              "gemini-flash"
+              "flash"
+            ];
             max-input-chars = 1048576;
           };
           "gemini-2.5-flash-lite" = {
-            aliases = ["gemini-flash-lite" "flash-lite"];
+            aliases = [
+              "gemini-flash-lite"
+              "flash-lite"
+            ];
             max-input-chars = 1048576;
           };
           "gemini-2.5-pro" = {
-            aliases = ["gemini-pro"];
+            aliases = [ "gemini-pro" ];
             max-input-chars = 1048576;
           };
         };
@@ -38,15 +45,15 @@
         api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm mistral";
         models = {
           mistral-large-latest = {
-            aliases = ["mistral-large"];
+            aliases = [ "mistral-large" ];
             max-input-chars = 384000;
           };
           mistral-medium-latest = {
-            aliases = ["mistral-medium"];
+            aliases = [ "mistral-medium" ];
             max-input-chars = 384000;
           };
           mistral-small-latest = {
-            aliases = ["mistral-small"];
+            aliases = [ "mistral-small" ];
             max-input-chars = 384000;
           };
         };
@@ -57,19 +64,28 @@
         api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm hyperbolic";
         models = {
           "deepseek-ai/DeepSeek-R1-0528" = {
-            aliases = ["deepseek-r1" "dsr1"];
+            aliases = [
+              "deepseek-r1"
+              "dsr1"
+            ];
             max-input-chars = 131072;
           };
           "deepseek-ai/DeepSeek-V3-0324" = {
-            aliases = ["deepseek-v3" "dsv3"];
+            aliases = [
+              "deepseek-v3"
+              "dsv3"
+            ];
             max-input-chars = 131072;
           };
           "meta-llama/Llama-3.3-70B-Instruct" = {
-            aliases = ["llama3" "llama"];
+            aliases = [
+              "llama3"
+              "llama"
+            ];
             max-input-chars = 131072;
           };
           "moonshotai/Kimi-K2-Instruct" = {
-            aliases = ["kimi-k2"];
+            aliases = [ "kimi-k2" ];
             max-input-chars = 131072;
           };
         };

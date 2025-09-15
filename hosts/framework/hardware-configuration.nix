@@ -1,19 +1,30 @@
-{modulesPath, ...}: {
+{ modulesPath, ... }:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/ec150a2a-03ec-450a-baab-e72dfa7f7a3b";
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=16G" "mode=755"];
+    options = [
+      "defaults"
+      "size=16G"
+      "mode=755"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -24,20 +35,32 @@
   fileSystems."/nix" = {
     label = "nixos";
     fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
     neededForBoot = true;
   };
 
   fileSystems."/home" = {
     label = "nixos";
     fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd" "noatime"];
+    options = [
+      "subvol=home"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/log" = {
     label = "nixos";
     fsType = "btrfs";
-    options = ["subvol=log" "compress=zstd" "noatime"];
+    options = [
+      "subvol=log"
+      "compress=zstd"
+      "noatime"
+    ];
     neededForBoot = true;
   };
 

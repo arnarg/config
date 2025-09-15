@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.hardware.fan2go;
 
   fan2goConfig = pkgs.writeText "fan2go.yaml" ''
@@ -62,7 +63,8 @@
             - nvme_curve
             - hdd_curve
   '';
-in {
+in
+{
   options.hardware.fan2go = with lib; {
     enable = mkEnableOption "fan2go";
 
@@ -76,8 +78,8 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.fan2go = {
       description = "A simple daemon providing dynamic fan speed control based on temperature sensors.";
-      wantedBy = ["multi-user.target"];
-      after = ["lm_sensors.service"];
+      wantedBy = [ "multi-user.target" ];
+      after = [ "lm_sensors.service" ];
 
       serviceConfig = {
         ExecStart = lib.concatStringsSep " " [

@@ -3,11 +3,13 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
 
   dotDir = ".config/zsh";
-in {
+in
+{
   options.profiles.development.zsh = with lib; {
     enable = mkOption {
       type = types.bool;
@@ -16,12 +18,13 @@ in {
     };
   };
 
-  config = with lib;
+  config =
+    with lib;
     mkIf (cfg.enable && cfg.zsh.enable) {
       programs.fzf.enable = true;
       programs.fzf.enableZshIntegration = true;
       # fzf keybinding requires perl
-      home.packages = [pkgs.perl];
+      home.packages = [ pkgs.perl ];
 
       programs.zsh = {
         inherit dotDir;

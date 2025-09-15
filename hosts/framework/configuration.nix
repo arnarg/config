@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     "${inputs.hardware.result}/framework/13-inch/12th-gen-intel"
@@ -44,7 +45,7 @@
   security.pam.services.login.fprintAuth = false;
 
   # I want to cross-compile
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   system.stateVersion = "24.05";
 }
