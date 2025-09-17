@@ -32,6 +32,8 @@ in
           pkgs.writeText "git-excludes-file" ''
             # All crush state keeping
             .crush/
+            # Crush' AGENTS.md
+            CRUSH.md
           ''
         );
       };
