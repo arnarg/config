@@ -54,6 +54,11 @@ in
     ];
 
     profiles.development.crush.settings = {
+      options.attribution = {
+        co_authored_by = false;
+        generated_with = false;
+      };
+
       providers = {
         gemini.api_key = "$(${pkgs.libsecret}/bin/secret-tool lookup llm gemini)";
         openrouter.api_key = "$(${pkgs.libsecret}/bin/secret-tool lookup llm openrouter)";
