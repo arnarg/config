@@ -59,6 +59,17 @@ in
         generated_with = false;
       };
 
+      lsp = {
+        nix = {
+          command = "${pkgs.nil}/bin/nil";
+          filetypes = [ "nix" ];
+          root_markers = [
+            "flake.nix"
+            "nilla.nix"
+          ];
+        };
+      };
+
       providers = {
         gemini.api_key = "$(${pkgs.libsecret}/bin/secret-tool lookup llm gemini)";
         openrouter.api_key = "$(${pkgs.libsecret}/bin/secret-tool lookup llm openrouter)";

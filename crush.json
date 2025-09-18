@@ -3,7 +3,8 @@
   "lsp": {
     "nix": {
       "command": "nil",
-      "filetypes": ["nix"]
+      "filetypes": ["nix"],
+      "root_markers": ["nilla.nix"]
     }
   },
   "mcp": {
