@@ -61,11 +61,38 @@ in
 
       lsp = {
         nix = {
-          command = "${pkgs.nil}/bin/nil";
+          command = "nil";
           filetypes = [ "nix" ];
           root_markers = [
             "flake.nix"
             "nilla.nix"
+            "default.nix"
+            "shell.nix"
+          ];
+        };
+        go = {
+          command = "gopls";
+          filetypes = [
+            "go"
+            "gomod"
+            "gowork"
+            "gotmpl"
+          ];
+          root_markers = [
+            "go.mod"
+            "go.work"
+          ];
+        };
+        python = {
+          command = "ruff";
+          filetypes = [
+            "py"
+            "pyi"
+          ];
+          root_markers = [
+            "pyproject.toml"
+            "ruff.toml"
+            ".ruff.toml"
           ];
         };
       };
