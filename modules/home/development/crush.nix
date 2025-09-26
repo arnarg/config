@@ -54,9 +54,12 @@ in
     ];
 
     profiles.development.crush.settings = {
-      options.attribution = {
-        co_authored_by = false;
-        generated_with = false;
+      options = {
+        disable_metrics = true;
+        attribution = {
+          co_authored_by = false;
+          generated_with = false;
+        };
       };
 
       lsp = {
