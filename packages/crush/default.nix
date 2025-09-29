@@ -4,11 +4,11 @@
   ...
 }:
 let
-  version = "0.10.0";
+  version = "0.10.3";
 
   bin = fetchzip {
     url = "https://github.com/charmbracelet/crush/releases/download/v${version}/crush_${version}_Linux_x86_64.tar.gz";
-    hash = "sha256-V3NLDwrsmNvW9JKBZBMMnlA3SWiS5pkz1YR6RNT+kZI=";
+    hash = "sha256-jnUAauLEqd7MA0LJHQshYKnAmGo5PhP2UhTL7tnhRPc=";
   };
 in
 stdenv.mkDerivation {
