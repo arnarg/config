@@ -38,6 +38,24 @@
     ###############
     services.tailscale.enable = true;
 
+    #########
+    ## PDS ##
+    #########
+    services.pds = {
+      enable = true;
+      environmentFiles = [
+        "/nix/persist/var/lib/pds/env"
+      ];
+      settings = {
+        PDS_HOSTNAME = "pds.cdbrdr.com";
+        PDS_DATA_DIRECTORY = "/nix/persist/var/lib/pds/data";
+        PDS_BLOBSTORE_DISK_LOCATION = "/nix/persist/var/lib/pds/data/blocks";
+      };
+    };
+    systemd.services.pds = {
+      serviceConfig.ReadWritePaths = [ "/nix/persist/var/lib/pds/data" ];
+    };
+
     #################
     ## NixOS stuff ##
     #################
