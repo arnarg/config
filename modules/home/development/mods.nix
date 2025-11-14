@@ -16,45 +16,43 @@
 
     default-model = "gemini-flash";
     apis = {
-      google = {
-        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm gemini";
+      openrouter = {
+        base-url = "https://openrouter.ai/api/v1";
+        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm openrouter";
         models = {
-          "gemini-2.5-flash" = {
+          "google/gemini-2.5-flash" = {
             aliases = [
               "gemini-flash"
               "flash"
             ];
             max-input-chars = 1048576;
           };
-          "gemini-2.5-flash-lite" = {
+          "google/gemini-2.5-flash-lite" = {
             aliases = [
               "gemini-flash-lite"
               "flash-lite"
             ];
             max-input-chars = 1048576;
           };
-          "gemini-2.5-pro" = {
+          "google/gemini-2.5-pro" = {
             aliases = [ "gemini-pro" ];
             max-input-chars = 1048576;
           };
-        };
-      };
-
-      mistral = {
-        base-url = "https://api.mistral.ai/v1";
-        api-key-cmd = "${pkgs.libsecret}/bin/secret-tool lookup llm mistral";
-        models = {
-          mistral-large-latest = {
-            aliases = [ "mistral-large" ];
-            max-input-chars = 384000;
-          };
-          mistral-medium-latest = {
-            aliases = [ "mistral-medium" ];
-            max-input-chars = 384000;
-          };
-          mistral-small-latest = {
+          "mistralai/mistral-small-3.2-24b-instruct" = {
             aliases = [ "mistral-small" ];
-            max-input-chars = 384000;
+            max-input-chars = 131072;
+          };
+          "mistralai/mistral-medium-3.1" = {
+            aliases = [ "mistral-medium" ];
+            max-input-chars = 131072;
+          };
+          "mistralai/codestral-2508" = {
+            aliases = [ "codestral" ];
+            max-input-chars = 256000;
+          };
+          "qwen/qwen3-235b-a22b-thinking-2507" = {
+            aliases = [ "qwen3" ];
+            max-input-chars = 262144;
           };
         };
       };
