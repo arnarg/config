@@ -57,7 +57,7 @@ in
       options = {
         disable_metrics = true;
         attribution = {
-          co_authored_by = false;
+          trailer_style = "none";
           generated_with = false;
         };
       };
