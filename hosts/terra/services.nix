@@ -32,9 +32,12 @@ with lib;
   services.transmission.enable = true;
   services.transmission.settings = {
     rpc-bind-address = "0.0.0.0";
-    rpc-host-whitelist = "lab.codedbearder.com,localhost";
+    rpc-host-whitelist = "tm.cdbrdr.com,lab.codedbearder.com,localhost";
     rpc-host-whitelist-enabled = true;
+    rpc-whitelist = "127.0.0.1,192.168.0.*";
+    rpc-whitelist-enabled = true;
   };
+  services.transmission.openRPCPort = true;
   services.transmission.group = "mediaowners";
 
   profiles.immutable.directories = [
