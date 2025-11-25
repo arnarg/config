@@ -22,11 +22,10 @@ in
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     # Use Gnome wayland.
-    services.xserver = {
+    services.desktopManager.gnome.enable = true;
+    services.displayManager.gdm = {
       enable = true;
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
-      desktopManager.gnome.enable = true;
+      wayland = true;
     };
 
     # Use pipewire instead of pulseaudio for sound.

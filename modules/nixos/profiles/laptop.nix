@@ -131,7 +131,7 @@ in
     };
 
     # Setup suspend then hibernate.
-    services.logind.lidSwitch =
+    services.logind.settings.Login.HandleLidSwitch =
       if cfg.suspendThenHibernate.enable then "suspend-then-hibernate" else "suspend";
     systemd.sleep.extraConfig = lib.optionalString cfg.suspendThenHibernate.enable ''
       HibernateDelaySec=${builtins.toString cfg.suspendThenHibernate.delayHours}h
