@@ -21,7 +21,7 @@ in
     programs.ghostty.enableZshIntegration = false;
     programs.ghostty.installBatSyntax = true;
     programs.ghostty.settings = {
-      theme = "GruvboxDark";
+      theme = "Gruvbox Dark";
 
       font-family = "Inconsolata";
       font-size = toString (builtins.floor (12 * sf));

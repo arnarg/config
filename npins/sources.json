@@ -25,9 +25,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "899dc449bc6428b9ee6b3b8f771ca2b0ef945ab9",
-      "url": "https://github.com/nixos/nixos-hardware/archive/899dc449bc6428b9ee6b3b8f771ca2b0ef945ab9.tar.gz",
-      "hash": "1dbf11zjspg68wiryp2y24w587izg954nbv517q57mpl8i8sfr85"
+      "revision": "da17006633ca9cda369be82893ae36824a2ddf1a",
+      "url": "https://github.com/nixos/nixos-hardware/archive/da17006633ca9cda369be82893ae36824a2ddf1a.tar.gz",
+      "hash": "050i03nvf0nrhighs9g4nfcfp5c3pbh7yg7dsri84wqh1cnjslvg"
     },
     "home-manager": {
       "type": "Git",
@@ -36,11 +36,11 @@
         "owner": "nix-community",
         "repo": "home-manager"
       },
-      "branch": "release-25.05",
+      "branch": "master",
       "submodules": false,
-      "revision": "3b955f5f0a942f9f60cdc9cacb7844335d0f21c3",
-      "url": "https://github.com/nix-community/home-manager/archive/3b955f5f0a942f9f60cdc9cacb7844335d0f21c3.tar.gz",
-      "hash": "0q3lv288xlzxczh6lc5lcw0zj9qskvjw3pzsrgvdh8rl8ibyq75s"
+      "revision": "295d90e22d557ccc3049dc92460b82f372cd3892",
+      "url": "https://github.com/nix-community/home-manager/archive/295d90e22d557ccc3049dc92460b82f372cd3892.tar.gz",
+      "hash": "1bg6p94gn7rzs43asb1njvhl242kd09ka2dbq3jyzhs140f0i099"
     },
     "impermanence": {
       "type": "Git",
@@ -101,11 +101,11 @@
         "owner": "nixos",
         "repo": "nixpkgs"
       },
-      "branch": "nixos-25.05",
+      "branch": "nixos-25.11",
       "submodules": false,
-      "revision": "c58bc7f5459328e4afac201c5c4feb7c818d604b",
-      "url": "https://github.com/nixos/nixpkgs/archive/c58bc7f5459328e4afac201c5c4feb7c818d604b.tar.gz",
-      "hash": "1lypgq8f1v571vgrlqj13yi97bhlw9gsqc0s9di5mn5w5fxjfd6n"
+      "revision": "a320ce8e6e2cc6b4397eef214d202a50a4583829",
+      "url": "https://github.com/nixos/nixpkgs/archive/a320ce8e6e2cc6b4397eef214d202a50a4583829.tar.gz",
+      "hash": "1q779dz718s7k00zmfzksl6j8alpixp4rdazsvsfk7rn7g05sdzb"
     },
     "tm-proxy": {
       "type": "Git",

@@ -23,9 +23,9 @@ in
 
     programs.git = {
       enable = true;
-      userName = "Arnar Gauti Ingason";
-      userEmail = "arnarg@fastmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "Arnar Gauti Ingason";
+        user.email = "arnarg@fastmail.com";
         pull.rebase = true;
         init.defaultBranch = "main";
         core.excludesFile = builtins.toString (
@@ -52,7 +52,7 @@ in
             "-r"
             "default() & recent()"
           ];
-          diff.tool = [
+          diff-formatter = [
             "${pkgs.difftastic}/bin/difft"
             "--color=always"
             "$left"

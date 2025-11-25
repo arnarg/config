@@ -7,7 +7,7 @@
 let
   cfg = config.profiles.development;
 
-  dotDir = ".config/zsh";
+  dotDir = "${config.xdg.configHome}/zsh";
 in
 {
   options.profiles.development.zsh = with lib; {
