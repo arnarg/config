@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -39,6 +40,7 @@ with lib;
   };
   services.transmission.openRPCPort = true;
   services.transmission.group = "mediaowners";
+  services.transmission.package = pkgs.transmission_4;
 
   profiles.immutable.directories = [
     "/var/lib/transmission"
