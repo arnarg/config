@@ -41,7 +41,7 @@
     #########
     ## PDS ##
     #########
-    services.pds = {
+    services.bluesky-pds = {
       enable = true;
       environmentFiles = [
         "/nix/persist/var/lib/pds/env"
@@ -52,7 +52,7 @@
         PDS_BLOBSTORE_DISK_LOCATION = "/nix/persist/var/lib/pds/data/blocks";
       };
     };
-    systemd.services.pds = {
+    systemd.services.bluesky-pds = {
       serviceConfig.ReadWritePaths = [ "/nix/persist/var/lib/pds/data" ];
     };
 
