@@ -1,3 +1,8 @@
+> [!IMPORTANT]  
+> I have moved this repository to [Codeberg](https://codeberg.org/arnarg/config).
+
+---
+
 ![Logo saying "config" in the style of a pink death metal band logo.](./logo.svg)
 
 ---
